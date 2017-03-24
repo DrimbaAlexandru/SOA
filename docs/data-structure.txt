@@ -1,0 +1,52 @@
+# Informatii ce trebuie gestionate la nivelul intregului sistem
+# Se vor adauga pe parcurs mai multe informatii
+
+User:
+	- Privilegii la nivel de conferinta
+
+Master-User:
+
+Steering comittee:
+	
+# Informatii ce trebuie gestionate la nivelul unei conferinte
+
+Section:
+	- lista de lucrari ce urmeaza sa fie prezentate
+		- speaker pentru fiecare lucrare
+	- orar
+	- Section Chair
+	- lista de Listeners
+	
+PC Member:
+	- Nume
+	- Afiliere
+	- Adresa e-mail
+	- Pagina web personala
+	- CMS username + password
+
+Submission:
+	- abstract
+	- full paper
+		- .pdf sau .msword
+	- nume
+	- cuvinte cheie
+	- subiecte (topics)
+	- lista de autori + meta-date (per autor?)
+		- posibile meta-date:
+			- nume / e-mail / afiliere per autor
+
+Review Qualifier:
+	- strong accept
+	- accept
+	- weak accept
+	- borderline paper
+	- weak reject
+	- reject
+	- strong reject
+	
+Alte informatii:
+	- deadline pentru incarcarea abstract-urilor
+	- deadline pentru incarcarea propunerilor
+	- deadline pentru review-uri
+	- pretul de inregistrare la conferinta
+	

@@ -1,0 +1,57 @@
+ACTORI:
+
+	Master 
+		- Utilizator cu putere absoluta
+	    - Ofera privilegii utilizatorilor -> Creeaza steering comittee
+	
+	Steering comittee member
+		- Creeaza conferinte
+		- Construieste grupul de chairs / co-chairs
+		- Poate fi chair / co-chair, dar NU PC member
+	
+	PC Member
+		- 'Staff' al conferintei
+		- 'Clasa abstracta' :>
+	
+	Chair / Co-Chair
+		- Specializare a PC member-ului
+		- Invita PC members
+		- (Chair sau UN Co-Chair) Poate amana deadline-urile pentru propuneri (? Privilegiu extra ?)
+		- (Chair only) Poate oferi votul final in cazul unui conflict la review. Poate cere review-ul unei a terta parti. Poate cere ca reviewer-ii sa reconcilieze scorul propunerii de unii singuri
+		- Decide sectiunile
+		
+	Reviewer
+		- Specializare a PC member-ului
+		- Poate alege ce propuneri doreste sa evalueze (review-eze)
+			- Clasificarea propunerilor:
+				- Ar dori sa le evalueze
+				- Nu s-ar supara daca le-ar evalua (neutru)
+				- Refuza sa le evalueze 
+			- Nu poate sa primeasca vreo propunere refuzata, indiferent de context
+		- Ofera calificative
+		- Dupa incarcarea review-lui (actiune finala, fara rollback), poate vedea celelalte review-uri ale propunerii si poate discuta cu reviewer-ii
+		- Participa in reconcilierea review-ului
+	
+	Autor
+		- Poate fi o specializare a PC member-ului
+		- Poate avea mai multe lucrari (?)
+		- ? Poate sa incarce revizuiri ale propunerilor, atat inainte de deadline, cat si pentru propunerile acceptate (Sa pastram variantele vechi?
+		
+	Listener
+		- Participa la conferinta
+		- Opteaza pentru sectiunile la care ar dori sa participe (? Lista de optiuni)
+		
+	Speaker (Vorbitor)
+		- Specializare a autorului si a Listener-ului
+			- Caz in care nu poate fi section chair al unei sectiuni unde prezinta
+		- Trebuie sa aiba cel putin o lucrare acceptata
+		- Va avea cate o prezentare / lucrare acceptata
+		- Incarca prezentarea ca si document .ppt sau .pdf
+		- Poate alege sa mearga si la alte sectiuni ale conferintei
+		
+	Section chair
+		- Specializare a PC member-ului
+		- 'Administrator' al unei sectiuni
+		- ? Primeste lista prezentarilor sectiunii sale
+			- Responsabil de programarea lor mai departe
+			
