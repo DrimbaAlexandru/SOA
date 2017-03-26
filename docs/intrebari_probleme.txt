@@ -1,0 +1,6 @@
+Intrebari deschise
+
+- Amanarea deadline-urilor se poate face de un singur chair/co-chair sau orice chair/co-chair
+- Implementare sistem de payment real sau nu
+- Lucrarile borderline se considera acceptate/respinse/niciuna
+- Se permite retragerea lucrarilor dupa acceptarea lor pentru conferinta
