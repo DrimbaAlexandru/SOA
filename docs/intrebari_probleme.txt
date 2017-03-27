@@ -1,6 +1,7 @@
 Intrebari deschise
 
 - Amanarea deadline-urilor se poate face de un singur chair/co-chair sau orice chair/co-chair
+          Raspuns: elisei: The chair or one of co-chairs have the permission to change deadlines by postponing them to later data.
 - Implementare sistem de payment real sau nu
 - Lucrarile borderline se considera acceptate/respinse/niciuna
 - Se permite retragerea lucrarilor dupa acceptarea lor pentru conferinta
