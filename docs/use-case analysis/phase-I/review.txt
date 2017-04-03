@@ -1,0 +1,20 @@
+USE-CASE Description possible issues:
+
+	CASE: Creating steering comittee member
+		- Cerintele de calitate exprima faptul ca master-ul are doar
+			10 secunde sa creeze contul de steering committee
+	
+	CASE: Create conferente
+		- Aceeasi problema ca mai sus
+
+		
+		
+USE-CASE Scenarios possible issues:		
+
+	- Astea nu par a fi scenarii exceptionale. 
+		Daca nu gasiti ceva, recomand sa nu incarcati documentul.
+		Mai degraba as elabora la descrierea scenariului de utilizare.
+
+--- 
+	Minor gripe:
+		- Numele scenariilor de utilizare trebuie scrise subliniat
