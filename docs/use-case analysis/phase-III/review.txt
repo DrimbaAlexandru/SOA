@@ -1,0 +1,28 @@
+1. Din moment ce actorul este un speaker/session chair/chair, nu este nevoie ca el sa se autentifice. Din moment ce este speaker,etc., este evident ca este deja autentificat. Nu poti fi speaker, etc. daca nu esti deja autentificat. Eventual sa se mute la preconditii.
+
+2. Adaugati si scenarii exceptionale pe langa happy-flow-uri si mutati "documentatiile" intr-un document si structurati-l si indentati-l.
+
+3. Facteti diagrama ca lumea. Relatiile alea de include sunt puse aiurea, practic ar insemna, de exemplu, ca de fiecare data cand un speaker sustine o prezentare, chair-ul sa vina si sa structureze conferinta pe sectiuni. ASTA PENTRU FIECARE SPEAKER CARE SUSTINE O PREZENTARE.
+
+4. Use case: incarca continut prezentare
+	a. Dezvoltati ca lumea etapa de upload. Nu poti spune ca incarcarea se face pur si simplu prin upload.
+	b. Clarificati postconditia. Nu se intelege exact daca prezentarea proaspat incarcata va aparea in fiecare 		sectiune sau doar in sectiunea ei.
+
+5. Use case: sustine prezentare
+	a. Din nou, dezvoltati ca lumea etapele. 
+
+6. Use case: specify sections
+	a. DIN NOU, DEZVOLTATI ETAPELE.
+
+7. Use case: oversees a section
+	a. WHAT THE FUCK IS THAT SUPPOSED TO MEAN? WHAT DOES OVERSEEING A SECTION MEAN? DETAIL THIS SHIT. BEST IS TO DELETE IT AND MAKE uP SOME ACTUAL USE CASES THAT A SESSION CHAIR IS SUPPOSED TO BE ASSOCIATED WITH. LIKE SCHEDULING THE PRESENTATIONS IN A SECTION OR SOMETHING LIKE THAT.
+
+8. Use case: decide the place and time of a section
+	a. DEZVOLTATI ETAPELE
+	b. preconditie: listenerii au avut ocazia de a alege la ce sectiuni vor sa participe
+
+9. Use case: Structureaza conferinta pe sectiuni
+	a. DEZVOLTATI ETAPELE
+
+10. Use case: decide session chair
+	a. DEZVOLTATI ETAPELE
