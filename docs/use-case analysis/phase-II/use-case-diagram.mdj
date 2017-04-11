@@ -16112,7 +16112,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«are pula mare»",
+											"text": "«has dig bick»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5
 										},
@@ -23233,7 +23233,7 @@
 							"isDerived": false
 						}
 					],
-					"stereotype": "are pula mare",
+					"stereotype": "has dig bick",
 					"visibility": "public",
 					"isAbstract": false,
 					"isFinalSpecialization": false,
