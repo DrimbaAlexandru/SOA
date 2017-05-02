@@ -21,7 +21,7 @@ ACTORI:
 		- Decide sectiunile
 		
 	Reviewer
-		- Specializare a PC member-ului
+		- Este un PC member
 		- Poate alege ce propuneri doreste sa evalueze (review-eze)
 			- Clasificarea propunerilor:
 				- Ar dori sa le evalueze
