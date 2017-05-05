@@ -1,0 +1,36 @@
+Spring Boot:
+
+	Spring Boot quick start:
+		https://spring.io/guides/gs/spring-boot/
+
+	Spring Boot web services quick start:
+		https://spring.io/guides/gs/rest-service/
+		
+	Spring Boot Reference Guide (kinda like a wiki):
+		http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/
+
+	Extra How-Tos:
+		https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#howto
+
+Spring Session (for session management):
+
+	Tutorial + reference guide:
+		http://docs.spring.io/spring-session/docs/current/reference/html5/#httpsession-redis-jc
+		
+Spring Data JPA:
+
+	Basic tutorial:
+		https://spring.io/guides/gs/accessing-data-jpa/
+
+	Introductory tutorial (super duper good):
+		https://www.petrikainulainen.net/programming/spring-framework/spring-data-jpa-tutorial-introduction/
+		
+	Spring Data Reference Guide:
+		https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
+		
+	Examples repo:
+		https://github.com/spring-projects/spring-data-examples/tree/master/jpa
+		
+Old app I made in this style (kinda useful reference):
+	https://bitbucket.org/Alex-D-TC/map-backend/
+		
