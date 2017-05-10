@@ -1,0 +1,45 @@
+Toate JSON-urile de tip raspuns vor avea doua array-uri de stringuri:
+    - warnings = in care se pun atentionari
+    - errors     = in care se pun erori, 
+    - !!! Daca raspunsul are erori atunci se considera ca apelul nu s-a realizat
+    - Raspuns OK= errors = []
+
+isLoggedIn() : {"loggedIn":true, type :"PCMember/utilizator"}
+                {"loggedIn":false, type:None}
+
+
+createListenerAccount(username, parola, email, Nume, afiliere, autor) : 
+                    {}
+
+participantLogin(username, parola):{}
+
+organizerLogin(username, parola) : {}
+
+------------ Participant ---------------
+
+getMyProposals() : 
+{
+    [
+        {
+            "id":int
+            "title":string
+            "keywords":[]
+            "subjects":[]
+        }
+        ..
+    ]
+}
+// nu trebuie sa trimitem contul -> se salveaza pe sesiune
+
+getProposalDetails(id): 
+{[{'id', 'title", "keywords", "subjects", authors: [{name, metadata}], "proposalLink"}
+
+setProposalDetails(id):
+{[{"Title", "keywords", "subjects", "authors":[{name, metadata}]]}
+
+uploadProposal(proposalId, file):{}
+
+
+
+
+
