@@ -4,16 +4,74 @@ Toate JSON-urile de tip raspuns vor avea doua array-uri de stringuri:
     - !!! Daca raspunsul are erori atunci se considera ca apelul nu s-a realizat
     - Raspuns OK= errors = []
 
-isLoggedIn() : {"loggedIn":true, type :"PCMember/utilizator"}
+
+!Note: sectiunea urmatoare cuprinde functionalitati care nu sunt specifice unei conferinte (creare conferinta: nu poti crea o conferinta de pe site-ul alteia!). Deci,  aceste functionalitati vor fi "practic" pe un alt server, server care va fi folosit pentru a accesa server in scop administrativ!
+
+--------- another server --------------------
+
+login(username, password) : {loginType = "MASTER|STEERING_COMMITEE_MEMBER|PC_MEMBER"}
+
+
+createSteeringCommiteeMember(username, password){}
+
+createConferinta(conferenceName, date, location)
+/* date e un string de forma ZZ/LL/YYYY */ 
+
+
+getConferences() {[{"conferenceName": , "conferenceDate":]}
+
+
+
+createChair(username, conferenceName, isChair)
+
+isChair = True => se da drept de chair userului username pentru conferinta conferenceName
+isChair = False=> se da drept de co-chair etc
+
+
+createPCMember(username, password)
+
+!Atentie: Dupa cum reiese din curs, fiecare PC Member are un cont creat cu functia de mai sus.
+Contul este pentru CMS (Conference Management System) adica functional pentru loginul de mai sus.
+Fiecare PC Member introduce datele despre el in faza preliminara inclusiv !!!parola pentru conferinta!!!
+Intelegem ca are acelasi username ca la contul de la CMS dar pentru fiecare conferinta are alta parola.
+La loginul de mai sus se logheaza cu parola de CMS, iar la loginul de mai jos cu parola de conferinta!!
+Pentru mai multe detalii contactati pe Elisei.
+
+
+getDate() {"name", "email", "afiliation", "website"}
+
+dataUpload(name, email, afiliation, website,  conferencePassword) {}
+
+
+
+getDeadLines(conferenceName) { ["deadlineName", "deadlineDate"]}
+
+setDeadLine(conferenceName, deadlineName, date){}
+
+
+
+
+--------- another server -------------------
+
+
+
+
+
+--------- conference website ---------------------------------
+
+
+isLoggedIn() : {"loggedIn":true, type :"PC_MEMBER/AUTHOR"}
                 {"loggedIn":false, type:None}
 
 
-createListenerAccount(username, parola, email, Nume, afiliere, autor) : 
+createListenerAccount(username, password, email, name, affiliation, isAuthor) : 
                     {}
 
-participantLogin(username, parola):{}
+/*isAuthor = True => va fi creat un cont de autor"
+altfel va fi creat un cont de listener
 
-organizerLogin(username, parola) : {}
+
+login(username, password) : {type="PC_MEMBER/AUTHOR/LISTENER}
 
 ------------ Participant ---------------
 
@@ -31,13 +89,160 @@ getMyProposals() :
 }
 // nu trebuie sa trimitem contul -> se salveaza pe sesiune
 
+
+addProposal(title, keywords, subjects, authors)
+
 getProposalDetails(id): 
 {[{'id', 'title", "keywords", "subjects", authors: [{name, metadata}], "proposalLink"}
 
-setProposalDetails(id):
-{[{"Title", "keywords", "subjects", "authors":[{name, metadata}]]}
+setProposalDetails(id, title, keywords, subjects, authors):
+subjects = []
+authors = [{name, metadata}]
 
 uploadProposal(proposalId, file):{}
+
+
+
+
+getAcceptedProposals(){[{id, title, keywords, subjects, author, recommendations}]}
+recommendations = [] de stringuri
+
+
+getProposalLink(id):{link}
+
+setPresentationFile(id, file) : {}
+
+
+
+getSections():{[{id, name, program}]}
+program = [{date, time, speakerName, }]
+date = ZZ/LL/YYYY
+time = HH:MM
+
+
+
+participateToSection(id) : {}
+
+
+
+
+
+------- PC Member ---------------
+
+getProposals() : {[{'id', 'name', 'keywords', 'subjects', 'authors'}]}
+
+--Reviewer
+
+getProposalBid(id):{bitType}
+bidType = NONE | ACCEPT_FOR_REVIEW, COULD_REVIEW, REJECT_FROM_REVIEW
+
+
+setProposalBid(id, bidType):{}
+bidType = ACCEPT_FOR_REVIEW, COULD_REVIEW, REJECT_FROM_REVIEW
+
+
+getProposalsToReview() :{[{id, name, keywords, subjects, authors}]}
+
+
+getProposalReview():{reviewType, recommendation}
+reviewType = NONE | STRONG_ACCEPT | ACCEPT | WEAK_ACCEPT | BORDELINE_PAPER | WEAK_REJECT | REJECT | STRONG_REJECT
+recommendation = string
+
+
+setProposalReview(id, reviewType, recommendation) :{}
+
+
+listOthersReviewsForPaper(id) : {[reviewerName, reviewType, recommendation]}
+
+
+areProposalReviewsContradictory(id):{contradictory:True/False}
+
+
+
+--Chair
+
+getPotentialReviewersForProposal(id):{[{reviewerId, reviewerName}]}
+//nu ii trimiti si pe cei care sunt deja asignati
+
+
+asignProposalToReviewer(proposalId, reviewerId){}
+
+
+getAsignedReviewersForProposal(id):{[{reviewerId, reviwerName}]}
+
+
+
+
+getContradictoryProposals() { [id, name, keywords, subjects, authors, askedForReevaluation, allReviwersAnswered]}
+
+requestReevaluation(id)
+
+chooseFinalReview(id, reviewType):{}
+reviewType = ACCEPT, REJECT
+
+
+getProposalReviewers(id) : {[{reviewerName, reviewerId}]}
+
+chooseFinalEvaluator(proposalId, reviewerId)
+
+
+
+
+
+getSections(): {[{id, name}]}
+
+getPotentialSessionChairsForSection(id):{[{id, name}]}
+
+
+setSectionChair(sectionId, personId):{}
+
+
+
+getSectionDateTimeAndPlace(id):{date, time, place}
+setSectionDateTimeAndPlace(id, date, time, place):{}
+
+
+
+createSection(name):{id}
+
+getAcceptedProposals():{[{id, title, name, keywords, subjects}]}
+
+getProposalSectionTime(proposalId, sectionId):{time)
+
+setProposalSectionTime(proposalId, sectionId, time)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
