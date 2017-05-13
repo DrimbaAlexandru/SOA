@@ -1,0 +1,89 @@
+FORConference{
+name : string
+date : Date
+
+}
+
+Member{
+name : string
+email : string
+affiliation
+website
+}
+
+Deadline{
+name:string
+date:Date
+}
+
+Author{
+name:string
+metadata:string
+}
+
+Proposal{
+id:int
+title :string
+keywords:string[]
+subjects:string[]
+authors:Author[]
+}
+
+ReevalReqProposal:Proposal{
+requested: boolean
+}
+
+ControdictoryProposal:Proposal{
+askedForReevaluation : bool, 
+allReviewersAnswered: bool,
+}
+
+AcceptedProposal:Proposal{
+recommendations : string[]
+}
+
+
+ProgramItem{
+speakerName: string
+date: Date
+}
+
+Section{
+id : int
+name: string
+program: ProgramItem[]
+}
+
+
+enum BidType {ACCEPT_FOR_REVIEW, COULD_REVIEW, REJECT_FROM_REVIEW, NONE}
+enum ReviewType { NONE, STRONG_ACCEPT, WEAK_ACCEPT, BORDERLINE_PAPER, WEAK_REJECT, REJECT, STRONG_REJECT
+
+Review{
+reviewType: 
+recommendation:string
+}
+
+PaperReview{
+id:int
+review:Review
+reviewer:Reviewer
+}
+
+Person{
+id:int
+name:string
+}
+
+Reviewer:Person{
+}
+
+
+
+
+
+
+
+
+
+
+

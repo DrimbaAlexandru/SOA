@@ -38,9 +38,9 @@ La loginul de mai sus se logheaza cu parola de CMS, iar la loginul de mai jos cu
 Pentru mai multe detalii contactati pe Elisei.
 
 
-getDate() {"name", "email", "afiliation", "website"}
+getMemberData() {"name", "email", "affiliation", "website"}
 
-dataUpload(name, email, afiliation, website,  conferencePassword) {}
+memberDataUpload(name, email, affiliation, website,  conferencePassword) {}
 
 
 
@@ -83,28 +83,26 @@ getMyProposals() :
             "title":string
             "keywords":[]
             "subjects":[]
+            authors: [{name, metadata}]
         }
         ..
     ]
 }
 // nu trebuie sa trimitem contul -> se salveaza pe sesiune
 
-
 addProposal(title, keywords, subjects, authors)
 
-getProposalDetails(id): 
-{[{'id', 'title", "keywords", "subjects", authors: [{name, metadata}], "proposalLink"}
-
-setProposalDetails(id, title, keywords, subjects, authors):
+setProposal(id, title, keywords, subjects, authors):
 subjects = []
 authors = [{name, metadata}]
 
+getProposalLink(id) { "proposalLink"}
 uploadProposal(proposalId, file):{}
 
 
 
 
-getAcceptedProposals(){[{id, title, keywords, subjects, author, recommendations}]}
+getAcceptedProposals(){[{id, title, keywords, subjects, authors, recommendations}]}
 recommendations = [] de stringuri
 
 
@@ -120,6 +118,8 @@ date = ZZ/LL/YYYY
 time = HH:MM
 
 
+canParticipateAtSection(id) :{value:boolean("True, False")}
+//userul se ia din sesiune
 
 participateToSection(id) : {}
 
@@ -143,6 +143,7 @@ bidType = ACCEPT_FOR_REVIEW, COULD_REVIEW, REJECT_FROM_REVIEW
 
 getProposalsToReview() :{[{id, name, keywords, subjects, authors}]}
 
+isProposalRequestedAgain(id) {value:boolean}
 
 getProposalReview():{reviewType, recommendation}
 reviewType = NONE | STRONG_ACCEPT | ACCEPT | WEAK_ACCEPT | BORDELINE_PAPER | WEAK_REJECT | REJECT | STRONG_REJECT
@@ -152,7 +153,7 @@ recommendation = string
 setProposalReview(id, reviewType, recommendation) :{}
 
 
-listOthersReviewsForPaper(id) : {[reviewerName, reviewType, recommendation]}
+listOthersReviewsForPaper(id) : {[reviewerId, reviewerName, reviewType, recommendation]}
 
 
 areProposalReviewsContradictory(id):{contradictory:True/False}
@@ -181,22 +182,25 @@ chooseFinalReview(id, reviewType):{}
 reviewType = ACCEPT, REJECT
 
 
-getProposalReviewers(id) : {[{reviewerName, reviewerId}]}
+getProposalDifferentReviewers(id) : {[{reviewerName, reviewerId}]}
 
 chooseFinalEvaluator(proposalId, reviewerId)
 
 
 
 
+//ca la functia pentru author
+getSections(): {[{id, name, program}]}
 
-getSections(): {[{id, name}]}
+program = [{date, time, speakerName, }]
+date = ZZ/LL/YYYY
+time = HH:MM
+
 
 getPotentialSessionChairsForSection(id):{[{id, name}]}
 
-
 setSectionChair(sectionId, personId):{}
-
-
+getSectionChair(sectionId): {name}
 
 getSectionDateTimeAndPlace(id):{date, time, place}
 setSectionDateTimeAndPlace(id, date, time, place):{}
@@ -205,7 +209,7 @@ setSectionDateTimeAndPlace(id, date, time, place):{}
 
 createSection(name):{id}
 
-getAcceptedProposals():{[{id, title, name, keywords, subjects}]}
+getAllAcceptedProposals():{[{id, title, name, keywords, subjects, authors}]}
 
 getProposalSectionTime(proposalId, sectionId):{time)
 
