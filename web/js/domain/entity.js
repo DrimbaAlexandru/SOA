@@ -57,7 +57,14 @@ var BidType = {
 	REJECT_FROM_REVIEW: 'REJECT_FROM_REVIEW',
 	NONE: 'NONE',
 };
-	
+
+var UserType = {
+	CHAIR: 'CHAIR',
+	REVIEWER: 'REVIEWER',
+	AUTHOR: 'AUTHOR',
+	NONE: 'NONE'
+};
+
 var Review = function(reviewType, recommendations){
 	this.reviewType = reviewType;
 	this.recommendations = recommendations || [];
