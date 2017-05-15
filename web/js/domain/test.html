@@ -1,0 +1,25 @@
+<!DOCTYPE>
+<html>
+<head>
+ <script src="e1.js" type="text/javascript"></script>
+</head>
+<body>
+</body>
+<script>
+var forConference = new FORConference('ASI', '2014/02/15');
+console.log(forConference.name);
+console.log(forConference.date);
+var author1 = new Author('Nimrod Foldvari', 'necasatorit');
+var author2 = new Author('Betty Raicu', 'necasatorita');
+var proposals = new Proposal(1, 'Megatimpul', ['actiune', 'ratiunea timpului'], ['stiinta', 'filozofie'],[author1, author2]);
+console.log(proposals.keywords);
+console.log(proposals.authors); //oare cum?
+var reevalReqProposal = new AcceptedProposal(1, 'Megatimpul', ['actiune', 'ratiunea timpului'], ['stiinta', 'filozofie'],[author1, author2], ['Fa-ti temele!']);
+console.log(reevalReqProposal.subjects);
+console.log(reevalReqProposal.recommendations);
+console.log(reevalReqProposal);
+var review = new Review(ReviewType.STRONG_ACCEPT, ['fa mai bine', 'fii mai atent']);
+console.log(review.getReviewType);
+console.log(review.getRecommendations);
+</script>
+</html>
