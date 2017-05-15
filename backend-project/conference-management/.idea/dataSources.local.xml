@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="ConferenceManagementDB@localhost" uuid="fde408dd-6e57-41a9-9928-0709b66cb694">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <secret-storage>master_key</secret-storage>
+      <first-sync>true</first-sync>
+      <user-name>ISSBACKEND</user-name>
+    </data-source>
+  </component>
+</project>
