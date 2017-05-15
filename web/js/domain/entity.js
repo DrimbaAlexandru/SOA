@@ -51,6 +51,12 @@ var ReviewType = {
 	STRONG_REJECT: 'STRONG_REJECT',
 	};
 
+var BidType = {
+	ACCEPT_FOR_REVIEW: 'ACCEPT_FOR_REVIEW',
+	COULD_REVIEW: 'COULD_REVIEW',
+	REJECT_FROM_REVIEW: 'REJECT_FROM_REVIEW',
+	NONE: 'NONE',
+};
 	
 var Review = function(reviewType, recommendations){
 	this.reviewType = reviewType;
@@ -67,14 +73,33 @@ var Proposal  = function(id, title, keywords, subjects, authors){
 
 
 var AcceptedProposal = function(id, title, keywords,subjects, authors, recommendations){
-	this.id = id;
-	this.title = title;
-	this.keywords = keywords || [];
-	this.subjects = subjects || [];
-	this.authors = authors || [];
+	Proposal.call(this, id, title, keywords, subjects, authors);
 	this.recommendations = recommendations || [];
 };
 
+AcceptedProposal.prototype = Object.create(Proposal.prototype);
+AcceptedProposal.prototype.constructor  = AcceptedProposal;
 
-AcceptedProposal.prototype = Object.create(Proposal);
+var ReevalReqProposal = function(id, title, keywords,subjects, authors, requested){
+	Proposal.call(this, id, title, keywords, subjects, authors);
+	this.requested = requested;
+};
+
+ReevalReqProposal.prototype = Object.create(Proposal.prototype);
+ReevalReqProposal.prototype.constructor = ReevalReqProposal;
+
+var ContradictoryProposal = function(id, title, keywords,subjects, authors, askedForReevaluation, allReviewersAnswered){
+	Proposal.call(this, id, title, keywords, subjects, authors);
+	this.askedForReevaluation = askedForReevaluation;
+	this.allReviewersAnswered = allReviewersAnswered;
+}
+
+ContradictoryProposal.prototype = Object.create(Proposal.prototype);
+ContradictoryProposal.prototype.constructor = ContradictoryProposal;
+
+var PaperReview = function(id, review, reviewer){
+	this.id = id;
+	this.review = review || [];
+	this.reviewer = reviewer || [];
+};
 
