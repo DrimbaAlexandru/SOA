@@ -71,7 +71,8 @@ createListenerAccount(username, password, email, name, affiliation, isAuthor) :
 altfel va fi creat un cont de listener
 
 
-login(username, password) : {type="PC_MEMBER/AUTHOR/LISTENER}
+login(username, password) : {type="CHAIR/REVIEWER/AUTHOR"}
+//daca nu este contul atunci se scrie in errors
 
 ------------ Participant ---------------
 
