@@ -1,0 +1,25 @@
+Gripes:
+    We need an app level user, which then has one or more roles in each conference
+        Those roles can be: 
+            Chair member
+            Author 
+            Speaker
+            Reviewer
+            Listener
+    In which entity are we to store the conference webpage URL?
+	We don't.
+    Please comment the possible values of each enum. It eases implementation a lot
+	Solved.
+    Where do we store presentation metadata?
+	Solved.
+    What about the presentations themselves?
+	Solved.
+    How are we implementing uploaded file versioning?
+	Sort by upload date, latest is the good one.
+    How do we store scheduling metadata for each session?
+	Solved.
+    Also, how do we store which papers are presented at which sections?
+	Solved.
+    We need to add a isPcMember flag for the User. I advise moving the flags to a separate table and form a many-to-many relationship between it and the user. It should ease further application extensions.
+	Solved.
+	
