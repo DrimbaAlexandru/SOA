@@ -11,6 +11,10 @@ Spring Boot:
 
 	Extra How-Tos:
 		https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#howto
+	
+	Samples:
+		https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples
+		
 
 Spring Session (for session management):
 
