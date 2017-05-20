@@ -1,0 +1,52 @@
+Repositories
+	repo_Conference;
+	repo_Privileges;
+	repo_Users;
+	repo_Submitted_papers;
+	repo_Sessions;
+	repo_Session_Schedule;
+	repo_Listeners;
+	repo_Reviews;
+	repo_Bids;
+	repo_Papers;
+	repo_Uploaded_Files;
+
+Services
+	srv_Conference: 
+		CRUD;
+		set/update chair;
+		add/remove cochair;
+		creare sesiune;		
+		manipulare privilegii(per conferinta);
+		dependente: repo_Conference,*repo_User,repo_privileges,repo_Session;
+
+	srv_User:
+		CRUD;
+		manipulare privilegii(per user);
+		dependente: repo_User;
+
+	srv_Session:
+		RUD;	(creerea se face din cadrul conferintei)
+		CRUD - Listeners
+		management programare;
+		dependente: repo_Session,repo_Listeners,repo_sesion_schedule;
+
+	srv_Review:
+		CRUD;
+		dependente: repo_Reviews, *repo_User, *repo_papers;
+
+	srv_Bid:
+		CRUD;
+		dependente: repo_Bid, *repo_User, *repo_papers;
+
+	srv_Paper:
+		CRUD;
+		dependente: repo_paper, *repo_user, repo_Submitted_papers, repo_Uploaded_Files;
+
+	srv_File:
+		CRUD;
+		dependente: repo_paper, repo_uploaded_Files;
+
+dependentele cu * sunt necesare doar pentru validarea legaturilor din relatiile 1:n si n:m
+
+Deasupra tuturor serviciilor astea vine controllerul ce proceseaza cererile HTTP.
