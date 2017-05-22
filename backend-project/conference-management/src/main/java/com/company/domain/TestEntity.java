@@ -9,17 +9,19 @@ import java.util.Set;
 /**
  * Created by AlexandruD on 15-May-17.
  */
-@Table(name = "TestEntity")
+@Table(name = "Parinte")
 @Entity
 public class TestEntity {
 
     private Integer id;
     private String string;
 
-    private Set<TestEnttiyOTMChild> children;
+    private Set<TestEnttiyOTMChild> children1;
+    private Set<TestEnttiyOTMChild> children2;
 
     public TestEntity() {
-        children = new HashSet<>();
+        children1 = new HashSet<>();
+        children2=new HashSet<>();
     }
 
     @Id
@@ -43,13 +45,24 @@ public class TestEntity {
     }
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "test_entity_id")
-    public Set<TestEnttiyOTMChild> getChildren() {
-        return children;
+    @JoinColumn(name = "parinte1_Id")
+    public Set<TestEnttiyOTMChild> getChildren1() {
+        return children1;
     }
 
-    public void setChildren(
+    public void setChildren1(
             Set<TestEnttiyOTMChild> children) {
-        this.children = children;
+        this.children1 = children;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "parinte2_Id")
+    public Set<TestEnttiyOTMChild> getChildren2() {
+        return children2;
+    }
+
+    public void setChildren2(
+            Set<TestEnttiyOTMChild> children) {
+        this.children2 = children;
     }
 }
