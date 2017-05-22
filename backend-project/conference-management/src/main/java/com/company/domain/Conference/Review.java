@@ -16,7 +16,7 @@ public class Review {
 
     @ManyToOne()
     @JoinColumn(name = "ReviewerID", nullable = false)
-    private Alex_AppUser reviewer;
+    private AppUser reviewer;
 
     @ManyToOne()
     @JoinColumn(name = "PaperID", nullable = false)
@@ -40,7 +40,7 @@ public class Review {
         return paper;
     }
 
-    public Alex_AppUser getReviewer() {
+    public AppUser getReviewer() {
         return reviewer;
     }
 
@@ -48,7 +48,7 @@ public class Review {
         this.status = status;
     }
 
-    public void setReviewer(Alex_AppUser reviewer) {
+    public void setReviewer(AppUser reviewer) {
         this.reviewer = reviewer;
     }
 

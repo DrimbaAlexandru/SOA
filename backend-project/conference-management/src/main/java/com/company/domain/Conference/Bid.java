@@ -17,7 +17,7 @@ public class Bid {
 
     @ManyToOne
     @JoinColumn(name = "BidderID", nullable = false)
-    private Alex_AppUser bidder;
+    private AppUser bidder;
 
     @ManyToOne
     @JoinColumn(name = "PaperID", nullable = false)
@@ -41,7 +41,7 @@ public class Bid {
         return paper;
     }
 
-    public Alex_AppUser getBidder() {
+    public AppUser getBidder() {
         return bidder;
     }
 
@@ -49,7 +49,7 @@ public class Bid {
         this.status = status;
     }
 
-    public void setBidder(Alex_AppUser bidder) {
+    public void setBidder(AppUser bidder) {
         this.bidder = bidder;
     }
 

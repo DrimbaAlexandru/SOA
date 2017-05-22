@@ -26,12 +26,12 @@ public class Paper {
     @OneToOne(mappedBy = "paper")
 //!!!!
     //@JoinColumn(name = "PaperID")
-    private Alex_SessionSchedule schedule;
+    private SessionSchedule schedule;
 
     @ManyToMany(mappedBy="submittedPapers")
 //!!!!
     //@JoinTable(name="SubmittedPapers")
-    private Set<Alex_AppUser> authors= new HashSet<>(0);
+    private Set<AppUser> authors= new HashSet<>(0);
 
     @OneToMany(mappedBy = "paper")
     private Set<Review> reviews= new HashSet<>(0);
@@ -50,7 +50,7 @@ public class Paper {
 
     public Paper(){}
 
-    public Paper(String _nume, PaperStatus _status, Set<Alex_AppUser> _authors)
+    public Paper(String _nume, PaperStatus _status, Set<AppUser> _authors)
     {
         nume=_nume;
         status=_status;
@@ -69,7 +69,7 @@ public class Paper {
         this.abstracts = abstracts;
     }
 
-    public void setAuthors(Set<Alex_AppUser> authors) {
+    public void setAuthors(Set<AppUser> authors) {
         this.authors = authors;
     }
 
@@ -93,7 +93,7 @@ public class Paper {
         this.status = status;
     }
 
-    public void setSchedule(Alex_SessionSchedule schedule) {
+    public void setSchedule(SessionSchedule schedule) {
         this.schedule = schedule;
     }
 
@@ -131,12 +131,12 @@ public class Paper {
     }
 
 
-    public Alex_SessionSchedule getSchedule() {
+    public SessionSchedule getSchedule() {
         return schedule;
     }
 
 
-    public Set<Alex_AppUser> getAuthors() {
+    public Set<AppUser> getAuthors() {
         return authors;
     }
 }
