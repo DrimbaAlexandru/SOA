@@ -33,7 +33,7 @@ Services
 
 	srv_Review:
 		CRUD;
-		dependente: repo_Reviews, *repo_User, *repo_papers;
+		dependente: repo_Reviews, repo_User, repo_papers;
 
 	srv_Bid:
 		CRUD;
@@ -41,7 +41,7 @@ Services
 
 	srv_Paper:
 		CRUD;
-		dependente: repo_paper, *repo_user, repo_Submitted_papers, repo_Uploaded_Files;
+		dependente: repo_paper, *repo_user, repo_Uploaded_Files, repo_Submitted_papers;
 
 	srv_File:
 		CRUD;

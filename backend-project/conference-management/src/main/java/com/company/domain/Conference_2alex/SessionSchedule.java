@@ -9,7 +9,7 @@ import java.util.Set;
  */
 @Table(name = "SessionSchedule")
 @Entity
-public class Alex_SessionSchedule {
+public class SessionSchedule {
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -18,6 +18,14 @@ public class Alex_SessionSchedule {
     @OneToOne
     @JoinColumn(name = "PaperID")
     private Paper paper;
+
+    @ManyToOne
+    @JoinColumn(name = "speakerID", nullable = false)
+    private AppUser speaker;
+
+    @ManyToMany
+    @JoinTable(name="Listeners")
+    private Set<AppUser> listeners;
 
     public void setId(int id) {
         this.id = id;
@@ -31,11 +39,18 @@ public class Alex_SessionSchedule {
         this.paper = paper;
     }
 
-
     public Paper getPaper() {
         return paper;
     }
 
-    public Alex_SessionSchedule(){}
+    public AppUser getSpeaker() {
+        return speaker;
+    }
+
+    public void setSpeaker(AppUser speaker) {
+        this.speaker = speaker;
+    }
+
+    public SessionSchedule(){}
 
 }
