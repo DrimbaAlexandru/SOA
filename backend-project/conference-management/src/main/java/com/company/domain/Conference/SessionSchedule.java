@@ -1,10 +1,7 @@
 package com.company.domain.Conference;
 
 import javax.persistence.*;
-<<<<<<< HEAD
 import java.util.Date;
-=======
->>>>>>> 81bc439640f04387779552afdd9a099384ff8748
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +22,6 @@ public class SessionSchedule {
 
     @ManyToOne
     @JoinColumn(name = "sesionID", nullable = false)
-<<<<<<< HEAD
     private Session session;
 
     @Column(name = "presentationTime")
@@ -34,12 +30,6 @@ public class SessionSchedule {
     @ManyToOne
     @JoinColumn(name = "speakerID", nullable = false)
     private AppUser speaker;
-=======
-    private Sesion sesion;
-
-    @Column(name = "presentationTime")
-    private long presentationTime;
->>>>>>> 81bc439640f04387779552afdd9a099384ff8748
 
     public void setId(int id) {
         this.id = id;
@@ -58,7 +48,6 @@ public class SessionSchedule {
         return paper;
     }
 
-<<<<<<< HEAD
     public Session getSession() {
         return session;
     }
@@ -78,33 +67,11 @@ public class SessionSchedule {
     public SessionSchedule(Paper paper, Session sesion, Date presentationTime){
         this.paper = paper;
         this.session = sesion;
-=======
-    public Sesion getSesion() {
-        return sesion;
-    }
-
-    public void setSesion(Sesion sesion) {
-        this.sesion = sesion;
-    }
-
-    public long getPresentationTime() {
-        return presentationTime;
-    }
-
-    public void setPresentationTime(long presentationTime) {
-        this.presentationTime = presentationTime;
-    }
-
-    public SessionSchedule(Paper paper, Sesion sesion, long presentationTime){
-        this.paper = paper;
-        this.sesion = sesion;
->>>>>>> 81bc439640f04387779552afdd9a099384ff8748
         this.presentationTime = presentationTime;
     }
 
     public SessionSchedule(){}
 
-<<<<<<< HEAD
     public AppUser getSpeaker() {
         return speaker;
     }
@@ -112,6 +79,4 @@ public class SessionSchedule {
     public void setSpeaker(AppUser speaker) {
         this.speaker = speaker;
     }
-=======
->>>>>>> 81bc439640f04387779552afdd9a099384ff8748
 }
