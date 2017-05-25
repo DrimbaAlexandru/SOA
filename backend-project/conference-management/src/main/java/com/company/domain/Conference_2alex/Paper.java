@@ -25,24 +25,13 @@ public class Paper {
 
     @OneToOne(mappedBy = "paper")
 //!!!!
-<<<<<<< HEAD
-=======
     //@JoinColumn(name = "PaperID")
->>>>>>> 81bc439640f04387779552afdd9a099384ff8748
     private SessionSchedule schedule;
 
     @ManyToMany(mappedBy="submittedPapers")
 //!!!!
-<<<<<<< HEAD
-    private Set<AppUser> authors= new HashSet<>(0);
-
-    @ManyToMany(mappedBy="assignedForReview")
-//!!!!
-    private Set<AppUser> reviewers= new HashSet<>(0);
-=======
     //@JoinTable(name="SubmittedPapers")
     private Set<AppUser> authors= new HashSet<>(0);
->>>>>>> 81bc439640f04387779552afdd9a099384ff8748
 
     @OneToMany(mappedBy = "paper")
     private Set<Review> reviews= new HashSet<>(0);
