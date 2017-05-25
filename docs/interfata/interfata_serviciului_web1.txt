@@ -1,0 +1,438 @@
+{
+    'resp':{ ce e mai jos pentru fiecare JSON
+            }
+    'warning': []
+    'error' : []
+}
+
+
+
+users/login POST 
+{
+username: string, 
+password: string
+}
+->'resp' Null
+
+users/loggedIn GET
+return 'resp'=>
+'resp' = {
+    //daca sunt erori atunci nu e logat
+    isSuperUser=bool
+    isCommiteeMember=bool
+}
+
+
+
+//getConference
+users/privilegdes?conferenceId=id GET
+return 
+'resp' => {
+   isAuthor = bool
+    isPCMember = bool, 
+    isChair = bool, 
+    isCoChair = bool,
+    
+}
+
+
+users GET
+return 'resp' =>
+'resp' = [{
+    username = string (e unic)
+    name = string
+    affiliation = string
+    email = string
+    website = string
+}]
+
+users/mine GET
+return 'resp' =>
+'resp' = {
+    username = string (e unic)
+    name = string
+    affiliation = string
+    email = string
+    website = string
+}
+
+
+//createUser
+users POST
+{
+    "username":string
+    name:string
+    affiliation:String
+    email :string
+    website:string
+    password:"string"
+}
+
+
+//updateUser
+users PUT
+{
+    username:string
+    name:string
+    affiliation:String
+    email :string
+    website:string
+    password:"string"
+}
+
+
+//grantSteeringCommiteeMember PUT
+/users/{username} PUT
+{
+    isCommiteeMember = bool   
+}
+
+
+
+//grantChair
+//grantCoChair
+//grantPCMember
+/users/{username}/{conferenceId}/
+{
+    [optional] isPCMember =  bool
+    [optional] isChair = bool
+    [optional] isCoChair = bool
+}
+
+
+
+
+
+
+
+//////Conference
+
+conferences POST
+{
+    name:string
+    eventTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    callFroAbstractTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    callForProposalsTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    biddingDeadline:Date
+}       
+=> 'res' =None
+
+
+conferences GET
+return 'resp' = [{
+    id:int
+    name:string
+    eventTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    callFroAbstractTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    callForProposalsTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    biddingDeadline:Date
+}       
+
+
+conferences/{conferenceId} GET
+return 'resp'= {
+    id:int
+    name:string
+    eventTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    callFroAbstractTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    callForProposalsTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    biddingDeadline:Date
+}
+
+
+conferences/{conferenceId} PUT
+{
+    [optional]   eventTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    [optional]   callFroAbstractTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    [optional]   callForProposalsTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    biddingDeadline:Date
+}
+
+
+// Proposals
+
+users/submittedPapers GET
+return 'resp'=>
+[{
+    id:int
+    name:string
+    subjects:string[]
+    keywords:string[]
+    authors:string[]//username
+}]
+
+
+papers GET
+return 'resp'={
+[{
+    id:int
+    name:string
+    subjects:string[]
+    keywords:string[]
+    authors:string[]//username
+}]
+
+papers POST
+{
+    name:string
+    subjects:string[]
+    keywords:string[]
+    authors:string[]
+}
+
+papers/{paperId} PUT
+{
+    name:string
+    subjects:string[]
+    keywords:string[]
+    authors:string[]
+}
+
+//all accepted proposals
+papers/acceptedProposals GET
+return 'resp'={
+[{
+    id:int
+    name:string
+    subjects:string[]
+    keywords:string[]
+    authors:string[]//username
+}]
+
+
+
+
+//getFullProposal
+papers/{paperId}/full GET
+return 'resp'=string RAW_DATA (pdf)
+
+
+
+users/submittedPapers?status=accepted/decline GET
+return 'resp'=[
+{    id:int
+    name:string
+    subjects:string[]
+    keywords:string[]
+    authors:string[]//username
+}]
+
+
+users/submittedPapers/{idPaper}/reviews GET
+return 'resp'=[
+    status:string//name
+    justification:string
+]
+
+
+users/submittedPapers/{idPaper}/presetation POST
+{
+    data:RAW_STRING
+    type:'pdf'/'doc'
+}
+    
+
+//Review
+users/bids/{paperId} GET
+return 'resp' {
+    status = "PLEASED"|"ACCEPT"|"REJECT"|"NONE"/pentru cazul in care nu a pus niciun bid
+}
+
+
+users/bids/{paperId} PUT
+{
+    status = "PLEASED"|"ACCEPT"|"REJECT"
+}
+return 'resp' None
+
+
+//getPapers to 
+users/asignedForReview GET
+return 'resp' = [{
+    id:int
+    name:string
+    subjects:string[]
+    keywords:string[]
+    authors:string[]//username
+}]
+
+users/reviews/{paperId} GET
+{
+    status=NONE|"STRONG_ACCEPT"|"ACCEPT"|"WEAK_ACCEPT"|"BORDERLINE_PAPER"|"WEAK_REJECT"|"REJECT"|"STRONG_REJECT"
+    justification=string
+}
+
+
+users/reviews/{paperId} PUT
+{
+    status="STRONG_ACCEPT"|"ACCEPT"|"WEAK_ACCEPT"|"BORDERLINE_PAPER"|"WEAK_REJECT"|"REJECT"|"STRONG_REJECT"
+    justification=string
+}
+
+
+users/potentialReviewers/{paperId} GET
+return 'resp'=[{
+    id:int
+    username = string (e unic)
+    name = string
+    affiliation = string
+    email = string
+    website = string
+}]
+
+users/asignedReviewers/{paperId} GET
+return 'resp'=[{
+    id:int
+    username = string (e unic)
+    name = string
+    affiliation = string
+    email = string
+    website = string
+}]
+
+
+users/{id}/asignPaper/{paperId} Put
+{}
+return {}
+
+
+papers/{paperId}/reevaluate {} PUT
+{}
+return {}
+
+papers/{paperId}/finalEvaluator/{id} PUT
+{}return {}
+
+
+
+//listOthersReviewsForPaper
+reviews/{paperId} GET
+return 'resp'=>[{
+    status = status=NONE| "STRONG_ACCEPT"|"ACCEPT"|"WEAK_ACCEPT"|"BORDERLINE_PAPER"|"WEAK_REJECT"|"REJECT"|"STRONG_REJECT"
+    justification=string
+    username=string
+}]
+
+
+
+//SECTIONS
+conferences/{conferenceId}/sessions GET
+return =>'resp'[
+{
+    id:int
+    name:String
+    schedule:[
+       {
+            sessionId:int
+            paperId:int
+            presentationStartTime:Date
+            presentationEndTime
+            username:string //speakerName
+        }
+    ]      
+}]
+
+sessions/{sessionId} GET
+return =>'resp'
+{
+    id:int
+    name:String
+    schedule:[
+       {
+            sessionId:int
+            paperId:int
+            presentationStartTime:Date
+            presentationEndTime
+            username:string //speakerName
+        }
+    ]      
+}
+
+
+sessions POST
+{
+    name:String
+    schedule:[
+       {
+            sessionId:int
+            paperId:int
+            presentationStartTime:Date
+            presentationEndTime
+            username:string //speakerName
+        }
+    ]
+}
+
+sessions/{sessionId}/potentialChairs GET
+return 'resp'
+[
+{   
+    id:int
+    username = string (e unic)
+    name = string
+    affiliation = string
+    email = string
+    website = string
+}    
+]
+
+sessions/{sessionId}/sessionChair PUT
+{
+    id:int
+}
+return {}
+
+
+sessions/{sessionId}/participate POST
+return => 'resp' None
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
