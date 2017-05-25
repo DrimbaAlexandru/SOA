@@ -1,10 +1,7 @@
 package com.company.domain.Conference;
 
 import javax.persistence.*;
-<<<<<<< HEAD
 import java.util.Date;
-=======
->>>>>>> 81bc439640f04387779552afdd9a099384ff8748
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +20,6 @@ public class Conference {
     @Column(name = "name", unique = false, nullable = false, length = 256)
     private String name;
 
-<<<<<<< HEAD
     @Column(name = "eventStartDate", nullable = false)
     private Date eventStartDate;
 
@@ -54,31 +50,6 @@ public class Conference {
         this.callForProposalsDeadline=callForProposalsDeadline;
         this.eventEndDate=eventEnd;
         this.eventStartDate=eventStart;
-=======
-    @Column(name = "eventTimeSpan", nullable = false)
-    private long eventTimeSpan;
-
-    @Column(name = "callForAbstractTimeSpan", nullable = false)
-    private long callForAbstractTimeSpan;
-
-    @Column(name = "callForProposalsTimeSpan", nullable = false)
-    private long callForProposalsTimeSpan;
-
-    @Column(name = "biddingDeadline", nullable = false)
-    private long biddingDeadline;
-
-    @OneToMany(mappedBy = "conf_ID")
-    private Set<Privileges> privileges = new HashSet<>();
-
-    public Conference(){}
-
-    public Conference(String name, long eventTimeSpan, long callForAbstractTimeSpan, long callForProposalsTimeSpan, long biddingDeadline) {
-        this.name = name;
-        this.eventTimeSpan = eventTimeSpan;
-        this.callForAbstractTimeSpan = callForAbstractTimeSpan;
-        this.callForProposalsTimeSpan = callForProposalsTimeSpan;
-        this.biddingDeadline = biddingDeadline;
->>>>>>> 81bc439640f04387779552afdd9a099384ff8748
     }
 
     public Set<Privileges> getPrivileges() {
@@ -105,7 +76,6 @@ public class Conference {
         this.name = name;
     }
 
-<<<<<<< HEAD
     public Date getBiddingDeadline() {
         return biddingDeadline;
     }
@@ -154,37 +124,3 @@ public class Conference {
         this.sessions = sessions;
     }
 }
-=======
-    public long getEventTimeSpan() {
-        return eventTimeSpan;
-    }
-
-    public void setEventTimeSpan(long eventTimeSpan) {
-        this.eventTimeSpan = eventTimeSpan;
-    }
-
-    public long getCallForAbstractTimeSpan() {
-        return callForAbstractTimeSpan;
-    }
-
-    public void setCallForAbstractTimeSpan(long callForAbstractTimeSpan) {
-        this.callForAbstractTimeSpan = callForAbstractTimeSpan;
-    }
-
-    public long getCallForProposalsTimeSpan() {
-        return callForProposalsTimeSpan;
-    }
-
-    public void setCallForProposalsTimeSpan(long callForProposalsTimeSpan) {
-        this.callForProposalsTimeSpan = callForProposalsTimeSpan;
-    }
-
-    public long getBiddingDeadline() {
-        return biddingDeadline;
-    }
-
-    public void setBiddingDeadline(long biddingDeadline) {
-        this.biddingDeadline = biddingDeadline;
-    }
-}
->>>>>>> 81bc439640f04387779552afdd9a099384ff8748
