@@ -1,4 +1,4 @@
-package com.company.domain.Conference;
+package com.company.domain;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -25,13 +25,15 @@ public class Paper {
 
     @OneToOne(mappedBy = "paper")
 //!!!!
-    //@JoinColumn(name = "PaperID")
     private SessionSchedule schedule;
 
     @ManyToMany(mappedBy="submittedPapers")
 //!!!!
-    //@JoinTable(name="SubmittedPapers")
     private Set<AppUser> authors= new HashSet<>(0);
+
+    @ManyToMany(mappedBy="assignedForReview")
+//!!!!
+    private Set<AppUser> reviewers= new HashSet<>(0);
 
     @OneToMany(mappedBy = "paper")
     private Set<Review> reviews= new HashSet<>(0);

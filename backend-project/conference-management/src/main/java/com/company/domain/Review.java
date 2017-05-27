@@ -1,4 +1,4 @@
-package com.company.domain.Conference;
+package com.company.domain;
 
 import javax.persistence.*;
 

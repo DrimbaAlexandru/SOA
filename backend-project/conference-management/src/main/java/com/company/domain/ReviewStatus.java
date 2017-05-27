@@ -1,4 +1,4 @@
-package com.company.domain.Conference;
+package com.company.domain;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -8,9 +8,9 @@ import java.util.Set;
  * Created by Alex on 21.05.2017.
  */
 
-@Table(name = "BidStatus")
+@Table(name = "ReviewStatus")
 @Entity
-public class BidStatus {
+public class ReviewStatus {
 
     @Id
     @GeneratedValue
@@ -21,9 +21,9 @@ public class BidStatus {
     private String nume;
 
     @OneToMany(mappedBy = "status")
-    private Set<Bid> bidsInThisState = new HashSet<>();
+    private Set<Review> reviewsInThisState = new HashSet<>();
 
-    public BidStatus(){}
+    public ReviewStatus(){}
 
     public String getNume() {
         return nume;
@@ -33,17 +33,16 @@ public class BidStatus {
         return id;
     }
 
-
-    public Set<Bid> getBidsInThisState() {
-        return bidsInThisState;
+    public Set<Review> getReviewsInThisState() {
+        return reviewsInThisState;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setBidsInThisState(Set<Bid> bidsInThisState) {
-        this.bidsInThisState = bidsInThisState;
+    public void setReviewsInThisState(Set<Review> reviewsInThisState) {
+        this.reviewsInThisState = reviewsInThisState;
     }
 
     public void setNume(String nume) {

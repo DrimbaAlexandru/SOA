@@ -1,4 +1,4 @@
-package com.company.domain.Conference;
+package com.company.domain;
 
 /**
  * Created by Alex on 21.05.2017.

@@ -1,4 +1,4 @@
-package com.company.domain.Conference;
+package com.company.domain;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,7 +14,7 @@ import java.util.Set;
 public class Conference {
     @Id
     @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "conf_id")
     private int id;
 
     @Column(name = "name", unique = false, nullable = false, length = 256)

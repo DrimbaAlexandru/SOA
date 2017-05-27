@@ -1,6 +1,7 @@
-package com.company.domain.Conference;
+package com.company.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,12 +21,15 @@ public class SessionSchedule {
     private Paper paper;
 
     @ManyToOne
+    @JoinColumn(name = "sesionID", nullable = false)
+    private Session session;
+
+    @Column(name = "presentationTime")
+    private Date presentationTime;
+
+    @ManyToOne
     @JoinColumn(name = "speakerID", nullable = false)
     private AppUser speaker;
-
-    @ManyToMany
-    @JoinTable(name="Listeners")
-    private Set<AppUser> listeners;
 
     public void setId(int id) {
         this.id = id;
@@ -39,9 +43,34 @@ public class SessionSchedule {
         this.paper = paper;
     }
 
+
     public Paper getPaper() {
         return paper;
     }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public Date getPresentationTime() {
+        return presentationTime;
+    }
+
+    public void setPresentationTime(Date presentationTime) {
+        this.presentationTime = presentationTime;
+    }
+
+    public SessionSchedule(Paper paper, Session sesion, Date presentationTime){
+        this.paper = paper;
+        this.session = sesion;
+        this.presentationTime = presentationTime;
+    }
+
+    public SessionSchedule(){}
 
     public AppUser getSpeaker() {
         return speaker;
@@ -50,7 +79,4 @@ public class SessionSchedule {
     public void setSpeaker(AppUser speaker) {
         this.speaker = speaker;
     }
-
-    public SessionSchedule(){}
-
 }

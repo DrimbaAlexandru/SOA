@@ -1,4 +1,4 @@
-package com.company.domain.Conference;
+package com.company.domain;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -36,8 +36,8 @@ public class Session {
 
     public Session(){}
 
-    public Session(Conference conf, String numele_pulii) {
-        this.name = numele_pulii;
+    public Session(Conference conf, String name) {
+        this.name = name;
         this.conference = conf;
     }
 
