@@ -25,7 +25,7 @@ return 'resp'=>
 
 
 //getConference
-users/privilegdes?conferenceId=id GET
+users/privileges?conferenceId=id GET
 return 
 'resp' => {
    isAuthor = bool
@@ -70,7 +70,7 @@ users POST
 
 
 //updateUser
-users PUT
+users/{username} PUT
 {
     username:string
     name:string
@@ -78,12 +78,6 @@ users PUT
     email :string
     website:string
     password:"string"
-}
-
-
-//grantSteeringCommiteeMember PUT
-/users/{username} PUT
-{
     isCommiteeMember = bool   
 }
 
@@ -98,151 +92,6 @@ users PUT
     [optional] isChair = bool
     [optional] isCoChair = bool
 }
-
-
-
-
-
-
-
-//////Conference
-
-conferences POST
-{
-    name:string
-    eventTimeSpan{
-        startDate:Date
-        endDate:Date
-    }
-    callFroAbstractTimeSpan{
-        startDate:Date
-        endDate:Date
-    }
-    callForProposalsTimeSpan{
-        startDate:Date
-        endDate:Date
-    }
-    biddingDeadline:Date
-}       
-=> 'res' =None
-
-
-conferences GET
-return 'resp' = [{
-    id:int
-    name:string
-    eventTimeSpan{
-        startDate:Date
-        endDate:Date
-    }
-    callFroAbstractTimeSpan{
-        startDate:Date
-        endDate:Date
-    }
-    callForProposalsTimeSpan{
-        startDate:Date
-        endDate:Date
-    }
-    biddingDeadline:Date
-}       
-
-
-conferences/{conferenceId} GET
-return 'resp'= {
-    id:int
-    name:string
-    eventTimeSpan{
-        startDate:Date
-        endDate:Date
-    }
-    callFroAbstractTimeSpan{
-        startDate:Date
-        endDate:Date
-    }
-    callForProposalsTimeSpan{
-        startDate:Date
-        endDate:Date
-    }
-    biddingDeadline:Date
-}
-
-
-conferences/{conferenceId} PUT
-{
-    [optional]   eventTimeSpan{
-        startDate:Date
-        endDate:Date
-    }
-    [optional]   callFroAbstractTimeSpan{
-        startDate:Date
-        endDate:Date
-    }
-    [optional]   callForProposalsTimeSpan{
-        startDate:Date
-        endDate:Date
-    }
-    biddingDeadline:Date
-}
-
-
-// Proposals
-
-users/submittedPapers GET
-return 'resp'=>
-[{
-    id:int
-    name:string
-    subjects:string[]
-    keywords:string[]
-    authors:string[]//username
-}]
-
-
-papers GET
-return 'resp'={
-[{
-    id:int
-    name:string
-    subjects:string[]
-    keywords:string[]
-    authors:string[]//username
-}]
-
-papers POST
-{
-    name:string
-    subjects:string[]
-    keywords:string[]
-    authors:string[]
-}
-
-papers/{paperId} PUT
-{
-    name:string
-    subjects:string[]
-    keywords:string[]
-    authors:string[]
-}
-
-//all accepted proposals
-papers/acceptedProposals GET
-return 'resp'={
-[{
-    id:int
-    name:string
-    subjects:string[]
-    keywords:string[]
-    authors:string[]//username
-}]
-
-
-
-
-//getFullProposal
-papers/{paperId}/full GET
-return 'resp'=string RAW_DATA (pdf)
-
-
 
 users/submittedPapers?status=accepted/decline GET
 return 'resp'=[
@@ -327,17 +176,80 @@ return 'resp'=[{
 }]
 
 
-users/{id}/asignPaper/{paperId} Put
+users/{id}/assignPaper/{paperId} Put
 {}
 return {}
 
+
+
+// Proposals
+
+users/submittedPapers GET
+return 'resp'=>
+[{
+    id:int
+    name:string
+    subjects:string[]
+    keywords:string[]
+    authors:string[]//username
+}]
+
+
+papers GET
+return 'resp'={
+[{
+    id:int
+    name:string
+    subjects:string[]
+    keywords:string[]
+    authors:string[]//username
+}]
+
+papers POST
+{
+    name:string
+    subjects:string[]
+    keywords:string[]
+    authors:string[]
+}
+
+papers/{paperId} PUT
+{
+    name:string
+    subjects:string[]
+    keywords:string[]
+    authors:string[]
+}
+
+// Uploads a full paper file
+papers/{paperId}/full POST
+{
+	type:string
+	data:string
+}
+
+//all accepted proposals
+papers/acceptedProposals GET
+return 'resp'={
+[{
+    id:int
+    name:string
+    subjects:string[]
+    keywords:string[]
+    authors:string[]//username
+}]
+
+//getFullProposal
+papers/{paperId}/full GET
+return 'resp'=string RAW_DATA (pdf)
 
 papers/{paperId}/reevaluate {} PUT
 {}
 return {}
 
-papers/{paperId}/finalEvaluator/{id} PUT
-{}return {}
+papers/{paperId}/finalEvaluator/{user_id} PUT
+{}
+return {}
 
 
 
@@ -352,6 +264,87 @@ return 'resp'=>[{
 
 
 //SECTIONS
+
+//////Conference
+
+conferences POST
+{
+    name:string
+    eventTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    callFroAbstractTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    callForProposalsTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    biddingDeadline:Date
+}       
+=> 'res' =None
+
+
+conferences GET
+return 'resp' = [{
+    id:int
+    name:string
+    eventTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    callFroAbstractTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    callForProposalsTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    biddingDeadline:Date
+}       
+
+
+conferences/{conferenceId} GET
+return 'resp'= {
+    id:int
+    name:string
+    eventTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    callFroAbstractTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    callForProposalsTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    biddingDeadline:Date
+}
+
+
+conferences/{conferenceId} PUT
+{
+    [optional]   eventTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    [optional]   callFroAbstractTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    [optional]   callForProposalsTimeSpan{
+        startDate:Date
+        endDate:Date
+    }
+    biddingDeadline:Date
+}
+
+
 conferences/{conferenceId}/sessions GET
 return =>'resp'[
 {
