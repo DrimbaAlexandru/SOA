@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<title>Chiar Main Page</title>
+<head>
+<link rel="stylesheet" href="stylePopupAssignRev.css">
+<link rel="stylesheet" href="stylePopupDeadlines.css">  
+	<style>
+		table, th, td {
+    	border: 2px solid black;
+    	border-collapse: collapse;
+		}
+		
+	</style>
+</head>
+<body>
+<h1>Welcome to your account!</h1>
+
+<div>
+	<table id="enrolledPapersChairPage" style="width:50%">
+		<caption>Enrolled papers</caption>
+  	<tr>
+    <th>Proposal Name</th>
+    <th>Keywords</th> 
+    <th>Topics</th>
+    <th>Authors</th>
+  </tr>
+  <tr>
+  	<td>
+  		lala
+  	</td>
+  	<td>lalalaal</td>
+  	<td>
+  		lala
+  	</td>
+  	<td>
+  		lala
+  	</td>
+  </tr>
+ 	</table>
+</div>
+<br>
+
+<div>
+	<p>Manage papers in conflict: </p>
+	<a href="url">Click here</a>
+	<p>Decide session chairs: </p>
+	<a href="url">Click here</a>
+</div>
+<br>
+
+<div>
+	<table id="deadlinesChiarPage" style="width:50%">
+		<caption>Deadlines</caption>
+  	<tr>
+    <th>Name</th>
+    <th>Date</th> 
+  </tr>
+  <tr>
+  	<td>
+  		lala
+  	</td>
+  	<td>
+  		lala
+  	</td>
+  </tr>
+ 	</table>
+</div>
+<br>
+<button id="logoutChair">Logout</button>
+<br>
+
+<!-- The Modal for Enrolled papers -->
+<div id="myModalEnrolledChair" class="modalEnrolledChair">
+
+  <!-- Modal content -->
+  <div class="modal-contentEnrolledChair">
+    <span class="closeEnrolledChair">&times;</span>
+    <div>
+    	<table id="assignedRevs" style="width:50%">
+		<caption>Reviewers already assigned to this paper</caption>
+  		<tr>
+    	<th>Reviewer</th>
+    	<th>Grade</th>
+  		</tr>
+  		<tr>
+  		<td>
+  			lala
+  		</td>
+  		<td>
+  			lala
+  		</td>
+  		</tr>
+ 		</table>
+ 	</div>
+ 	<br>
+ 	<div>
+    	<table id="potentialRevs" style="width:50%">
+		<caption>Reviewers that are willing to review this paper</caption>
+  		<tr>
+    	<th>Reviewer</th>
+    	<th>Bidding rating</th>
+  		</tr>
+  		<tr>
+  		<td>
+  			lala
+  		</td>
+  		<td>
+  			lala
+  		</td>
+  		</tr>
+ 		</table>
+ 	</div>
+ 	<div>
+ 		<p>Assign a new reviewer:</p>
+ 		<button id="addReviewer">Add</button>
+ 	</div>
+
+
+    </div>
+  </div>
+ </div>
+
+ <!-- The Modal for Abs -->
+<div id="myModalDeadlines" class="modalDeadlines">
+
+  <!-- Modal content -->
+  <div class="modal-contentDeadlines">
+    <span class="closeDeadlines">&times;</span>
+    <div>
+    	<form action="something">
+  		New Date: <input type="text" name="newDate"><br>
+  		<br>
+  		<input type="submit" value="Submit">
+		</form>
+
+
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
