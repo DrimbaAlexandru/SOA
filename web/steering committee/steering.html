@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<title>Steering Account</title>
+<head>
+	<link rel="stylesheet" href="stylePopupCreateChair.css"> 
+	<link rel="stylesheet" href="stylePopupCreateConf.css"> 
+	
+	
+	
+</head>
+<body>
+
+<h1>Welcome to your account!</h1>
+<div>
+<p>Create a new conference?</p>
+
+<button id="createConfButton" type="button" >Create conference</button><br>
+
+<p>Create a new chair?</p>
+
+<button id="createChairButton" type="button" >Create chair</button><br>
+<br>
+<button id="logoutSteeringButton" type="button" >Logout</button><br>
+
+<div id="myModalCreateConf" class="modalCreateConf">
+
+  <!-- Modal content -->
+  <div class="modal-contentCreateConf">
+    <span class="closeCreateConf">&times;</span>
+    <p>
+    	Conference name: <input type="text" name="confname"><br>
+		<br>
+		Date: <input type="text" name="date"><br>
+		<br>
+		Location: <input type="text" name="location"><br>
+		<br>
+		<button id="createCreateConfButton" type="button" >Create now</button><br>
+    </p>
+  </div>
+
+</div>
+
+
+
+<div id="myModalCreateChair" class="modalCreateChair">
+
+  <!-- Modal content -->
+  <div class="modal-contentCreateChair">
+    <span class="closeCreateChair">&times;</span>
+    <p>
+    	Username: <input type="text" name="username"><br>
+		<br>
+		Conference: <input type="text" name="conference"><br>
+		<br>
+		<button id="createCreateChair" type="button" >Create now</button><br>
+    </p>
+  </div>
+
+</div>
+
+<script type="text/javascript" src="popupCreateChair.js"></script>
+<script type="text/javascript" src="popupCreateConf.js"></script>
+
+</body>
+</html>
