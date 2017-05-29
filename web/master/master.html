@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<title>Master Account</title>
+<head>
+	<link rel="stylesheet" href="stylePopupCreateSteering.css"> 
+	
+	
+	
+</head>
+<body>
+
+<h1>Welcome to your account!</h1>
+<div>
+<p>Create a new steering committee?</p>
+<br>
+<button id="createSteeringButton" type="button" >Create</button><br>
+<br>
+<button id="logoutMaster" type="button" >Logout</button><br>
+<br>
+
+<div id="myModalCreateSteering" class="modalCreateSteering">
+
+  <!-- Modal content -->
+  <div class="modal-contentCreateSteering">
+    <span class="closeCreateSteering">&times;</span>
+    <p>
+    	Username: <input type="text" name="username"><br>
+		<br>
+		Password: <input type="text" name="password"><br>
+		<br>
+		<button id="createSteeringInPopupButton" type="button" >Create now</button><br>
+    </p>
+  </div>
+
+</div>
+
+<script type="text/javascript" src="popupCreateSteering.js"></script>
+
+</body>
+</html>
