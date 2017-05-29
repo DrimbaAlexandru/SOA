@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<title>Manage conflict papers</title>
+<head>
+
+  <link rel="stylesheet" href="stylePopupReevaluation.css">
+  <link rel="stylesheet" href="stylePopupFinalReview.css">
+  <link rel="stylesheet" href="stylePopupFinalReviewer.css">   
+	<style>
+		table, th, td {
+    	border: 2px solid black;
+    	border-collapse: collapse;
+		}
+		.paperDetails {
+  			border: 2px solid black ;
+		}
+	</style>
+	
+	
+</head>
+<body>
+<h1>You can manage papers in conflict here</h1>
+
+<div>
+<table id="idConflict" style="width:50%">
+<caption>Papers in conflict</caption>
+  <tr>
+    <th>Proposal Name</th>
+    <th>Keywords</th> 
+    <th>Topics</th>
+    <th>Authors</th>
+  </tr>
+  <tr>
+  	<td>
+  		lala
+  	</td>
+  	<td>lalalaal</td>
+  	<td>
+  		lala
+  	</td>
+  	<td>
+  		lala
+  	</td>
+  </tr>
+ </table>
+<br>
+
+<p>Reevaluate proposal: </p>
+<button id="reevaluation">Reevaluate</button><br>
+
+<p>Give final review: </p>
+<button id="finalReview">Final Review</button><br>
+
+<p>Assign final reviewer: </p>
+<button id="finalReviewer">Assign</button><br>
+
+<!-- The Modal for the Reevaluation of the proposal  -->
+<div id="myModalReevalChair" class="modalReevalChair">
+
+  <!-- Modal content -->
+  <div class="modal-contentReevalChair">
+    <span class="closeReeval">&times;</span>
+    <div>
+      <p>Confirm reevaluation of the selected paper?</p>
+      <form action="">
+        <input type="radio" name="reeval" value="yes"> Yes<br>
+        <input type="radio" name="gender" value="no"> No<br>
+      </form>
+      <br>
+      <button id="submitReevalChair">Submit</button><br>  
+    </div>
+    
+  </div>
+ </div>
+
+ <!-- The Modal for the the final review of the proposal  -->
+<div id="myModalFinalRevChair" class="modalFinalRevChair">
+
+  <!-- Modal content -->
+  <div class="modal-contentFinalRevChair">
+    <span class="closeFinalRevChair">&times;</span>
+    <div>
+      <div id="detailedPapersChair" class="paperDetails">
+      Details of the clicked paper
+      </div>
+      <p>Confirm final review of the selected paper</p>
+      <form action="">
+        <input type="radio" name="finalRev" value="accept"> Accept<br>
+        <input type="radio" name="finalRev" value="reject"> Reject<br>
+      </form>
+      <br>
+      <button id="submitReeval">Submit</button><br>  
+    </div>
+    
+  </div>
+ </div>
+
+<!-- The Modal for the final reviewer -->
+<div id="myModalFinalReviewerChair" class="modalFinalReviewerChair">
+
+  <!-- Modal content -->
+  <div class="modal-contentFinalReviewerChair">
+    <span class="closeFinalReviewerChair">&times;</span>
+    <div>
+      <table id="finalReviewersChair" style="width:50%">
+        <caption>Available reviewers for the final evaluation</caption>
+      <tr>
+      <th>Reviewer</th>
+      <th>Bidding rating</th>
+      </tr>
+      <tr>
+      <td>
+        lala
+      </td>
+      <td>
+        lala
+      </td>
+      </tr>
+    </table>
+    <br>
+    <button id="submitReviewerChair">Submit</button><br>  
+
+
+    </div>
+  </div>
+
+</div>
+
+
+</div>
+
+</body>
+</html>
