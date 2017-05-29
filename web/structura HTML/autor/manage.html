@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<title>Manage papers</title>
+<head>
+	<link rel="stylesheet" href="stylePopupAbs.css"> 
+	<link rel="stylesheet" href="stylePopupFull.css"> 
+	<style>
+		table, th, td {
+    	border: 2px solid black;
+    	border-collapse: collapse;
+		}
+		.paperDetails {
+  			border: 2px solid black ;
+		}
+	</style>
+	
+	
+</head>
+<body>
+<h1>You can manage your papers here</h1>
+<div>
+<table id="sentPapersTable" style="width:50%">
+<caption>Your sent papers</caption>
+  <tr>
+    <th>Proposal Name</th>
+    <th>Keywords</th> 
+    <th>Topics</th>
+    <th>Authors</th>
+  </tr>
+  <tr>
+  	<td>
+  		lala
+  	</td>
+  	<td>lalalaal</td>
+  	<td>
+  		lala
+  	</td>
+  	<td>
+  		lala
+  	</td>
+  </tr>
+ </table>
+<br>
+<!--
+<p>Upload full paper: </p>
+<button id="full">Upload</button><br> -->
+
+<p>Upload abstract: </p>
+<button id="abstractUploadButton">Upload</button><br>
+
+<!-- The Modal for Full -->
+<div id="myModalFull" class="modalFull">
+
+  <!-- Modal content -->
+  <div class="modal-contentFull">
+    <span class="closeFull">&times;</span>
+    <div id="detailedPapers" class="paperDetails">
+    	Details of the clicked paper
+    </div>
+    <div>
+    	<button id="updatePaperButton">Update</button><br>
+    </div>
+    <div>
+    	<form action="something">
+    	<input type="file" name="fileupload" value="fileupload" id="fileupload">
+    	<label for="fileupload"> Select a file to upload</label>
+    	<input type="submit" value="submit">
+    	</form>
+    </div>
+  </div>
+ </div>
+
+<!-- The Modal for Abs -->
+<div id="myModalAbs" class="modalAbs">
+
+  <!-- Modal content -->
+  <div class="modal-contentAbs">
+    <span class="closeAbs">&times;</span>
+    <div>
+    	<form>
+  			Paper name:<br>
+  			<input type="text" name="pname"><br>
+  			Keywords:<br>
+  			<input type="text" name="keywords"><br>
+  			Topics:<br>
+  			<input type="text" name="topics"><br>
+  			Authors:<br>
+  			<input type="text" name="authors"><br>
+  			<input type="button" onclick="addInput()" value="+"/>
+			<span id="responce"></span>
+		</form>
+
+
+    </div>
+  </div>
+
+</div>
+
+
+</div>
+
+<script type="text/javascript" src="popupAbs.js"></script>
+<script>
+var countBox =1;
+var boxName = 0;
+function addInput()
+{
+    var boxName="enter text here"+countBox; 
+	document.getElementById('responce').innerHTML+='<br/><input type="text" id="'+boxName+'" value="'+boxName+'" "  /><br/>';
+    countBox += 1;
+}
+</script>
+</body>
+</html>
