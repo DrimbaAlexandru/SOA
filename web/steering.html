@@ -2,8 +2,7 @@
 <html>
 <title>Steering Account</title>
 <head>
-	<link rel="stylesheet" href="stylePopupCreateChair.css"> 
-	<link rel="stylesheet" href="stylePopupCreateConf.css"> 
+	<link rel="stylesheet" href="css/design.css">
 	
 	
 	
@@ -22,11 +21,11 @@
 <br>
 <button id="logoutSteeringButton" type="button" >Logout</button><br>
 
-<div id="myModalCreateConf" class="modalCreateConf">
+<div id="myModalCreateConf" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-contentCreateConf">
-    <span class="closeCreateConf">&times;</span>
+  <div class="modal-content">
+    <span class="closeButton" id="closeCreateConf">&times;</span>
     <p>
     	Conference name: <input type="text" name="confname"><br>
 		<br>
@@ -42,11 +41,11 @@
 
 
 
-<div id="myModalCreateChair" class="modalCreateChair">
+<div id="myModalCreateChair" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-contentCreateChair">
-    <span class="closeCreateChair">&times;</span>
+  <div class="modal-content">
+    <span id="closeCreateChair" class="closeButton">&times;</span>
     <p>
     	Username: <input type="text" name="username"><br>
 		<br>
@@ -58,8 +57,8 @@
 
 </div>
 
-<script type="text/javascript" src="popupCreateChair.js"></script>
-<script type="text/javascript" src="popupCreateConf.js"></script>
+<script type="text/javascript" src="js/gui/popupCreateChair.js"></script>
+<script type="text/javascript" src="js/gui/popupCreateConf.js"></script>
 
 </body>
 </html>

@@ -2,32 +2,11 @@
 <html>
 <title>Revewer Main Page</title>
 <head>
-<link rel="stylesheet" href="stylePopupReviewed.css"> 
-<link rel="stylesheet" href="stylePopupUnReviewed.css"> 
-	<style>
-		table, th, td {
-    	border: 2px solid black;
-    	border-collapse: collapse;
-		}
-
-		.paperDetails {
-  			border: 2px solid black ;
-		}
-
-		.paperDetailsDue {
-  			border: 2px solid black ;
-		}
-		
-	</style>
+<link rel="stylesheet" href="css/design.css">
 </head>
 <body>
 
 <h1>Welcome to your account!</h1>
-<div>
-<p>Bid for papers: </p>
-<a href="url">Click here</a>
-</div>
-<br>
 <div>
 	<table id="revewedPapersReviewer" style="width:50%">
 		<caption>Your revewed papers</caption>
@@ -74,11 +53,11 @@
 <!-- for the popups-->
 
 <!-- The Modal for Reviewed papers -->
-<div id="myModalReviewedPapers" class="modalReviewedPapers">
+<div id="myModalReviewedPapers" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-contentReviewedPapers">
-    <span class="closeReviewedPapers">&times;</span>
+  <div class="modal-content">
+    <span class="closeButton" id="closeReviewedPapers">&times;</span>
     <div id="detailedPapers" class="paperDetails">
     	Details of the clicked paper
     </div>
@@ -111,11 +90,11 @@
  </div>
 
 <!-- The Modal for UnReviewed papers -->
-<div id="myModalUnReviewed" class="modalUnReviewed">
+<div id="myModalUnReviewed" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-contentUnReviewed">
-    <span class="closeUnReviewed">&times;</span>
+  <div class="modal-content">
+    <span class="closeButton" id="closeUnReviewed">&times;</span>
     <div id="detailedPapersDue" class="paperDetailsDue">
     	<p>Details of the clicked paper</p>
     </div>

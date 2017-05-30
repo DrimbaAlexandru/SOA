@@ -3,20 +3,7 @@
 <title>Manage conflict papers</title>
 <head>
 
-  <link rel="stylesheet" href="stylePopupReevaluation.css">
-  <link rel="stylesheet" href="stylePopupFinalReview.css">
-  <link rel="stylesheet" href="stylePopupFinalReviewer.css">   
-	<style>
-		table, th, td {
-    	border: 2px solid black;
-    	border-collapse: collapse;
-		}
-		.paperDetails {
-  			border: 2px solid black ;
-		}
-	</style>
-	
-	
+  <link rel="stylesheet" href="css/design.css">
 </head>
 <body>
 <h1>You can manage papers in conflict here</h1>
@@ -55,11 +42,11 @@
 <button id="finalReviewer">Assign</button><br>
 
 <!-- The Modal for the Reevaluation of the proposal  -->
-<div id="myModalReevalChair" class="modalReevalChair">
+<div id="myModalReevalChair" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-contentReevalChair">
-    <span class="closeReeval">&times;</span>
+  <div class="modal-content">
+    <span class="closeButton" id="closeReeval">&times;</span>
     <div>
       <p>Confirm reevaluation of the selected paper?</p>
       <form action="">
@@ -74,11 +61,11 @@
  </div>
 
  <!-- The Modal for the the final review of the proposal  -->
-<div id="myModalFinalRevChair" class="modalFinalRevChair">
+<div id="myModalFinalRevChair" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-contentFinalRevChair">
-    <span class="closeFinalRevChair">&times;</span>
+  <div class="modal-content">
+    <span class="closeButton" id="closeFinalRevChair">&times;</span>
     <div>
       <div id="detailedPapersChair" class="paperDetails">
       Details of the clicked paper
@@ -96,11 +83,11 @@
  </div>
 
 <!-- The Modal for the final reviewer -->
-<div id="myModalFinalReviewerChair" class="modalFinalReviewerChair">
+<div id="myModalFinalReviewerChair" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-contentFinalReviewerChair">
-    <span class="closeFinalReviewerChair">&times;</span>
+  <div class="modal-content">
+    <span class="closeButton" id="closeFinalReviewerChair">&times;</span>
     <div>
       <table id="finalReviewersChair" style="width:50%">
         <caption>Available reviewers for the final evaluation</caption>

@@ -2,13 +2,7 @@
 <html>
 <title>Assign session chair</title>
 <head>
-<link rel="stylesheet" href="stylePopupSessions.css">
-	<style>
-		table, th, td {
-    	border: 2px solid black;
-    	border-collapse: collapse;
-		}
-	</style>
+<link rel="stylesheet" href="css/design.css">
 </head>
 <body>
 <h1>You can you can assign session chairs here</h1>
@@ -38,11 +32,11 @@
 </div>
 
 <!-- The Modal for assigning session chairs  -->
-<div id="myModalSession" class="modalSession">
+<div id="myModalSession" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-contentSession">
-    <span class="closeSession">&times;</span>
+  <div class="modal-content">
+    <span class="closeButton" id="closeSession">&times;</span>
     <div>
       <table id="potetialSessionChairs" style="width:50%">
 		<caption>Potential session chair</caption>
@@ -67,25 +61,28 @@
     </div>
     <br>
     <button id="submitSessionChair">Submit</button><br>
-    
+
+      <div>
+          <form action="">
+              Date: <input type="text" name="date"><br>
+              <br>
+              Time: <input type="text" name="time"><br>
+              <br>
+              Location: <input type="text" name="location"><br>
+              <br>
+              <p>Update new session data?</p>
+              <input type="submit" value="Update">
+          </form>
+          <br>
+
+      </div>
+
   </div>
  </div>
 <br>
 
- <div>
- 	<form action="">
-  		Date: <input type="text" name="date"><br>
-  		<br>
-  		Time: <input type="text" name="time"><br>
-  		<br>
-  		Location: <input type="text" name="location"><br>
-  		<br>
-  		<p>Update new session data?</p>
-  		<input type="submit" value="Update">
-	</form>
-	<br>
 
- </div>
+
 
 </body>
 </html>

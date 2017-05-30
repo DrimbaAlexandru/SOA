@@ -2,18 +2,7 @@
 <html>
 <title>Manage papers</title>
 <head>
-	<link rel="stylesheet" href="stylePopupAbs.css"> 
-	<link rel="stylesheet" href="stylePopupFull.css"> 
-	<style>
-		table, th, td {
-    	border: 2px solid black;
-    	border-collapse: collapse;
-		}
-		.paperDetails {
-  			border: 2px solid black ;
-		}
-	</style>
-	
+	<link rel="stylesheet" href="css/design.css">
 	
 </head>
 <body>
@@ -49,11 +38,11 @@
 <button id="abstractUploadButton">Upload</button><br>
 
 <!-- The Modal for Full -->
-<div id="myModalFull" class="modalFull">
+<div id="myModalFull" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-contentFull">
-    <span class="closeFull">&times;</span>
+  <div class="modal-content">
+    <span id="closeFull" class="closeButton">&times;</span>
     <div id="detailedPapers" class="paperDetails">
     	Details of the clicked paper
     </div>
@@ -71,11 +60,11 @@
  </div>
 
 <!-- The Modal for Abs -->
-<div id="myModalAbs" class="modalAbs">
+<div id="myModalAbs" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-contentAbs">
-    <span class="closeAbs">&times;</span>
+  <div class="modal-content">
+    <span id="closeAbs" class="closeButton">&times;</span>
     <div>
     	<form>
   			Paper name:<br>
@@ -99,7 +88,7 @@
 
 </div>
 
-<script type="text/javascript" src="popupAbs.js"></script>
+<script type="text/javascript" src="js/gui/popupAbs.js"></script>
 <script>
 var countBox =1;
 var boxName = 0;
