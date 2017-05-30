@@ -1,15 +1,25 @@
-var FORConference = function(name, date){
+var Conference = function(name= undefined, eventTimeSpan = undefined, callForAbstract = undefined, callForProposals = undefined, biddingDeadline = undefined){
 	this.name = name;
-	this.date = date;
+	this.eventTimeSpan = eventTimeSpan;
+	this.callForAbstract = callForAbstract;
+	this.callForProposal = callForProposals;
+	this.biddingDeadline = biddingDeadline;
 };
 
-var Member = function(name, date, email, affiliation, website){
+var TimeSpan = function(startDate = undefined, endDate= undefined){
+    this.startDate = startDate;
+    this.endDate = endDate;
+}
+
+var User = function(id = undefined, name, date, email, affiliation, website, password=undefined, isCommiteeMember=undefined){
+    this.id = id;
 	this.name = name;
 	this.email = email;
 	this.affiliation = affiliation;
 	this.date = date;
 	this.webite = website;
-	
+	this.password = password;
+	this.isCommiteeMember= isCommiteeMember;
 };
 
 
@@ -18,32 +28,33 @@ var Deadline = function(name, date){
 	this.date = date;
 };
 
-var Author = function(name, metadata){
-	this.name = name;
-	this.metadata = metadata;
+var Priviledge = function (isAuthor = false, isPCMember = false, isChair = false,
+    isCoChair = false){
+    this.isAuthor = isAuthor;
+    this.isPCMember = isPCMember;
+    this.isChair = isChair;
+    this.isCoChair = isCoChair;
+}
+
+
+var ScheduleItem = function(sessionId, paperId, presentationStartTime, presentationEndTime, username){
+	this.sessionId = sessionId;
+	this.paperId = paperId;
+	this.presentationStartTime = presentationStartTime;
+	this.presentationEndTime = presentationEndTime;
+	this.username = username;
 };
 
 
-var ProgramItem = function(speakerName, metadata){
-	this.speakerName = speakerName;
-	this.metadata = metadata;
-};
-
-
-var Person = function(id, name){
-	this.name = name;
-	this.id = id;
-};
-
-var Section = function(id, name, program){
+var Section = function(id, name, schedule){
 	this.id = id;
     this.name = name;
-	this.program = program || [];
+	this.schedule = schedule || [];
 };
 
 var ReviewType = {
 	NONE: 'NONE', 
-	STRONG_ACCEPT: 'STRONG_ACCEPT', 
+	STRONG_ACCEPT: 'STRONG_ACCEPT',
 	WEAK_ACCEPT: 'WEAK_ACCEPT', 
 	BORDERLINE_PAPER: 'BORDERLINE_PAPER', 
 	WEAK_REJECT: 'WEAK_REJECT', 
@@ -52,57 +63,25 @@ var ReviewType = {
 	};
 
 var BidType = {
-	ACCEPT_FOR_REVIEW: 'ACCEPT_FOR_REVIEW',
-	COULD_REVIEW: 'COULD_REVIEW',
-	REJECT_FROM_REVIEW: 'REJECT_FROM_REVIEW',
+	ACCEPT_FOR_REVIEW: 'ACCEPT',
+	COULD_REVIEW: 'PLEASED',
+	REJECT_FROM_REVIEW: 'REJECT',
 	NONE: 'NONE',
 };
 
-var UserType = {
-	CHAIR: 'CHAIR',
-	REVIEWER: 'REVIEWER',
-	AUTHOR: 'AUTHOR',
-	NONE: 'NONE'
+var Review = function(status, recommendation){
+	this.status = status;
+	//recommendations
+	this.justification = recommendation;
 };
 
-var Review = function(reviewType, recommendations){
-	this.reviewType = reviewType;
-	this.recommendations = recommendations || [];
-};
-
-var Proposal  = function(id, title, keywords, subjects, authors){
+var Proposal  = function(id, name, keywords, subjects, authors){
 	this.id = id;
-	this.title = title;
+	this.name = name;
 	this.keywords = keywords || [];
 	this.subjects = subjects || [];
 	this.authors = authors || [];
 };
-
-
-var AcceptedProposal = function(id, title, keywords,subjects, authors, recommendations){
-	Proposal.call(this, id, title, keywords, subjects, authors);
-	this.recommendations = recommendations || [];
-};
-
-AcceptedProposal.prototype = Object.create(Proposal.prototype);
-AcceptedProposal.prototype.constructor  = AcceptedProposal;
-
-var ReevalReqProposal = function(id, title, keywords,subjects, authors, requested){
-	Proposal.call(this, id, title, keywords, subjects, authors);
-	this.requested = requested;
-};
-
-ReevalReqProposal.prototype = Object.create(Proposal.prototype);
-ReevalReqProposal.prototype.constructor = ReevalReqProposal;
-
-var ContradictoryProposal = function(id, title, keywords,subjects, authors, askedForReevaluation, allReviewersAnswered){
-	Proposal.call(this, id, title, keywords, subjects, authors);
-	this.askedForReevaluation = askedForReevaluation;
-	this.allReviewersAnswered = allReviewersAnswered;
-}
-
-ContradictoryProposal.prototype = Object.create(Proposal.prototype);
-ContradictoryProposal.prototype.constructor = ContradictoryProposal;
 
 var PaperReview = function(id, review, reviewer){
 	this.id = id;
