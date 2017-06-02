@@ -10,7 +10,9 @@ import java.util.Date;
 @Table(name = "UploadedFile")
 @Entity
 public class UploadedFile {
-    @Id @GeneratedValue
+
+    @Id
+    @GeneratedValue
     @Column(name = "id")
     private int id;
 

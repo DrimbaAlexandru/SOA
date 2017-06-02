@@ -12,6 +12,7 @@ import java.util.Set;
 @Table(name = "Conference")
 @Entity
 public class Conference {
+
     @Id
     @GeneratedValue
     @Column(name = "conf_id")
@@ -123,4 +124,5 @@ public class Conference {
     public void setSessions(Set<Session> sessions) {
         this.sessions = sessions;
     }
+
 }

@@ -48,13 +48,13 @@ public class AppUser {
     @JoinTable(name="AssignedForReview")
     private Set<Paper> assignedForReview=new HashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Privileges> privileges = new HashSet<>();
 
     @OneToMany(mappedBy = "reviewer")
     private Set<Review> reviews=new HashSet<>();
 
-    @OneToMany(mappedBy = "bidder")
+    @OneToMany(mappedBy = "bidder", cascade = CascadeType.ALL)
     private Set<Bid> bids=new HashSet<>();
 
     @OneToOne(mappedBy = "sessionChair")
@@ -131,19 +131,19 @@ public class AppUser {
         this.password = password;
     }
 
-    public boolean isSuperUser() {
+    public boolean getIsSuperUser() {
         return isSuperUser;
     }
 
-    public void setSuperUser(boolean superUser) {
+    public void setIsSuperUser(boolean superUser) {
         isSuperUser = superUser;
     }
 
-    public boolean isCometeeMember() {
+    public boolean getIsCometeeMember() {
         return isCometeeMember;
     }
 
-    public void setCometeeMember(boolean cometeeMember) {
+    public void setIsCometeeMember(boolean cometeeMember) {
         isCometeeMember = cometeeMember;
     }
 

@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.utils.updater.UsersGettersAndSetters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,5 +15,10 @@ public class GeneralContext {
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public UsersGettersAndSetters getUsersGettersAndSetters() {
+        return new UsersGettersAndSetters();
     }
 }

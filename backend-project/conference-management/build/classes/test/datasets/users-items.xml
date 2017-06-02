@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <BidStatus id="1" nume="MEH"/>
+
+    <PaperStatus id="1" nume="OK"/>
+    <PaperStatus id="2" nume="NOT-OK"/>
+
+    <Paper id="3" nume="Paper on distributed sistems" statusID="2"/>
+    <Paper id="2" nume="More papers on differential equations" statusID="1"/>
+    <Paper id="1" nume="Some paper on differential equations" statusID="1"/>
+
+    <AppUser id="1" username="Alex-D-TC" isSuperUser="true" isCometeeMember="true" email="badco25@gmail.com"
+        password="pass" name="Alexandru Duma"/>
+
+    <AppUser id="2" username="alex-trs" isSuperUser="true" isCometeeMember="true" email="alex-trs@gmail.com"
+             password="pass" name="Alexandru Drimba"/>
+
+    <SubmittedPapers authors_id="1" submittedPapers_id="1"/>
+    <SubmittedPapers authors_id="1" submittedPapers_id="3"/>
+    <SubmittedPapers authors_id="2" submittedPapers_id="2"/>
+
+    <Bid id="1" BidderID="1" PaperID="2" BidStatusID="1"/>
+    <Bid id="2" BidderID="2" PaperID="1" BidStatusID="1"/>
+    <Bid id="3" BidderID="2" PaperID="3" BidStatusID="1"/>
+</dataset>
