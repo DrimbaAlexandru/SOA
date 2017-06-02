@@ -1,15 +1,55 @@
-<div id="myModalGrantChair" class="modal">
+<!DOCTYPE html>
+<html>
+<title>Revewer Main Page</title>
+<head>
+    <link rel="stylesheet" href="css/design.css">
+    <script src="js/lib/jquery-3.2.1.min.js"></script>
+</head>
+<body>
 
-    <!-- Modal content -->
-    <div class="modal-content">
-        <span id="closeGrantChair" class="closeButton">&times;</span>
-        <p>
-            Username: <input type="text" name="username"><br>
-            <br>
-            Conference: <input type="text" name="conference"><br>
-            <br>
-            <button id="saveGrantChair" type="button" >Create now</button><br>
-        </p>
+<div id="content">
+
+    <div id="left">
+        <div id="menu">
+            <ul>
+                <li><a href="#">Menu Item 1</a></li>
+                <li><a href="#">Menu Item 2</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="right">
+        <table id="chairUsersTable">
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Afilliation</th>
+                <th>Website</th>
+                <th>Email</th>
+                <th>Grant chair</th>
+                <th>Grant co-chair</th>
+            </tr>
+            <tr>
+                <td>ghita12</td>
+                <td>Ghitica Maricei</td>
+                <td>Globalizare</td>
+                <td>iutub.com</td>
+                <td>email@imeil.con</td>
+                <td><button class="grantChair">Grant</button></td>
+                <td>Already granted</td>
+            </tr>
+            <tr>
+                <td>ghita12</td>
+                <td>Ghitica Maricei</td>
+                <td>Globalizare</td>
+                <td>iutub.com</td>
+                <td>email@imeil.con</td>
+                <td>Already granted</td>
+                <td><button class="grantCoChair">Grant</button></td>
+            </tr>
+        </table>
+
     </div>
 
 </div>
+</body>
+</html>
