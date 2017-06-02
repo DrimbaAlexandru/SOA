@@ -154,35 +154,9 @@ users/reviews/{paperId} PUT
     justification=string
 }
 
-
-users/potentialReviewers/{paperId} GET
-return 'resp'=[{
-    id:int
-    username = string (e unic)
-    name = string
-    affiliation = string
-    email = string
-    website = string
-}]
-
-users/asignedReviewers/{paperId} GET
-return 'resp'=[{
-    id:int
-    username = string (e unic)
-    name = string
-    affiliation = string
-    email = string
-    website = string
-}]
-
-
 users/{id}/assignPaper/{paperId} Put
 {}
 return {}
-
-
-
-// Proposals
 
 users/submittedPapers GET
 return 'resp'=>
@@ -193,6 +167,8 @@ return 'resp'=>
     keywords:string[]
     authors:string[]//username
 }]
+
+// Proposals
 
 
 papers GET
@@ -219,6 +195,16 @@ papers/{paperId} PUT
     subjects:string[]
     keywords:string[]
     authors:string[]
+}
+
+papers/{paperId}/abstracts GET
+return 'resp' ={
+     data: string(RAW_DATA)
+} (edited)
+
+papers/{paperId}/abstracts POST
+{
+    data:string
 }
 
 // Uploads a full paper file
@@ -251,7 +237,17 @@ papers/{paperId}/finalEvaluator/{user_id} PUT
 {}
 return {}
 
+// Gets all potential reviewers of a paper
+papers/{paperId}/potentialReviewers GET
+return 'resp' = [{
+	username = string
+}]
 
+// Gets all assigned reviewers of a paper
+papers/{paperId}/assignedReviewers GET
+return 'resp' = [{
+	username = string
+}]
 
 //listOthersReviewsForPaper
 reviews/{paperId} GET

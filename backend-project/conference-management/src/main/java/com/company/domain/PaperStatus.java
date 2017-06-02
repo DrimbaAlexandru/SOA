@@ -44,7 +44,6 @@ public class PaperStatus {
         this.nume = nume;
     }
 
-
     public Set<Paper> getPapersInThisState() {
         return papersInThisState;
     }
