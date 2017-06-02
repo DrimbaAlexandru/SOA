@@ -3,39 +3,48 @@
 <title>Manage papers</title>
 <head>
 	<link rel="stylesheet" href="css/design.css">
-	
+	<script src="js/lib/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-<h1>You can manage your papers here</h1>
-<div>
-<table id="sentPapersTable" style="width:50%">
-<caption>Your sent papers</caption>
-  <tr>
-    <th>Proposal Name</th>
-    <th>Keywords</th> 
-    <th>Topics</th>
-    <th>Authors</th>
-  </tr>
-  <tr>
-  	<td>
-  		lala
-  	</td>
-  	<td>lalalaal</td>
-  	<td>
-  		lala
-  	</td>
-  	<td>
-  		lala
-  	</td>
-  </tr>
- </table>
-<br>
-<!--
-<p>Upload full paper: </p>
-<button id="full">Upload</button><br> -->
+<div id="content">
 
-<p>Upload abstract: </p>
-<button id="abstractUploadButton">Upload</button><br>
+	<div id="left">
+		<div id="menu">
+			<ul>
+				<li><a href="#">Menu Item 1</a></li>
+				<li><a href="#">Menu Item 2</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="right">
+
+		<h1>You can manage your papers here</h1>
+		<table id="sentPapersTable" style="width:50%">
+			<caption>Your sent papers</caption>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Keywords</th>
+				<th>Topics</th>
+				<th>Authors</th>
+                <th>Edit</th>
+                <th>Upload abstract</th>
+                <th>Upload full</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>Cum sa mergi la mare?</td>
+				<td>mare</td>
+				<td>A merge;Mare;</td>
+				<td>ghitaBarosanul; catinca</td>
+                <td><button class="editPaper">Edit</button></td>
+                <td><button class="uploadAbs">Upload</button></td>
+                <td><button class="uploadFull">Upload</button></td>
+			</tr>
+		</table>
+
+	</div>
+</div>
 
 <!-- The Modal for Full -->
 <div id="myModalFull" class="modal">
@@ -43,61 +52,59 @@
   <!-- Modal content -->
   <div class="modal-content">
     <span id="closeFull" class="closeButton">&times;</span>
-    <div id="detailedPapers" class="paperDetails">
-    	Details of the clicked paper
-    </div>
     <div>
-    	<button id="updatePaperButton">Update</button><br>
-    </div>
-    <div>
-    	<form action="something">
-    	<input type="file" name="fileupload" value="fileupload" id="fileupload">
-    	<label for="fileupload"> Select a file to upload</label>
-    	<input type="submit" value="submit">
+    	<form>
+            <label for="fullFileUpload"> Select the full paper file to upload</label><br>
+            <input type="file" name="fileupload" value="fileupload" id="fullFileUpload"><br>
+            <input id="submitFullPaper" type="submit" value="Upload">
     	</form>
     </div>
   </div>
- </div>
+</div>
 
 <!-- The Modal for Abs -->
-<div id="myModalAbs" class="modal">
+<div id="myModalAbs" class="modal" >
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span id="closeAbs" class="closeButton">&times;</span>
+        <div>
+            <form>
+                <label for="absFileUpload"> Select the abs paper file  to upload</label><br>
+                <input type="file" name="fileupload" value="fileupload" id="absFileUpload"><br>
+                <input id="submitAbsPaper" type="submit" value="Upload">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="myModalEdit" class="modal" >
 
   <!-- Modal content -->
   <div class="modal-content">
-    <span id="closeAbs" class="closeButton">&times;</span>
+    <span id="closeEdit" class="closeButton">&times;</span>
     <div>
     	<form>
+            Id:<br>
+            <input id="idEditModal" type="text" name="id"/></br>
   			Paper name:<br>
-  			<input type="text" name="pname"><br>
+  			<input id="nameEditModal" type="text" name="name"><br>
   			Keywords:<br>
-  			<input type="text" name="keywords"><br>
+  			<input id="keywordsEditModal" type="text" name="keywords"><br>
   			Topics:<br>
-  			<input type="text" name="topics"><br>
+  			<input id="topicsEditModal" type="text" name="topics"><br>
   			Authors:<br>
-  			<input type="text" name="authors"><br>
-  			<input type="button" onclick="addInput()" value="+"/>
-			<span id="responce"></span>
+  			<input id="authorsEditModal" type="text" name="authors"><br>
+			<input id="submitEditPaper" type="submit"/>
 		</form>
-
-
     </div>
   </div>
 
 </div>
 
-
-</div>
-
-<script type="text/javascript" src="js/gui/popupAbs.js"></script>
 <script>
-var countBox =1;
-var boxName = 0;
-function addInput()
-{
-    var boxName="enter text here"+countBox; 
-	document.getElementById('responce').innerHTML+='<br/><input type="text" id="'+boxName+'" value="'+boxName+'" "  /><br/>';
-    countBox += 1;
-}
+$(".closeButton").click(function (e){ $(this).parent().parent().css("display", "none");});
 </script>
 </body>
 </html>
