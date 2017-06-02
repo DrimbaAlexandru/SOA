@@ -44,9 +44,11 @@ return 'resp' =>
     affiliation = string
     email = string
     website = string
+	isSuperUser=bool
+    isCommiteeMember=bool
 }]
 
-users/mine GET
+users/{username} GET
 return 'resp' =>
 'resp' = {
     username = string (e unic)
@@ -54,6 +56,8 @@ return 'resp' =>
     affiliation = string
     email = string
     website = string
+	isSuperUser=bool
+    isCommiteeMember=bool
 }
 
 
@@ -93,7 +97,7 @@ users/{username} PUT
     [optional] isCoChair = bool
 }
 
-users/submittedPapers?status=accepted/decline GET
+users/{username}/submittedPapers?status=accepted/decline GET
 return 'resp'=[
 {    id:int
     name:string
@@ -103,14 +107,14 @@ return 'resp'=[
 }]
 
 
-users/submittedPapers/{idPaper}/reviews GET
+users/{username}/submittedPapers/{idPaper}/reviews GET
 return 'resp'=[
     status:string//name
     justification:string
 ]
 
 
-users/submittedPapers/{idPaper}/presetation POST
+users/{username}/submittedPapers/{idPaper}/presetation POST
 {
     data:RAW_STRING
     type:'pdf'/'doc'
@@ -118,13 +122,13 @@ users/submittedPapers/{idPaper}/presetation POST
     
 
 //Review
-users/bids/{paperId} GET
+users/{username}/bids/{paperId} GET
 return 'resp' {
     status = "PLEASED"|"ACCEPT"|"REJECT"|"NONE"/pentru cazul in care nu a pus niciun bid
 }
 
 
-users/bids/{paperId} PUT
+users/{username}/bids/{paperId} PUT
 {
     status = "PLEASED"|"ACCEPT"|"REJECT"
 }
@@ -132,7 +136,7 @@ return 'resp' None
 
 
 //getPapers to 
-users/asignedForReview GET
+users/{username}/asignedForReview GET
 return 'resp' = [{
     id:int
     name:string
@@ -141,50 +145,24 @@ return 'resp' = [{
     authors:string[]//username
 }]
 
-users/reviews/{paperId} GET
+users/{username}/reviews/{paperId} GET
 {
     status=NONE|"STRONG_ACCEPT"|"ACCEPT"|"WEAK_ACCEPT"|"BORDERLINE_PAPER"|"WEAK_REJECT"|"REJECT"|"STRONG_REJECT"
     justification=string
 }
 
 
-users/reviews/{paperId} PUT
+users/{username}/reviews/{paperId} PUT
 {
     status="STRONG_ACCEPT"|"ACCEPT"|"WEAK_ACCEPT"|"BORDERLINE_PAPER"|"WEAK_REJECT"|"REJECT"|"STRONG_REJECT"
     justification=string
 }
 
-
-users/potentialReviewers/{paperId} GET
-return 'resp'=[{
-    id:int
-    username = string (e unic)
-    name = string
-    affiliation = string
-    email = string
-    website = string
-}]
-
-users/asignedReviewers/{paperId} GET
-return 'resp'=[{
-    id:int
-    username = string (e unic)
-    name = string
-    affiliation = string
-    email = string
-    website = string
-}]
-
-
-users/{id}/assignPaper/{paperId} Put
+users/{username}/assignedPapers/{paperId} Put
 {}
 return {}
 
-
-
-// Proposals
-
-users/submittedPapers GET
+users/{username}/submittedPapers GET
 return 'resp'=>
 [{
     id:int
@@ -194,6 +172,7 @@ return 'resp'=>
     authors:string[]//username
 }]
 
+// Proposals
 
 papers GET
 return 'resp'={
@@ -237,6 +216,18 @@ return 'resp'={
     subjects:string[]
     keywords:string[]
     authors:string[]//username
+}]
+
+// Gets all potential reviewers of a paper
+papers/{paperId}/potentialReviewers GET
+return 'resp' = [{
+	username = string
+}]
+
+// Gets all assigned reviewers of a paper
+papers/{paperId}/assignedReviewers GET
+return 'resp' = [{
+	username = string
 }]
 
 //getFullProposal
