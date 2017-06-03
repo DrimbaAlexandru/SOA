@@ -5,81 +5,109 @@
 <link rel="stylesheet" href="css/design.css">
 </head>
 <body>
-<h1>You can you can assign session chairs here</h1>
-<div>
-	<table id="sessionsTable" style="width:50%">
-		<caption>The conference's sessions</caption>
-  	<tr>
-    <th>Session Name</th>
-    <th>Date</th> 
-    <th>Time</th>
-    <th>Location</th>
-  	</tr>
-  	<tr>
-  	<td>
-  		lala
-  	</td>
-  	<td>lalalaal</td>
-  	<td>
-  		lala
-  	</td>
-  	<td>
-  		lala
-  	</td>
-  	</tr>
- 	</table>
-	<br>
+
+<div id="content">
+
+	<div id="left">
+		<div id="menu">
+			<ul>
+				<li><a href="#">Menu Item 1</a></li>
+				<li><a href="#">Menu Item 2</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="right">
+
+
+        <h1>You can you can assign session chairs here</h1>
+        <div>
+            <table id="sessionsTable" style="width:50%">
+                <caption>Available sections</caption>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Schedule</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Sesiunea 1</td>
+                    <td>
+                        <table class="sessionTable">
+                            <tr>
+                                <th>Paper Id</th>
+                                <th>Paper Name</th>
+                                <th>Paper Keywords</th>
+                                <th>Paper Topics</th>
+                                <th>Paper Authors</th>
+                                <th>Presentation Start Time</th>
+                                <th>Presentation End Time</th>
+                                <th>Speaker</th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Ghitica, floricica din munti</td>
+                                <td>floricica</td>
+                                <td>Ghitica; Flori; Munti</td>
+                                <td>Ghita de la Caransebes</td>
+                                <td>2017/03/17 15:00</td>
+                                <td>2017/03/17 15:30</td>
+                                <td>Maricica</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Ghitica, floricica din munti</td>
+                                <td>floricica</td>
+                                <td>Ghitica; Flori; Munti</td>
+                                <td>Ghita de la Caransebes</td>
+                                <td>2017/03/17 15:30</td>
+                                <td>2017/03/17 16:00</td>
+                                <td>Moravita</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <br>
+        </div>
+	</div>
 </div>
+
+
 
 <!-- The Modal for assigning session chairs  -->
 <div id="myModalSession" class="modal">
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="closeButton" id="closeSession">&times;</span>
-    <div>
-      <table id="potetialSessionChairs" style="width:50%">
-		<caption>Potential session chair</caption>
-  	<tr>
-    <th>Name</th>
-    <th>Age</th> 
-    <th>Experience</th>
-  	</tr>
-  	<tr>
-  	<td>
-  		lala
-  	</td>
-  	<td>
-  		lala
-  	</td>
-  	<td>
-  		lala
-  	</td>
-  	</tr>
- 	</table>
-	<br>
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="closeButton" id="closeSession">&times;</span>
+        <div>
+            <table id="potetialSessionChairs" style="width:50%">
+                <caption>Potential session chair</caption>
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Name</th>
+
+                </tr>
+                <tr class="selected">
+                    <td>1</td>
+                    <td>ghita12</td>
+                    <td>Ghita</td>
+                </tr>
+
+                <tr >
+                    <td>1</td>
+                    <td>ghita12</td>
+                    <td>Ghita</td>
+                </tr>
+            </table>
+            <br>
+        </div>
+        <br>
+        <button id="submitSessionChair">Submit</button><br>
     </div>
-    <br>
-    <button id="submitSessionChair">Submit</button><br>
-
-      <div>
-          <form action="">
-              Date: <input type="text" name="date"><br>
-              <br>
-              Time: <input type="text" name="time"><br>
-              <br>
-              Location: <input type="text" name="location"><br>
-              <br>
-              <p>Update new session data?</p>
-              <input type="submit" value="Update">
-          </form>
-          <br>
-
-      </div>
-
-  </div>
- </div>
-<br>
+</div>
 
 
 

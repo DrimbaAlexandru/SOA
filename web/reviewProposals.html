@@ -3,51 +3,66 @@
 <title>Revewer Main Page</title>
 <head>
 <link rel="stylesheet" href="css/design.css">
+	<script src="js/lib/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 
-<h1>Welcome to your account!</h1>
-<div>
-	<table id="revewedPapersReviewer" style="width:50%">
-		<caption>Your revewed papers</caption>
-  	<tr>
-    <th>Proposal Name</th>
-    <th>Result</th> 
-    <th>Authors</th>
-  	</tr>
-  	<tr>
-  	<td>
-  		lala
-  	</td>
-  	<td>
-  		lala
-  	</td>
-  	<td>
-  		lala
-  	</td>
-  	</tr>
- 	</table>
+<div id="content">
+
+    <div id="left">
+        <div id="menu">
+            <ul>
+                <li><a href="#">Menu Item 1</a></li>
+                <li><a href="#">Menu Item 2</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="right">
+
+        <div>
+            <table id="revewedPapersReviewer" style="width:50%">
+                <caption>Your revewed papers</caption>
+                <tr>
+                    <th>Id</th>
+                    <th>Proposal Name</th>
+                    <th>Result</th>
+                    <th>Authors</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Cum sa mergi la mare? (partea a II-a)</td>
+                    <td>STRONG_ACCEPT</td>
+                    <td>Florica</td>
+
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div>
+            <table id="unrevewedPapersReviewer" style="width:50%">
+                <caption>Your due to be revewed papers</caption>
+                <tr>
+                    <th>Id</th>
+                    <th>Proposal Name</th>
+                    <th>Keywords</th>
+                    <th>Topics</th>
+                    <th>Authors</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Cum sa mergi la mare?</td>
+                    <td>Salut</td>
+                    <td>Topics</td>
+                    <td>Author1</td>
+                </tr>
+            </table>
+        </div>
+        <br>
+    </div>
 </div>
-<br>
-<div>
-	<table id="unrevewedPapersReviewer" style="width:50%">
-		<caption>Your due to be revewed papers</caption>
-  	<tr>
-    <th>Proposal Name</th>
-    <th>Authors</th>
-  	</tr>
-  	<tr>
-  	<td>
-  		lala
-  	</td>
-  	<td>
-  		lala
-  	</td>
-  	</tr>
- 	</table>
-</div>
-<br>
-<button id="logoutRevewer">Logout</button>
+
+
+
 
 
 <!-- for the popups-->
@@ -55,39 +70,37 @@
 <!-- The Modal for Reviewed papers -->
 <div id="myModalReviewedPapers" class="modal">
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="closeButton" id="closeReviewedPapers">&times;</span>
-    <div id="detailedPapers" class="paperDetails">
-    	Details of the clicked paper
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="closeButton" id="closeReviewedPapers">&times;</span>
+        <div id="paperDetailsReviewedPapersModal" class="paperDetails">
+            Details of the clicked paper
+            <br>
+            <span>#details</span>
+        </div>
+        <div id="paperStatusReviewedPapersModal">
+            Status:<span>#status</span>
+        </div>
+        <div id="recommandation" class="reco">
+            Recommandation<span>#recommendation</span>
+        </div>
+        <div>
+            <table id="otherReviewsForPaper" style="width:50%">
+                <caption>Other reviews of the paper</caption>
+                <tr>
+                    <th>Reviewer</th>
+                    <th>Status</th>
+                    <th>Recommendation</th>
+                </tr>
+                <tr>
+                    <td>marghioala123</td>
+                    <td>STRONG_ACCEPT</td>
+                    <td>Mai culca-te</td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div id="recommandation" class="reco">
-    	Recommandation
-    </div>
-    <div>
-    	<table id="otherReviewedPapers" style="width:50%">
-		<caption>Other reviews of the paper</caption>
-  		<tr>
-    	<th>Proposal Name</th>
-    	<th>Authors</th>
-    	<th>Reviewer</th>
-  		</tr>
-  		</tr>
-  		<tr>
-  		<td>
-  			lala
-  		</td>
-  		<td>
-  			lala
-  		</td>
-  		<td>
-  			lala
-  		</td>
-  		</tr>
- 		</table>
-    </div>
-  </div>
- </div>
+</div>
 
 <!-- The Modal for UnReviewed papers -->
 <div id="myModalUnReviewed" class="modal">
@@ -95,21 +108,19 @@
   <!-- Modal content -->
   <div class="modal-content">
     <span class="closeButton" id="closeUnReviewed">&times;</span>
-    <div id="detailedPapersDue" class="paperDetailsDue">
-    	<p>Details of the clicked paper</p>
-    </div>
-    <br>
-    <p>Attatch a recomandation:</p>
-    <form action="something">
-    	<input type="file" name="fileupload" value="fileupload" id="fileupload">
-    	<label for="fileupload"> Select a file to upload</label>
-    	<input type="submit" value="submit">
-    	</form>
+      <div id="paperDetailsUnreviewedPapersModal" class="paperDetails">
+          Details of the clicked paper
+          <br>
+          <span>#details</span>
+      </div>
+      <br>
+      <label for="recommendationTextBoxUnReviewedModal" >Attach a recommendation</label>
+      <input id="recommendationTextBoxUnReviewedModal" type="text"/>
     <div>
     <br>
     <div>
     	<p>Grade the paper:</p>
-    	<form action="">
+    	<form id="gradeFormUnReviewedModal" action="">
   			<input type="radio" name="grade" value="sAccept"> Strong Accept<br>
   			<input type="radio" name="grade" value="accept"> Accept<br>
   			<input type="radio" name="grade" value="wAccept"> Weak Accept<br>
