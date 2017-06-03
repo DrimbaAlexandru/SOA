@@ -14,7 +14,7 @@ public class Session {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "name", unique = false, nullable = false, length = 256)
     private String name;
@@ -41,11 +41,11 @@ public class Session {
         this.conference = conf;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

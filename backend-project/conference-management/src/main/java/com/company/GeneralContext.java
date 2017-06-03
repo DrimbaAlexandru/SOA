@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.utils.updater.PrivilegesGettersAndSetters;
 import com.company.utils.updater.UsersGettersAndSetters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,5 +21,10 @@ public class GeneralContext {
     @Bean
     public UsersGettersAndSetters getUsersGettersAndSetters() {
         return new UsersGettersAndSetters();
+    }
+
+    @Bean
+    public PrivilegesGettersAndSetters getPrivilegesGettersAndSetters() {
+        return new PrivilegesGettersAndSetters();
     }
 }

@@ -14,7 +14,7 @@ public class SessionSchedule {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @OneToOne
     @JoinColumn(name = "PaperID")
@@ -31,11 +31,11 @@ public class SessionSchedule {
     @JoinColumn(name = "speakerID", nullable = false)
     private AppUser speaker;
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

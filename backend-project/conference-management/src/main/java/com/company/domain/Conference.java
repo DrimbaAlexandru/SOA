@@ -16,7 +16,7 @@ public class Conference {
     @Id
     @GeneratedValue
     @Column(name = "conf_id")
-    private int id;
+    private Integer id;
 
     @Column(name = "name", unique = false, nullable = false, length = 256)
     private String name;
@@ -61,11 +61,11 @@ public class Conference {
         this.privileges = privileges;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

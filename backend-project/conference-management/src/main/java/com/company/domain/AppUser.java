@@ -14,7 +14,7 @@ public class AppUser {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "username",unique = true, nullable = false, length = 64)
     private String username;
@@ -35,10 +35,10 @@ public class AppUser {
     private String password;
 
     @Column(name = "isSuperUser", nullable = false)
-    private boolean isSuperUser;
+    private Boolean isSuperUser;
 
     @Column(name = "isCometeeMember", nullable = false)
-    private boolean isCometeeMember;
+    private Boolean isCometeeMember;
 
     @ManyToMany
     @JoinTable(name="SubmittedPapers")
@@ -131,19 +131,19 @@ public class AppUser {
         this.password = password;
     }
 
-    public boolean getIsSuperUser() {
+    public Boolean getIsSuperUser() {
         return isSuperUser;
     }
 
-    public void setIsSuperUser(boolean superUser) {
+    public void setIsSuperUser(Boolean superUser) {
         isSuperUser = superUser;
     }
 
-    public boolean getIsCometeeMember() {
+    public Boolean getIsCometeeMember() {
         return isCometeeMember;
     }
 
-    public void setIsCometeeMember(boolean cometeeMember) {
+    public void setIsCometeeMember(Boolean cometeeMember) {
         isCometeeMember = cometeeMember;
     }
 
@@ -155,11 +155,11 @@ public class AppUser {
         this.privileges = privileges;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -183,7 +183,7 @@ public class AppUser {
     }
 
     public AppUser(String username, String name, String affiliation, String email,
-                   String webpage, String password, boolean isSuperUser, boolean isCometeeMember) {
+                   String webpage, String password, Boolean isSuperUser, Boolean isCometeeMember) {
         this.username = username;
         this.name = name;
         this.affiliation = affiliation;

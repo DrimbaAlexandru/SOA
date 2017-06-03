@@ -79,4 +79,14 @@ public class UserRepositoryTests {
         Assert.assertNotNull(repo.getBidOfPaper("alex-trs", 1));
         Assert.assertNotNull(repo.getBidOfPaper("alex-trs", 3));
     }
+
+    @Test
+    public void testUserExistsTrue() {
+        Assert.assertTrue(repo.userExists("Alex-D-TC"));
+    }
+
+    @Test
+    public void testUserExistsFalse() {
+        Assert.assertFalse(repo.userExists("RANDOM"));
+    }
 }

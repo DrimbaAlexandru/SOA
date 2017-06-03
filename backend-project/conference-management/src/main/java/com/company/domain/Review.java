@@ -12,7 +12,7 @@ public class Review {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @ManyToOne()
     @JoinColumn(name = "ReviewerID", nullable = false)
@@ -32,7 +32,7 @@ public class Review {
         return status;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -52,7 +52,7 @@ public class Review {
         this.reviewer = reviewer;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="repository.UserRepositoryTests" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-06-02T21:36:17" hostname="DESKTOP-CD5HDT7" time="0.527">
+<testsuite name="repository.UserRepositoryTests" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-06-03T11:01:20" hostname="DESKTOP-CD5HDT7" time="0.542">
   <properties/>
-  <testcase name="testFindUserNoUser" classname="repository.UserRepositoryTests" time="0.262"/>
-  <testcase name="testGetSubmittedPapers" classname="repository.UserRepositoryTests" time="0.119"/>
-  <testcase name="testFindUser" classname="repository.UserRepositoryTests" time="0.043"/>
-  <testcase name="testGetBidsOfPaper" classname="repository.UserRepositoryTests" time="0.101"/>
-  <system-out><![CDATA[00:36:11.096 [Test worker] DEBUG org.springframework.test.context.junit4.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class repository.UserRepositoryTests]
-00:36:11.101 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
-00:36:11.108 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
-00:36:11.129 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [repository.UserRepositoryTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
-00:36:11.145 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [repository.UserRepositoryTests], using SpringBootContextLoader
-00:36:11.151 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [repository.UserRepositoryTests]: class path resource [repository/UserRepositoryTests-context.xml] does not exist
-00:36:11.151 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [repository.UserRepositoryTests]: class path resource [repository/UserRepositoryTestsContext.groovy] does not exist
-00:36:11.152 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [repository.UserRepositoryTests]: no resource found for suffixes {-context.xml, Context.groovy}.
-00:36:11.174 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [repository.UserRepositoryTests]
-00:36:11.214 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@7ca15379, org.springframework.test.context.support.DirtiesContextTestExecutionListener@610f8730, org.springframework.test.context.transaction.TransactionalTestExecutionListener@df67df5, com.github.springtestdbunit.DbUnitTestExecutionListener@1136e366]
-00:36:11.216 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [repository.UserRepositoryTests]
-00:36:11.217 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [repository.UserRepositoryTests]
-00:36:11.217 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [repository.UserRepositoryTests]
-00:36:11.218 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [repository.UserRepositoryTests]
-00:36:11.219 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [repository.UserRepositoryTests]
-00:36:11.220 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [repository.UserRepositoryTests]
-00:36:11.223 [Test worker] DEBUG org.springframework.test.context.support.DependencyInjectionTestExecutionListener - Performing dependency injection for test context [[DefaultTestContext@76ed24de testClass = UserRepositoryTests, testInstance = repository.UserRepositoryTests@339e80bf, testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6c53dea2 testClass = UserRepositoryTests, locations = '{}', classes = '{class com.company.Application, class com.company.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@8f1deab, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@680deec1, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]].
-00:36:11.282 [Test worker] DEBUG org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
-00:36:11.282 [Test worker] DEBUG org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
-00:36:11.283 [Test worker] DEBUG org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
-00:36:11.285 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}
-00:36:11.286 [Test worker] DEBUG org.springframework.core.env.StandardEnvironment - Adding [Inlined Test Properties] PropertySource with highest search precedence
+  <testcase name="testFindUserNoUser" classname="repository.UserRepositoryTests" time="0.261"/>
+  <testcase name="testGetSubmittedPapers" classname="repository.UserRepositoryTests" time="0.117"/>
+  <testcase name="testFindUser" classname="repository.UserRepositoryTests" time="0.048"/>
+  <testcase name="testGetBidsOfPaper" classname="repository.UserRepositoryTests" time="0.113"/>
+  <system-out><![CDATA[14:01:13.751 [Test worker] DEBUG org.springframework.test.context.junit4.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class repository.UserRepositoryTests]
+14:01:13.754 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+14:01:13.760 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+14:01:13.776 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [repository.UserRepositoryTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+14:01:13.787 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [repository.UserRepositoryTests], using SpringBootContextLoader
+14:01:13.790 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [repository.UserRepositoryTests]: class path resource [repository/UserRepositoryTests-context.xml] does not exist
+14:01:13.791 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [repository.UserRepositoryTests]: class path resource [repository/UserRepositoryTestsContext.groovy] does not exist
+14:01:13.791 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [repository.UserRepositoryTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+14:01:13.810 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [repository.UserRepositoryTests]
+14:01:13.844 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@1752286e, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5a395cc2, org.springframework.test.context.transaction.TransactionalTestExecutionListener@470c5533, com.github.springtestdbunit.DbUnitTestExecutionListener@28a1518a]
+14:01:13.847 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [repository.UserRepositoryTests]
+14:01:13.847 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [repository.UserRepositoryTests]
+14:01:13.848 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [repository.UserRepositoryTests]
+14:01:13.848 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [repository.UserRepositoryTests]
+14:01:13.850 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [repository.UserRepositoryTests]
+14:01:13.850 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [repository.UserRepositoryTests]
+14:01:13.853 [Test worker] DEBUG org.springframework.test.context.support.DependencyInjectionTestExecutionListener - Performing dependency injection for test context [[DefaultTestContext@2c4f3a68 testClass = UserRepositoryTests, testInstance = repository.UserRepositoryTests@658dbb15, testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@1c089640 testClass = UserRepositoryTests, locations = '{}', classes = '{class com.company.Application, class com.company.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@18ed0ee3, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5be10069, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]].
+14:01:13.920 [Test worker] DEBUG org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+14:01:13.921 [Test worker] DEBUG org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+14:01:13.921 [Test worker] DEBUG org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+14:01:13.922 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}
+14:01:13.923 [Test worker] DEBUG org.springframework.core.env.StandardEnvironment - Adding [Inlined Test Properties] PropertySource with highest search precedence
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -36,47 +36,48 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v1.5.3.RELEASE)
 
-2017-06-03 00:36:11.621  INFO 17312 --- [    Test worker] repository.UserRepositoryTests           : Starting UserRepositoryTests on DESKTOP-CD5HDT7 with PID 17312 (started by AlexandruD in D:\Projects\iss\software-engineering-223-1\backend-project\conference-management)
-2017-06-03 00:36:11.622  INFO 17312 --- [    Test worker] repository.UserRepositoryTests           : The following profiles are active: dev
-2017-06-03 00:36:11.650  INFO 17312 --- [    Test worker] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@72728c83: startup date [Sat Jun 03 00:36:11 EEST 2017]; root of context hierarchy
-2017-06-03 00:36:13.591  INFO 17312 --- [    Test worker] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 0 (http)
-2017-06-03 00:36:13.609  INFO 17312 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service Tomcat
-2017-06-03 00:36:13.610  INFO 17312 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.14
-2017-06-03 00:36:13.748  INFO 17312 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2017-06-03 00:36:13.748  INFO 17312 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2101 ms
-2017-06-03 00:36:13.969  INFO 17312 --- [ost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
-2017-06-03 00:36:13.972  INFO 17312 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
-2017-06-03 00:36:13.973  INFO 17312 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
-2017-06-03 00:36:13.973  INFO 17312 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
-2017-06-03 00:36:13.973  INFO 17312 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
-2017-06-03 00:36:14.058  INFO 17312 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2017-06-03 00:36:14.463  INFO 17312 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2017-06-03 00:36:14.554  INFO 17312 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
-2017-06-03 00:36:14.574  INFO 17312 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+2017-06-03 14:01:14.193  INFO 12440 --- [    Test worker] repository.UserRepositoryTests           : Starting UserRepositoryTests on DESKTOP-CD5HDT7 with PID 12440 (started by AlexandruD in D:\Projects\iss\software-engineering-223-1\backend-project\conference-management)
+2017-06-03 14:01:14.194  INFO 12440 --- [    Test worker] repository.UserRepositoryTests           : The following profiles are active: dev
+2017-06-03 14:01:14.223  INFO 12440 --- [    Test worker] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@3f2a972e: startup date [Sat Jun 03 14:01:14 EEST 2017]; root of context hierarchy
+2017-06-03 14:01:16.204  INFO 12440 --- [    Test worker] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 0 (http)
+2017-06-03 14:01:16.227  INFO 12440 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2017-06-03 14:01:16.229  INFO 12440 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.14
+2017-06-03 14:01:16.394  INFO 12440 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-06-03 14:01:16.395  INFO 12440 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2174 ms
+2017-06-03 14:01:16.590  INFO 12440 --- [ost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-06-03 14:01:16.596  INFO 12440 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-06-03 14:01:16.597  INFO 12440 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-06-03 14:01:16.597  INFO 12440 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-06-03 14:01:16.597  INFO 12440 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-06-03 14:01:16.679  INFO 12440 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2017-06-03 14:01:16.994  INFO 12440 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2017-06-03 14:01:17.090  INFO 12440 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-06-03 14:01:17.109  INFO 12440 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
 	name: default
 	...]
-2017-06-03 00:36:14.662  INFO 17312 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.10.Final}
-2017-06-03 00:36:14.663  INFO 17312 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
-2017-06-03 00:36:14.721  INFO 17312 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
-2017-06-03 00:36:14.899  INFO 17312 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.SQLServerDialect
-2017-06-03 00:36:16.057  INFO 17312 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2017-06-03 00:36:16.632  INFO 17312 --- [    Test worker] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
-2017-06-03 00:36:17.016  INFO 17312 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@72728c83: startup date [Sat Jun 03 00:36:11 EEST 2017]; root of context hierarchy
-2017-06-03 00:36:17.134  INFO 17312 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/users],methods=[GET]}" onto public java.lang.Iterable<com.company.domain.AppUser> com.company.controller.UserController.getUsers()
-2017-06-03 00:36:17.137  INFO 17312 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
-2017-06-03 00:36:17.138  INFO 17312 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
-2017-06-03 00:36:17.173  INFO 17312 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
-2017-06-03 00:36:17.173  INFO 17312 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
-2017-06-03 00:36:17.223  INFO 17312 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
-2017-06-03 00:36:17.569  INFO 17312 --- [    Test worker] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 18887 (http)
-2017-06-03 00:36:17.574  INFO 17312 --- [    Test worker] repository.UserRepositoryTests           : Started UserRepositoryTests in 6.284 seconds (JVM running for 7.016)
-2017-06-03 00:36:17.668  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:17.735  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:17.742  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:17.750  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:17.759  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:17.767  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:17.828 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:17.212  INFO 12440 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.10.Final}
+2017-06-03 14:01:17.214  INFO 12440 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-06-03 14:01:17.270  INFO 12440 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-06-03 14:01:17.445  INFO 12440 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.SQLServerDialect
+2017-06-03 14:01:18.684  INFO 12440 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-06-03 14:01:19.265  INFO 12440 --- [    Test worker] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2017-06-03 14:01:19.616  INFO 12440 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@3f2a972e: startup date [Sat Jun 03 14:01:14 EEST 2017]; root of context hierarchy
+2017-06-03 14:01:19.716  INFO 12440 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/users],methods=[GET]}" onto public java.lang.Iterable<com.company.domain.AppUser> com.company.controller.UserController.getUsers()
+2017-06-03 14:01:19.718  INFO 12440 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/users/{username}],methods=[POST]}" onto public void com.company.controller.UserController.updateUser(java.lang.String,com.company.domain.AppUser)
+2017-06-03 14:01:19.720  INFO 12440 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-06-03 14:01:19.721  INFO 12440 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-06-03 14:01:19.764  INFO 12440 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-06-03 14:01:19.764  INFO 12440 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-06-03 14:01:19.819  INFO 12440 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-06-03 14:01:20.171  INFO 12440 --- [    Test worker] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 22145 (http)
+2017-06-03 14:01:20.176  INFO 12440 --- [    Test worker] repository.UserRepositoryTests           : Started UserRepositoryTests in 6.25 seconds (JVM running for 7.097)
+2017-06-03 14:01:20.280  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.351  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.373  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.380  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.387  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.394  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.443 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         appuser0_.id as id1_0_,
         appuser0_.affiliation as affiliat2_0_,
@@ -91,14 +92,14 @@
         AppUser appuser0_ 
     where
         appuser0_.username=?
-2017-06-03 00:36:17.831 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [RANDOM]
-2017-06-03 00:36:17.873  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:17.876  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:17.879  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:17.883  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:17.886  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:17.891  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:17.910 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.446 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [RANDOM]
+2017-06-03 14:01:20.484  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.487  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.492  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.497  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.501  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.508  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.527 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         paper2_.id as id1_6_,
         paper2_.nume as nume2_6_,
@@ -113,8 +114,8 @@
             on submittedp1_.submittedPapers_id=paper2_.id 
     where
         appuser0_.username=?
-2017-06-03 00:36:17.910 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
-2017-06-03 00:36:17.929 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.528 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
+2017-06-03 14:01:20.546 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         paperstatu0_.id as id1_7_0_,
         paperstatu0_.nume as nume2_7_0_ 
@@ -122,8 +123,8 @@
         PaperStatus paperstatu0_ 
     where
         paperstatu0_.id=?
-2017-06-03 00:36:17.930 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 00:36:17.939 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.547 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 14:01:20.553 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         uploadedfi0_.id as id1_14_9_,
         uploadedfi0_.dateUploaded as dateUplo2_14_9_,
@@ -212,8 +213,8 @@
             on sessionsch5_.speakerID=appuser9_.id 
     where
         uploadedfi0_.PaperID_Presentation=?
-2017-06-03 00:36:17.941 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 00:36:17.952 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.555 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 14:01:20.562 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         sessionsch0_.id as id1_12_9_,
         sessionsch0_.PaperID as PaperID3_12_9_,
@@ -298,8 +299,8 @@
             on sessionsch0_.speakerID=appuser9_.id 
     where
         sessionsch0_.PaperID=?
-2017-06-03 00:36:17.954 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 00:36:17.962 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.564 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 14:01:20.571 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         paperstatu0_.id as id1_7_0_,
         paperstatu0_.nume as nume2_7_0_ 
@@ -307,8 +308,8 @@
         PaperStatus paperstatu0_ 
     where
         paperstatu0_.id=?
-2017-06-03 00:36:17.963 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
-2017-06-03 00:36:17.964 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.572 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
+2017-06-03 14:01:20.573 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         uploadedfi0_.id as id1_14_9_,
         uploadedfi0_.dateUploaded as dateUplo2_14_9_,
@@ -397,8 +398,8 @@
             on sessionsch5_.speakerID=appuser9_.id 
     where
         uploadedfi0_.PaperID_Presentation=?
-2017-06-03 00:36:17.966 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [3]
-2017-06-03 00:36:17.968 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.574 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [3]
+2017-06-03 14:01:20.576 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         sessionsch0_.id as id1_12_9_,
         sessionsch0_.PaperID as PaperID3_12_9_,
@@ -483,14 +484,14 @@
             on sessionsch0_.speakerID=appuser9_.id 
     where
         sessionsch0_.PaperID=?
-2017-06-03 00:36:17.969 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [3]
-2017-06-03 00:36:17.993  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:17.996  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:18.000  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:18.003  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:18.007  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:18.010  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:18.014 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.577 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [3]
+2017-06-03 14:01:20.600  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.603  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.606  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.611  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.615  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.619  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.623 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         appuser0_.id as id1_0_,
         appuser0_.affiliation as affiliat2_0_,
@@ -505,8 +506,8 @@
         AppUser appuser0_ 
     where
         appuser0_.username=?
-2017-06-03 00:36:18.015 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
-2017-06-03 00:36:18.017 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.624 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
+2017-06-03 14:01:20.626 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         session0_.id as id1_11_2_,
         session0_.conf_ID as conf_ID3_11_2_,
@@ -538,14 +539,14 @@
             on session0_.sessionChairID=appuser2_.id 
     where
         session0_.sessionChairID=?
-2017-06-03 00:36:18.017 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 00:36:18.038  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:18.040  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:18.044  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:18.049  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:18.053  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:18.057  WARN 17312 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 00:36:18.062 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.627 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 14:01:20.650  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.654  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.658  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.664  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.668  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.674  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 14:01:20.680 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         bids1_.id as id1_2_,
         bids1_.BidderID as BidderID2_2_,
@@ -559,9 +560,9 @@
     where
         appuser0_.username=? 
         and bids1_.PaperID=?
-2017-06-03 00:36:18.062 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
-2017-06-03 00:36:18.062 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [1]
-2017-06-03 00:36:18.067 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.680 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
+2017-06-03 14:01:20.680 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [1]
+2017-06-03 14:01:20.685 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         bids1_.id as id1_2_,
         bids1_.BidderID as BidderID2_2_,
@@ -575,9 +576,9 @@
     where
         appuser0_.username=? 
         and bids1_.PaperID=?
-2017-06-03 00:36:18.067 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
-2017-06-03 00:36:18.067 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [3]
-2017-06-03 00:36:18.068 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.685 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
+2017-06-03 14:01:20.685 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [3]
+2017-06-03 14:01:20.687 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         bids1_.id as id1_2_,
         bids1_.BidderID as BidderID2_2_,
@@ -591,9 +592,9 @@
     where
         appuser0_.username=? 
         and bids1_.PaperID=?
-2017-06-03 00:36:18.069 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [alex-trs]
-2017-06-03 00:36:18.069 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [2]
-2017-06-03 00:36:18.071 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.687 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [alex-trs]
+2017-06-03 14:01:20.687 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [2]
+2017-06-03 14:01:20.689 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         bids1_.id as id1_2_,
         bids1_.BidderID as BidderID2_2_,
@@ -607,9 +608,9 @@
     where
         appuser0_.username=? 
         and bids1_.PaperID=?
-2017-06-03 00:36:18.071 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
-2017-06-03 00:36:18.071 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [2]
-2017-06-03 00:36:18.072 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.689 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
+2017-06-03 14:01:20.689 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [2]
+2017-06-03 14:01:20.691 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         appuser0_.id as id1_0_0_,
         appuser0_.affiliation as affiliat2_0_0_,
@@ -641,8 +642,8 @@
             on session1_.conf_ID=conference2_.conf_id 
     where
         appuser0_.id=?
-2017-06-03 00:36:18.073 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 00:36:18.079 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.692 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 14:01:20.696 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         paper0_.id as id1_6_0_,
         paper0_.nume as nume2_6_0_,
@@ -727,8 +728,8 @@
             on uploadedfi2_.PaperID_FullPaper=paper9_.id 
     where
         paper0_.id=?
-2017-06-03 00:36:18.080 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
-2017-06-03 00:36:18.092 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.697 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
+2017-06-03 14:01:20.708 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         sessionsch0_.id as id1_12_9_,
         sessionsch0_.PaperID as PaperID3_12_9_,
@@ -813,8 +814,8 @@
             on sessionsch0_.speakerID=appuser9_.id 
     where
         sessionsch0_.PaperID=?
-2017-06-03 00:36:18.093 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
-2017-06-03 00:36:18.095 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.708 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
+2017-06-03 14:01:20.710 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         bidstatus0_.id as id1_3_0_,
         bidstatus0_.nume as nume2_3_0_ 
@@ -822,8 +823,8 @@
         BidStatus bidstatus0_ 
     where
         bidstatus0_.id=?
-2017-06-03 00:36:18.096 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 00:36:18.099 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.710 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 14:01:20.713 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         bids1_.id as id1_2_,
         bids1_.BidderID as BidderID2_2_,
@@ -837,9 +838,9 @@
     where
         appuser0_.username=? 
         and bids1_.PaperID=?
-2017-06-03 00:36:18.100 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [alex-trs]
-2017-06-03 00:36:18.100 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [1]
-2017-06-03 00:36:18.101 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.714 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [alex-trs]
+2017-06-03 14:01:20.714 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [1]
+2017-06-03 14:01:20.715 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         appuser0_.id as id1_0_0_,
         appuser0_.affiliation as affiliat2_0_0_,
@@ -871,8 +872,8 @@
             on session1_.conf_ID=conference2_.conf_id 
     where
         appuser0_.id=?
-2017-06-03 00:36:18.102 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
-2017-06-03 00:36:18.104 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.715 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
+2017-06-03 14:01:20.717 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         paper0_.id as id1_6_0_,
         paper0_.nume as nume2_6_0_,
@@ -957,8 +958,8 @@
             on uploadedfi2_.PaperID_FullPaper=paper9_.id 
     where
         paper0_.id=?
-2017-06-03 00:36:18.105 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 00:36:18.107 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.718 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 14:01:20.720 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         sessionsch0_.id as id1_12_9_,
         sessionsch0_.PaperID as PaperID3_12_9_,
@@ -1043,8 +1044,8 @@
             on sessionsch0_.speakerID=appuser9_.id 
     where
         sessionsch0_.PaperID=?
-2017-06-03 00:36:18.108 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 00:36:18.109 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.721 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 14:01:20.723 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         bidstatus0_.id as id1_3_0_,
         bidstatus0_.nume as nume2_3_0_ 
@@ -1052,8 +1053,8 @@
         BidStatus bidstatus0_ 
     where
         bidstatus0_.id=?
-2017-06-03 00:36:18.110 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 00:36:18.112 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.723 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 14:01:20.726 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         bids1_.id as id1_2_,
         bids1_.BidderID as BidderID2_2_,
@@ -1067,9 +1068,9 @@
     where
         appuser0_.username=? 
         and bids1_.PaperID=?
-2017-06-03 00:36:18.113 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [alex-trs]
-2017-06-03 00:36:18.113 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [3]
-2017-06-03 00:36:18.114 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.726 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [alex-trs]
+2017-06-03 14:01:20.726 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [3]
+2017-06-03 14:01:20.727 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         appuser0_.id as id1_0_0_,
         appuser0_.affiliation as affiliat2_0_0_,
@@ -1101,8 +1102,8 @@
             on session1_.conf_ID=conference2_.conf_id 
     where
         appuser0_.id=?
-2017-06-03 00:36:18.114 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
-2017-06-03 00:36:18.116 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.728 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
+2017-06-03 14:01:20.730 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         paper0_.id as id1_6_0_,
         paper0_.nume as nume2_6_0_,
@@ -1187,8 +1188,8 @@
             on uploadedfi2_.PaperID_FullPaper=paper9_.id 
     where
         paper0_.id=?
-2017-06-03 00:36:18.117 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [3]
-2017-06-03 00:36:18.119 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.731 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [3]
+2017-06-03 14:01:20.735 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         sessionsch0_.id as id1_12_9_,
         sessionsch0_.PaperID as PaperID3_12_9_,
@@ -1273,8 +1274,8 @@
             on sessionsch0_.speakerID=appuser9_.id 
     where
         sessionsch0_.PaperID=?
-2017-06-03 00:36:18.120 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [3]
-2017-06-03 00:36:18.121 DEBUG 17312 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 14:01:20.736 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [3]
+2017-06-03 14:01:20.739 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
     select
         bidstatus0_.id as id1_3_0_,
         bidstatus0_.nume as nume2_3_0_ 
@@ -1282,11 +1283,11 @@
         BidStatus bidstatus0_ 
     where
         bidstatus0_.id=?
-2017-06-03 00:36:18.122 TRACE 17312 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 00:36:18.128  INFO 17312 --- [    Test worker] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@72728c83: startup date [Sat Jun 03 00:36:11 EEST 2017]; root of context hierarchy
-2017-06-03 00:36:18.131  INFO 17312 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2017-06-03 00:36:18.132  INFO 17312 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2017-06-03 00:36:18.143  INFO 17312 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2017-06-03 14:01:20.740 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 14:01:20.752  INFO 12440 --- [    Test worker] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@3f2a972e: startup date [Sat Jun 03 14:01:14 EEST 2017]; root of context hierarchy
+2017-06-03 14:01:20.755  INFO 12440 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-06-03 14:01:20.757  INFO 12440 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2017-06-03 14:01:20.777  INFO 12440 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

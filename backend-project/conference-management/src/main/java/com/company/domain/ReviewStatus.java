@@ -15,7 +15,7 @@ public class ReviewStatus {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "nume", unique = true, nullable = false, length = 20)
     private String nume;
@@ -29,7 +29,7 @@ public class ReviewStatus {
         return nume;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -37,7 +37,7 @@ public class ReviewStatus {
         return reviewsInThisState;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
