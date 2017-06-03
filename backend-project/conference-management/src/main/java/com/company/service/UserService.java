@@ -10,7 +10,6 @@ import java.util.Optional;
 /**
  * Created by AlexandruD on 02-Jun-17.
  */
-@Component
 public interface UserService {
 
     /**
@@ -83,16 +82,17 @@ public interface UserService {
      * Adds the bid of a user to the paper
      * @param username The username
      * @param paperId The paper
+     * @param status The bid status
      */
-    void addBidForPaper(String username, int paperId);
+    void addBidForPaper(String username, int paperId, BidStatus status);
 
     /**
      * Uploads a user's presentation of a paper
      * @param username The username
      * @param paperId The paper id
-     * @param presentationFile The presentation file
+     * @param presentationFileData The presentation file data
      */
-    void uploadPresentation(String username, int paperId, File presentationFile);
+    void uploadPresentation(String username, int paperId, String presentationFileData);
 
     /**
      * Gets all papers assigned for review to a given user

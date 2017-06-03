@@ -28,10 +28,10 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 /**
  * Created by AlexandruD on 02-Jun-17.
  */
-@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class,
-        DbUnitTestExecutionListener.class})
+        DbUnitTestExecutionListener.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT,
         classes = Application.class)
@@ -41,7 +41,8 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @DirtiesContext
 public class UserRepositoryTests {
 
-    protected static final String DATASET = "classpath:datasets/users-items.xml";
+    //public static final String DATASET = "/datasets/users-items.xml";
+    protected static final String DATASET = "caca";
 
     @Autowired
     private UserRepository repo;
@@ -59,7 +60,7 @@ public class UserRepositoryTests {
     @Test
     public void testGetSubmittedPapers() {
         Iterable<Paper> assPapers = repo.getSubmittedPapers("Alex-D-TC");
-        Assert.assertNotNull(assPapers);
+         Assert.assertNotNull(assPapers);
         List<Paper> assPapersList = StreamSupport.stream(assPapers.spliterator(), false)
                 .collect(Collectors.toList());
         Assert.assertEquals(2, assPapersList.size());

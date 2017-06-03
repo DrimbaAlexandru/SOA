@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.company.service.UserServiceTests" tests="1" skipped="0" failures="1" errors="0" timestamp="2017-06-03T20:35:17" hostname="DESKTOP-CD5HDT7" time="0.097">
+  <properties/>
+  <testcase name="testBidOnPaper" classname="com.company.service.UserServiceTests" time="0.097">
+    <failure message="org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.company.domain.AppUser.bids, could not initialize proxy - no Session" type="org.hibernate.LazyInitializationException">org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.company.domain.AppUser.bids, could not initialize proxy - no Session
+	at org.hibernate.collection.internal.AbstractPersistentCollection.throwLazyInitializationException(AbstractPersistentCollection.java:582)
+	at org.hibernate.collection.internal.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:201)
+	at org.hibernate.collection.internal.AbstractPersistentCollection.initialize(AbstractPersistentCollection.java:561)
+	at org.hibernate.collection.internal.AbstractPersistentCollection.read(AbstractPersistentCollection.java:132)
+	at org.hibernate.collection.internal.PersistentSet.iterator(PersistentSet.java:163)
+	at java.util.Spliterators$IteratorSpliterator.estimateSize(Spliterators.java:1821)
+	at java.util.Spliterator.getExactSizeIfKnown(Spliterator.java:408)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:480)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.reduce(ReferencePipeline.java:479)
+	at com.company.service.UserServiceImpl.lambda$addBidForPaper$11(UserServiceImpl.java:170)
+	at java.util.Optional.ifPresent(Optional.java:159)
+	at com.company.service.UserServiceImpl.addBidForPaper(UserServiceImpl.java:166)
+	at com.company.service.UserServiceTests.testBidOnPaper(UserServiceTests.java:49)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:252)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.runTestClass(JUnitTestClassExecuter.java:114)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.execute(JUnitTestClassExecuter.java:57)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassProcessor.processTestClass(JUnitTestClassProcessor.java:66)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:32)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
+	at com.sun.proxy.$Proxy3.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:377)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:54)
+	at org.gradle.internal.concurrent.StoppableExecutorImpl$1.run(StoppableExecutorImpl.java:40)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+</failure>
+  </testcase>
+  <system-out><![CDATA[2017-06-03 23:35:15.763  INFO 3896 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.company.service.UserServiceTests], using SpringBootContextLoader
+2017-06-03 23:35:15.763  INFO 3896 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.company.service.UserServiceTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-06-03 23:35:15.769  INFO 3896 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@17d16bae, org.springframework.test.context.support.DirtiesContextTestExecutionListener@4be74ab7, org.springframework.test.context.transaction.TransactionalTestExecutionListener@61f5f266, com.github.springtestdbunit.DbUnitTestExecutionListener@2e682427]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.5.3.RELEASE)
+
+2017-06-03 23:35:15.819  INFO 3896 --- [    Test worker] com.company.service.UserServiceTests     : Starting UserServiceTests on DESKTOP-CD5HDT7 with PID 3896 (started by AlexandruD in D:\Projects\iss\software-engineering-223-1\backend-project\conference-management)
+2017-06-03 23:35:15.819  INFO 3896 --- [    Test worker] com.company.service.UserServiceTests     : The following profiles are active: dev
+2017-06-03 23:35:15.821  INFO 3896 --- [    Test worker] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@8b4268a: startup date [Sat Jun 03 23:35:15 EEST 2017]; root of context hierarchy
+2017-06-03 23:35:16.434  INFO 3896 --- [    Test worker] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 0 (http)
+2017-06-03 23:35:16.435  INFO 3896 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2017-06-03 23:35:16.435  INFO 3896 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.14
+2017-06-03 23:35:16.466  INFO 3896 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-06-03 23:35:16.466  INFO 3896 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 645 ms
+2017-06-03 23:35:16.578  INFO 3896 --- [ost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-06-03 23:35:16.579  INFO 3896 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-06-03 23:35:16.580  INFO 3896 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-06-03 23:35:16.580  INFO 3896 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-06-03 23:35:16.580  INFO 3896 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-06-03 23:35:16.590  INFO 3896 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2017-06-03 23:35:16.607  INFO 3896 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2017-06-03 23:35:16.658  INFO 3896 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-06-03 23:35:16.658  INFO 3896 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-06-03 23:35:16.667  INFO 3896 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.SQLServerDialect
+2017-06-03 23:35:16.946  INFO 3896 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-06-03 23:35:17.143  INFO 3896 --- [    Test worker] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2017-06-03 23:35:17.334  INFO 3896 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@8b4268a: startup date [Sat Jun 03 23:35:15 EEST 2017]; root of context hierarchy
+2017-06-03 23:35:17.358  INFO 3896 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/users/{username}],methods=[POST]}" onto public void com.company.controller.UserController.updateUser(java.lang.String,com.company.domain.AppUser)
+2017-06-03 23:35:17.359  INFO 3896 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/users],methods=[GET]}" onto public java.lang.Iterable<com.company.domain.AppUser> com.company.controller.UserController.getUsers()
+2017-06-03 23:35:17.361  INFO 3896 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-06-03 23:35:17.361  INFO 3896 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-06-03 23:35:17.382  INFO 3896 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-06-03 23:35:17.382  INFO 3896 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-06-03 23:35:17.408  INFO 3896 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-06-03 23:35:17.604  INFO 3896 --- [    Test worker] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 9302 (http)
+2017-06-03 23:35:17.606  INFO 3896 --- [    Test worker] com.company.service.UserServiceTests     : Started UserServiceTests in 1.831 seconds (JVM running for 12.492)
+2017-06-03 23:35:17.638  WARN 3896 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 23:35:17.643  WARN 3896 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 23:35:17.647  WARN 3896 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 23:35:17.653  WARN 3896 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 23:35:17.668 DEBUG 3896 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        paper0_.id as id1_5_0_,
+        paper0_.nume as nume2_5_0_,
+        paper0_.status as status3_5_0_,
+        uploadedfi1_.id as id1_11_1_,
+        uploadedfi1_.dateUploaded as dateUplo2_11_1_,
+        uploadedfi1_.filePath as filePath3_11_1_,
+        uploadedfi1_.nume as nume4_11_1_,
+        uploadedfi1_.PaperID_Abstract as PaperID_5_11_1_,
+        uploadedfi1_.PaperID_FullPaper as PaperID_6_11_1_,
+        uploadedfi1_.PaperID_Presentation as PaperID_7_11_1_,
+        paper2_.id as id1_5_2_,
+        paper2_.nume as nume2_5_2_,
+        paper2_.status as status3_5_2_,
+        sessionsch3_.id as id1_9_3_,
+        sessionsch3_.PaperID as PaperID3_9_3_,
+        sessionsch3_.presentationTime as presenta2_9_3_,
+        sessionsch3_.sesionID as sesionID4_9_3_,
+        sessionsch3_.speakerID as speakerI5_9_3_,
+        session4_.id as id1_8_4_,
+        session4_.conf_ID as conf_ID3_8_4_,
+        session4_.name as name2_8_4_,
+        session4_.sessionChairID as sessionC4_8_4_,
+        conference5_.conf_id as conf_id1_3_5_,
+        conference5_.biddingDeadline as biddingD2_3_5_,
+        conference5_.callForAbstractDeadline as callForA3_3_5_,
+        conference5_.callForProposalsDeadline as callForP4_3_5_,
+        conference5_.eventEndDate as eventEnd5_3_5_,
+        conference5_.eventStartDate as eventSta6_3_5_,
+        conference5_.name as name7_3_5_,
+        appuser6_.id as id1_0_6_,
+        appuser6_.affiliation as affiliat2_0_6_,
+        appuser6_.email as email3_0_6_,
+        appuser6_.isCometeeMember as isComete4_0_6_,
+        appuser6_.isSuperUser as isSuperU5_0_6_,
+        appuser6_.name as name6_0_6_,
+        appuser6_.password as password7_0_6_,
+        appuser6_.username as username8_0_6_,
+        appuser6_.webpage as webpage9_0_6_,
+        appuser7_.id as id1_0_7_,
+        appuser7_.affiliation as affiliat2_0_7_,
+        appuser7_.email as email3_0_7_,
+        appuser7_.isCometeeMember as isComete4_0_7_,
+        appuser7_.isSuperUser as isSuperU5_0_7_,
+        appuser7_.name as name6_0_7_,
+        appuser7_.password as password7_0_7_,
+        appuser7_.username as username8_0_7_,
+        appuser7_.webpage as webpage9_0_7_,
+        paper8_.id as id1_5_8_,
+        paper8_.nume as nume2_5_8_,
+        paper8_.status as status3_5_8_ 
+    from
+        Paper paper0_ 
+    left outer join
+        UploadedFile uploadedfi1_ 
+            on paper0_.id=uploadedfi1_.PaperID_Presentation 
+    left outer join
+        Paper paper2_ 
+            on uploadedfi1_.PaperID_Abstract=paper2_.id 
+    left outer join
+        SessionSchedule sessionsch3_ 
+            on paper2_.id=sessionsch3_.PaperID 
+    left outer join
+        Sesion session4_ 
+            on sessionsch3_.sesionID=session4_.id 
+    left outer join
+        Conference conference5_ 
+            on session4_.conf_ID=conference5_.conf_id 
+    left outer join
+        AppUser appuser6_ 
+            on session4_.sessionChairID=appuser6_.id 
+    left outer join
+        AppUser appuser7_ 
+            on sessionsch3_.speakerID=appuser7_.id 
+    left outer join
+        Paper paper8_ 
+            on uploadedfi1_.PaperID_FullPaper=paper8_.id 
+    where
+        paper0_.id=?
+2017-06-03 23:35:17.669 TRACE 3896 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
+2017-06-03 23:35:17.673 DEBUG 3896 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        sessionsch0_.id as id1_9_8_,
+        sessionsch0_.PaperID as PaperID3_9_8_,
+        sessionsch0_.presentationTime as presenta2_9_8_,
+        sessionsch0_.sesionID as sesionID4_9_8_,
+        sessionsch0_.speakerID as speakerI5_9_8_,
+        paper1_.id as id1_5_0_,
+        paper1_.nume as nume2_5_0_,
+        paper1_.status as status3_5_0_,
+        uploadedfi2_.id as id1_11_1_,
+        uploadedfi2_.dateUploaded as dateUplo2_11_1_,
+        uploadedfi2_.filePath as filePath3_11_1_,
+        uploadedfi2_.nume as nume4_11_1_,
+        uploadedfi2_.PaperID_Abstract as PaperID_5_11_1_,
+        uploadedfi2_.PaperID_FullPaper as PaperID_6_11_1_,
+        uploadedfi2_.PaperID_Presentation as PaperID_7_11_1_,
+        paper3_.id as id1_5_2_,
+        paper3_.nume as nume2_5_2_,
+        paper3_.status as status3_5_2_,
+        paper4_.id as id1_5_3_,
+        paper4_.nume as nume2_5_3_,
+        paper4_.status as status3_5_3_,
+        session5_.id as id1_8_4_,
+        session5_.conf_ID as conf_ID3_8_4_,
+        session5_.name as name2_8_4_,
+        session5_.sessionChairID as sessionC4_8_4_,
+        conference6_.conf_id as conf_id1_3_5_,
+        conference6_.biddingDeadline as biddingD2_3_5_,
+        conference6_.callForAbstractDeadline as callForA3_3_5_,
+        conference6_.callForProposalsDeadline as callForP4_3_5_,
+        conference6_.eventEndDate as eventEnd5_3_5_,
+        conference6_.eventStartDate as eventSta6_3_5_,
+        conference6_.name as name7_3_5_,
+        appuser7_.id as id1_0_6_,
+        appuser7_.affiliation as affiliat2_0_6_,
+        appuser7_.email as email3_0_6_,
+        appuser7_.isCometeeMember as isComete4_0_6_,
+        appuser7_.isSuperUser as isSuperU5_0_6_,
+        appuser7_.name as name6_0_6_,
+        appuser7_.password as password7_0_6_,
+        appuser7_.username as username8_0_6_,
+        appuser7_.webpage as webpage9_0_6_,
+        appuser8_.id as id1_0_7_,
+        appuser8_.affiliation as affiliat2_0_7_,
+        appuser8_.email as email3_0_7_,
+        appuser8_.isCometeeMember as isComete4_0_7_,
+        appuser8_.isSuperUser as isSuperU5_0_7_,
+        appuser8_.name as name6_0_7_,
+        appuser8_.password as password7_0_7_,
+        appuser8_.username as username8_0_7_,
+        appuser8_.webpage as webpage9_0_7_ 
+    from
+        SessionSchedule sessionsch0_ 
+    left outer join
+        Paper paper1_ 
+            on sessionsch0_.PaperID=paper1_.id 
+    left outer join
+        UploadedFile uploadedfi2_ 
+            on paper1_.id=uploadedfi2_.PaperID_Presentation 
+    left outer join
+        Paper paper3_ 
+            on uploadedfi2_.PaperID_Abstract=paper3_.id 
+    left outer join
+        Paper paper4_ 
+            on uploadedfi2_.PaperID_FullPaper=paper4_.id 
+    inner join
+        Sesion session5_ 
+            on sessionsch0_.sesionID=session5_.id 
+    left outer join
+        Conference conference6_ 
+            on session5_.conf_ID=conference6_.conf_id 
+    left outer join
+        AppUser appuser7_ 
+            on session5_.sessionChairID=appuser7_.id 
+    inner join
+        AppUser appuser8_ 
+            on sessionsch0_.speakerID=appuser8_.id 
+    where
+        sessionsch0_.PaperID=?
+2017-06-03 23:35:17.674 TRACE 3896 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
+2017-06-03 23:35:17.684 DEBUG 3896 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        appuser0_.id as id1_0_,
+        appuser0_.affiliation as affiliat2_0_,
+        appuser0_.email as email3_0_,
+        appuser0_.isCometeeMember as isComete4_0_,
+        appuser0_.isSuperUser as isSuperU5_0_,
+        appuser0_.name as name6_0_,
+        appuser0_.password as password7_0_,
+        appuser0_.username as username8_0_,
+        appuser0_.webpage as webpage9_0_ 
+    from
+        AppUser appuser0_ 
+    where
+        appuser0_.username=?
+2017-06-03 23:35:17.685 TRACE 3896 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
+2017-06-03 23:35:17.690 DEBUG 3896 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        session0_.id as id1_8_2_,
+        session0_.conf_ID as conf_ID3_8_2_,
+        session0_.name as name2_8_2_,
+        session0_.sessionChairID as sessionC4_8_2_,
+        conference1_.conf_id as conf_id1_3_0_,
+        conference1_.biddingDeadline as biddingD2_3_0_,
+        conference1_.callForAbstractDeadline as callForA3_3_0_,
+        conference1_.callForProposalsDeadline as callForP4_3_0_,
+        conference1_.eventEndDate as eventEnd5_3_0_,
+        conference1_.eventStartDate as eventSta6_3_0_,
+        conference1_.name as name7_3_0_,
+        appuser2_.id as id1_0_1_,
+        appuser2_.affiliation as affiliat2_0_1_,
+        appuser2_.email as email3_0_1_,
+        appuser2_.isCometeeMember as isComete4_0_1_,
+        appuser2_.isSuperUser as isSuperU5_0_1_,
+        appuser2_.name as name6_0_1_,
+        appuser2_.password as password7_0_1_,
+        appuser2_.username as username8_0_1_,
+        appuser2_.webpage as webpage9_0_1_ 
+    from
+        Sesion session0_ 
+    inner join
+        Conference conference1_ 
+            on session0_.conf_ID=conference1_.conf_id 
+    left outer join
+        AppUser appuser2_ 
+            on session0_.sessionChairID=appuser2_.id 
+    where
+        session0_.sessionChairID=?
+2017-06-03 23:35:17.691 TRACE 3896 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 23:35:17.707  INFO 3896 --- [    Test worker] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@8b4268a: startup date [Sat Jun 03 23:35:15 EEST 2017]; root of context hierarchy
+2017-06-03 23:35:17.709  INFO 3896 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-06-03 23:35:17.710  INFO 3896 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2017-06-03 23:35:17.713  INFO 3896 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

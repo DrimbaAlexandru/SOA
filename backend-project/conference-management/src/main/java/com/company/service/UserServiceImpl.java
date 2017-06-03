@@ -4,15 +4,18 @@ import com.company.domain.*;
 import com.company.repository.ConferenceRepository;
 import com.company.repository.PaperRepository;
 import com.company.repository.UserRepository;
+import com.company.utils.dropbox.DropboxUploader;
 import com.company.utils.updater.PrivilegesGettersAndSetters;
 import com.company.utils.updater.Updater;
 import com.company.utils.updater.UsersGettersAndSetters;
+import com.dropbox.core.DbxException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -21,6 +24,7 @@ import java.util.stream.Collectors;
 @Component
 public class UserServiceImpl implements UserService {
 
+    private UploadedFileService uploadedFileService;
     private ConferenceRepository conferenceRepository;
     private UserRepository userRepository;
     private PaperRepository paperRepository;
@@ -28,13 +32,15 @@ public class UserServiceImpl implements UserService {
     private UsersGettersAndSetters usersGettersAndSetters;
     private PrivilegesGettersAndSetters privilegesGettersAndSetters;
     private Updater updater;
+    private Random random;
 
     public UserServiceImpl(@Autowired UserRepository userRepository,
                            @Autowired PaperRepository paperRepository,
                            @Autowired PasswordEncoder encoder,
                            @Autowired UsersGettersAndSetters usersGettersAndSetters,
                            @Autowired PrivilegesGettersAndSetters privilegesGettersAndSetters,
-                           @Autowired ConferenceRepository conferenceRepository) {
+                           @Autowired ConferenceRepository conferenceRepository,
+                           @Autowired UploadedFileService uploadedFileService) {
         this.userRepository = userRepository;
         this.paperRepository = paperRepository;
         this.encoder = encoder;
@@ -42,6 +48,8 @@ public class UserServiceImpl implements UserService {
         this.updater = new Updater();
         this.privilegesGettersAndSetters = privilegesGettersAndSetters;
         this.conferenceRepository = conferenceRepository;
+        this.uploadedFileService = uploadedFileService;
+        random = new Random(System.currentTimeMillis());
     }
 
     @Override
@@ -149,13 +157,47 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addBidForPaper(String username, int paperId) {
+    public void addBidForPaper(String username, int paperId, BidStatus status) {
+        Paper pap = paperRepository.findOne(paperId);
+        if(pap == null)
+            return;
 
+        Optional<AppUser> uopt = getUser(username);
+        uopt.ifPresent(user -> {
+            // If bid for paper already exists, update it
+            Optional<Bid> bidopt = user.getBids().stream()
+                    .filter(e -> e.getPaper().getId().equals(paperId))
+                    .reduce((a, b) -> a);
+
+            if(bidopt.isPresent()) {
+                // Update bid status
+                bidopt.get().setStatus(status);
+            } else {
+                // Create new bid
+                Bid b = new Bid();
+                b.setBidder(user);
+                b.setPaper(pap);
+                b.setStatus(status);
+                user.getBids().add(b);
+            }
+
+            userRepository.save(user);
+        });
     }
 
     @Override
-    public void uploadPresentation(String username, int paperId, File presentationFile) {
-
+    public void uploadPresentation(String username, int paperId, String presentationFileData) {
+        String filePath = username + random.nextLong();
+        Paper pap = paperRepository.findOne(paperId);
+        if(pap == null) {
+            // Return if no paper found
+            return;
+        }
+        Optional<UploadedFile> file = uploadedFileService.uploadFile(filePath, presentationFileData);
+        file.ifPresent(uf -> {
+            uf.setPaperIsPresentationFor(pap);
+            uploadedFileService.saveUploadedFileData(uf);
+        });
     }
 
     @Override
