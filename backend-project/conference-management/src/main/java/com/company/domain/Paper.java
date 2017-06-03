@@ -19,8 +19,7 @@ public class Paper {
     @Column(name = "nume",unique = false, nullable = false, length = 256)
     private String nume;
 
-    @ManyToOne()
-    @JoinColumn(name = "statusID", nullable = false)
+    @Enumerated(value = EnumType.STRING)
     private PaperStatus status;
 
     @OneToOne(mappedBy = "paper")
