@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">4</div>
+<div class="counter">6</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.539s</div>
+<div class="counter">0.659s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,22 +79,32 @@
 </thead>
 <tr>
 <td class="success">testFindUser</td>
-<td>0.048s</td>
+<td>0.055s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testFindUserNoUser</td>
-<td>0.261s</td>
+<td>0.272s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetBidsOfPaper</td>
-<td>0.113s</td>
+<td>0.134s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testGetSubmittedPapers</td>
-<td>0.117s</td>
+<td>0.112s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testUserExistsFalse</td>
+<td>0.047s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testUserExistsTrue</td>
+<td>0.039s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -102,28 +112,28 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>14:01:13.751 [Test worker] DEBUG org.springframework.test.context.junit4.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class repository.UserRepositoryTests]
-14:01:13.754 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
-14:01:13.760 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
-14:01:13.776 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [repository.UserRepositoryTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
-14:01:13.787 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [repository.UserRepositoryTests], using SpringBootContextLoader
-14:01:13.790 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [repository.UserRepositoryTests]: class path resource [repository/UserRepositoryTests-context.xml] does not exist
-14:01:13.791 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [repository.UserRepositoryTests]: class path resource [repository/UserRepositoryTestsContext.groovy] does not exist
-14:01:13.791 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [repository.UserRepositoryTests]: no resource found for suffixes {-context.xml, Context.groovy}.
-14:01:13.810 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [repository.UserRepositoryTests]
-14:01:13.844 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@1752286e, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5a395cc2, org.springframework.test.context.transaction.TransactionalTestExecutionListener@470c5533, com.github.springtestdbunit.DbUnitTestExecutionListener@28a1518a]
-14:01:13.847 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [repository.UserRepositoryTests]
-14:01:13.847 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [repository.UserRepositoryTests]
-14:01:13.848 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [repository.UserRepositoryTests]
-14:01:13.848 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [repository.UserRepositoryTests]
-14:01:13.850 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [repository.UserRepositoryTests]
-14:01:13.850 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [repository.UserRepositoryTests]
-14:01:13.853 [Test worker] DEBUG org.springframework.test.context.support.DependencyInjectionTestExecutionListener - Performing dependency injection for test context [[DefaultTestContext@2c4f3a68 testClass = UserRepositoryTests, testInstance = repository.UserRepositoryTests@658dbb15, testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@1c089640 testClass = UserRepositoryTests, locations = '{}', classes = '{class com.company.Application, class com.company.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@18ed0ee3, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5be10069, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]].
-14:01:13.920 [Test worker] DEBUG org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
-14:01:13.921 [Test worker] DEBUG org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
-14:01:13.921 [Test worker] DEBUG org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
-14:01:13.922 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}
-14:01:13.923 [Test worker] DEBUG org.springframework.core.env.StandardEnvironment - Adding [Inlined Test Properties] PropertySource with highest search precedence
+<pre>16:51:41.992 [Test worker] DEBUG org.springframework.test.context.junit4.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class repository.UserRepositoryTests]
+16:51:41.997 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+16:51:42.003 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+16:51:42.019 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [repository.UserRepositoryTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+16:51:42.030 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [repository.UserRepositoryTests], using SpringBootContextLoader
+16:51:42.033 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [repository.UserRepositoryTests]: class path resource [repository/UserRepositoryTests-context.xml] does not exist
+16:51:42.034 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [repository.UserRepositoryTests]: class path resource [repository/UserRepositoryTestsContext.groovy] does not exist
+16:51:42.034 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [repository.UserRepositoryTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+16:51:42.053 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [repository.UserRepositoryTests]
+16:51:42.083 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@22338e86, org.springframework.test.context.support.DirtiesContextTestExecutionListener@23238c76, org.springframework.test.context.transaction.TransactionalTestExecutionListener@77752afc, com.github.springtestdbunit.DbUnitTestExecutionListener@213a3027]
+16:51:42.085 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [repository.UserRepositoryTests]
+16:51:42.086 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [repository.UserRepositoryTests]
+16:51:42.086 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [repository.UserRepositoryTests]
+16:51:42.086 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [repository.UserRepositoryTests]
+16:51:42.088 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [repository.UserRepositoryTests]
+16:51:42.088 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [repository.UserRepositoryTests]
+16:51:42.092 [Test worker] DEBUG org.springframework.test.context.support.DependencyInjectionTestExecutionListener - Performing dependency injection for test context [[DefaultTestContext@6540ac34 testClass = UserRepositoryTests, testInstance = repository.UserRepositoryTests@5912506d, testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@36b179cc testClass = UserRepositoryTests, locations = '{}', classes = '{class com.company.Application, class com.company.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.context.SpringBootTestContextCustomizer@6caf9640, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@35a11c6d, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]]].
+16:51:42.153 [Test worker] DEBUG org.springframework.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+16:51:42.153 [Test worker] DEBUG org.springframework.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+16:51:42.154 [Test worker] DEBUG org.springframework.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+16:51:42.155 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}
+16:51:42.156 [Test worker] DEBUG org.springframework.core.env.StandardEnvironment - Adding [Inlined Test Properties] PropertySource with highest search precedence
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -133,48 +143,46 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v1.5.3.RELEASE)
 
-2017-06-03 14:01:14.193  INFO 12440 --- [    Test worker] repository.UserRepositoryTests           : Starting UserRepositoryTests on DESKTOP-CD5HDT7 with PID 12440 (started by AlexandruD in D:\Projects\iss\software-engineering-223-1\backend-project\conference-management)
-2017-06-03 14:01:14.194  INFO 12440 --- [    Test worker] repository.UserRepositoryTests           : The following profiles are active: dev
-2017-06-03 14:01:14.223  INFO 12440 --- [    Test worker] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@3f2a972e: startup date [Sat Jun 03 14:01:14 EEST 2017]; root of context hierarchy
-2017-06-03 14:01:16.204  INFO 12440 --- [    Test worker] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 0 (http)
-2017-06-03 14:01:16.227  INFO 12440 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service Tomcat
-2017-06-03 14:01:16.229  INFO 12440 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.14
-2017-06-03 14:01:16.394  INFO 12440 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2017-06-03 14:01:16.395  INFO 12440 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2174 ms
-2017-06-03 14:01:16.590  INFO 12440 --- [ost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
-2017-06-03 14:01:16.596  INFO 12440 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
-2017-06-03 14:01:16.597  INFO 12440 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
-2017-06-03 14:01:16.597  INFO 12440 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
-2017-06-03 14:01:16.597  INFO 12440 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
-2017-06-03 14:01:16.679  INFO 12440 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2017-06-03 14:01:16.994  INFO 12440 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2017-06-03 14:01:17.090  INFO 12440 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
-2017-06-03 14:01:17.109  INFO 12440 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+2017-06-03 16:51:42.430  INFO 15568 --- [    Test worker] repository.UserRepositoryTests           : Starting UserRepositoryTests on DESKTOP-CD5HDT7 with PID 15568 (started by AlexandruD in D:\Projects\iss\software-engineering-223-1\backend-project\conference-management)
+2017-06-03 16:51:42.431  INFO 15568 --- [    Test worker] repository.UserRepositoryTests           : The following profiles are active: dev
+2017-06-03 16:51:42.459  INFO 15568 --- [    Test worker] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@5305f2e7: startup date [Sat Jun 03 16:51:42 EEST 2017]; root of context hierarchy
+2017-06-03 16:51:44.217  INFO 15568 --- [    Test worker] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 0 (http)
+2017-06-03 16:51:44.227  INFO 15568 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2017-06-03 16:51:44.228  INFO 15568 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.14
+2017-06-03 16:51:44.344  INFO 15568 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-06-03 16:51:44.344  INFO 15568 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1887 ms
+2017-06-03 16:51:44.505  INFO 15568 --- [ost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-06-03 16:51:44.509  INFO 15568 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-06-03 16:51:44.510  INFO 15568 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-06-03 16:51:44.510  INFO 15568 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-06-03 16:51:44.510  INFO 15568 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-06-03 16:51:44.577  INFO 15568 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2017-06-03 16:51:44.993  INFO 15568 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2017-06-03 16:51:45.074  INFO 15568 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-06-03 16:51:45.092  INFO 15568 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
 	name: default
 	...]
-2017-06-03 14:01:17.212  INFO 12440 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.10.Final}
-2017-06-03 14:01:17.214  INFO 12440 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
-2017-06-03 14:01:17.270  INFO 12440 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
-2017-06-03 14:01:17.445  INFO 12440 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.SQLServerDialect
-2017-06-03 14:01:18.684  INFO 12440 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2017-06-03 14:01:19.265  INFO 12440 --- [    Test worker] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
-2017-06-03 14:01:19.616  INFO 12440 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@3f2a972e: startup date [Sat Jun 03 14:01:14 EEST 2017]; root of context hierarchy
-2017-06-03 14:01:19.716  INFO 12440 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped &quot;{[/users],methods=[GET]}&quot; onto public java.lang.Iterable&lt;com.company.domain.AppUser&gt; com.company.controller.UserController.getUsers()
-2017-06-03 14:01:19.718  INFO 12440 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped &quot;{[/users/{username}],methods=[POST]}&quot; onto public void com.company.controller.UserController.updateUser(java.lang.String,com.company.domain.AppUser)
-2017-06-03 14:01:19.720  INFO 12440 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped &quot;{[/error]}&quot; onto public org.springframework.http.ResponseEntity&lt;java.util.Map&lt;java.lang.String, java.lang.Object&gt;&gt; org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
-2017-06-03 14:01:19.721  INFO 12440 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped &quot;{[/error],produces=[text/html]}&quot; onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
-2017-06-03 14:01:19.764  INFO 12440 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
-2017-06-03 14:01:19.764  INFO 12440 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
-2017-06-03 14:01:19.819  INFO 12440 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
-2017-06-03 14:01:20.171  INFO 12440 --- [    Test worker] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 22145 (http)
-2017-06-03 14:01:20.176  INFO 12440 --- [    Test worker] repository.UserRepositoryTests           : Started UserRepositoryTests in 6.25 seconds (JVM running for 7.097)
-2017-06-03 14:01:20.280  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.351  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.373  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.380  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.387  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.394  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.443 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:45.210  INFO 15568 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.10.Final}
+2017-06-03 16:51:45.212  INFO 15568 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-06-03 16:51:45.265  INFO 15568 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-06-03 16:51:45.420  INFO 15568 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.SQLServerDialect
+2017-06-03 16:51:46.606  INFO 15568 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-06-03 16:51:47.192  INFO 15568 --- [    Test worker] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2017-06-03 16:51:47.582  INFO 15568 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@5305f2e7: startup date [Sat Jun 03 16:51:42 EEST 2017]; root of context hierarchy
+2017-06-03 16:51:47.686  INFO 15568 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped &quot;{[/users],methods=[GET]}&quot; onto public java.lang.Iterable&lt;com.company.domain.AppUser&gt; com.company.controller.UserController.getUsers()
+2017-06-03 16:51:47.687  INFO 15568 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped &quot;{[/users/{username}],methods=[POST]}&quot; onto public void com.company.controller.UserController.updateUser(java.lang.String,com.company.domain.AppUser)
+2017-06-03 16:51:47.690  INFO 15568 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped &quot;{[/error]}&quot; onto public org.springframework.http.ResponseEntity&lt;java.util.Map&lt;java.lang.String, java.lang.Object&gt;&gt; org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-06-03 16:51:47.691  INFO 15568 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped &quot;{[/error],produces=[text/html]}&quot; onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-06-03 16:51:47.723  INFO 15568 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-06-03 16:51:47.723  INFO 15568 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-06-03 16:51:47.767  INFO 15568 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-06-03 16:51:48.120  INFO 15568 --- [    Test worker] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 4939 (http)
+2017-06-03 16:51:48.125  INFO 15568 --- [    Test worker] repository.UserRepositoryTests           : Started UserRepositoryTests in 5.967 seconds (JVM running for 6.678)
+2017-06-03 16:51:48.243  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.333  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.340  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.347  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.395 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
         appuser0_.id as id1_0_,
         appuser0_.affiliation as affiliat2_0_,
@@ -189,18 +197,16 @@
         AppUser appuser0_ 
     where
         appuser0_.username=?
-2017-06-03 14:01:20.446 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [RANDOM]
-2017-06-03 14:01:20.484  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.487  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.492  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.497  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.501  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.508  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.527 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.398 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [RANDOM]
+2017-06-03 16:51:48.439  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.444  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.448  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.453  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.468 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
-        paper2_.id as id1_6_,
-        paper2_.nume as nume2_6_,
-        paper2_.statusID as statusID3_6_ 
+        paper2_.id as id1_5_,
+        paper2_.nume as nume2_5_,
+        paper2_.status as status3_5_ 
     from
         AppUser appuser0_ 
     inner join
@@ -211,56 +217,54 @@
             on submittedp1_.submittedPapers_id=paper2_.id 
     where
         appuser0_.username=?
-2017-06-03 14:01:20.528 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
-2017-06-03 14:01:20.546 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.468 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
+2017-06-03 16:51:48.489 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
-        paperstatu0_.id as id1_7_0_,
-        paperstatu0_.nume as nume2_7_0_ 
-    from
-        PaperStatus paperstatu0_ 
-    where
-        paperstatu0_.id=?
-2017-06-03 14:01:20.547 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 14:01:20.553 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
-    select
-        uploadedfi0_.id as id1_14_9_,
-        uploadedfi0_.dateUploaded as dateUplo2_14_9_,
-        uploadedfi0_.filePath as filePath3_14_9_,
-        uploadedfi0_.nume as nume4_14_9_,
-        uploadedfi0_.PaperID_Abstract as PaperID_5_14_9_,
-        uploadedfi0_.PaperID_FullPaper as PaperID_6_14_9_,
-        uploadedfi0_.PaperID_Presentation as PaperID_7_14_9_,
-        paper1_.id as id1_6_0_,
-        paper1_.nume as nume2_6_0_,
-        paper1_.statusID as statusID3_6_0_,
-        paperstatu2_.id as id1_7_1_,
-        paperstatu2_.nume as nume2_7_1_,
-        uploadedfi3_.id as id1_14_2_,
-        uploadedfi3_.dateUploaded as dateUplo2_14_2_,
-        uploadedfi3_.filePath as filePath3_14_2_,
-        uploadedfi3_.nume as nume4_14_2_,
-        uploadedfi3_.PaperID_Abstract as PaperID_5_14_2_,
-        uploadedfi3_.PaperID_FullPaper as PaperID_6_14_2_,
-        uploadedfi3_.PaperID_Presentation as PaperID_7_14_2_,
-        paper4_.id as id1_6_3_,
-        paper4_.nume as nume2_6_3_,
-        paper4_.statusID as statusID3_6_3_,
-        sessionsch5_.id as id1_12_4_,
-        sessionsch5_.PaperID as PaperID3_12_4_,
-        sessionsch5_.presentationTime as presenta2_12_4_,
-        sessionsch5_.sesionID as sesionID4_12_4_,
-        sessionsch5_.speakerID as speakerI5_12_4_,
-        session6_.id as id1_11_5_,
-        session6_.conf_ID as conf_ID3_11_5_,
-        session6_.name as name2_11_5_,
-        session6_.sessionChairID as sessionC4_11_5_,
-        conference7_.conf_id as conf_id1_4_6_,
-        conference7_.biddingDeadline as biddingD2_4_6_,
-        conference7_.callForAbstractDeadline as callForA3_4_6_,
-        conference7_.callForProposalsDeadline as callForP4_4_6_,
-        conference7_.eventEndDate as eventEnd5_4_6_,
-        conference7_.eventStartDate as eventSta6_4_6_,
-        conference7_.name as name7_4_6_,
+        uploadedfi0_.id as id1_11_8_,
+        uploadedfi0_.dateUploaded as dateUplo2_11_8_,
+        uploadedfi0_.filePath as filePath3_11_8_,
+        uploadedfi0_.nume as nume4_11_8_,
+        uploadedfi0_.PaperID_Abstract as PaperID_5_11_8_,
+        uploadedfi0_.PaperID_FullPaper as PaperID_6_11_8_,
+        uploadedfi0_.PaperID_Presentation as PaperID_7_11_8_,
+        paper1_.id as id1_5_0_,
+        paper1_.nume as nume2_5_0_,
+        paper1_.status as status3_5_0_,
+        uploadedfi2_.id as id1_11_1_,
+        uploadedfi2_.dateUploaded as dateUplo2_11_1_,
+        uploadedfi2_.filePath as filePath3_11_1_,
+        uploadedfi2_.nume as nume4_11_1_,
+        uploadedfi2_.PaperID_Abstract as PaperID_5_11_1_,
+        uploadedfi2_.PaperID_FullPaper as PaperID_6_11_1_,
+        uploadedfi2_.PaperID_Presentation as PaperID_7_11_1_,
+        paper3_.id as id1_5_2_,
+        paper3_.nume as nume2_5_2_,
+        paper3_.status as status3_5_2_,
+        sessionsch4_.id as id1_9_3_,
+        sessionsch4_.PaperID as PaperID3_9_3_,
+        sessionsch4_.presentationTime as presenta2_9_3_,
+        sessionsch4_.sesionID as sesionID4_9_3_,
+        sessionsch4_.speakerID as speakerI5_9_3_,
+        session5_.id as id1_8_4_,
+        session5_.conf_ID as conf_ID3_8_4_,
+        session5_.name as name2_8_4_,
+        session5_.sessionChairID as sessionC4_8_4_,
+        conference6_.conf_id as conf_id1_3_5_,
+        conference6_.biddingDeadline as biddingD2_3_5_,
+        conference6_.callForAbstractDeadline as callForA3_3_5_,
+        conference6_.callForProposalsDeadline as callForP4_3_5_,
+        conference6_.eventEndDate as eventEnd5_3_5_,
+        conference6_.eventStartDate as eventSta6_3_5_,
+        conference6_.name as name7_3_5_,
+        appuser7_.id as id1_0_6_,
+        appuser7_.affiliation as affiliat2_0_6_,
+        appuser7_.email as email3_0_6_,
+        appuser7_.isCometeeMember as isComete4_0_6_,
+        appuser7_.isSuperUser as isSuperU5_0_6_,
+        appuser7_.name as name6_0_6_,
+        appuser7_.password as password7_0_6_,
+        appuser7_.username as username8_0_6_,
+        appuser7_.webpage as webpage9_0_6_,
         appuser8_.id as id1_0_7_,
         appuser8_.affiliation as affiliat2_0_7_,
         appuser8_.email as email3_0_7_,
@@ -269,84 +273,79 @@
         appuser8_.name as name6_0_7_,
         appuser8_.password as password7_0_7_,
         appuser8_.username as username8_0_7_,
-        appuser8_.webpage as webpage9_0_7_,
-        appuser9_.id as id1_0_8_,
-        appuser9_.affiliation as affiliat2_0_8_,
-        appuser9_.email as email3_0_8_,
-        appuser9_.isCometeeMember as isComete4_0_8_,
-        appuser9_.isSuperUser as isSuperU5_0_8_,
-        appuser9_.name as name6_0_8_,
-        appuser9_.password as password7_0_8_,
-        appuser9_.username as username8_0_8_,
-        appuser9_.webpage as webpage9_0_8_ 
+        appuser8_.webpage as webpage9_0_7_ 
     from
         UploadedFile uploadedfi0_ 
     left outer join
         Paper paper1_ 
             on uploadedfi0_.PaperID_Abstract=paper1_.id 
     left outer join
-        PaperStatus paperstatu2_ 
-            on paper1_.statusID=paperstatu2_.id 
+        UploadedFile uploadedfi2_ 
+            on paper1_.id=uploadedfi2_.PaperID_Presentation 
     left outer join
-        UploadedFile uploadedfi3_ 
-            on paper1_.id=uploadedfi3_.PaperID_Presentation 
+        Paper paper3_ 
+            on uploadedfi2_.PaperID_FullPaper=paper3_.id 
     left outer join
-        Paper paper4_ 
-            on uploadedfi3_.PaperID_FullPaper=paper4_.id 
+        SessionSchedule sessionsch4_ 
+            on paper3_.id=sessionsch4_.PaperID 
     left outer join
-        SessionSchedule sessionsch5_ 
-            on paper4_.id=sessionsch5_.PaperID 
+        Sesion session5_ 
+            on sessionsch4_.sesionID=session5_.id 
     left outer join
-        Sesion session6_ 
-            on sessionsch5_.sesionID=session6_.id 
+        Conference conference6_ 
+            on session5_.conf_ID=conference6_.conf_id 
     left outer join
-        Conference conference7_ 
-            on session6_.conf_ID=conference7_.conf_id 
+        AppUser appuser7_ 
+            on session5_.sessionChairID=appuser7_.id 
     left outer join
         AppUser appuser8_ 
-            on session6_.sessionChairID=appuser8_.id 
-    left outer join
-        AppUser appuser9_ 
-            on sessionsch5_.speakerID=appuser9_.id 
+            on sessionsch4_.speakerID=appuser8_.id 
     where
         uploadedfi0_.PaperID_Presentation=?
-2017-06-03 14:01:20.555 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 14:01:20.562 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.491 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 16:51:48.498 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
-        sessionsch0_.id as id1_12_9_,
-        sessionsch0_.PaperID as PaperID3_12_9_,
-        sessionsch0_.presentationTime as presenta2_12_9_,
-        sessionsch0_.sesionID as sesionID4_12_9_,
-        sessionsch0_.speakerID as speakerI5_12_9_,
-        paper1_.id as id1_6_0_,
-        paper1_.nume as nume2_6_0_,
-        paper1_.statusID as statusID3_6_0_,
-        paperstatu2_.id as id1_7_1_,
-        paperstatu2_.nume as nume2_7_1_,
-        uploadedfi3_.id as id1_14_2_,
-        uploadedfi3_.dateUploaded as dateUplo2_14_2_,
-        uploadedfi3_.filePath as filePath3_14_2_,
-        uploadedfi3_.nume as nume4_14_2_,
-        uploadedfi3_.PaperID_Abstract as PaperID_5_14_2_,
-        uploadedfi3_.PaperID_FullPaper as PaperID_6_14_2_,
-        uploadedfi3_.PaperID_Presentation as PaperID_7_14_2_,
-        paper4_.id as id1_6_3_,
-        paper4_.nume as nume2_6_3_,
-        paper4_.statusID as statusID3_6_3_,
-        paper5_.id as id1_6_4_,
-        paper5_.nume as nume2_6_4_,
-        paper5_.statusID as statusID3_6_4_,
-        session6_.id as id1_11_5_,
-        session6_.conf_ID as conf_ID3_11_5_,
-        session6_.name as name2_11_5_,
-        session6_.sessionChairID as sessionC4_11_5_,
-        conference7_.conf_id as conf_id1_4_6_,
-        conference7_.biddingDeadline as biddingD2_4_6_,
-        conference7_.callForAbstractDeadline as callForA3_4_6_,
-        conference7_.callForProposalsDeadline as callForP4_4_6_,
-        conference7_.eventEndDate as eventEnd5_4_6_,
-        conference7_.eventStartDate as eventSta6_4_6_,
-        conference7_.name as name7_4_6_,
+        sessionsch0_.id as id1_9_8_,
+        sessionsch0_.PaperID as PaperID3_9_8_,
+        sessionsch0_.presentationTime as presenta2_9_8_,
+        sessionsch0_.sesionID as sesionID4_9_8_,
+        sessionsch0_.speakerID as speakerI5_9_8_,
+        paper1_.id as id1_5_0_,
+        paper1_.nume as nume2_5_0_,
+        paper1_.status as status3_5_0_,
+        uploadedfi2_.id as id1_11_1_,
+        uploadedfi2_.dateUploaded as dateUplo2_11_1_,
+        uploadedfi2_.filePath as filePath3_11_1_,
+        uploadedfi2_.nume as nume4_11_1_,
+        uploadedfi2_.PaperID_Abstract as PaperID_5_11_1_,
+        uploadedfi2_.PaperID_FullPaper as PaperID_6_11_1_,
+        uploadedfi2_.PaperID_Presentation as PaperID_7_11_1_,
+        paper3_.id as id1_5_2_,
+        paper3_.nume as nume2_5_2_,
+        paper3_.status as status3_5_2_,
+        paper4_.id as id1_5_3_,
+        paper4_.nume as nume2_5_3_,
+        paper4_.status as status3_5_3_,
+        session5_.id as id1_8_4_,
+        session5_.conf_ID as conf_ID3_8_4_,
+        session5_.name as name2_8_4_,
+        session5_.sessionChairID as sessionC4_8_4_,
+        conference6_.conf_id as conf_id1_3_5_,
+        conference6_.biddingDeadline as biddingD2_3_5_,
+        conference6_.callForAbstractDeadline as callForA3_3_5_,
+        conference6_.callForProposalsDeadline as callForP4_3_5_,
+        conference6_.eventEndDate as eventEnd5_3_5_,
+        conference6_.eventStartDate as eventSta6_3_5_,
+        conference6_.name as name7_3_5_,
+        appuser7_.id as id1_0_6_,
+        appuser7_.affiliation as affiliat2_0_6_,
+        appuser7_.email as email3_0_6_,
+        appuser7_.isCometeeMember as isComete4_0_6_,
+        appuser7_.isSuperUser as isSuperU5_0_6_,
+        appuser7_.name as name6_0_6_,
+        appuser7_.password as password7_0_6_,
+        appuser7_.username as username8_0_6_,
+        appuser7_.webpage as webpage9_0_6_,
         appuser8_.id as id1_0_7_,
         appuser8_.affiliation as affiliat2_0_7_,
         appuser8_.email as email3_0_7_,
@@ -355,97 +354,83 @@
         appuser8_.name as name6_0_7_,
         appuser8_.password as password7_0_7_,
         appuser8_.username as username8_0_7_,
-        appuser8_.webpage as webpage9_0_7_,
-        appuser9_.id as id1_0_8_,
-        appuser9_.affiliation as affiliat2_0_8_,
-        appuser9_.email as email3_0_8_,
-        appuser9_.isCometeeMember as isComete4_0_8_,
-        appuser9_.isSuperUser as isSuperU5_0_8_,
-        appuser9_.name as name6_0_8_,
-        appuser9_.password as password7_0_8_,
-        appuser9_.username as username8_0_8_,
-        appuser9_.webpage as webpage9_0_8_ 
+        appuser8_.webpage as webpage9_0_7_ 
     from
         SessionSchedule sessionsch0_ 
     left outer join
         Paper paper1_ 
             on sessionsch0_.PaperID=paper1_.id 
     left outer join
-        PaperStatus paperstatu2_ 
-            on paper1_.statusID=paperstatu2_.id 
+        UploadedFile uploadedfi2_ 
+            on paper1_.id=uploadedfi2_.PaperID_Presentation 
     left outer join
-        UploadedFile uploadedfi3_ 
-            on paper1_.id=uploadedfi3_.PaperID_Presentation 
+        Paper paper3_ 
+            on uploadedfi2_.PaperID_Abstract=paper3_.id 
     left outer join
         Paper paper4_ 
-            on uploadedfi3_.PaperID_Abstract=paper4_.id 
-    left outer join
-        Paper paper5_ 
-            on uploadedfi3_.PaperID_FullPaper=paper5_.id 
+            on uploadedfi2_.PaperID_FullPaper=paper4_.id 
     inner join
-        Sesion session6_ 
-            on sessionsch0_.sesionID=session6_.id 
+        Sesion session5_ 
+            on sessionsch0_.sesionID=session5_.id 
     left outer join
-        Conference conference7_ 
-            on session6_.conf_ID=conference7_.conf_id 
+        Conference conference6_ 
+            on session5_.conf_ID=conference6_.conf_id 
     left outer join
+        AppUser appuser7_ 
+            on session5_.sessionChairID=appuser7_.id 
+    inner join
         AppUser appuser8_ 
-            on session6_.sessionChairID=appuser8_.id 
-    inner join
-        AppUser appuser9_ 
-            on sessionsch0_.speakerID=appuser9_.id 
+            on sessionsch0_.speakerID=appuser8_.id 
     where
         sessionsch0_.PaperID=?
-2017-06-03 14:01:20.564 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 14:01:20.571 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.499 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 16:51:48.515 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
-        paperstatu0_.id as id1_7_0_,
-        paperstatu0_.nume as nume2_7_0_ 
-    from
-        PaperStatus paperstatu0_ 
-    where
-        paperstatu0_.id=?
-2017-06-03 14:01:20.572 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
-2017-06-03 14:01:20.573 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
-    select
-        uploadedfi0_.id as id1_14_9_,
-        uploadedfi0_.dateUploaded as dateUplo2_14_9_,
-        uploadedfi0_.filePath as filePath3_14_9_,
-        uploadedfi0_.nume as nume4_14_9_,
-        uploadedfi0_.PaperID_Abstract as PaperID_5_14_9_,
-        uploadedfi0_.PaperID_FullPaper as PaperID_6_14_9_,
-        uploadedfi0_.PaperID_Presentation as PaperID_7_14_9_,
-        paper1_.id as id1_6_0_,
-        paper1_.nume as nume2_6_0_,
-        paper1_.statusID as statusID3_6_0_,
-        paperstatu2_.id as id1_7_1_,
-        paperstatu2_.nume as nume2_7_1_,
-        uploadedfi3_.id as id1_14_2_,
-        uploadedfi3_.dateUploaded as dateUplo2_14_2_,
-        uploadedfi3_.filePath as filePath3_14_2_,
-        uploadedfi3_.nume as nume4_14_2_,
-        uploadedfi3_.PaperID_Abstract as PaperID_5_14_2_,
-        uploadedfi3_.PaperID_FullPaper as PaperID_6_14_2_,
-        uploadedfi3_.PaperID_Presentation as PaperID_7_14_2_,
-        paper4_.id as id1_6_3_,
-        paper4_.nume as nume2_6_3_,
-        paper4_.statusID as statusID3_6_3_,
-        sessionsch5_.id as id1_12_4_,
-        sessionsch5_.PaperID as PaperID3_12_4_,
-        sessionsch5_.presentationTime as presenta2_12_4_,
-        sessionsch5_.sesionID as sesionID4_12_4_,
-        sessionsch5_.speakerID as speakerI5_12_4_,
-        session6_.id as id1_11_5_,
-        session6_.conf_ID as conf_ID3_11_5_,
-        session6_.name as name2_11_5_,
-        session6_.sessionChairID as sessionC4_11_5_,
-        conference7_.conf_id as conf_id1_4_6_,
-        conference7_.biddingDeadline as biddingD2_4_6_,
-        conference7_.callForAbstractDeadline as callForA3_4_6_,
-        conference7_.callForProposalsDeadline as callForP4_4_6_,
-        conference7_.eventEndDate as eventEnd5_4_6_,
-        conference7_.eventStartDate as eventSta6_4_6_,
-        conference7_.name as name7_4_6_,
+        uploadedfi0_.id as id1_11_8_,
+        uploadedfi0_.dateUploaded as dateUplo2_11_8_,
+        uploadedfi0_.filePath as filePath3_11_8_,
+        uploadedfi0_.nume as nume4_11_8_,
+        uploadedfi0_.PaperID_Abstract as PaperID_5_11_8_,
+        uploadedfi0_.PaperID_FullPaper as PaperID_6_11_8_,
+        uploadedfi0_.PaperID_Presentation as PaperID_7_11_8_,
+        paper1_.id as id1_5_0_,
+        paper1_.nume as nume2_5_0_,
+        paper1_.status as status3_5_0_,
+        uploadedfi2_.id as id1_11_1_,
+        uploadedfi2_.dateUploaded as dateUplo2_11_1_,
+        uploadedfi2_.filePath as filePath3_11_1_,
+        uploadedfi2_.nume as nume4_11_1_,
+        uploadedfi2_.PaperID_Abstract as PaperID_5_11_1_,
+        uploadedfi2_.PaperID_FullPaper as PaperID_6_11_1_,
+        uploadedfi2_.PaperID_Presentation as PaperID_7_11_1_,
+        paper3_.id as id1_5_2_,
+        paper3_.nume as nume2_5_2_,
+        paper3_.status as status3_5_2_,
+        sessionsch4_.id as id1_9_3_,
+        sessionsch4_.PaperID as PaperID3_9_3_,
+        sessionsch4_.presentationTime as presenta2_9_3_,
+        sessionsch4_.sesionID as sesionID4_9_3_,
+        sessionsch4_.speakerID as speakerI5_9_3_,
+        session5_.id as id1_8_4_,
+        session5_.conf_ID as conf_ID3_8_4_,
+        session5_.name as name2_8_4_,
+        session5_.sessionChairID as sessionC4_8_4_,
+        conference6_.conf_id as conf_id1_3_5_,
+        conference6_.biddingDeadline as biddingD2_3_5_,
+        conference6_.callForAbstractDeadline as callForA3_3_5_,
+        conference6_.callForProposalsDeadline as callForP4_3_5_,
+        conference6_.eventEndDate as eventEnd5_3_5_,
+        conference6_.eventStartDate as eventSta6_3_5_,
+        conference6_.name as name7_3_5_,
+        appuser7_.id as id1_0_6_,
+        appuser7_.affiliation as affiliat2_0_6_,
+        appuser7_.email as email3_0_6_,
+        appuser7_.isCometeeMember as isComete4_0_6_,
+        appuser7_.isSuperUser as isSuperU5_0_6_,
+        appuser7_.name as name6_0_6_,
+        appuser7_.password as password7_0_6_,
+        appuser7_.username as username8_0_6_,
+        appuser7_.webpage as webpage9_0_6_,
         appuser8_.id as id1_0_7_,
         appuser8_.affiliation as affiliat2_0_7_,
         appuser8_.email as email3_0_7_,
@@ -454,84 +439,79 @@
         appuser8_.name as name6_0_7_,
         appuser8_.password as password7_0_7_,
         appuser8_.username as username8_0_7_,
-        appuser8_.webpage as webpage9_0_7_,
-        appuser9_.id as id1_0_8_,
-        appuser9_.affiliation as affiliat2_0_8_,
-        appuser9_.email as email3_0_8_,
-        appuser9_.isCometeeMember as isComete4_0_8_,
-        appuser9_.isSuperUser as isSuperU5_0_8_,
-        appuser9_.name as name6_0_8_,
-        appuser9_.password as password7_0_8_,
-        appuser9_.username as username8_0_8_,
-        appuser9_.webpage as webpage9_0_8_ 
+        appuser8_.webpage as webpage9_0_7_ 
     from
         UploadedFile uploadedfi0_ 
     left outer join
         Paper paper1_ 
             on uploadedfi0_.PaperID_Abstract=paper1_.id 
     left outer join
-        PaperStatus paperstatu2_ 
-            on paper1_.statusID=paperstatu2_.id 
+        UploadedFile uploadedfi2_ 
+            on paper1_.id=uploadedfi2_.PaperID_Presentation 
     left outer join
-        UploadedFile uploadedfi3_ 
-            on paper1_.id=uploadedfi3_.PaperID_Presentation 
+        Paper paper3_ 
+            on uploadedfi2_.PaperID_FullPaper=paper3_.id 
     left outer join
-        Paper paper4_ 
-            on uploadedfi3_.PaperID_FullPaper=paper4_.id 
+        SessionSchedule sessionsch4_ 
+            on paper3_.id=sessionsch4_.PaperID 
     left outer join
-        SessionSchedule sessionsch5_ 
-            on paper4_.id=sessionsch5_.PaperID 
+        Sesion session5_ 
+            on sessionsch4_.sesionID=session5_.id 
     left outer join
-        Sesion session6_ 
-            on sessionsch5_.sesionID=session6_.id 
+        Conference conference6_ 
+            on session5_.conf_ID=conference6_.conf_id 
     left outer join
-        Conference conference7_ 
-            on session6_.conf_ID=conference7_.conf_id 
+        AppUser appuser7_ 
+            on session5_.sessionChairID=appuser7_.id 
     left outer join
         AppUser appuser8_ 
-            on session6_.sessionChairID=appuser8_.id 
-    left outer join
-        AppUser appuser9_ 
-            on sessionsch5_.speakerID=appuser9_.id 
+            on sessionsch4_.speakerID=appuser8_.id 
     where
         uploadedfi0_.PaperID_Presentation=?
-2017-06-03 14:01:20.574 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [3]
-2017-06-03 14:01:20.576 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.517 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [3]
+2017-06-03 16:51:48.520 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
-        sessionsch0_.id as id1_12_9_,
-        sessionsch0_.PaperID as PaperID3_12_9_,
-        sessionsch0_.presentationTime as presenta2_12_9_,
-        sessionsch0_.sesionID as sesionID4_12_9_,
-        sessionsch0_.speakerID as speakerI5_12_9_,
-        paper1_.id as id1_6_0_,
-        paper1_.nume as nume2_6_0_,
-        paper1_.statusID as statusID3_6_0_,
-        paperstatu2_.id as id1_7_1_,
-        paperstatu2_.nume as nume2_7_1_,
-        uploadedfi3_.id as id1_14_2_,
-        uploadedfi3_.dateUploaded as dateUplo2_14_2_,
-        uploadedfi3_.filePath as filePath3_14_2_,
-        uploadedfi3_.nume as nume4_14_2_,
-        uploadedfi3_.PaperID_Abstract as PaperID_5_14_2_,
-        uploadedfi3_.PaperID_FullPaper as PaperID_6_14_2_,
-        uploadedfi3_.PaperID_Presentation as PaperID_7_14_2_,
-        paper4_.id as id1_6_3_,
-        paper4_.nume as nume2_6_3_,
-        paper4_.statusID as statusID3_6_3_,
-        paper5_.id as id1_6_4_,
-        paper5_.nume as nume2_6_4_,
-        paper5_.statusID as statusID3_6_4_,
-        session6_.id as id1_11_5_,
-        session6_.conf_ID as conf_ID3_11_5_,
-        session6_.name as name2_11_5_,
-        session6_.sessionChairID as sessionC4_11_5_,
-        conference7_.conf_id as conf_id1_4_6_,
-        conference7_.biddingDeadline as biddingD2_4_6_,
-        conference7_.callForAbstractDeadline as callForA3_4_6_,
-        conference7_.callForProposalsDeadline as callForP4_4_6_,
-        conference7_.eventEndDate as eventEnd5_4_6_,
-        conference7_.eventStartDate as eventSta6_4_6_,
-        conference7_.name as name7_4_6_,
+        sessionsch0_.id as id1_9_8_,
+        sessionsch0_.PaperID as PaperID3_9_8_,
+        sessionsch0_.presentationTime as presenta2_9_8_,
+        sessionsch0_.sesionID as sesionID4_9_8_,
+        sessionsch0_.speakerID as speakerI5_9_8_,
+        paper1_.id as id1_5_0_,
+        paper1_.nume as nume2_5_0_,
+        paper1_.status as status3_5_0_,
+        uploadedfi2_.id as id1_11_1_,
+        uploadedfi2_.dateUploaded as dateUplo2_11_1_,
+        uploadedfi2_.filePath as filePath3_11_1_,
+        uploadedfi2_.nume as nume4_11_1_,
+        uploadedfi2_.PaperID_Abstract as PaperID_5_11_1_,
+        uploadedfi2_.PaperID_FullPaper as PaperID_6_11_1_,
+        uploadedfi2_.PaperID_Presentation as PaperID_7_11_1_,
+        paper3_.id as id1_5_2_,
+        paper3_.nume as nume2_5_2_,
+        paper3_.status as status3_5_2_,
+        paper4_.id as id1_5_3_,
+        paper4_.nume as nume2_5_3_,
+        paper4_.status as status3_5_3_,
+        session5_.id as id1_8_4_,
+        session5_.conf_ID as conf_ID3_8_4_,
+        session5_.name as name2_8_4_,
+        session5_.sessionChairID as sessionC4_8_4_,
+        conference6_.conf_id as conf_id1_3_5_,
+        conference6_.biddingDeadline as biddingD2_3_5_,
+        conference6_.callForAbstractDeadline as callForA3_3_5_,
+        conference6_.callForProposalsDeadline as callForP4_3_5_,
+        conference6_.eventEndDate as eventEnd5_3_5_,
+        conference6_.eventStartDate as eventSta6_3_5_,
+        conference6_.name as name7_3_5_,
+        appuser7_.id as id1_0_6_,
+        appuser7_.affiliation as affiliat2_0_6_,
+        appuser7_.email as email3_0_6_,
+        appuser7_.isCometeeMember as isComete4_0_6_,
+        appuser7_.isSuperUser as isSuperU5_0_6_,
+        appuser7_.name as name6_0_6_,
+        appuser7_.password as password7_0_6_,
+        appuser7_.username as username8_0_6_,
+        appuser7_.webpage as webpage9_0_6_,
         appuser8_.id as id1_0_7_,
         appuser8_.affiliation as affiliat2_0_7_,
         appuser8_.email as email3_0_7_,
@@ -540,55 +520,71 @@
         appuser8_.name as name6_0_7_,
         appuser8_.password as password7_0_7_,
         appuser8_.username as username8_0_7_,
-        appuser8_.webpage as webpage9_0_7_,
-        appuser9_.id as id1_0_8_,
-        appuser9_.affiliation as affiliat2_0_8_,
-        appuser9_.email as email3_0_8_,
-        appuser9_.isCometeeMember as isComete4_0_8_,
-        appuser9_.isSuperUser as isSuperU5_0_8_,
-        appuser9_.name as name6_0_8_,
-        appuser9_.password as password7_0_8_,
-        appuser9_.username as username8_0_8_,
-        appuser9_.webpage as webpage9_0_8_ 
+        appuser8_.webpage as webpage9_0_7_ 
     from
         SessionSchedule sessionsch0_ 
     left outer join
         Paper paper1_ 
             on sessionsch0_.PaperID=paper1_.id 
     left outer join
-        PaperStatus paperstatu2_ 
-            on paper1_.statusID=paperstatu2_.id 
+        UploadedFile uploadedfi2_ 
+            on paper1_.id=uploadedfi2_.PaperID_Presentation 
     left outer join
-        UploadedFile uploadedfi3_ 
-            on paper1_.id=uploadedfi3_.PaperID_Presentation 
+        Paper paper3_ 
+            on uploadedfi2_.PaperID_Abstract=paper3_.id 
     left outer join
         Paper paper4_ 
-            on uploadedfi3_.PaperID_Abstract=paper4_.id 
-    left outer join
-        Paper paper5_ 
-            on uploadedfi3_.PaperID_FullPaper=paper5_.id 
+            on uploadedfi2_.PaperID_FullPaper=paper4_.id 
     inner join
-        Sesion session6_ 
-            on sessionsch0_.sesionID=session6_.id 
+        Sesion session5_ 
+            on sessionsch0_.sesionID=session5_.id 
     left outer join
-        Conference conference7_ 
-            on session6_.conf_ID=conference7_.conf_id 
+        Conference conference6_ 
+            on session5_.conf_ID=conference6_.conf_id 
     left outer join
+        AppUser appuser7_ 
+            on session5_.sessionChairID=appuser7_.id 
+    inner join
         AppUser appuser8_ 
-            on session6_.sessionChairID=appuser8_.id 
-    inner join
-        AppUser appuser9_ 
-            on sessionsch0_.speakerID=appuser9_.id 
+            on sessionsch0_.speakerID=appuser8_.id 
     where
         sessionsch0_.PaperID=?
-2017-06-03 14:01:20.577 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [3]
-2017-06-03 14:01:20.600  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.603  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.606  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.611  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.615  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.619  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.623 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.523 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [3]
+2017-06-03 16:51:48.548  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.553  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.559  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.566  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.572 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        case 
+            when count(*)&gt;0 then 1 
+            else 0 
+        end as col_0_0_ 
+    from
+        AppUser appuser0_ 
+    where
+        appuser0_.username=?
+2017-06-03 16:51:48.573 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [RANDOM]
+2017-06-03 16:51:48.597  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.603  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.608  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.615  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.620 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        case 
+            when count(*)&gt;0 then 1 
+            else 0 
+        end as col_0_0_ 
+    from
+        AppUser appuser0_ 
+    where
+        appuser0_.username=?
+2017-06-03 16:51:48.620 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
+2017-06-03 16:51:48.638  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.644  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.650  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.657  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.663 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
         appuser0_.id as id1_0_,
         appuser0_.affiliation as affiliat2_0_,
@@ -603,20 +599,20 @@
         AppUser appuser0_ 
     where
         appuser0_.username=?
-2017-06-03 14:01:20.624 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
-2017-06-03 14:01:20.626 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.663 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
+2017-06-03 16:51:48.665 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
-        session0_.id as id1_11_2_,
-        session0_.conf_ID as conf_ID3_11_2_,
-        session0_.name as name2_11_2_,
-        session0_.sessionChairID as sessionC4_11_2_,
-        conference1_.conf_id as conf_id1_4_0_,
-        conference1_.biddingDeadline as biddingD2_4_0_,
-        conference1_.callForAbstractDeadline as callForA3_4_0_,
-        conference1_.callForProposalsDeadline as callForP4_4_0_,
-        conference1_.eventEndDate as eventEnd5_4_0_,
-        conference1_.eventStartDate as eventSta6_4_0_,
-        conference1_.name as name7_4_0_,
+        session0_.id as id1_8_2_,
+        session0_.conf_ID as conf_ID3_8_2_,
+        session0_.name as name2_8_2_,
+        session0_.sessionChairID as sessionC4_8_2_,
+        conference1_.conf_id as conf_id1_3_0_,
+        conference1_.biddingDeadline as biddingD2_3_0_,
+        conference1_.callForAbstractDeadline as callForA3_3_0_,
+        conference1_.callForProposalsDeadline as callForP4_3_0_,
+        conference1_.eventEndDate as eventEnd5_3_0_,
+        conference1_.eventStartDate as eventSta6_3_0_,
+        conference1_.name as name7_3_0_,
         appuser2_.id as id1_0_1_,
         appuser2_.affiliation as affiliat2_0_1_,
         appuser2_.email as email3_0_1_,
@@ -636,19 +632,17 @@
             on session0_.sessionChairID=appuser2_.id 
     where
         session0_.sessionChairID=?
-2017-06-03 14:01:20.627 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 14:01:20.650  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.654  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.658  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.664  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.668  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.674  WARN 12440 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
-2017-06-03 14:01:20.680 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.667 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 16:51:48.696  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.703  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.708  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.714  WARN 15568 --- [    Test worker] o.dbunit.dataset.AbstractTableMetaData   : Potential problem found: The configured data type factory 'class org.dbunit.dataset.datatype.DefaultDataTypeFactory' might cause problems with the current database 'Microsoft SQL Server' (e.g. some datatypes may not be supported properly). In rare cases you might see this message because the list of supported database products is incomplete (list=[derby]). If so please request a java-class update via the forums.If you are using your own IDataTypeFactory extending DefaultDataTypeFactory, ensure that you override getValidDbProducts() to specify the supported database products.
+2017-06-03 16:51:48.720 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
         bids1_.id as id1_2_,
-        bids1_.BidderID as BidderID2_2_,
-        bids1_.PaperID as PaperID3_2_,
-        bids1_.BidStatusID as BidStatu4_2_ 
+        bids1_.BidderID as BidderID3_2_,
+        bids1_.PaperID as PaperID4_2_,
+        bids1_.status as status2_2_ 
     from
         AppUser appuser0_ 
     inner join
@@ -657,14 +651,14 @@
     where
         appuser0_.username=? 
         and bids1_.PaperID=?
-2017-06-03 14:01:20.680 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
-2017-06-03 14:01:20.680 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [1]
-2017-06-03 14:01:20.685 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.720 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
+2017-06-03 16:51:48.720 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [1]
+2017-06-03 16:51:48.725 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
         bids1_.id as id1_2_,
-        bids1_.BidderID as BidderID2_2_,
-        bids1_.PaperID as PaperID3_2_,
-        bids1_.BidStatusID as BidStatu4_2_ 
+        bids1_.BidderID as BidderID3_2_,
+        bids1_.PaperID as PaperID4_2_,
+        bids1_.status as status2_2_ 
     from
         AppUser appuser0_ 
     inner join
@@ -673,14 +667,14 @@
     where
         appuser0_.username=? 
         and bids1_.PaperID=?
-2017-06-03 14:01:20.685 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
-2017-06-03 14:01:20.685 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [3]
-2017-06-03 14:01:20.687 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.726 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
+2017-06-03 16:51:48.726 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [3]
+2017-06-03 16:51:48.728 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
         bids1_.id as id1_2_,
-        bids1_.BidderID as BidderID2_2_,
-        bids1_.PaperID as PaperID3_2_,
-        bids1_.BidStatusID as BidStatu4_2_ 
+        bids1_.BidderID as BidderID3_2_,
+        bids1_.PaperID as PaperID4_2_,
+        bids1_.status as status2_2_ 
     from
         AppUser appuser0_ 
     inner join
@@ -689,14 +683,14 @@
     where
         appuser0_.username=? 
         and bids1_.PaperID=?
-2017-06-03 14:01:20.687 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [alex-trs]
-2017-06-03 14:01:20.687 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [2]
-2017-06-03 14:01:20.689 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.729 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [alex-trs]
+2017-06-03 16:51:48.729 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [2]
+2017-06-03 16:51:48.732 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
         bids1_.id as id1_2_,
-        bids1_.BidderID as BidderID2_2_,
-        bids1_.PaperID as PaperID3_2_,
-        bids1_.BidStatusID as BidStatu4_2_ 
+        bids1_.BidderID as BidderID3_2_,
+        bids1_.PaperID as PaperID4_2_,
+        bids1_.status as status2_2_ 
     from
         AppUser appuser0_ 
     inner join
@@ -705,9 +699,9 @@
     where
         appuser0_.username=? 
         and bids1_.PaperID=?
-2017-06-03 14:01:20.689 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
-2017-06-03 14:01:20.689 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [2]
-2017-06-03 14:01:20.691 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.732 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Alex-D-TC]
+2017-06-03 16:51:48.732 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [2]
+2017-06-03 16:51:48.737 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
         appuser0_.id as id1_0_0_,
         appuser0_.affiliation as affiliat2_0_0_,
@@ -718,17 +712,17 @@
         appuser0_.password as password7_0_0_,
         appuser0_.username as username8_0_0_,
         appuser0_.webpage as webpage9_0_0_,
-        session1_.id as id1_11_1_,
-        session1_.conf_ID as conf_ID3_11_1_,
-        session1_.name as name2_11_1_,
-        session1_.sessionChairID as sessionC4_11_1_,
-        conference2_.conf_id as conf_id1_4_2_,
-        conference2_.biddingDeadline as biddingD2_4_2_,
-        conference2_.callForAbstractDeadline as callForA3_4_2_,
-        conference2_.callForProposalsDeadline as callForP4_4_2_,
-        conference2_.eventEndDate as eventEnd5_4_2_,
-        conference2_.eventStartDate as eventSta6_4_2_,
-        conference2_.name as name7_4_2_ 
+        session1_.id as id1_8_1_,
+        session1_.conf_ID as conf_ID3_8_1_,
+        session1_.name as name2_8_1_,
+        session1_.sessionChairID as sessionC4_8_1_,
+        conference2_.conf_id as conf_id1_3_2_,
+        conference2_.biddingDeadline as biddingD2_3_2_,
+        conference2_.callForAbstractDeadline as callForA3_3_2_,
+        conference2_.callForProposalsDeadline as callForP4_3_2_,
+        conference2_.eventEndDate as eventEnd5_3_2_,
+        conference2_.eventStartDate as eventSta6_3_2_,
+        conference2_.name as name7_3_2_ 
     from
         AppUser appuser0_ 
     left outer join
@@ -739,40 +733,47 @@
             on session1_.conf_ID=conference2_.conf_id 
     where
         appuser0_.id=?
-2017-06-03 14:01:20.692 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 14:01:20.696 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.738 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 16:51:48.749 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
-        paper0_.id as id1_6_0_,
-        paper0_.nume as nume2_6_0_,
-        paper0_.statusID as statusID3_6_0_,
-        paperstatu1_.id as id1_7_1_,
-        paperstatu1_.nume as nume2_7_1_,
-        uploadedfi2_.id as id1_14_2_,
-        uploadedfi2_.dateUploaded as dateUplo2_14_2_,
-        uploadedfi2_.filePath as filePath3_14_2_,
-        uploadedfi2_.nume as nume4_14_2_,
-        uploadedfi2_.PaperID_Abstract as PaperID_5_14_2_,
-        uploadedfi2_.PaperID_FullPaper as PaperID_6_14_2_,
-        uploadedfi2_.PaperID_Presentation as PaperID_7_14_2_,
-        paper3_.id as id1_6_3_,
-        paper3_.nume as nume2_6_3_,
-        paper3_.statusID as statusID3_6_3_,
-        sessionsch4_.id as id1_12_4_,
-        sessionsch4_.PaperID as PaperID3_12_4_,
-        sessionsch4_.presentationTime as presenta2_12_4_,
-        sessionsch4_.sesionID as sesionID4_12_4_,
-        sessionsch4_.speakerID as speakerI5_12_4_,
-        session5_.id as id1_11_5_,
-        session5_.conf_ID as conf_ID3_11_5_,
-        session5_.name as name2_11_5_,
-        session5_.sessionChairID as sessionC4_11_5_,
-        conference6_.conf_id as conf_id1_4_6_,
-        conference6_.biddingDeadline as biddingD2_4_6_,
-        conference6_.callForAbstractDeadline as callForA3_4_6_,
-        conference6_.callForProposalsDeadline as callForP4_4_6_,
-        conference6_.eventEndDate as eventEnd5_4_6_,
-        conference6_.eventStartDate as eventSta6_4_6_,
-        conference6_.name as name7_4_6_,
+        paper0_.id as id1_5_0_,
+        paper0_.nume as nume2_5_0_,
+        paper0_.status as status3_5_0_,
+        uploadedfi1_.id as id1_11_1_,
+        uploadedfi1_.dateUploaded as dateUplo2_11_1_,
+        uploadedfi1_.filePath as filePath3_11_1_,
+        uploadedfi1_.nume as nume4_11_1_,
+        uploadedfi1_.PaperID_Abstract as PaperID_5_11_1_,
+        uploadedfi1_.PaperID_FullPaper as PaperID_6_11_1_,
+        uploadedfi1_.PaperID_Presentation as PaperID_7_11_1_,
+        paper2_.id as id1_5_2_,
+        paper2_.nume as nume2_5_2_,
+        paper2_.status as status3_5_2_,
+        sessionsch3_.id as id1_9_3_,
+        sessionsch3_.PaperID as PaperID3_9_3_,
+        sessionsch3_.presentationTime as presenta2_9_3_,
+        sessionsch3_.sesionID as sesionID4_9_3_,
+        sessionsch3_.speakerID as speakerI5_9_3_,
+        session4_.id as id1_8_4_,
+        session4_.conf_ID as conf_ID3_8_4_,
+        session4_.name as name2_8_4_,
+        session4_.sessionChairID as sessionC4_8_4_,
+        conference5_.conf_id as conf_id1_3_5_,
+        conference5_.biddingDeadline as biddingD2_3_5_,
+        conference5_.callForAbstractDeadline as callForA3_3_5_,
+        conference5_.callForProposalsDeadline as callForP4_3_5_,
+        conference5_.eventEndDate as eventEnd5_3_5_,
+        conference5_.eventStartDate as eventSta6_3_5_,
+        conference5_.name as name7_3_5_,
+        appuser6_.id as id1_0_6_,
+        appuser6_.affiliation as affiliat2_0_6_,
+        appuser6_.email as email3_0_6_,
+        appuser6_.isCometeeMember as isComete4_0_6_,
+        appuser6_.isSuperUser as isSuperU5_0_6_,
+        appuser6_.name as name6_0_6_,
+        appuser6_.password as password7_0_6_,
+        appuser6_.username as username8_0_6_,
+        appuser6_.webpage as webpage9_0_6_,
         appuser7_.id as id1_0_7_,
         appuser7_.affiliation as affiliat2_0_7_,
         appuser7_.email as email3_0_7_,
@@ -782,86 +783,81 @@
         appuser7_.password as password7_0_7_,
         appuser7_.username as username8_0_7_,
         appuser7_.webpage as webpage9_0_7_,
-        appuser8_.id as id1_0_8_,
-        appuser8_.affiliation as affiliat2_0_8_,
-        appuser8_.email as email3_0_8_,
-        appuser8_.isCometeeMember as isComete4_0_8_,
-        appuser8_.isSuperUser as isSuperU5_0_8_,
-        appuser8_.name as name6_0_8_,
-        appuser8_.password as password7_0_8_,
-        appuser8_.username as username8_0_8_,
-        appuser8_.webpage as webpage9_0_8_,
-        paper9_.id as id1_6_9_,
-        paper9_.nume as nume2_6_9_,
-        paper9_.statusID as statusID3_6_9_ 
+        paper8_.id as id1_5_8_,
+        paper8_.nume as nume2_5_8_,
+        paper8_.status as status3_5_8_ 
     from
         Paper paper0_ 
-    inner join
-        PaperStatus paperstatu1_ 
-            on paper0_.statusID=paperstatu1_.id 
     left outer join
-        UploadedFile uploadedfi2_ 
-            on paper0_.id=uploadedfi2_.PaperID_Presentation 
+        UploadedFile uploadedfi1_ 
+            on paper0_.id=uploadedfi1_.PaperID_Presentation 
     left outer join
-        Paper paper3_ 
-            on uploadedfi2_.PaperID_Abstract=paper3_.id 
+        Paper paper2_ 
+            on uploadedfi1_.PaperID_Abstract=paper2_.id 
     left outer join
-        SessionSchedule sessionsch4_ 
-            on paper3_.id=sessionsch4_.PaperID 
+        SessionSchedule sessionsch3_ 
+            on paper2_.id=sessionsch3_.PaperID 
     left outer join
-        Sesion session5_ 
-            on sessionsch4_.sesionID=session5_.id 
+        Sesion session4_ 
+            on sessionsch3_.sesionID=session4_.id 
     left outer join
-        Conference conference6_ 
-            on session5_.conf_ID=conference6_.conf_id 
+        Conference conference5_ 
+            on session4_.conf_ID=conference5_.conf_id 
+    left outer join
+        AppUser appuser6_ 
+            on session4_.sessionChairID=appuser6_.id 
     left outer join
         AppUser appuser7_ 
-            on session5_.sessionChairID=appuser7_.id 
+            on sessionsch3_.speakerID=appuser7_.id 
     left outer join
-        AppUser appuser8_ 
-            on sessionsch4_.speakerID=appuser8_.id 
-    left outer join
-        Paper paper9_ 
-            on uploadedfi2_.PaperID_FullPaper=paper9_.id 
+        Paper paper8_ 
+            on uploadedfi1_.PaperID_FullPaper=paper8_.id 
     where
         paper0_.id=?
-2017-06-03 14:01:20.697 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
-2017-06-03 14:01:20.708 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.751 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
+2017-06-03 16:51:48.769 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
-        sessionsch0_.id as id1_12_9_,
-        sessionsch0_.PaperID as PaperID3_12_9_,
-        sessionsch0_.presentationTime as presenta2_12_9_,
-        sessionsch0_.sesionID as sesionID4_12_9_,
-        sessionsch0_.speakerID as speakerI5_12_9_,
-        paper1_.id as id1_6_0_,
-        paper1_.nume as nume2_6_0_,
-        paper1_.statusID as statusID3_6_0_,
-        paperstatu2_.id as id1_7_1_,
-        paperstatu2_.nume as nume2_7_1_,
-        uploadedfi3_.id as id1_14_2_,
-        uploadedfi3_.dateUploaded as dateUplo2_14_2_,
-        uploadedfi3_.filePath as filePath3_14_2_,
-        uploadedfi3_.nume as nume4_14_2_,
-        uploadedfi3_.PaperID_Abstract as PaperID_5_14_2_,
-        uploadedfi3_.PaperID_FullPaper as PaperID_6_14_2_,
-        uploadedfi3_.PaperID_Presentation as PaperID_7_14_2_,
-        paper4_.id as id1_6_3_,
-        paper4_.nume as nume2_6_3_,
-        paper4_.statusID as statusID3_6_3_,
-        paper5_.id as id1_6_4_,
-        paper5_.nume as nume2_6_4_,
-        paper5_.statusID as statusID3_6_4_,
-        session6_.id as id1_11_5_,
-        session6_.conf_ID as conf_ID3_11_5_,
-        session6_.name as name2_11_5_,
-        session6_.sessionChairID as sessionC4_11_5_,
-        conference7_.conf_id as conf_id1_4_6_,
-        conference7_.biddingDeadline as biddingD2_4_6_,
-        conference7_.callForAbstractDeadline as callForA3_4_6_,
-        conference7_.callForProposalsDeadline as callForP4_4_6_,
-        conference7_.eventEndDate as eventEnd5_4_6_,
-        conference7_.eventStartDate as eventSta6_4_6_,
-        conference7_.name as name7_4_6_,
+        sessionsch0_.id as id1_9_8_,
+        sessionsch0_.PaperID as PaperID3_9_8_,
+        sessionsch0_.presentationTime as presenta2_9_8_,
+        sessionsch0_.sesionID as sesionID4_9_8_,
+        sessionsch0_.speakerID as speakerI5_9_8_,
+        paper1_.id as id1_5_0_,
+        paper1_.nume as nume2_5_0_,
+        paper1_.status as status3_5_0_,
+        uploadedfi2_.id as id1_11_1_,
+        uploadedfi2_.dateUploaded as dateUplo2_11_1_,
+        uploadedfi2_.filePath as filePath3_11_1_,
+        uploadedfi2_.nume as nume4_11_1_,
+        uploadedfi2_.PaperID_Abstract as PaperID_5_11_1_,
+        uploadedfi2_.PaperID_FullPaper as PaperID_6_11_1_,
+        uploadedfi2_.PaperID_Presentation as PaperID_7_11_1_,
+        paper3_.id as id1_5_2_,
+        paper3_.nume as nume2_5_2_,
+        paper3_.status as status3_5_2_,
+        paper4_.id as id1_5_3_,
+        paper4_.nume as nume2_5_3_,
+        paper4_.status as status3_5_3_,
+        session5_.id as id1_8_4_,
+        session5_.conf_ID as conf_ID3_8_4_,
+        session5_.name as name2_8_4_,
+        session5_.sessionChairID as sessionC4_8_4_,
+        conference6_.conf_id as conf_id1_3_5_,
+        conference6_.biddingDeadline as biddingD2_3_5_,
+        conference6_.callForAbstractDeadline as callForA3_3_5_,
+        conference6_.callForProposalsDeadline as callForP4_3_5_,
+        conference6_.eventEndDate as eventEnd5_3_5_,
+        conference6_.eventStartDate as eventSta6_3_5_,
+        conference6_.name as name7_3_5_,
+        appuser7_.id as id1_0_6_,
+        appuser7_.affiliation as affiliat2_0_6_,
+        appuser7_.email as email3_0_6_,
+        appuser7_.isCometeeMember as isComete4_0_6_,
+        appuser7_.isSuperUser as isSuperU5_0_6_,
+        appuser7_.name as name6_0_6_,
+        appuser7_.password as password7_0_6_,
+        appuser7_.username as username8_0_6_,
+        appuser7_.webpage as webpage9_0_6_,
         appuser8_.id as id1_0_7_,
         appuser8_.affiliation as affiliat2_0_7_,
         appuser8_.email as email3_0_7_,
@@ -870,63 +866,42 @@
         appuser8_.name as name6_0_7_,
         appuser8_.password as password7_0_7_,
         appuser8_.username as username8_0_7_,
-        appuser8_.webpage as webpage9_0_7_,
-        appuser9_.id as id1_0_8_,
-        appuser9_.affiliation as affiliat2_0_8_,
-        appuser9_.email as email3_0_8_,
-        appuser9_.isCometeeMember as isComete4_0_8_,
-        appuser9_.isSuperUser as isSuperU5_0_8_,
-        appuser9_.name as name6_0_8_,
-        appuser9_.password as password7_0_8_,
-        appuser9_.username as username8_0_8_,
-        appuser9_.webpage as webpage9_0_8_ 
+        appuser8_.webpage as webpage9_0_7_ 
     from
         SessionSchedule sessionsch0_ 
     left outer join
         Paper paper1_ 
             on sessionsch0_.PaperID=paper1_.id 
     left outer join
-        PaperStatus paperstatu2_ 
-            on paper1_.statusID=paperstatu2_.id 
+        UploadedFile uploadedfi2_ 
+            on paper1_.id=uploadedfi2_.PaperID_Presentation 
     left outer join
-        UploadedFile uploadedfi3_ 
-            on paper1_.id=uploadedfi3_.PaperID_Presentation 
+        Paper paper3_ 
+            on uploadedfi2_.PaperID_Abstract=paper3_.id 
     left outer join
         Paper paper4_ 
-            on uploadedfi3_.PaperID_Abstract=paper4_.id 
-    left outer join
-        Paper paper5_ 
-            on uploadedfi3_.PaperID_FullPaper=paper5_.id 
+            on uploadedfi2_.PaperID_FullPaper=paper4_.id 
     inner join
-        Sesion session6_ 
-            on sessionsch0_.sesionID=session6_.id 
+        Sesion session5_ 
+            on sessionsch0_.sesionID=session5_.id 
     left outer join
-        Conference conference7_ 
-            on session6_.conf_ID=conference7_.conf_id 
+        Conference conference6_ 
+            on session5_.conf_ID=conference6_.conf_id 
     left outer join
+        AppUser appuser7_ 
+            on session5_.sessionChairID=appuser7_.id 
+    inner join
         AppUser appuser8_ 
-            on session6_.sessionChairID=appuser8_.id 
-    inner join
-        AppUser appuser9_ 
-            on sessionsch0_.speakerID=appuser9_.id 
+            on sessionsch0_.speakerID=appuser8_.id 
     where
         sessionsch0_.PaperID=?
-2017-06-03 14:01:20.708 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
-2017-06-03 14:01:20.710 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
-    select
-        bidstatus0_.id as id1_3_0_,
-        bidstatus0_.nume as nume2_3_0_ 
-    from
-        BidStatus bidstatus0_ 
-    where
-        bidstatus0_.id=?
-2017-06-03 14:01:20.710 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 14:01:20.713 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.770 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
+2017-06-03 16:51:48.776 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
         bids1_.id as id1_2_,
-        bids1_.BidderID as BidderID2_2_,
-        bids1_.PaperID as PaperID3_2_,
-        bids1_.BidStatusID as BidStatu4_2_ 
+        bids1_.BidderID as BidderID3_2_,
+        bids1_.PaperID as PaperID4_2_,
+        bids1_.status as status2_2_ 
     from
         AppUser appuser0_ 
     inner join
@@ -935,9 +910,9 @@
     where
         appuser0_.username=? 
         and bids1_.PaperID=?
-2017-06-03 14:01:20.714 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [alex-trs]
-2017-06-03 14:01:20.714 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [1]
-2017-06-03 14:01:20.715 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.777 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [alex-trs]
+2017-06-03 16:51:48.777 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [1]
+2017-06-03 16:51:48.779 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
         appuser0_.id as id1_0_0_,
         appuser0_.affiliation as affiliat2_0_0_,
@@ -948,17 +923,17 @@
         appuser0_.password as password7_0_0_,
         appuser0_.username as username8_0_0_,
         appuser0_.webpage as webpage9_0_0_,
-        session1_.id as id1_11_1_,
-        session1_.conf_ID as conf_ID3_11_1_,
-        session1_.name as name2_11_1_,
-        session1_.sessionChairID as sessionC4_11_1_,
-        conference2_.conf_id as conf_id1_4_2_,
-        conference2_.biddingDeadline as biddingD2_4_2_,
-        conference2_.callForAbstractDeadline as callForA3_4_2_,
-        conference2_.callForProposalsDeadline as callForP4_4_2_,
-        conference2_.eventEndDate as eventEnd5_4_2_,
-        conference2_.eventStartDate as eventSta6_4_2_,
-        conference2_.name as name7_4_2_ 
+        session1_.id as id1_8_1_,
+        session1_.conf_ID as conf_ID3_8_1_,
+        session1_.name as name2_8_1_,
+        session1_.sessionChairID as sessionC4_8_1_,
+        conference2_.conf_id as conf_id1_3_2_,
+        conference2_.biddingDeadline as biddingD2_3_2_,
+        conference2_.callForAbstractDeadline as callForA3_3_2_,
+        conference2_.callForProposalsDeadline as callForP4_3_2_,
+        conference2_.eventEndDate as eventEnd5_3_2_,
+        conference2_.eventStartDate as eventSta6_3_2_,
+        conference2_.name as name7_3_2_ 
     from
         AppUser appuser0_ 
     left outer join
@@ -969,40 +944,47 @@
             on session1_.conf_ID=conference2_.conf_id 
     where
         appuser0_.id=?
-2017-06-03 14:01:20.715 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
-2017-06-03 14:01:20.717 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.779 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
+2017-06-03 16:51:48.782 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
-        paper0_.id as id1_6_0_,
-        paper0_.nume as nume2_6_0_,
-        paper0_.statusID as statusID3_6_0_,
-        paperstatu1_.id as id1_7_1_,
-        paperstatu1_.nume as nume2_7_1_,
-        uploadedfi2_.id as id1_14_2_,
-        uploadedfi2_.dateUploaded as dateUplo2_14_2_,
-        uploadedfi2_.filePath as filePath3_14_2_,
-        uploadedfi2_.nume as nume4_14_2_,
-        uploadedfi2_.PaperID_Abstract as PaperID_5_14_2_,
-        uploadedfi2_.PaperID_FullPaper as PaperID_6_14_2_,
-        uploadedfi2_.PaperID_Presentation as PaperID_7_14_2_,
-        paper3_.id as id1_6_3_,
-        paper3_.nume as nume2_6_3_,
-        paper3_.statusID as statusID3_6_3_,
-        sessionsch4_.id as id1_12_4_,
-        sessionsch4_.PaperID as PaperID3_12_4_,
-        sessionsch4_.presentationTime as presenta2_12_4_,
-        sessionsch4_.sesionID as sesionID4_12_4_,
-        sessionsch4_.speakerID as speakerI5_12_4_,
-        session5_.id as id1_11_5_,
-        session5_.conf_ID as conf_ID3_11_5_,
-        session5_.name as name2_11_5_,
-        session5_.sessionChairID as sessionC4_11_5_,
-        conference6_.conf_id as conf_id1_4_6_,
-        conference6_.biddingDeadline as biddingD2_4_6_,
-        conference6_.callForAbstractDeadline as callForA3_4_6_,
-        conference6_.callForProposalsDeadline as callForP4_4_6_,
-        conference6_.eventEndDate as eventEnd5_4_6_,
-        conference6_.eventStartDate as eventSta6_4_6_,
-        conference6_.name as name7_4_6_,
+        paper0_.id as id1_5_0_,
+        paper0_.nume as nume2_5_0_,
+        paper0_.status as status3_5_0_,
+        uploadedfi1_.id as id1_11_1_,
+        uploadedfi1_.dateUploaded as dateUplo2_11_1_,
+        uploadedfi1_.filePath as filePath3_11_1_,
+        uploadedfi1_.nume as nume4_11_1_,
+        uploadedfi1_.PaperID_Abstract as PaperID_5_11_1_,
+        uploadedfi1_.PaperID_FullPaper as PaperID_6_11_1_,
+        uploadedfi1_.PaperID_Presentation as PaperID_7_11_1_,
+        paper2_.id as id1_5_2_,
+        paper2_.nume as nume2_5_2_,
+        paper2_.status as status3_5_2_,
+        sessionsch3_.id as id1_9_3_,
+        sessionsch3_.PaperID as PaperID3_9_3_,
+        sessionsch3_.presentationTime as presenta2_9_3_,
+        sessionsch3_.sesionID as sesionID4_9_3_,
+        sessionsch3_.speakerID as speakerI5_9_3_,
+        session4_.id as id1_8_4_,
+        session4_.conf_ID as conf_ID3_8_4_,
+        session4_.name as name2_8_4_,
+        session4_.sessionChairID as sessionC4_8_4_,
+        conference5_.conf_id as conf_id1_3_5_,
+        conference5_.biddingDeadline as biddingD2_3_5_,
+        conference5_.callForAbstractDeadline as callForA3_3_5_,
+        conference5_.callForProposalsDeadline as callForP4_3_5_,
+        conference5_.eventEndDate as eventEnd5_3_5_,
+        conference5_.eventStartDate as eventSta6_3_5_,
+        conference5_.name as name7_3_5_,
+        appuser6_.id as id1_0_6_,
+        appuser6_.affiliation as affiliat2_0_6_,
+        appuser6_.email as email3_0_6_,
+        appuser6_.isCometeeMember as isComete4_0_6_,
+        appuser6_.isSuperUser as isSuperU5_0_6_,
+        appuser6_.name as name6_0_6_,
+        appuser6_.password as password7_0_6_,
+        appuser6_.username as username8_0_6_,
+        appuser6_.webpage as webpage9_0_6_,
         appuser7_.id as id1_0_7_,
         appuser7_.affiliation as affiliat2_0_7_,
         appuser7_.email as email3_0_7_,
@@ -1012,86 +994,81 @@
         appuser7_.password as password7_0_7_,
         appuser7_.username as username8_0_7_,
         appuser7_.webpage as webpage9_0_7_,
-        appuser8_.id as id1_0_8_,
-        appuser8_.affiliation as affiliat2_0_8_,
-        appuser8_.email as email3_0_8_,
-        appuser8_.isCometeeMember as isComete4_0_8_,
-        appuser8_.isSuperUser as isSuperU5_0_8_,
-        appuser8_.name as name6_0_8_,
-        appuser8_.password as password7_0_8_,
-        appuser8_.username as username8_0_8_,
-        appuser8_.webpage as webpage9_0_8_,
-        paper9_.id as id1_6_9_,
-        paper9_.nume as nume2_6_9_,
-        paper9_.statusID as statusID3_6_9_ 
+        paper8_.id as id1_5_8_,
+        paper8_.nume as nume2_5_8_,
+        paper8_.status as status3_5_8_ 
     from
         Paper paper0_ 
-    inner join
-        PaperStatus paperstatu1_ 
-            on paper0_.statusID=paperstatu1_.id 
     left outer join
-        UploadedFile uploadedfi2_ 
-            on paper0_.id=uploadedfi2_.PaperID_Presentation 
+        UploadedFile uploadedfi1_ 
+            on paper0_.id=uploadedfi1_.PaperID_Presentation 
     left outer join
-        Paper paper3_ 
-            on uploadedfi2_.PaperID_Abstract=paper3_.id 
+        Paper paper2_ 
+            on uploadedfi1_.PaperID_Abstract=paper2_.id 
     left outer join
-        SessionSchedule sessionsch4_ 
-            on paper3_.id=sessionsch4_.PaperID 
+        SessionSchedule sessionsch3_ 
+            on paper2_.id=sessionsch3_.PaperID 
     left outer join
-        Sesion session5_ 
-            on sessionsch4_.sesionID=session5_.id 
+        Sesion session4_ 
+            on sessionsch3_.sesionID=session4_.id 
     left outer join
-        Conference conference6_ 
-            on session5_.conf_ID=conference6_.conf_id 
+        Conference conference5_ 
+            on session4_.conf_ID=conference5_.conf_id 
+    left outer join
+        AppUser appuser6_ 
+            on session4_.sessionChairID=appuser6_.id 
     left outer join
         AppUser appuser7_ 
-            on session5_.sessionChairID=appuser7_.id 
+            on sessionsch3_.speakerID=appuser7_.id 
     left outer join
-        AppUser appuser8_ 
-            on sessionsch4_.speakerID=appuser8_.id 
-    left outer join
-        Paper paper9_ 
-            on uploadedfi2_.PaperID_FullPaper=paper9_.id 
+        Paper paper8_ 
+            on uploadedfi1_.PaperID_FullPaper=paper8_.id 
     where
         paper0_.id=?
-2017-06-03 14:01:20.718 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 14:01:20.720 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.783 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 16:51:48.787 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
-        sessionsch0_.id as id1_12_9_,
-        sessionsch0_.PaperID as PaperID3_12_9_,
-        sessionsch0_.presentationTime as presenta2_12_9_,
-        sessionsch0_.sesionID as sesionID4_12_9_,
-        sessionsch0_.speakerID as speakerI5_12_9_,
-        paper1_.id as id1_6_0_,
-        paper1_.nume as nume2_6_0_,
-        paper1_.statusID as statusID3_6_0_,
-        paperstatu2_.id as id1_7_1_,
-        paperstatu2_.nume as nume2_7_1_,
-        uploadedfi3_.id as id1_14_2_,
-        uploadedfi3_.dateUploaded as dateUplo2_14_2_,
-        uploadedfi3_.filePath as filePath3_14_2_,
-        uploadedfi3_.nume as nume4_14_2_,
-        uploadedfi3_.PaperID_Abstract as PaperID_5_14_2_,
-        uploadedfi3_.PaperID_FullPaper as PaperID_6_14_2_,
-        uploadedfi3_.PaperID_Presentation as PaperID_7_14_2_,
-        paper4_.id as id1_6_3_,
-        paper4_.nume as nume2_6_3_,
-        paper4_.statusID as statusID3_6_3_,
-        paper5_.id as id1_6_4_,
-        paper5_.nume as nume2_6_4_,
-        paper5_.statusID as statusID3_6_4_,
-        session6_.id as id1_11_5_,
-        session6_.conf_ID as conf_ID3_11_5_,
-        session6_.name as name2_11_5_,
-        session6_.sessionChairID as sessionC4_11_5_,
-        conference7_.conf_id as conf_id1_4_6_,
-        conference7_.biddingDeadline as biddingD2_4_6_,
-        conference7_.callForAbstractDeadline as callForA3_4_6_,
-        conference7_.callForProposalsDeadline as callForP4_4_6_,
-        conference7_.eventEndDate as eventEnd5_4_6_,
-        conference7_.eventStartDate as eventSta6_4_6_,
-        conference7_.name as name7_4_6_,
+        sessionsch0_.id as id1_9_8_,
+        sessionsch0_.PaperID as PaperID3_9_8_,
+        sessionsch0_.presentationTime as presenta2_9_8_,
+        sessionsch0_.sesionID as sesionID4_9_8_,
+        sessionsch0_.speakerID as speakerI5_9_8_,
+        paper1_.id as id1_5_0_,
+        paper1_.nume as nume2_5_0_,
+        paper1_.status as status3_5_0_,
+        uploadedfi2_.id as id1_11_1_,
+        uploadedfi2_.dateUploaded as dateUplo2_11_1_,
+        uploadedfi2_.filePath as filePath3_11_1_,
+        uploadedfi2_.nume as nume4_11_1_,
+        uploadedfi2_.PaperID_Abstract as PaperID_5_11_1_,
+        uploadedfi2_.PaperID_FullPaper as PaperID_6_11_1_,
+        uploadedfi2_.PaperID_Presentation as PaperID_7_11_1_,
+        paper3_.id as id1_5_2_,
+        paper3_.nume as nume2_5_2_,
+        paper3_.status as status3_5_2_,
+        paper4_.id as id1_5_3_,
+        paper4_.nume as nume2_5_3_,
+        paper4_.status as status3_5_3_,
+        session5_.id as id1_8_4_,
+        session5_.conf_ID as conf_ID3_8_4_,
+        session5_.name as name2_8_4_,
+        session5_.sessionChairID as sessionC4_8_4_,
+        conference6_.conf_id as conf_id1_3_5_,
+        conference6_.biddingDeadline as biddingD2_3_5_,
+        conference6_.callForAbstractDeadline as callForA3_3_5_,
+        conference6_.callForProposalsDeadline as callForP4_3_5_,
+        conference6_.eventEndDate as eventEnd5_3_5_,
+        conference6_.eventStartDate as eventSta6_3_5_,
+        conference6_.name as name7_3_5_,
+        appuser7_.id as id1_0_6_,
+        appuser7_.affiliation as affiliat2_0_6_,
+        appuser7_.email as email3_0_6_,
+        appuser7_.isCometeeMember as isComete4_0_6_,
+        appuser7_.isSuperUser as isSuperU5_0_6_,
+        appuser7_.name as name6_0_6_,
+        appuser7_.password as password7_0_6_,
+        appuser7_.username as username8_0_6_,
+        appuser7_.webpage as webpage9_0_6_,
         appuser8_.id as id1_0_7_,
         appuser8_.affiliation as affiliat2_0_7_,
         appuser8_.email as email3_0_7_,
@@ -1100,63 +1077,42 @@
         appuser8_.name as name6_0_7_,
         appuser8_.password as password7_0_7_,
         appuser8_.username as username8_0_7_,
-        appuser8_.webpage as webpage9_0_7_,
-        appuser9_.id as id1_0_8_,
-        appuser9_.affiliation as affiliat2_0_8_,
-        appuser9_.email as email3_0_8_,
-        appuser9_.isCometeeMember as isComete4_0_8_,
-        appuser9_.isSuperUser as isSuperU5_0_8_,
-        appuser9_.name as name6_0_8_,
-        appuser9_.password as password7_0_8_,
-        appuser9_.username as username8_0_8_,
-        appuser9_.webpage as webpage9_0_8_ 
+        appuser8_.webpage as webpage9_0_7_ 
     from
         SessionSchedule sessionsch0_ 
     left outer join
         Paper paper1_ 
             on sessionsch0_.PaperID=paper1_.id 
     left outer join
-        PaperStatus paperstatu2_ 
-            on paper1_.statusID=paperstatu2_.id 
+        UploadedFile uploadedfi2_ 
+            on paper1_.id=uploadedfi2_.PaperID_Presentation 
     left outer join
-        UploadedFile uploadedfi3_ 
-            on paper1_.id=uploadedfi3_.PaperID_Presentation 
+        Paper paper3_ 
+            on uploadedfi2_.PaperID_Abstract=paper3_.id 
     left outer join
         Paper paper4_ 
-            on uploadedfi3_.PaperID_Abstract=paper4_.id 
-    left outer join
-        Paper paper5_ 
-            on uploadedfi3_.PaperID_FullPaper=paper5_.id 
+            on uploadedfi2_.PaperID_FullPaper=paper4_.id 
     inner join
-        Sesion session6_ 
-            on sessionsch0_.sesionID=session6_.id 
+        Sesion session5_ 
+            on sessionsch0_.sesionID=session5_.id 
     left outer join
-        Conference conference7_ 
-            on session6_.conf_ID=conference7_.conf_id 
+        Conference conference6_ 
+            on session5_.conf_ID=conference6_.conf_id 
     left outer join
+        AppUser appuser7_ 
+            on session5_.sessionChairID=appuser7_.id 
+    inner join
         AppUser appuser8_ 
-            on session6_.sessionChairID=appuser8_.id 
-    inner join
-        AppUser appuser9_ 
-            on sessionsch0_.speakerID=appuser9_.id 
+            on sessionsch0_.speakerID=appuser8_.id 
     where
         sessionsch0_.PaperID=?
-2017-06-03 14:01:20.721 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 14:01:20.723 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
-    select
-        bidstatus0_.id as id1_3_0_,
-        bidstatus0_.nume as nume2_3_0_ 
-    from
-        BidStatus bidstatus0_ 
-    where
-        bidstatus0_.id=?
-2017-06-03 14:01:20.723 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 14:01:20.726 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.787 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
+2017-06-03 16:51:48.793 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
         bids1_.id as id1_2_,
-        bids1_.BidderID as BidderID2_2_,
-        bids1_.PaperID as PaperID3_2_,
-        bids1_.BidStatusID as BidStatu4_2_ 
+        bids1_.BidderID as BidderID3_2_,
+        bids1_.PaperID as PaperID4_2_,
+        bids1_.status as status2_2_ 
     from
         AppUser appuser0_ 
     inner join
@@ -1165,9 +1121,9 @@
     where
         appuser0_.username=? 
         and bids1_.PaperID=?
-2017-06-03 14:01:20.726 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [alex-trs]
-2017-06-03 14:01:20.726 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [3]
-2017-06-03 14:01:20.727 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.797 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [alex-trs]
+2017-06-03 16:51:48.797 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [INTEGER] - [3]
+2017-06-03 16:51:48.802 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
         appuser0_.id as id1_0_0_,
         appuser0_.affiliation as affiliat2_0_0_,
@@ -1178,17 +1134,17 @@
         appuser0_.password as password7_0_0_,
         appuser0_.username as username8_0_0_,
         appuser0_.webpage as webpage9_0_0_,
-        session1_.id as id1_11_1_,
-        session1_.conf_ID as conf_ID3_11_1_,
-        session1_.name as name2_11_1_,
-        session1_.sessionChairID as sessionC4_11_1_,
-        conference2_.conf_id as conf_id1_4_2_,
-        conference2_.biddingDeadline as biddingD2_4_2_,
-        conference2_.callForAbstractDeadline as callForA3_4_2_,
-        conference2_.callForProposalsDeadline as callForP4_4_2_,
-        conference2_.eventEndDate as eventEnd5_4_2_,
-        conference2_.eventStartDate as eventSta6_4_2_,
-        conference2_.name as name7_4_2_ 
+        session1_.id as id1_8_1_,
+        session1_.conf_ID as conf_ID3_8_1_,
+        session1_.name as name2_8_1_,
+        session1_.sessionChairID as sessionC4_8_1_,
+        conference2_.conf_id as conf_id1_3_2_,
+        conference2_.biddingDeadline as biddingD2_3_2_,
+        conference2_.callForAbstractDeadline as callForA3_3_2_,
+        conference2_.callForProposalsDeadline as callForP4_3_2_,
+        conference2_.eventEndDate as eventEnd5_3_2_,
+        conference2_.eventStartDate as eventSta6_3_2_,
+        conference2_.name as name7_3_2_ 
     from
         AppUser appuser0_ 
     left outer join
@@ -1199,40 +1155,47 @@
             on session1_.conf_ID=conference2_.conf_id 
     where
         appuser0_.id=?
-2017-06-03 14:01:20.728 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
-2017-06-03 14:01:20.730 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.803 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [2]
+2017-06-03 16:51:48.806 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
-        paper0_.id as id1_6_0_,
-        paper0_.nume as nume2_6_0_,
-        paper0_.statusID as statusID3_6_0_,
-        paperstatu1_.id as id1_7_1_,
-        paperstatu1_.nume as nume2_7_1_,
-        uploadedfi2_.id as id1_14_2_,
-        uploadedfi2_.dateUploaded as dateUplo2_14_2_,
-        uploadedfi2_.filePath as filePath3_14_2_,
-        uploadedfi2_.nume as nume4_14_2_,
-        uploadedfi2_.PaperID_Abstract as PaperID_5_14_2_,
-        uploadedfi2_.PaperID_FullPaper as PaperID_6_14_2_,
-        uploadedfi2_.PaperID_Presentation as PaperID_7_14_2_,
-        paper3_.id as id1_6_3_,
-        paper3_.nume as nume2_6_3_,
-        paper3_.statusID as statusID3_6_3_,
-        sessionsch4_.id as id1_12_4_,
-        sessionsch4_.PaperID as PaperID3_12_4_,
-        sessionsch4_.presentationTime as presenta2_12_4_,
-        sessionsch4_.sesionID as sesionID4_12_4_,
-        sessionsch4_.speakerID as speakerI5_12_4_,
-        session5_.id as id1_11_5_,
-        session5_.conf_ID as conf_ID3_11_5_,
-        session5_.name as name2_11_5_,
-        session5_.sessionChairID as sessionC4_11_5_,
-        conference6_.conf_id as conf_id1_4_6_,
-        conference6_.biddingDeadline as biddingD2_4_6_,
-        conference6_.callForAbstractDeadline as callForA3_4_6_,
-        conference6_.callForProposalsDeadline as callForP4_4_6_,
-        conference6_.eventEndDate as eventEnd5_4_6_,
-        conference6_.eventStartDate as eventSta6_4_6_,
-        conference6_.name as name7_4_6_,
+        paper0_.id as id1_5_0_,
+        paper0_.nume as nume2_5_0_,
+        paper0_.status as status3_5_0_,
+        uploadedfi1_.id as id1_11_1_,
+        uploadedfi1_.dateUploaded as dateUplo2_11_1_,
+        uploadedfi1_.filePath as filePath3_11_1_,
+        uploadedfi1_.nume as nume4_11_1_,
+        uploadedfi1_.PaperID_Abstract as PaperID_5_11_1_,
+        uploadedfi1_.PaperID_FullPaper as PaperID_6_11_1_,
+        uploadedfi1_.PaperID_Presentation as PaperID_7_11_1_,
+        paper2_.id as id1_5_2_,
+        paper2_.nume as nume2_5_2_,
+        paper2_.status as status3_5_2_,
+        sessionsch3_.id as id1_9_3_,
+        sessionsch3_.PaperID as PaperID3_9_3_,
+        sessionsch3_.presentationTime as presenta2_9_3_,
+        sessionsch3_.sesionID as sesionID4_9_3_,
+        sessionsch3_.speakerID as speakerI5_9_3_,
+        session4_.id as id1_8_4_,
+        session4_.conf_ID as conf_ID3_8_4_,
+        session4_.name as name2_8_4_,
+        session4_.sessionChairID as sessionC4_8_4_,
+        conference5_.conf_id as conf_id1_3_5_,
+        conference5_.biddingDeadline as biddingD2_3_5_,
+        conference5_.callForAbstractDeadline as callForA3_3_5_,
+        conference5_.callForProposalsDeadline as callForP4_3_5_,
+        conference5_.eventEndDate as eventEnd5_3_5_,
+        conference5_.eventStartDate as eventSta6_3_5_,
+        conference5_.name as name7_3_5_,
+        appuser6_.id as id1_0_6_,
+        appuser6_.affiliation as affiliat2_0_6_,
+        appuser6_.email as email3_0_6_,
+        appuser6_.isCometeeMember as isComete4_0_6_,
+        appuser6_.isSuperUser as isSuperU5_0_6_,
+        appuser6_.name as name6_0_6_,
+        appuser6_.password as password7_0_6_,
+        appuser6_.username as username8_0_6_,
+        appuser6_.webpage as webpage9_0_6_,
         appuser7_.id as id1_0_7_,
         appuser7_.affiliation as affiliat2_0_7_,
         appuser7_.email as email3_0_7_,
@@ -1242,86 +1205,81 @@
         appuser7_.password as password7_0_7_,
         appuser7_.username as username8_0_7_,
         appuser7_.webpage as webpage9_0_7_,
-        appuser8_.id as id1_0_8_,
-        appuser8_.affiliation as affiliat2_0_8_,
-        appuser8_.email as email3_0_8_,
-        appuser8_.isCometeeMember as isComete4_0_8_,
-        appuser8_.isSuperUser as isSuperU5_0_8_,
-        appuser8_.name as name6_0_8_,
-        appuser8_.password as password7_0_8_,
-        appuser8_.username as username8_0_8_,
-        appuser8_.webpage as webpage9_0_8_,
-        paper9_.id as id1_6_9_,
-        paper9_.nume as nume2_6_9_,
-        paper9_.statusID as statusID3_6_9_ 
+        paper8_.id as id1_5_8_,
+        paper8_.nume as nume2_5_8_,
+        paper8_.status as status3_5_8_ 
     from
         Paper paper0_ 
-    inner join
-        PaperStatus paperstatu1_ 
-            on paper0_.statusID=paperstatu1_.id 
     left outer join
-        UploadedFile uploadedfi2_ 
-            on paper0_.id=uploadedfi2_.PaperID_Presentation 
+        UploadedFile uploadedfi1_ 
+            on paper0_.id=uploadedfi1_.PaperID_Presentation 
     left outer join
-        Paper paper3_ 
-            on uploadedfi2_.PaperID_Abstract=paper3_.id 
+        Paper paper2_ 
+            on uploadedfi1_.PaperID_Abstract=paper2_.id 
     left outer join
-        SessionSchedule sessionsch4_ 
-            on paper3_.id=sessionsch4_.PaperID 
+        SessionSchedule sessionsch3_ 
+            on paper2_.id=sessionsch3_.PaperID 
     left outer join
-        Sesion session5_ 
-            on sessionsch4_.sesionID=session5_.id 
+        Sesion session4_ 
+            on sessionsch3_.sesionID=session4_.id 
     left outer join
-        Conference conference6_ 
-            on session5_.conf_ID=conference6_.conf_id 
+        Conference conference5_ 
+            on session4_.conf_ID=conference5_.conf_id 
+    left outer join
+        AppUser appuser6_ 
+            on session4_.sessionChairID=appuser6_.id 
     left outer join
         AppUser appuser7_ 
-            on session5_.sessionChairID=appuser7_.id 
+            on sessionsch3_.speakerID=appuser7_.id 
     left outer join
-        AppUser appuser8_ 
-            on sessionsch4_.speakerID=appuser8_.id 
-    left outer join
-        Paper paper9_ 
-            on uploadedfi2_.PaperID_FullPaper=paper9_.id 
+        Paper paper8_ 
+            on uploadedfi1_.PaperID_FullPaper=paper8_.id 
     where
         paper0_.id=?
-2017-06-03 14:01:20.731 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [3]
-2017-06-03 14:01:20.735 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
+2017-06-03 16:51:48.807 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [3]
+2017-06-03 16:51:48.809 DEBUG 15568 --- [    Test worker] org.hibernate.SQL                        : 
     select
-        sessionsch0_.id as id1_12_9_,
-        sessionsch0_.PaperID as PaperID3_12_9_,
-        sessionsch0_.presentationTime as presenta2_12_9_,
-        sessionsch0_.sesionID as sesionID4_12_9_,
-        sessionsch0_.speakerID as speakerI5_12_9_,
-        paper1_.id as id1_6_0_,
-        paper1_.nume as nume2_6_0_,
-        paper1_.statusID as statusID3_6_0_,
-        paperstatu2_.id as id1_7_1_,
-        paperstatu2_.nume as nume2_7_1_,
-        uploadedfi3_.id as id1_14_2_,
-        uploadedfi3_.dateUploaded as dateUplo2_14_2_,
-        uploadedfi3_.filePath as filePath3_14_2_,
-        uploadedfi3_.nume as nume4_14_2_,
-        uploadedfi3_.PaperID_Abstract as PaperID_5_14_2_,
-        uploadedfi3_.PaperID_FullPaper as PaperID_6_14_2_,
-        uploadedfi3_.PaperID_Presentation as PaperID_7_14_2_,
-        paper4_.id as id1_6_3_,
-        paper4_.nume as nume2_6_3_,
-        paper4_.statusID as statusID3_6_3_,
-        paper5_.id as id1_6_4_,
-        paper5_.nume as nume2_6_4_,
-        paper5_.statusID as statusID3_6_4_,
-        session6_.id as id1_11_5_,
-        session6_.conf_ID as conf_ID3_11_5_,
-        session6_.name as name2_11_5_,
-        session6_.sessionChairID as sessionC4_11_5_,
-        conference7_.conf_id as conf_id1_4_6_,
-        conference7_.biddingDeadline as biddingD2_4_6_,
-        conference7_.callForAbstractDeadline as callForA3_4_6_,
-        conference7_.callForProposalsDeadline as callForP4_4_6_,
-        conference7_.eventEndDate as eventEnd5_4_6_,
-        conference7_.eventStartDate as eventSta6_4_6_,
-        conference7_.name as name7_4_6_,
+        sessionsch0_.id as id1_9_8_,
+        sessionsch0_.PaperID as PaperID3_9_8_,
+        sessionsch0_.presentationTime as presenta2_9_8_,
+        sessionsch0_.sesionID as sesionID4_9_8_,
+        sessionsch0_.speakerID as speakerI5_9_8_,
+        paper1_.id as id1_5_0_,
+        paper1_.nume as nume2_5_0_,
+        paper1_.status as status3_5_0_,
+        uploadedfi2_.id as id1_11_1_,
+        uploadedfi2_.dateUploaded as dateUplo2_11_1_,
+        uploadedfi2_.filePath as filePath3_11_1_,
+        uploadedfi2_.nume as nume4_11_1_,
+        uploadedfi2_.PaperID_Abstract as PaperID_5_11_1_,
+        uploadedfi2_.PaperID_FullPaper as PaperID_6_11_1_,
+        uploadedfi2_.PaperID_Presentation as PaperID_7_11_1_,
+        paper3_.id as id1_5_2_,
+        paper3_.nume as nume2_5_2_,
+        paper3_.status as status3_5_2_,
+        paper4_.id as id1_5_3_,
+        paper4_.nume as nume2_5_3_,
+        paper4_.status as status3_5_3_,
+        session5_.id as id1_8_4_,
+        session5_.conf_ID as conf_ID3_8_4_,
+        session5_.name as name2_8_4_,
+        session5_.sessionChairID as sessionC4_8_4_,
+        conference6_.conf_id as conf_id1_3_5_,
+        conference6_.biddingDeadline as biddingD2_3_5_,
+        conference6_.callForAbstractDeadline as callForA3_3_5_,
+        conference6_.callForProposalsDeadline as callForP4_3_5_,
+        conference6_.eventEndDate as eventEnd5_3_5_,
+        conference6_.eventStartDate as eventSta6_3_5_,
+        conference6_.name as name7_3_5_,
+        appuser7_.id as id1_0_6_,
+        appuser7_.affiliation as affiliat2_0_6_,
+        appuser7_.email as email3_0_6_,
+        appuser7_.isCometeeMember as isComete4_0_6_,
+        appuser7_.isSuperUser as isSuperU5_0_6_,
+        appuser7_.name as name6_0_6_,
+        appuser7_.password as password7_0_6_,
+        appuser7_.username as username8_0_6_,
+        appuser7_.webpage as webpage9_0_6_,
         appuser8_.id as id1_0_7_,
         appuser8_.affiliation as affiliat2_0_7_,
         appuser8_.email as email3_0_7_,
@@ -1330,61 +1288,40 @@
         appuser8_.name as name6_0_7_,
         appuser8_.password as password7_0_7_,
         appuser8_.username as username8_0_7_,
-        appuser8_.webpage as webpage9_0_7_,
-        appuser9_.id as id1_0_8_,
-        appuser9_.affiliation as affiliat2_0_8_,
-        appuser9_.email as email3_0_8_,
-        appuser9_.isCometeeMember as isComete4_0_8_,
-        appuser9_.isSuperUser as isSuperU5_0_8_,
-        appuser9_.name as name6_0_8_,
-        appuser9_.password as password7_0_8_,
-        appuser9_.username as username8_0_8_,
-        appuser9_.webpage as webpage9_0_8_ 
+        appuser8_.webpage as webpage9_0_7_ 
     from
         SessionSchedule sessionsch0_ 
     left outer join
         Paper paper1_ 
             on sessionsch0_.PaperID=paper1_.id 
     left outer join
-        PaperStatus paperstatu2_ 
-            on paper1_.statusID=paperstatu2_.id 
+        UploadedFile uploadedfi2_ 
+            on paper1_.id=uploadedfi2_.PaperID_Presentation 
     left outer join
-        UploadedFile uploadedfi3_ 
-            on paper1_.id=uploadedfi3_.PaperID_Presentation 
+        Paper paper3_ 
+            on uploadedfi2_.PaperID_Abstract=paper3_.id 
     left outer join
         Paper paper4_ 
-            on uploadedfi3_.PaperID_Abstract=paper4_.id 
-    left outer join
-        Paper paper5_ 
-            on uploadedfi3_.PaperID_FullPaper=paper5_.id 
+            on uploadedfi2_.PaperID_FullPaper=paper4_.id 
     inner join
-        Sesion session6_ 
-            on sessionsch0_.sesionID=session6_.id 
+        Sesion session5_ 
+            on sessionsch0_.sesionID=session5_.id 
     left outer join
-        Conference conference7_ 
-            on session6_.conf_ID=conference7_.conf_id 
+        Conference conference6_ 
+            on session5_.conf_ID=conference6_.conf_id 
     left outer join
+        AppUser appuser7_ 
+            on session5_.sessionChairID=appuser7_.id 
+    inner join
         AppUser appuser8_ 
-            on session6_.sessionChairID=appuser8_.id 
-    inner join
-        AppUser appuser9_ 
-            on sessionsch0_.speakerID=appuser9_.id 
+            on sessionsch0_.speakerID=appuser8_.id 
     where
         sessionsch0_.PaperID=?
-2017-06-03 14:01:20.736 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [3]
-2017-06-03 14:01:20.739 DEBUG 12440 --- [    Test worker] org.hibernate.SQL                        : 
-    select
-        bidstatus0_.id as id1_3_0_,
-        bidstatus0_.nume as nume2_3_0_ 
-    from
-        BidStatus bidstatus0_ 
-    where
-        bidstatus0_.id=?
-2017-06-03 14:01:20.740 TRACE 12440 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [1]
-2017-06-03 14:01:20.752  INFO 12440 --- [    Test worker] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@3f2a972e: startup date [Sat Jun 03 14:01:14 EEST 2017]; root of context hierarchy
-2017-06-03 14:01:20.755  INFO 12440 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2017-06-03 14:01:20.757  INFO 12440 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2017-06-03 14:01:20.777  INFO 12440 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2017-06-03 16:51:48.810 TRACE 15568 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [INTEGER] - [3]
+2017-06-03 16:51:48.817  INFO 15568 --- [    Test worker] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@5305f2e7: startup date [Sat Jun 03 16:51:42 EEST 2017]; root of context hierarchy
+2017-06-03 16:51:48.822  INFO 15568 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2017-06-03 16:51:48.823  INFO 15568 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2017-06-03 16:51:48.829  INFO 15568 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 </pre>
 </span>
 </div>
@@ -1396,7 +1333,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 3.3</a> at Jun 3, 2017 2:01:20 PM</p>
+<a href="http://www.gradle.org">Gradle 3.3</a> at Jun 3, 2017 4:51:49 PM</p>
 </div>
 </div>
 </body>

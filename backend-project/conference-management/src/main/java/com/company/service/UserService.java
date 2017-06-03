@@ -65,11 +65,11 @@ public interface UserService {
 
     /**
      * Returns all papers having a given status
-     * @param username
-     * @param paperStatusId
-     * @return
+     * @param username The username
+     * @param status The paper status
+     * @return Optional.empty() if the user does not exist, Optional with the data otherwise
      */
-    Optional<Iterable<Paper>> getPapersOfStatus(String username, int paperStatusId);
+    Optional<Iterable<Paper>> getPapersOfStatus(String username, PaperStatus status);
 
     /**
      * Gets all reviews of a paper submitted by the given user

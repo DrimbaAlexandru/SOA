@@ -22,8 +22,7 @@ public class Review {
     @JoinColumn(name = "PaperID", nullable = false)
     private Paper paper;
 
-    @ManyToOne()
-    @JoinColumn(name = "ReviewStatusID", nullable = false)
+    @Enumerated(value = EnumType.STRING)
     private ReviewStatus status;
 
     public Review(){}

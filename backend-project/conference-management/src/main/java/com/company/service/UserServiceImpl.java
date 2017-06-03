@@ -120,14 +120,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<Iterable<Paper>> getPapersOfStatus(String username, int paperStatusId) {
+    public Optional<Iterable<Paper>> getPapersOfStatus(String username, PaperStatus status) {
         Optional<AppUser> opt = getUser(username);
 
         return opt.isPresent()?
             Optional.of(
                 opt.get().getSubmittedPapers()
                     .stream()
-                    .filter(e -> e.getStatus().getId() == paperStatusId)
+                    .filter(e -> e.getStatus().equals(status))
                     .collect(Collectors.toList())
             ) : Optional.empty();
     }

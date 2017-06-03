@@ -23,8 +23,7 @@ public class Bid {
     @JoinColumn(name = "PaperID", nullable = false)
     private Paper paper;
 
-    @ManyToOne
-    @JoinColumn(name = "BidStatusID", nullable = false)
+    @Enumerated(value = EnumType.STRING)
     private BidStatus status;
 
     public Bid(){}
