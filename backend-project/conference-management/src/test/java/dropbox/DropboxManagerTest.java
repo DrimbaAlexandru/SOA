@@ -25,6 +25,11 @@ public class DropboxManagerTest {
     @Autowired
     private RemoteFileManager manager;
 
+    @Test
+    public void testTrueIsTrue() {
+        Assert.assertTrue(true);
+    }
+
     //@Test
     // Ran only once for ease of feature checking
     public void testFileDownload() {
