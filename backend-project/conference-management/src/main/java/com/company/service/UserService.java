@@ -92,7 +92,7 @@ public interface UserService {
      * @param paperId The paper id
      * @param presentationFileData The presentation file data
      */
-    void uploadPresentation(String username, int paperId, String presentationFileData);
+    void uploadPresentation(String username, int paperId, String extension, String presentationFileData);
 
     /**
      * Gets all papers assigned for review to a given user
@@ -122,4 +122,11 @@ public interface UserService {
      * @return Optional.empty() if the user does not exist, an Optional with the data otherwise
      */
     Optional<Iterable<Paper>> getSubmittedPapers(String username);
+
+    /**
+     * Removes a paper review assignment from a user
+     * @param username The username
+     * @param paperId The paper id
+     */
+    void removeAssignedPaper(String username, int paperId);
 }

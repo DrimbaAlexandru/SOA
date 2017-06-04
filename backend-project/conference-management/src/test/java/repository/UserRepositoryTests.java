@@ -41,8 +41,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @DirtiesContext
 public class UserRepositoryTests {
 
-    //public static final String DATASET = "/datasets/users-items.xml";
-    protected static final String DATASET = "caca";
+    protected static final String DATASET = "classpath:datasets/users-items.xml";
 
     @Autowired
     private UserRepository repo;

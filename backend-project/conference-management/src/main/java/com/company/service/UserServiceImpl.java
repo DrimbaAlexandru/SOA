@@ -9,14 +9,18 @@ import com.company.utils.updater.PrivilegesGettersAndSetters;
 import com.company.utils.updater.Updater;
 import com.company.utils.updater.UsersGettersAndSetters;
 import com.dropbox.core.DbxException;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Created by AlexandruD on 02-Jun-17.
@@ -64,6 +68,7 @@ public class UserServiceImpl implements UserService {
         return usr == null? Optional.empty() : Optional.of(usr);
     }
 
+    @Transactional
     @Override
     public Optional<Privileges> getConferencePrivileges(String username, int confId) {
         Optional<AppUser> opt = getUser(username);
@@ -81,7 +86,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<AppUser> addUser(AppUser u) {
-        u.setUsername(null);
         // Encrypt password
         u.setPassword(encoder.encode(u.getPassword()));
         return Optional.of(userRepository.save(u));
@@ -99,6 +103,7 @@ public class UserServiceImpl implements UserService {
         return au;
     }
 
+    @Transactional
     @Override
     public void updatePrivilegesOfConference(String username, int confId, Privileges newPrivs) {
         Optional<AppUser> au = getUser(username);
@@ -127,6 +132,7 @@ public class UserServiceImpl implements UserService {
         });
     }
 
+    @Transactional
     @Override
     public Optional<Iterable<Paper>> getPapersOfStatus(String username, PaperStatus status) {
         Optional<AppUser> opt = getUser(username);
@@ -140,6 +146,7 @@ public class UserServiceImpl implements UserService {
             ) : Optional.empty();
     }
 
+    @Transactional
     @Override
     public Optional<Iterable<Review>> getReviewsOfPaper(String username, int paperId) {
         Optional<AppUser> opt = getUser(username);
@@ -153,9 +160,16 @@ public class UserServiceImpl implements UserService {
                 .filter(e -> e.getId() == paperId)
                 .reduce((a ,b) -> a);
 
-        return paperOpt.isPresent()? Optional.of(paperOpt.get().getReviews()) : Optional.empty();
+        Optional<Iterable<Review>> result = Optional.empty();
+
+        if(paperOpt.isPresent()) {
+            result = Optional.of(new ArrayList<>(paperOpt.get().getReviews()));
+        }
+
+        return result;
     }
 
+    @Transactional
     @Override
     public void addBidForPaper(String username, int paperId, BidStatus status) {
         Paper pap = paperRepository.findOne(paperId);
@@ -186,8 +200,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void uploadPresentation(String username, int paperId, String presentationFileData) {
-        String filePath = username + random.nextLong();
+    public void uploadPresentation(String username, int paperId, String extension, String presentationFileData) {
+        // Save no paper from a non-existant user
+        if(!userRepository.userExists(username))
+            return;
+        // Generate a filename
+        String filePath = username + random.nextLong() + extension;
         Paper pap = paperRepository.findOne(paperId);
         if(pap == null) {
             // Return if no paper found
@@ -203,7 +221,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<Iterable<Paper>> getAssignedPapers(String username) {
         Iterable<Paper> res = userRepository.getAssignedPapers(username);
-        return !userRepository.userExists(username)? Optional.of(res) : Optional.empty();
+        return userRepository.userExists(username)? Optional.of(res) : Optional.empty();
     }
 
     @Override
@@ -212,6 +230,7 @@ public class UserServiceImpl implements UserService {
         return b == null? Optional.empty() : Optional.of(b);
     }
 
+    @Transactional
     @Override
     public void assignPaper(String username, int paperId) {
         Optional<AppUser> usrOpt = getUser(username);
@@ -219,6 +238,19 @@ public class UserServiceImpl implements UserService {
             Paper p = paperRepository.findOne(paperId);
             if(p != null) {
                 e.getAssignedForReview().add(p);
+                userRepository.save(e);
+            }
+        });
+    }
+
+    @Transactional
+    @Override
+    public void removeAssignedPaper(String username, int paperId) {
+        Optional<AppUser> usrOpt = getUser(username);
+        usrOpt.ifPresent(e -> {
+            Paper p = paperRepository.findOne(paperId);
+            if(p != null) {
+                e.getAssignedForReview().removeIf(f -> f.getId().equals(paperId));
                 userRepository.save(e);
             }
         });

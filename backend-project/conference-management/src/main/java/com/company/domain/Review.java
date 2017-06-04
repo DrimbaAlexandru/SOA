@@ -14,11 +14,11 @@ public class Review {
     @Column(name = "id")
     private Integer id;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ReviewerID", nullable = false)
     private AppUser reviewer;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PaperID", nullable = false)
     private Paper paper;
 
