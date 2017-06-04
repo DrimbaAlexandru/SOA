@@ -4,23 +4,18 @@ import com.company.domain.*;
 import com.company.repository.ConferenceRepository;
 import com.company.repository.PaperRepository;
 import com.company.repository.UserRepository;
-import com.company.utils.dropbox.DropboxUploader;
 import com.company.utils.updater.PrivilegesGettersAndSetters;
 import com.company.utils.updater.Updater;
 import com.company.utils.updater.UsersGettersAndSetters;
-import com.dropbox.core.DbxException;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * Created by AlexandruD on 02-Jun-17.
@@ -200,12 +195,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void uploadPresentation(String username, int paperId, String extension, String presentationFileData) {
+    public void uploadPresentation(String username, int paperId, String extension, byte[] presentationFileData) {
         // Save no paper from a non-existant user
         if(!userRepository.userExists(username))
             return;
         // Generate a filename
-        String filePath = username + random.nextLong() + extension;
+        String filePath = username + "--" + random.nextLong() + extension;
         Paper pap = paperRepository.findOne(paperId);
         if(pap == null) {
             // Return if no paper found

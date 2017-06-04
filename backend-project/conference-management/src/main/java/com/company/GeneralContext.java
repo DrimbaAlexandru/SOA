@@ -1,7 +1,7 @@
 package com.company;
 
-import com.company.utils.FileUploader;
-import com.company.utils.dropbox.DropboxUploader;
+import com.company.utils.RemoteFileManager;
+import com.company.utils.dropbox.DropboxManagerRemote;
 import com.company.utils.updater.PrivilegesGettersAndSetters;
 import com.company.utils.updater.UsersGettersAndSetters;
 import org.springframework.context.annotation.Bean;
@@ -32,7 +32,9 @@ public class GeneralContext {
     }
 
     @Bean
-    public FileUploader getFileUploader(Environment env) {
-        return new DropboxUploader(env.getProperty("dropbox.app.key"), env.getProperty("dropbox.app.secret"));
+    public RemoteFileManager getFileUploader(Environment env) {
+        return new DropboxManagerRemote(env.getProperty("dropbox.app.key"),
+                env.getProperty("dropbox.app.secret"),
+                env.getProperty("dropbox.access.token"));
     }
 }

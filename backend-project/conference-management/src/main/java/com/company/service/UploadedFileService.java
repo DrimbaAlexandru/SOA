@@ -15,7 +15,7 @@ public interface UploadedFileService {
      * @param data The data
      * @return The file's metadata if upload succeeds. Optional.empty() otherwise
      */
-    Optional<UploadedFile> uploadFile(String path, String data);
+    Optional<UploadedFile> uploadFile(String path, byte[] data);
 
     void saveUploadedFileData(UploadedFile data);
 

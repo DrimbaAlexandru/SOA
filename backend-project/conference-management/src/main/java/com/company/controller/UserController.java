@@ -3,10 +3,7 @@ package com.company.controller;
 import com.company.domain.AppUser;
 import com.company.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -33,5 +30,43 @@ public class UserController {
                            AppUser user) {
 
         Optional<AppUser> res = service.updateUser(username, user);
+    }
+
+    @RequestMapping(path = "/{username}/submittedPapers/{paperId}/presentation",
+            method = RequestMethod.POST)
+    public void uploadPresentation(@PathVariable("username") String username,
+                                   @PathVariable("paperId") Integer paperId,
+                                   @RequestBody PresentationPostDTO data) {
+
+        service.uploadPresentation(username,
+                paperId,
+                "." + data.getType(),
+                data.getData());
+    }
+
+
+    private class PresentationPostDTO {
+        private String type;
+        private byte[] data;
+
+        public PresentationPostDTO() {
+
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public byte[] getData() {
+            return data;
+        }
+
+        public void setData(byte[] data) {
+            this.data = data;
+        }
     }
 }

@@ -2,7 +2,7 @@ package com.company.service;
 
 import com.company.domain.UploadedFile;
 import com.company.repository.UploadedFileRepository;
-import com.company.utils.FileUploader;
+import com.company.utils.RemoteFileManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,15 +16,16 @@ import java.util.Optional;
 public class UploadedFileServiceImpl implements UploadedFileService{
 
     private UploadedFileRepository repo;
-    private FileUploader uploader;
+    private RemoteFileManager uploader;
 
     public UploadedFileServiceImpl(@Autowired UploadedFileRepository repo,
-                                   @Autowired FileUploader uploader) {
+                                   @Autowired RemoteFileManager uploader) {
         this.repo = repo;
         this.uploader = uploader;
     }
 
-    public Optional<UploadedFile> uploadFile(String path, String data) {
+    @Override
+    public Optional<UploadedFile> uploadFile(String path, byte[] data) {
         Optional<String> filename = uploader.uploadFile(path, data);
 
         if(!filename.isPresent()) {
@@ -37,6 +38,7 @@ public class UploadedFileServiceImpl implements UploadedFileService{
         return Optional.of(file);
     }
 
+    @Override
     public void saveUploadedFileData(UploadedFile file) {
         repo.save(file);
     }

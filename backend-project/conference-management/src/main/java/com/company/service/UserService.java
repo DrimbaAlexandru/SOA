@@ -90,9 +90,10 @@ public interface UserService {
      * Uploads a user's presentation of a paper
      * @param username The username
      * @param paperId The paper id
+     * @param extension The paper file extension
      * @param presentationFileData The presentation file data
      */
-    void uploadPresentation(String username, int paperId, String extension, String presentationFileData);
+    void uploadPresentation(String username, int paperId, String extension, byte[] presentationFileData);
 
     /**
      * Gets all papers assigned for review to a given user

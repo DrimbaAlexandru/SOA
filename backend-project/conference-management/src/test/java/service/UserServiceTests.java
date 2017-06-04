@@ -15,6 +15,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -22,6 +24,12 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
+import java.io.IOError;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -46,7 +54,8 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @DirtiesContext
 public class UserServiceTests {
 
-    public static final String DATASET = "classpath:datasets/users-items.xml";
+    protected static final String DATASET = "classpath:datasets/users-items.xml";
+    protected static final String UPLOAD_PATH = "to_upload/xml_introd.pdf";
 
     @Autowired
     private UserService service;
@@ -228,6 +237,18 @@ public class UserServiceTests {
 
         Assert.assertTrue(revList.size() == 1);
         Assert.assertTrue(revList.stream().filter(e -> e.getId().equals(1)).count() == 1);
+    }
+
+    //@Test
+    // Worked once. Not going to bother testing futher for convenience's sake
+    public void testUploadPresentation() throws IOException, URISyntaxException {
+
+        Resource res = new ClassPathResource(UPLOAD_PATH);
+
+        byte[] data = Files.readAllBytes(Paths.get(res.getURI()));
+
+        service.uploadPresentation("Alex-D-TC", 1, ".pdf", data);
+
     }
 
     private boolean appUserEqual(AppUser a, AppUser b) {
