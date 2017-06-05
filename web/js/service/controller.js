@@ -19,7 +19,7 @@ function Controller(onError= undefined, onWarning = undefined){
         "users_getOne":"users.php?username={0}",
         "users_save":"users.php",
         "users_update":"users.php?username={0}",
-        "users_setPrivilegdes":"users.php?username={0}&conferenceId={1}",
+        //parametrul username va fi luat din sesiune
         "users_getSubmittedPapers":"users.submittedPapers.php",
         "users_getAcceptedSubmittedPapers":"users.submittedPapers.php?status=accepted",
         "users_getSubmittedPapersReviews":"users.submittedPapers.reviews.php?idPaper={0}",
@@ -29,6 +29,8 @@ function Controller(onError= undefined, onWarning = undefined){
         "users_getAssignedForReview":"users.asignedForReview.php",
         "users_getPaperReview":"users.reviews.php?paperId={0}",
         "users_setPaperReview":"users.reviews.php?paperId={0}",
+        //parametrul username e explicit
+        "users_setPrivilegdes":"users.php?username={0}&conferenceId={1}",
         "users_setPaperAssignement":"users.assignedPapers.php?username={0}&paperId={1}",
 
         "papers_getAll":"papers.php?conferenceId={0}",
@@ -73,7 +75,7 @@ function Controller(onError= undefined, onWarning = undefined){
     }
 
     function errorFunction(result){
-        onError("Error receiving response:\n" +result.responseText);
+        onError(["Error receiving response:\n" +result.responseText]);
     }
 
     function hasError(result){
@@ -97,7 +99,7 @@ function Controller(onError= undefined, onWarning = undefined){
 
     function hasNoResp(result){
         if(!("resp" in result)){
-            onError("Invalid response: field 'resp' not found!");
+            onError(["Invalid response: field 'resp' not found!"]);
             return true;
         }
         return false;
@@ -108,7 +110,7 @@ function Controller(onError= undefined, onWarning = undefined){
             result = JSON.parse(result);
         }
         catch (e){
-            onError("Invalid JSON received!");
+            onError(["Invalid JSON received!"]);
             return;
         }
 
