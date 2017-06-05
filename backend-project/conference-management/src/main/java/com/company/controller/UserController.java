@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.DatatypeConverter;
+import java.awt.image.MultiPixelPackedSampleModel;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -397,16 +401,24 @@ public class UserController {
             @CookieValue(value = "username", defaultValue = "") String usernameCookie,
             @CookieValue(value = "password", defaultValue = "") String passwordCookie,
             @PathVariable("paperId") Integer paperId,
-            @RequestBody PresentationPostDTO data) {
+            @RequestParam("type") String type,
+            @RequestParam("file") MultipartFile file) {
 
-        ResponseJSON<String> resp=new ResponseJSON<>();
-        resp.getErrors().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getErrors());
-        if(resp.getErrors().size()==0)
-            service.uploadPresentation(usernameCookie,
-                    paperId,
-                    "." + data.getType(),
-                    data.getData());
-        return new ResponseEntity<ResponseJSON<String>>(resp,HttpStatus.OK);
+        try {
+            byte[] fileData = file.getBytes();
+
+            ResponseJSON<String> resp = new ResponseJSON<>();
+            resp.getErrors().addAll(handle_loggedIn(usernameCookie, passwordCookie).getBody().getErrors());
+            if (resp.getErrors().size() == 0)
+                service.uploadPresentation(usernameCookie,
+                        paperId,
+                        "." + type,
+                        fileData);
+            return new ResponseEntity<ResponseJSON<String>>(resp, HttpStatus.OK);
+        }catch(IOException e) {
+            return new ResponseEntity<ResponseJSON<String>>(new ResponseJSON<>("Error occured on file upload"),
+                    HttpStatus.BAD_REQUEST);
+        }
     }
 
 }
@@ -442,7 +454,7 @@ class loggedInResponse
 class PresentationPostDTO
 {
     private String type;
-    private byte[] data;
+    private MultipartFile data;
 
     public PresentationPostDTO() {
 
@@ -456,11 +468,11 @@ class PresentationPostDTO
         this.type = type;
     }
 
-    public byte[] getData() {
+    public MultipartFile getData() {
         return data;
     }
 
-    public void setData(byte[] data) {
+    public void setData(MultipartFile data) {
         this.data = data;
     }
 }

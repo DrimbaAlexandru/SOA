@@ -200,7 +200,7 @@ public class UserServiceImpl implements UserService {
         if(!userRepository.userExists(username))
             return;
         // Generate a filename
-        String filePath = username + "--" + random.nextLong() + extension;
+        String filePath = "/" + username + "--" + random.nextLong() + extension;
         Paper pap = paperRepository.findOne(paperId);
         if(pap == null) {
             // Return if no paper found

@@ -19,7 +19,7 @@
     <Bid id="2" BidderID="2" PaperID="1" status="ACCEPT"/>
     <Bid id="3" BidderID="2" PaperID="3" status="ACCEPT"/>
 
-    <Conference conf_id="1" name="Some conference" eventStartDate="2016-10-10 00:00:00"
+    <Conference id="1" name="Some conference" eventStartDate="2016-10-10 00:00:00"
                 eventEndDate="2016-10-10 00:00:00"
                 callForAbstractDeadline="2016-10-10 00:00:00"
                 callForProposalsDeadline="2016-10-10 00:00:00"
