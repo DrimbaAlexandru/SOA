@@ -5,7 +5,7 @@
     'error' : []
 }
 
-
+users/logout POST{}
 
 users/login POST 
 {
@@ -90,12 +90,13 @@ users/{username} PUT
 //grantChair
 //grantCoChair
 //grantPCMember
-/users/{username}/{conferenceId}/ POST
+/users/{username}/{conferenceId}/ PUT
 {
     [optional] isPCMember =  bool
     [optional] isChair = bool
     [optional] isCoChair = bool
 }
+
 
 users/{username}/submittedPapers?status=accepted/decline GET
 return 'resp'=[
@@ -174,7 +175,7 @@ return 'resp'=>
 
 // Proposals
 
-papers GET
+papers/{conferenceId} GET
 return 'resp'={
 [{
     id:int
@@ -184,7 +185,7 @@ return 'resp'={
     authors:string[]//username
 }]
 
-papers POST
+papers/{conferenceId} POST
 {
     name:string
     subjects:string[]
@@ -192,7 +193,7 @@ papers POST
     authors:string[]
 }
 
-papers/{paperId} PUT
+papers/{conferenceId}/{paperId} PUT
 {
     name:string
     subjects:string[]
@@ -201,14 +202,33 @@ papers/{paperId} PUT
 }
 
 // Uploads a full paper file
-papers/{paperId}/full POST
+papers/{conferenceId}/{paperId}/full POST
 {
 	type:string
 	data:string
 }
 
+
+//getFullProposal
+papers/{conferenceId}/{paperId}/full GET
+return 'resp'=string RAW_DATA (pdf)
+
+//Uploads a abs paper file
+papers/{conferenceId}/{paperId}/abs POST
+{
+	type:string
+	data:string
+}
+
+
+//getAbsProposal
+papers/{conferenceId}/{paperId}/abs GET
+return 'resp'=string RAW_DATA (pdf)
+
+
+
 //all accepted proposals
-papers/acceptedProposals GET
+papers/{conferenceId}/acceptedProposals GET
 return 'resp'={
 [{
     id:int
@@ -219,29 +239,33 @@ return 'resp'={
 }]
 
 // Gets all potential reviewers of a paper
-papers/{paperId}/potentialReviewers GET
+papers/{conferenceId}/{paperId}/potentialReviewers GET
 return 'resp' = [{
 	username = string
 }]
 
 // Gets all assigned reviewers of a paper
-papers/{paperId}/assignedReviewers GET
+papers/{conferenceId}/{paperId}/assignedReviewers GET
 return 'resp' = [{
 	username = string
 }]
 
-//getFullProposal
-papers/{paperId}/full GET
-return 'resp'=string RAW_DATA (pdf)
 
-papers/{paperId}/reevaluate {} PUT
+papers/{conferenceId}/{paperId}/reevaluate {} PUT
 {}
 return {}
 
-papers/{paperId}/finalEvaluator/{user_id} PUT
+papers/{conferenceId}/{paperId}/finalEvaluator/{username} PUT
 {}
 return {}
 
+//chair gives the final for paper, if there is a controverse
+papers/{conferenceId}/{paperId}/finalStatus PUT
+{
+    status = "STRONG_ACCEPT"|"ACCEPT"|"WEAK_ACCEPT"|"BORDERLINE_PAPER"|"WEAK_REJECT"|"REJECT"|"STRONG_REJECT"
+    justification=string
+}
+return {}
 
 
 //listOthersReviewsForPaper

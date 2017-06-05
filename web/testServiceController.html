@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="js/service/controller.js"></script>
+<script src="js/lib/jquery-3.2.1.min.js"></script>
+<script src="js/domain/entity.js"></script>
+<script>
+    var c = new Controller(onError=console.log, onWarning=console.log);
+    c.login("Elise", "este", function(){console.log("Login IN");});
+    c.logout(function() {console.log("Logout OUT")});
+    c.loggedIn(function(result) {console.log(result)});
+</script>
+</body>
+</html>
