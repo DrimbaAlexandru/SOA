@@ -90,7 +90,7 @@ users/{username} PUT
 //grantChair
 //grantCoChair
 //grantPCMember
-/users/{username}/{conferenceId}/
+/users/{username}/{conferenceId}/ POST
 {
     [optional] isPCMember =  bool
     [optional] isChair = bool
