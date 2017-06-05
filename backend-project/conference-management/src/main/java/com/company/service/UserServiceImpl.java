@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
 
         return opt.isPresent()? opt.get().getPrivileges()
                 .stream()
-                .filter(e -> e.getId() == confId)
+                .filter(e -> e.getConference().getId() == confId)
                 .reduce((a, b) -> a) : Optional.empty();
     }
 
@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
     public Optional<AppUser> updateUser(String username, AppUser u) {
 
         Optional<AppUser> au = getUser(username);
-
+        u.setPassword(encoder.encode(u.getPassword()));
         au.ifPresent(e -> {
             updater.update(e, u, usersGettersAndSetters.getGettersAndSetters());
             this.userRepository.save(e);
@@ -169,7 +169,7 @@ public class UserServiceImpl implements UserService {
     public void addBidForPaper(String username, int paperId, BidStatus status) {
         Paper pap = paperRepository.findOne(paperId);
         if(pap == null)
-            return;
+            throw new RuntimeException();
 
         Optional<AppUser> uopt = getUser(username);
         uopt.ifPresent(user -> {
@@ -255,5 +255,35 @@ public class UserServiceImpl implements UserService {
     public Optional<Iterable<Paper>> getSubmittedPapers(String username) {
         Iterable<Paper> res = userRepository.getSubmittedPapers(username);
         return !userRepository.userExists(username)? Optional.empty() : Optional.of(res);
+    }
+
+    @Transactional
+    @Override
+    public void addReviewToPaper(String username, int paperId, ReviewStatus status, String justification) {
+        Optional<AppUser> au = getUser(username);
+        au.ifPresent(e -> {
+            Paper p = paperRepository.findOne(paperId);
+
+            if(p == null)
+                // If the paper does not exist, abort
+                throw new RuntimeException();
+
+            if(e.getSubmittedPapers()
+                    .stream()
+                    .filter(f -> f.getId().equals(paperId))
+                    .count() >= 1) {
+
+                // If the paper is submitted by this user, abort
+                return;
+            }
+
+            Review rev = new Review();
+            rev.setPaper(p);
+            rev.setReviewer(e);
+            rev.setStatus(status);
+
+            e.getReviews().add(rev);
+            userRepository.save(e);
+        });
     }
 }

@@ -18,4 +18,19 @@
     <Bid id="1" BidderID="1" PaperID="2" status="ACCEPT"/>
     <Bid id="2" BidderID="2" PaperID="1" status="ACCEPT"/>
     <Bid id="3" BidderID="2" PaperID="3" status="ACCEPT"/>
+
+    <Conference conf_id="1" name="Some conference" eventStartDate="2016-10-10 00:00:00"
+                eventEndDate="2016-10-10 00:00:00"
+                callForAbstractDeadline="2016-10-10 00:00:00"
+                callForProposalsDeadline="2016-10-10 00:00:00"
+                biddingDeadline="2016-10-10 00:00:00"/>
+
+    <Privileges id="1" userId="1" conferenceID="1" isPCMember="false"
+                isChair="false"
+                isCoChair="false"
+                isAuthor="false"/>
+
+    <Review id="1" status="STRONG_ACCEPT" paperID="1" reviewerID="2"/>
+
+    <AssignedForReview reviewers_id="1" assignedForReview_id="2"/>
 </dataset>

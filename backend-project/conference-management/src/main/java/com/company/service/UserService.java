@@ -130,4 +130,14 @@ public interface UserService {
      * @param paperId The paper id
      */
     void removeAssignedPaper(String username, int paperId);
+
+    /**
+     * Adds the review of a user to the paper
+     * @param username The username
+     * @param paperId The paper
+     * @param status The review status
+     * @param justification The review justification
+     */
+    void addReviewToPaper(String username, int paperId, ReviewStatus status, String justification);
+
 }

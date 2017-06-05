@@ -5,7 +5,7 @@
     'error' : []
 }
 
-
+USERS: DONE 11/18
 
 users/login POST 
 {
@@ -86,7 +86,7 @@ users/{username} PUT
 //grantChair
 //grantCoChair
 //grantPCMember
-/users/{username}/{conferenceId}/
+/users/{username}/{conferenceId}/  ?PUT
 {
     [optional] isPCMember =  bool
     [optional] isChair = bool
@@ -95,7 +95,7 @@ users/{username} PUT
 
 users/submittedPapers?status=accepted/decline GET
 return 'resp'=[
-{    id:int
+{   id:int
     name:string
     subjects:string[]
     keywords:string[]
@@ -110,7 +110,7 @@ return 'resp'=[
 ]
 
 
-users/submittedPapers/{idPaper}/presetation POST
+users/submittedPapers/{idPaper}/presentation POST
 {
     data:RAW_STRING
     type:'pdf'/'doc'
@@ -132,7 +132,7 @@ return 'resp' None
 
 
 //getPapers to 
-users/asignedForReview GET
+users/assignedForReview GET
 return 'resp' = [{
     id:int
     name:string

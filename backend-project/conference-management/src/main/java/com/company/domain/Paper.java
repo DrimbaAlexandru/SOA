@@ -12,7 +12,8 @@ import java.util.Set;
 @Entity
 public class Paper {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY )
     @Column(name = "id")
     private Integer id;
 

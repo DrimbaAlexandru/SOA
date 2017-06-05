@@ -14,8 +14,8 @@ import java.util.Set;
 public class Conference {
 
     @Id
-    @GeneratedValue
-    @Column(name = "conf_id")
+    @GeneratedValue(strategy= GenerationType.IDENTITY )
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "name", unique = false, nullable = false, length = 256)

@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 public class AppUser {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY )
     @Column(name = "id")
     private Integer id;
 
@@ -81,7 +81,6 @@ public class AppUser {
     public void setListenedSessions(Set<Session> listenedSessions) {
         this.listenedSessions = listenedSessions;
     }
-
 
     public String getUsername() {
         return username;
@@ -180,6 +179,8 @@ public class AppUser {
         this.email = email;
         this.webpage = webpage;
         this.password = password;
+        isCometeeMember=false;
+        isSuperUser=false;
     }
 
     public AppUser(String username, String name, String affiliation, String email,
