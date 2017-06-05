@@ -77,9 +77,7 @@ public interface UserService {
      * @return Optional.empty() if the user or paper do not exist, an Optional with the data otherwise
      */
     Optional<Iterable<Review>> getReviewsOfPaper(String username, int paperId);
-
-    void addReviewToPaper(String username, int paperId, ReviewStatus status, String justification);
-
+    
     /**
      * Adds the bid of a user to the paper
      * @param username The username
