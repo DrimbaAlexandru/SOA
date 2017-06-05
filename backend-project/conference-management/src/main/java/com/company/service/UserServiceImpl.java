@@ -166,6 +166,36 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
+    public void addReviewToPaper(String username, int paperId, ReviewStatus status, String justification) {
+        Optional<AppUser> au = getUser(username);
+        au.ifPresent(e -> {
+            Paper p = paperRepository.findOne(paperId);
+
+            if(p == null)
+                // If the paper does not exist, abort
+                return;
+
+            if(e.getSubmittedPapers()
+                    .stream()
+                    .filter(f -> f.getId().equals(paperId))
+                    .count() >= 1) {
+
+                // If the paper is submitted by this user, abort
+                return;
+            }
+
+            Review rev = new Review();
+            rev.setPaper(p);
+            rev.setReviewer(e);
+            rev.setStatus(status);
+
+            e.getReviews().add(rev);
+            userRepository.save(e);
+        });
+    }
+
+    @Transactional
+    @Override
     public void addBidForPaper(String username, int paperId, BidStatus status) {
         Paper pap = paperRepository.findOne(paperId);
         if(pap == null)

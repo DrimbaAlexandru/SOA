@@ -78,6 +78,8 @@ public interface UserService {
      */
     Optional<Iterable<Review>> getReviewsOfPaper(String username, int paperId);
 
+    void addReviewToPaper(String username, int paperId, ReviewStatus status, String justification);
+
     /**
      * Adds the bid of a user to the paper
      * @param username The username
