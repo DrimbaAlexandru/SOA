@@ -73,24 +73,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public Exceptional<Privileges> getConferencePrivileges(String username, int confId) {
 
-        AppUser au = userRepository.findByUsername(username);
         Conference c=conferenceRepository.findOne(confId);
-
-        if(au!=null && c!=null)
-        {
-            Optional<Privileges> priv = au.getPrivileges().stream().filter(e -> e.getConference().getId()==confId).findFirst();
-            if(priv.isPresent())
-                return Exceptional.OK(priv.get());
-            else
-            {
-                Privileges p=new Privileges(au,c);
-                au.getPrivileges().add(p);
-                return Exceptional.OK(p);
-            }
-        }
 
         if(c==null)
             return Exceptional.Error(new Exception("There's no conference with the given ID"));
+
+        AppUser au = userRepository.findByUsername(username);
 
         if(au == null) {
             return Exceptional.Error(new Exception("User not found"));
