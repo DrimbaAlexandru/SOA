@@ -148,9 +148,13 @@ public class UserController {
     @RequestMapping(path = "/", method = RequestMethod.POST)
     public ResponseEntity<ResponseJSON<String>> handle_create_user(@RequestBody updateUserRequest body)
     {
-        service.addUser(new AppUser(body.getUsername(),
-                body.getName(),body.getAffiliation(),body.getEmail(),body.getWebsite(),body.getPassword()));
-        return new ResponseEntity<ResponseJSON<String>>(new ResponseJSON<>(""),HttpStatus.OK);
+        ResponseJSON<String> resp=new ResponseJSON<>("");
+        service.getUser(body.getUsername()).error(a->{
+            service.addUser(new AppUser(body.getUsername(),
+                body.getName(),body.getAffiliation(),body.getEmail(),body.getWebsite(),body.getPassword())).error(b-> {
+                    resp.addError("Unexpected error. The given email may be already be used by another user");});}
+        ).ok(a->{resp.addError("An user with this username already exists");});
+        return new ResponseEntity<ResponseJSON<String>>(resp,HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{username}", method = RequestMethod.PUT)

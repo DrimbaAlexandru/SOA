@@ -64,8 +64,6 @@ public class UserServiceImpl implements UserService {
     public Exceptional<AppUser> getUser(String username) {
         AppUser usr = userRepository.findByUsername(username);
 
-        Exceptional exp = Exceptional.OK("CACAA");
-
         return usr == null?
                 Exceptional.Error(new Exception("Username not found")) :
                 Exceptional.OK(usr);
@@ -76,6 +74,14 @@ public class UserServiceImpl implements UserService {
     public Exceptional<Privileges> getConferencePrivileges(String username, int confId) {
         AppUser au = userRepository.findByUsername(username);
 
+        if(au!=null)
+        {
+            Optional<Privileges> priv = au.getPrivileges().stream().filter(e -> e.getConference().getId()==confId).findFirst();
+            if(priv.isPresent())
+                return Exceptional.OK(priv.get());
+            else
+                return Exceptional.Error(new Exception("There's no conference with the given ID"));
+        }
 
         return au != null? Exceptional.OK(au.getPrivileges()
                 .stream()
@@ -94,7 +100,8 @@ public class UserServiceImpl implements UserService {
         // Encrypt password
         u.setPassword(encoder.encode(u.getPassword()));
         try {
-            return Exceptional.OK(userRepository.save(u));
+            AppUser saved=userRepository.save(u);
+            return Exceptional.OK(saved);
         }catch(Exception e) {
             return Exceptional.Error(e);
         }
