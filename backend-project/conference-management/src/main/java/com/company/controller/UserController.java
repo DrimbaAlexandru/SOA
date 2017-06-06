@@ -167,29 +167,31 @@ public class UserController {
     {
         ResponseJSON<String> resp=new ResponseJSON<>("");
         resp.getErrors().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getErrors());
+        if(service.getUser(username).isException())
+            resp.addError("The username you want to make changes to doesn't exist");
         if(resp.getErrors().size()==0) {
             Exceptional<AppUser> au = service.getUser(usernameCookie);
             au.error(e -> {
                 resp.addError(e.getMessage());
             }).ok(e -> {
-                if ((username.equals(usernameCookie) &&
-                        body.getUsername().equals(usernameCookie)) ||
+                if ((username.equals(usernameCookie) && (body.getUsername()==null || service.getUser(body.getUsername()).isException())) ||
                         (e.getIsSuperUser())) {
+
                     service.updateUser(username, new AppUser(
                             body.getUsername(), body.getName(), body.getAffiliation(), body.getEmail(), body.getWebsite(),
-                            body.getPassword(), false, body.getisCommiteeMember()));
-                    if (!e.getIsSuperUser()) {
-                        setCookie("username", body.getUsername(), 3600, response);
-                        setCookie("password", body.getPassword(), 3600, response);
+                            body.getPassword(), null, body.getisCommiteeMember()));
+                    if (usernameCookie.equals(username)) {
+                        if(body.getUsername()!=null)
+                            setCookie("username", body.getUsername(), 3600, response);
+                        if(body.getPassword()!=null)
+                            setCookie("password", body.getPassword(), 3600, response);
                     }
                 } else {
                     resp.addError("You don't have the permissions to do these changes!");
                 }
             });
         }
-        else {
-            resp.addError("You don't have the permissions to do these changes!");
-        }
+
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
@@ -325,7 +327,8 @@ public class UserController {
                     resp.addError(f.getMessage());
                 });
             }).ok(e -> {
-                resp.addError("The paper with the given ID already has a bid from you or doesn't exist");
+                service.addBidForPaper(usernameCookie, paperId,
+                        BidStatus.valueOf(request.getStatus()));
             });
 
         return new ResponseEntity<>(resp,HttpStatus.OK);
@@ -391,15 +394,10 @@ public class UserController {
         resp.setResp("");
 
         if(resp.getErrors().size()==0) {
-            try
-            {
-                service.addReviewToPaper(usernameCookie,paperId,ReviewStatus.valueOf(request.getStatus()),request.getJustification());
-            }
-            catch (Exception e)
-            {
-                resp.addError("The paper with the given ID already has a review from you or doesn't exist");
-            }
+            service.addReviewToPaper(usernameCookie,paperId,ReviewStatus.valueOf(request.getStatus()),request.getJustification()).
+                    error(e->{resp.addError(e.getMessage());});
         }
+
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
@@ -415,9 +413,8 @@ public class UserController {
         resp.setResp("");
 
         if(resp.getErrors().size()==0) {
-            service.assignPaper(reviewerUsername,paperId);
+            service.assignPaper(reviewerUsername,paperId).error(e->{resp.addError(e.getMessage());});
         }
-        resp.addWarning("Not sure everything went OK");
 
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
@@ -607,10 +604,10 @@ class updateUserRequest
     private String email;
     private String website;
     private String password;
-    private boolean isCommiteeMember=false;
+    private Boolean isCommiteeMember=null;
     public updateUserRequest(){}
 
-    public void setisCommiteeMember(boolean commiteeMember) {
+    public void setIsCommiteeMember(boolean commiteeMember) {
         isCommiteeMember = commiteeMember;
     }
 
@@ -662,7 +659,7 @@ class updateUserRequest
         return username;
     }
 
-    public boolean getisCommiteeMember() {
+    public Boolean getisCommiteeMember() {
         return isCommiteeMember;
     }
 }

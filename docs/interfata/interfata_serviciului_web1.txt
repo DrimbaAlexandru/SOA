@@ -154,7 +154,7 @@ users/reviews/{paperId} PUT
     justification=string
 }
 
-users/{id}/assignPaper/{paperId} Put
+users/{username}/assignPaper/{paperId} Put
 {}
 return {}
 

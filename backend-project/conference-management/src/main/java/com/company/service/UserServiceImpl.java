@@ -74,18 +74,23 @@ public class UserServiceImpl implements UserService {
     public Exceptional<Privileges> getConferencePrivileges(String username, int confId) {
 
         AppUser au = userRepository.findByUsername(username);
+        Conference c=conferenceRepository.findOne(confId);
 
-        if(au!=null)
+        if(au!=null && c!=null)
         {
             Optional<Privileges> priv = au.getPrivileges().stream().filter(e -> e.getConference().getId()==confId).findFirst();
             if(priv.isPresent())
                 return Exceptional.OK(priv.get());
             else
-                return Exceptional.Error(new Exception("There's no conference with the given ID"));
+            {
+                Privileges p=new Privileges(au,c);
+                au.getPrivileges().add(p);
+                return Exceptional.OK(p);
+            }
         }
-        if(!conferenceRepository.exists(confId)) {
-            return Exceptional.Error(new Exception("Conference not found"));
-        }
+
+        if(c==null)
+            return Exceptional.Error(new Exception("There's no conference with the given ID"));
 
         if(au == null) {
             return Exceptional.Error(new Exception("User not found"));
@@ -127,7 +132,8 @@ public class UserServiceImpl implements UserService {
     public Exceptional<AppUser> updateUser(String username, AppUser u) {
 
         AppUser au = userRepository.findByUsername(username);
-        u.setPassword(encoder.encode(u.getPassword()));
+        if(u.getPassword()!=null)
+            u.setPassword(encoder.encode(u.getPassword()));
         if(au == null) {
             return Exceptional.Error(new Exception("Username not found"));
         }
@@ -296,6 +302,7 @@ public class UserServiceImpl implements UserService {
         if(p == null) {
             return Exceptional.Error(new Exception("Paper not found"));
         }
+
         user.getAssignedForReview().add(p);
         userRepository.save(user);
         return Exceptional.OK(null);
@@ -337,7 +344,7 @@ public class UserServiceImpl implements UserService {
 
         if(p == null)
             // If the paper does not exist, abort
-            throw new RuntimeException();
+            return Exceptional.Error(new Exception("Paper does not exist"));
 
         if(user.getSubmittedPapers()
                 .stream()
@@ -345,13 +352,14 @@ public class UserServiceImpl implements UserService {
                 .count() >= 1) {
 
             // If the paper is submitted by this user, abort
-            return Exceptional.Error(new Exception("Paper not submitted by user"));
+            return Exceptional.Error(new Exception("Paper cannot be reviewed by its author"));
         }
 
         Review rev = new Review();
         rev.setPaper(p);
         rev.setReviewer(user);
         rev.setStatus(status);
+        rev.setJustification(justification);
 
         user.getReviews().add(rev);
         userRepository.save(user);

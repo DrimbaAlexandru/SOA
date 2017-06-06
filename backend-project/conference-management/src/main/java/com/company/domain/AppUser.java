@@ -51,7 +51,7 @@ public class AppUser {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Privileges> privileges = new HashSet<>();
 
-    @OneToMany(mappedBy = "reviewer")
+    @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL)
     private Set<Review> reviews=new HashSet<>();
 
     @OneToMany(mappedBy = "bidder", cascade = CascadeType.ALL)
