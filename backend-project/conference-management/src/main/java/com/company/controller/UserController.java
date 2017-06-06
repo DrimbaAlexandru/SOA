@@ -338,7 +338,7 @@ public class UserController {
             else
                 resp.addError("The paper with the given ID doesn't exist");
         }
-        return new ResponseEntity<ResponseJSON<reviewResponse>>(resp,HttpStatus.OK);
+        return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
     @RequestMapping(path="/reviews/{idPaper}", method = RequestMethod.PUT)
@@ -380,20 +380,10 @@ public class UserController {
             service.assignPaper(reviewerUsername,paperId);
         }
         resp.addWarning("Not sure everything went OK");
+
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 //------------------------------------------------------------------
-    @RequestMapping(method = RequestMethod.GET)
-    public Iterable<AppUser> getUsers() {
-        return service.getUsers();
-    }
-
-    @RequestMapping(path="/{username}", method = RequestMethod.POST)
-    public void updateUser(@PathVariable("username") String username,
-                           AppUser user) {
-
-        Optional<AppUser> res = service.updateUser(username, user);
-    }
 
     @RequestMapping(path = "/submittedPapers/{paperId}/presentation",
             method = RequestMethod.POST)
