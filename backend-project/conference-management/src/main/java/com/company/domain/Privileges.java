@@ -34,10 +34,6 @@ public class Privileges {
     private Boolean isAuthor;
 
     public Privileges() {
-        isPCMember = false;
-        isChair = false;
-        isCoChair = false;
-        isAuthor = false;
         this.user = null;
         this.conference = null;
     }

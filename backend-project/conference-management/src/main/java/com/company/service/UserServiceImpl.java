@@ -72,6 +72,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public Exceptional<Privileges> getConferencePrivileges(String username, int confId) {
+
         AppUser au = userRepository.findByUsername(username);
 
         if(au!=null)
@@ -82,12 +83,28 @@ public class UserServiceImpl implements UserService {
             else
                 return Exceptional.Error(new Exception("There's no conference with the given ID"));
         }
+        if(!conferenceRepository.exists(confId)) {
+            return Exceptional.Error(new Exception("Conference not found"));
+        }
 
-        return au != null? Exceptional.OK(au.getPrivileges()
+        if(au == null) {
+            return Exceptional.Error(new Exception("User not found"));
+        }
+
+        Optional<Privileges> privs = au.getPrivileges()
                 .stream()
                 .filter(e -> e.getConference().getId() == confId)
-                .reduce((a, b) -> a).get()) :
-                Exceptional.Error(new Exception("Username not found"));
+                .reduce((a, b) -> a);
+
+        Privileges finalPrivs;
+
+        if(!privs.isPresent()) {
+            finalPrivs = new Privileges(au, conferenceRepository.findOne(confId));
+        } else {
+            finalPrivs = privs.get();
+        }
+
+        return Exceptional.OK(finalPrivs);
     }
 
     @Override
@@ -100,8 +117,7 @@ public class UserServiceImpl implements UserService {
         // Encrypt password
         u.setPassword(encoder.encode(u.getPassword()));
         try {
-            AppUser saved=userRepository.save(u);
-            return Exceptional.OK(saved);
+            return Exceptional.OK(userRepository.save(u));
         }catch(Exception e) {
             return Exceptional.Error(e);
         }
@@ -159,12 +175,12 @@ public class UserServiceImpl implements UserService {
         AppUser au = userRepository.findByUsername(username);
 
         return au != null?
-            Exceptional.OK(
-                au.getSubmittedPapers()
-                    .stream()
-                    .filter(e -> e.getStatus().equals(status))
-                    .collect(Collectors.toList())
-            ) : Exceptional.Error(new Exception("User not found"));
+                Exceptional.OK(
+                        au.getSubmittedPapers()
+                                .stream()
+                                .filter(e -> e.getStatus().equals(status))
+                                .collect(Collectors.toList())
+                ) : Exceptional.Error(new Exception("User not found"));
     }
 
     @Transactional
@@ -317,7 +333,7 @@ public class UserServiceImpl implements UserService {
             return Exceptional.Error(new Exception("User not found"));
         }
 
-       Paper p = paperRepository.findOne(paperId);
+        Paper p = paperRepository.findOne(paperId);
 
         if(p == null)
             // If the paper does not exist, abort
