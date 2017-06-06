@@ -17,6 +17,14 @@ public class ConferenceServiceImpl implements ConferenceService {
     private Updater updater;
     private ConferencesGettersAndSetters conferencesGettersAndSetters;
 
+    public ConferenceServiceImpl(
+            @Autowired ConferenceRepository conferenceRepository,
+            @Autowired ConferencesGettersAndSetters conferencesGettersAndSetters) {
+        this.conferenceRepository = conferenceRepository;
+        this.updater = new Updater();
+        this.conferencesGettersAndSetters = conferencesGettersAndSetters;
+    }
+
     @Override
     public Exceptional<Conference> getConference(int confId) {
         Conference conf = conferenceRepository.findOne(confId);
@@ -49,14 +57,6 @@ public class ConferenceServiceImpl implements ConferenceService {
         updater.update(conference, c, conferencesGettersAndSetters.getGettersAndSetters());
         this.conferenceRepository.save(c);
         return Exceptional.OK(conference);
-    }
-
-    public ConferenceServiceImpl(
-            @Autowired ConferenceRepository conferenceRepository,
-            @Autowired ConferencesGettersAndSetters conferencesGettersAndSetters) {
-        this.conferenceRepository = conferenceRepository;
-        this.updater = new Updater();
-        this.conferencesGettersAndSetters = conferencesGettersAndSetters;
     }
 
     @Override
