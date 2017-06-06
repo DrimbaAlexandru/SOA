@@ -1,0 +1,1 @@
+{"resp":{"isAuthor":false, "isChair":true, "isCoChair":false, "isPCMember":false}}

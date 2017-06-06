@@ -36,6 +36,10 @@ var Priviledge = function (isAuthor = false, isPCMember = false, isChair = false
     this.isCoChair = isCoChair;
 }
 
+var SystemPriviledge= function(isSuperUser= false, isCommiteeMember = false){
+	this.isCommiteeMember = isCommiteeMember;
+	this.isSuperUser = isSuperUser;
+}
 
 var ScheduleItem = function(sessionId, paperId, presentationStartTime, presentationEndTime, username){
 	this.sessionId = sessionId;

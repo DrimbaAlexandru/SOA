@@ -5,7 +5,7 @@
     'error' : []
 }
 
-USERS: DONE 18/18
+
 
 users/login POST 
 {
@@ -44,9 +44,11 @@ return 'resp' =>
     affiliation = string
     email = string
     website = string
+	isSuperUser=bool
+    isCommiteeMember=bool
 }]
 
-users/mine GET
+users/{username} GET
 return 'resp' =>
 'resp' = {
     username = string (e unic)
@@ -54,6 +56,8 @@ return 'resp' =>
     affiliation = string
     email = string
     website = string
+	isSuperUser=bool
+    isCommiteeMember=bool
 }
 
 
@@ -86,16 +90,16 @@ users/{username} PUT
 //grantChair
 //grantCoChair
 //grantPCMember
-/users/{username}/{conferenceId}/  ?PUT
+/users/{username}/{conferenceId}/
 {
     [optional] isPCMember =  bool
     [optional] isChair = bool
     [optional] isCoChair = bool
 }
 
-users/submittedPapers?status=accepted/decline GET
+users/{username}/submittedPapers?status=accepted/decline GET
 return 'resp'=[
-{   id:int
+{    id:int
     name:string
     subjects:string[]
     keywords:string[]
@@ -103,14 +107,14 @@ return 'resp'=[
 }]
 
 
-users/submittedPapers/{idPaper}/reviews GET
+users/{username}/submittedPapers/{idPaper}/reviews GET
 return 'resp'=[
     status:string//name
     justification:string
 ]
 
 
-users/submittedPapers/{idPaper}/presentation POST
+users/{username}/submittedPapers/{idPaper}/presetation POST
 {
     data:RAW_STRING
     type:'pdf'/'doc'
@@ -118,13 +122,13 @@ users/submittedPapers/{idPaper}/presentation POST
     
 
 //Review
-users/bids/{paperId} GET
+users/{username}/bids/{paperId} GET
 return 'resp' {
     status = "PLEASED"|"ACCEPT"|"REJECT"|"NONE"/pentru cazul in care nu a pus niciun bid
 }
 
 
-users/bids/{paperId} PUT
+users/{username}/bids/{paperId} PUT
 {
     status = "PLEASED"|"ACCEPT"|"REJECT"
 }
@@ -132,7 +136,7 @@ return 'resp' None
 
 
 //getPapers to 
-users/assignedForReview GET
+users/{username}/asignedForReview GET
 return 'resp' = [{
     id:int
     name:string
@@ -141,24 +145,24 @@ return 'resp' = [{
     authors:string[]//username
 }]
 
-users/reviews/{paperId} GET
+users/{username}/reviews/{paperId} GET
 {
     status=NONE|"STRONG_ACCEPT"|"ACCEPT"|"WEAK_ACCEPT"|"BORDERLINE_PAPER"|"WEAK_REJECT"|"REJECT"|"STRONG_REJECT"
     justification=string
 }
 
 
-users/reviews/{paperId} PUT
+users/{username}/reviews/{paperId} PUT
 {
     status="STRONG_ACCEPT"|"ACCEPT"|"WEAK_ACCEPT"|"BORDERLINE_PAPER"|"WEAK_REJECT"|"REJECT"|"STRONG_REJECT"
     justification=string
 }
 
-users/{username}/assignPaper/{paperId} Put
+users/{username}/assignedPapers/{paperId} Put
 {}
 return {}
 
-users/submittedPapers GET
+users/{username}/submittedPapers GET
 return 'resp'=>
 [{
     id:int
@@ -169,7 +173,6 @@ return 'resp'=>
 }]
 
 // Proposals
-
 
 papers GET
 return 'resp'={
@@ -197,16 +200,6 @@ papers/{paperId} PUT
     authors:string[]
 }
 
-papers/{paperId}/abstracts GET
-return 'resp' ={
-     data: string(RAW_DATA)
-} (edited)
-
-papers/{paperId}/abstracts POST
-{
-    data:string
-}
-
 // Uploads a full paper file
 papers/{paperId}/full POST
 {
@@ -225,6 +218,18 @@ return 'resp'={
     authors:string[]//username
 }]
 
+// Gets all potential reviewers of a paper
+papers/{paperId}/potentialReviewers GET
+return 'resp' = [{
+	username = string
+}]
+
+// Gets all assigned reviewers of a paper
+papers/{paperId}/assignedReviewers GET
+return 'resp' = [{
+	username = string
+}]
+
 //getFullProposal
 papers/{paperId}/full GET
 return 'resp'=string RAW_DATA (pdf)
@@ -237,17 +242,7 @@ papers/{paperId}/finalEvaluator/{user_id} PUT
 {}
 return {}
 
-// Gets all potential reviewers of a paper
-papers/{paperId}/potentialReviewers GET
-return 'resp' = [{
-	username = string
-}]
 
-// Gets all assigned reviewers of a paper
-papers/{paperId}/assignedReviewers GET
-return 'resp' = [{
-	username = string
-}]
 
 //listOthersReviewsForPaper
 reviews/{paperId} GET

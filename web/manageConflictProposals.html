@@ -4,45 +4,55 @@
 <head>
 
   <link rel="stylesheet" href="css/design.css">
+  <script src="js/lib/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-<h1>You can manage papers in conflict here</h1>
 
-<div>
-<table id="idConflict" style="width:50%">
-<caption>Papers in conflict</caption>
-  <tr>
-    <th>Proposal Name</th>
-    <th>Keywords</th> 
-    <th>Topics</th>
-    <th>Authors</th>
-  </tr>
-  <tr>
-  	<td>
-  		lala
-  	</td>
-  	<td>lalalaal</td>
-  	<td>
-  		lala
-  	</td>
-  	<td>
-  		lala
-  	</td>
-  </tr>
- </table>
-<br>
+<div id="content">
 
-<p>Reevaluate proposal: </p>
-<button id="reevaluation">Reevaluate</button><br>
+  <div id="left">
+    <div id="menu">
+      <ul>
+        <li><a href="#">Menu Item 1</a></li>
+        <li><a href="#">Menu Item 2</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="right">
+      <h1>You can manage papers in conflict here</h1>
 
-<p>Give final review: </p>
-<button id="finalReview">Final Review</button><br>
+      <div>
+          <table id="conflictPapersTable" style="width:50%">
+              <caption>Papers in conflict</caption>
+              <tr>
+                  <th>Id</th>
+                  <th>Proposal Name</th>
+                  <th>Keywords</th>
+                  <th>Topics</th>
+                  <th>Authors</th>
+                  <th>Reevaluate paper</th>
+                  <th>Asign final reviewer</th>
+                  <th>Give final review</th>
+              </tr>
+              <tr>
+                  <td>1</td>
+                  <td>Cum sa mergi la mare?</td>
+                  <td>Mare</td>
+                  <td>A merge;Mare</td>
+                  <td>ghitaBarosanul</td>
+                  <td><button class="reevaluatePaperButton">Reevaluate</button></td>
+                  <td><button class="asignFinalReviewerButton">Asign</button></td>
+                  <td><button class="giveFinalReviewButton">Final Reviewer</button></td>
+              </tr>
+          </table>
+          <br>
+      </div>
+    </div>
+</div>
 
-<p>Assign final reviewer: </p>
-<button id="finalReviewer">Assign</button><br>
 
 <!-- The Modal for the Reevaluation of the proposal  -->
-<div id="myModalReevalChair" class="modal">
+<div id="myModalReeval" class="modal">
 
   <!-- Modal content -->
   <div class="modal-content">
@@ -50,30 +60,8 @@
     <div>
       <p>Confirm reevaluation of the selected paper?</p>
       <form action="">
-        <input type="radio" name="reeval" value="yes"> Yes<br>
-        <input type="radio" name="gender" value="no"> No<br>
-      </form>
-      <br>
-      <button id="submitReevalChair">Submit</button><br>  
-    </div>
-    
-  </div>
- </div>
-
- <!-- The Modal for the the final review of the proposal  -->
-<div id="myModalFinalRevChair" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="closeButton" id="closeFinalRevChair">&times;</span>
-    <div>
-      <div id="detailedPapersChair" class="paperDetails">
-      Details of the clicked paper
-      </div>
-      <p>Confirm final review of the selected paper</p>
-      <form action="">
-        <input type="radio" name="finalRev" value="accept"> Accept<br>
-        <input type="radio" name="finalRev" value="reject"> Reject<br>
+        <input id="yesRadioBoxReevalModal" type="radio" name="reeval" value="yes"> Yes<br>
+        <input id="noRadioBoxReevalModal" type="radio" name="gender" value="no"> No<br>
       </form>
       <br>
       <button id="submitReeval">Submit</button><br>  
@@ -82,39 +70,60 @@
   </div>
  </div>
 
-<!-- The Modal for the final reviewer -->
-<div id="myModalFinalReviewerChair" class="modal">
+ <!-- The Modal for the the final review of the proposal  -->
+<div id="myModalFinalRev" class="modal">
 
   <!-- Modal content -->
   <div class="modal-content">
-    <span class="closeButton" id="closeFinalReviewerChair">&times;</span>
+    <span class="closeButton" id="closeFinalRev">&times;</span>
     <div>
-      <table id="finalReviewersChair" style="width:50%">
-        <caption>Available reviewers for the final evaluation</caption>
-      <tr>
-      <th>Reviewer</th>
-      <th>Bidding rating</th>
-      </tr>
-      <tr>
-      <td>
-        lala
-      </td>
-      <td>
-        lala
-      </td>
-      </tr>
-    </table>
-    <br>
-    <button id="submitReviewerChair">Submit</button><br>  
-
-
+      <div id="detailedPapers" class="paperDetails">
+      Details of the clicked paper
+      </div>
+      <p>Confirm final review of the selected paper</p>
+      <form action="">
+        <input id="accpetRadioBoxFinalRevModal" type="radio" name="finalRev" value="accept"> Accept<br>
+        <input id="rejectRadioBoxReevalModal"type="radio" name="finalRev" value="reject"> Reject<br>
+      </form>
+      <br>
+      <button id="submitFinalRev">Submit</button><br>
     </div>
+    
   </div>
+ </div>
 
+<!-- The Modal for the final reviewer -->
+<div id="myModalFinalReviewer" class="modal ">
+
+<!-- Modal content -->
+    <div class="modal-content ">
+        <span class="closeButton" id="closeFinalReviewer">&times;</span>
+        <div>
+            <table id="finalReviewers" style="width:50%">
+                <caption>Available reviewers for the final evaluation</caption>
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Name</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>ghitaBarosanul</td>
+                    <td>Ghita</td>
+                </tr>
+                <tr class="selected"><!--Tr selectat are class selected in el.. Sa faci sa
+                fie un pic diferit la ceva.. sa se cunoasca ca e selectat-->
+                    <td>2</td>
+                    <td>ghitaBarosanul2</td>
+                    <td>Ghita2</td>
+                </tr>
+            </table>
+            <br>
+            <button id="submitFinalReviewer">Submit</button><br>
+        </div>
+    </div>
 </div>
 
-
-</div>
 
 </body>
 </html>

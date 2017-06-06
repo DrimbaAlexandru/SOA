@@ -2,80 +2,93 @@
 <html>
 <head>
 <link rel="stylesheet" href="css/design.css" />
+	<script src="js/lib/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-<div>
-	<table id="biddedPapersTable" style="width:50%">
-		<caption>Your bidded papers</caption>
-  	<tr>
-    <th>Proposal Name</th>
-    <th>Keywords</th> 
-    <th>Topics</th>
-    <th>Authors</th>
-  	</tr>
-  	<tr>
-  	<td>
-  		lala
-  	</td>
-  	<td>lalalaal</td>
-  	<td>
-  		lala
-  	</td>
-  	<td>
-  		lala
-  	</td>
-  	</tr>
- 	</table>
-</div>
-<br>
-<div>
-	<table id="forBidPapersTable" style="width:50%">
-		<caption>Papers for bid</caption>
-  	<tr>
-    <th>Proposal Name</th>
-    <th>Keywords</th> 
-    <th>Topics</th>
-    <th>Authors</th>
-  	</tr>
-  	<tr>
-  	<td>
-  		lala
-  	</td>
-  	<td>lalalaal</td>
-  	<td>
-  		lala
-  	</td>
-  	<td>
-  		lala
-  	</td>
-  	</tr>
- 	</table>
 
+<div id="content">
+
+    <div id="left">
+        <div id="menu">
+            <ul>
+                <li><a href="#">Menu Item 1</a></li>
+                <li><a href="#">Menu Item 2</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="right">
+
+        <h1>You can bid papers here!</h1>
+        <div>
+            <table id="biddedPapersTable" style="width:50%">
+                <caption>Your bidded papers</caption>
+                <tr>
+                    <th>Id</th>
+                    <th>Proposal Name</th>
+                    <th>Keywords</th>
+                    <th>Topics</th>
+                    <th>Authors</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Cum sa mergi la mare?</td>
+                    <td>mare</td>
+                    <td>A merge; Mare</td>
+                    <td>ghitaBarosanul</td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div>
+            <table id="forBidPapersTable" style="width:50%">
+                <caption>Papers for bid</caption>
+                <tr>
+                    <th>Id</th>
+                    <th>Proposal Name</th>
+                    <th>Keywords</th>
+                    <th>Topics</th>
+                    <th>Authors</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Cum sa mergi la mare? (partea a II-a)</td>
+                    <td>mare</td>
+                    <td>A merge; Mare</td>
+                    <td>ghitaBarosanul</td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
 </div>
+
+
+
 <!-- Modal for bidding-->
- <div id="myModalBid" class="modal">
+<div id="myModalBid" class="modal">
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span id="closeBid" class="closeButton">&times;</span>
+<!-- Modal content -->
+    <div class="modal-content">
+        <span id="closeBid" class="closeButton">&times;</span>
+        <span>Bid for <span id="paperNameModalBidSpan">#paperName</span></span>
+        <div id="paperDetailsUnreviewedPapersModal" class="paperDetails">
+            Details of the clicked paper
+            <br>
+            <span>#details</span>
+        </div>
+        <div>
+            <form action="">
+                <input type="radio" name="bid" value="yes"> Yes<br>
+                <input type="radio" name="bid" value="maybe" checked="checked"> Maybe<br>
+                <input type="radio" name="bid" value="no"> No<br>
+            </form>
 
-    <div id="detailedPapers" class="paperDetails">
-    	<p>Details of the clicked paper</p>
+        </div>
+        <br>
+        <button id="saveBid">Save Bid</button>
+
     </div>
-    <br>
-    <div>
-    	<form action="">
-  			<input type="radio" name="bid" value="yes"> Yes<br>
-  			<input type="radio" name="bid" value="maybe"> Maybe<br>
-  			<input type="radio" name="bid" value="no"> No
-		</form>
-
-    </div>
-    <br>
-    <button id="saveBid">Save Bid</button>
- 
-  </div>
- </div>
+</div>
 
 
 </body>
