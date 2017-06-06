@@ -24,7 +24,7 @@ return 'resp'=>
 
 
 
-//getConference
+//getConference privileges
 users/privileges?conferenceId=id GET
 return 
 'resp' => {

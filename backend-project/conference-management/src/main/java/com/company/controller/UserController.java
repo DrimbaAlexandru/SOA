@@ -48,7 +48,7 @@ public class UserController {
              HttpServletResponse response)
     {
         ResponseJSON<String> resp=new ResponseJSON<>();
-        resp.setResp("GAY PORN");
+        resp.setResp("some response");
         Exceptional<AppUser> ex = service.getUser(body.getUsername());
         ex.error(e -> resp.addError(e.getMessage()))
             .ok(e -> {

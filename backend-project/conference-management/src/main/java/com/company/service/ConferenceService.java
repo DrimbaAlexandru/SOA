@@ -28,24 +28,24 @@ public interface ConferenceService {
 
     /**
      *
-     * @param id conference id
+     * @param confId conference id
      * @param c new conference
      * @return updated conference
      */
-    Exceptional<Conference> updateConference(int id, Conference c);
+    Exceptional<Conference> updateConference(int confId, Conference c);
 
     /**
      *
-     * @param id conference id
+     * @param confId conference id
      * @return deleted conference
      */
-    Exceptional<Conference> removeConference(int id);
+    Exceptional<Conference> removeConference(int confId);
 
     /**
      *
      * @param confId conference Id
      * @return all sessions of the conference
      */
-    Iterable<Session> getSessions(int confId);
+    Exceptional<Iterable<Session>> getSessions(int confId);
 
 }
