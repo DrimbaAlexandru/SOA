@@ -1,80 +1,84 @@
 package com.company.service;
 
+import com.company.controller.DTOs.FilePostDTO;
 import com.company.domain.AppUser;
 import com.company.domain.Paper;
-import com.company.domain.Review;
-import com.company.repository.PaperRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.company.domain.PaperStatus;
+import com.company.domain.UploadedFile;
+import com.company.utils.exception.Exceptional;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 /**
- * Created by David on 6/5/2017.
+ * Created by Alex on 07.06.2017.
  */
+public interface PaperService {
 
-@Component
-public class PaperService {
+    /**
+     * @return Collection of all papers
+     */
+    Iterable<Paper> getAll();
 
-    private PaperRepository repository;
+    /**
+     * @param p the paper to be inserted
+     * @return Exceptional containing the newly inserted paper or an exception
+     */
+    Exceptional<Paper> addPaper(Paper p);
 
-
-    public PaperService(@Autowired PaperRepository repository){
-        this.repository=repository;
-    }
-
-    public Paper getPaper(Integer id){
-        return repository.findOne(id);
-    }
-
-    public Paper addPaper(Paper p){
-        repository.save(p);
-        return p;
-    }
-
-    public Iterable<Paper> getAll(){
-        return repository.findAll();
-    }
-
-    public Iterable<Paper> getPapersConference(Integer conferenceId){
-        return repository.findAll();
-    }
-
-    public void UploadFullPaperFile(Integer id){
-
-        repository.findOne(id).setFullPapers(null);
-    }
-
-    public Set<AppUser> getPotentialReviewrs(Integer id){
-        Set<Review> reviews=repository.findOne(id).getReviews();
-        Set<AppUser> users=new HashSet<>();
-        for(Review r :reviews){
-            users.add(r.getReviewer());
-        }
-        return users;
-    }
-
-    public Set<Review> getAssignedReviewrs(Integer id){
-        //Set<Review> reviews=repository.findOne(id).
-        return null;
-    }
-
-    public Set<Paper> getAcceptedProporsal(){
-        Set<Paper> papers=new HashSet<>();
-        for(Paper paper:repository.findAll()){
-            if(paper.getStatus().getNume().compareTo("Accepted")==0){
-                papers.add(paper);
-            }
-        }
-        return papers;
-    }
-
-    public void setFinalEvaluator(Integer id,Integer idEval){
-        //repository.findOne(id).
-    }
+    /**
+     * @param p the paper to be replaced with
+     * @param oldId the replaced paper's ID
+     * @return Exceptional containing the newly updated paper or an exception
+     */
+    Exceptional<Paper> updatePaper(int oldId, Paper p);
 
 
+    /**
+     * @param paperId the paper which the file is added to
+     * @param type document's extension
+     * @param data document's raw bytes
+     * @param fileType File's type regarding the paper (FullPaper, Abstract, Presentation)
+     * @return Exceptional containing the newly uploaded UploadedFile or an exception
+     */
+    Exceptional<UploadedFile> addFile(int paperId, String type, byte[] data, String fileType);
 
+    /**
+     * @param status Paper status
+     * @return Get all papers with given status
+     */
+    Iterable<Paper> getByStatus(String status);
+
+    /**
+     * @param paperId
+     * @return Exceptional containing a collection of potential reviewers or an exception
+     */
+    Exceptional<Iterable<AppUser>> getPotentialReviewers(int paperId);
+
+    /**
+     * @param paperId
+     * @return Exceptional containing a collection of assigned reviewers or an exception
+     */
+    Exceptional<Iterable<AppUser>> getAssignedReviewers(int paperId);
+
+    /**
+     * @param paperId
+     * @param fileType File's type regarding the paper (FullPaper, Abstract, Presentation)
+     * @return Latest file of the given type of the given paper
+     */
+    Exceptional<UploadedFile> getFiles(int paperId,String fileType);
+
+    /**
+     * @param paperId
+     * @return exception if paperId is not k
+     */
+    Exceptional<Void> setPaperStatus(int paperId, PaperStatus status);
+
+    /**
+     * @param paperId
+     * @param u
+     * @return Clears all the reviews, sets the paper's status to WAITING_FOR_REVIEW
+     * and designates a reviewer to give the final review or exception
+     */
+    Exceptional<Void> setFinalEvaluator(int paperId, AppUser u);
 
 }
