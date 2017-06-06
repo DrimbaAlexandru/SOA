@@ -3,6 +3,7 @@ package com.company.service;
 import com.company.domain.UploadedFile;
 import com.company.repository.UploadedFileRepository;
 import com.company.utils.RemoteFileManager;
+import com.company.utils.exception.Exceptional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,22 +26,23 @@ public class UploadedFileServiceImpl implements UploadedFileService{
     }
 
     @Override
-    public Optional<UploadedFile> uploadFile(String path, byte[] data) {
+    public Exceptional<UploadedFile> uploadFile(String path, byte[] data) {
         Optional<String> filename = uploader.uploadFile(path, data);
 
         if(!filename.isPresent()) {
-            return Optional.empty();
+            return Exceptional.Error(new Exception("Error occured when uploading file"));
         }
 
         UploadedFile file = new UploadedFile(filename.get(), filename.get(), new Date());
         file = repo.save(file);
 
-        return Optional.of(file);
+        return Exceptional.OK(file);
     }
 
     @Override
-    public void saveUploadedFileData(UploadedFile file) {
+    public Exceptional<Void> saveUploadedFileData(UploadedFile file) {
         repo.save(file);
+        return Exceptional.OK(null);
     }
 
 }

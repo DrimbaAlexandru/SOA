@@ -4,9 +4,12 @@ import com.company.domain.*;
 import com.company.repository.ConferenceRepository;
 import com.company.repository.PaperRepository;
 import com.company.repository.UserRepository;
+import com.company.utils.container.Container;
+import com.company.utils.exception.Exceptional;
 import com.company.utils.updater.PrivilegesGettersAndSetters;
 import com.company.utils.updater.Updater;
 import com.company.utils.updater.UsersGettersAndSetters;
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -58,20 +61,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<AppUser> getUser(String username) {
+    public Exceptional<AppUser> getUser(String username) {
         AppUser usr = userRepository.findByUsername(username);
-        return usr == null? Optional.empty() : Optional.of(usr);
+
+        Exceptional exp = Exceptional.OK("CACAA");
+
+        return usr == null?
+                Exceptional.Error(new Exception("Username not found")) :
+                Exceptional.OK(usr);
     }
 
     @Transactional
     @Override
-    public Optional<Privileges> getConferencePrivileges(String username, int confId) {
-        Optional<AppUser> opt = getUser(username);
+    public Exceptional<Privileges> getConferencePrivileges(String username, int confId) {
+        AppUser au = userRepository.findByUsername(username);
 
-        return opt.isPresent()? opt.get().getPrivileges()
+
+        return au != null? Exceptional.OK(au.getPrivileges()
                 .stream()
                 .filter(e -> e.getConference().getId() == confId)
-                .reduce((a, b) -> a) : Optional.empty();
+                .reduce((a, b) -> a).get()) :
+                Exceptional.Error(new Exception("Username not found"));
     }
 
     @Override
@@ -80,210 +90,248 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<AppUser> addUser(AppUser u) {
+    public Exceptional<AppUser> addUser(AppUser u) {
         // Encrypt password
         u.setPassword(encoder.encode(u.getPassword()));
-        return Optional.of(userRepository.save(u));
+        try {
+            return Exceptional.OK(userRepository.save(u));
+        }catch(Exception e) {
+            return Exceptional.Error(e);
+        }
     }
 
     @Override
-    public Optional<AppUser> updateUser(String username, AppUser u) {
+    public Exceptional<AppUser> updateUser(String username, AppUser u) {
 
-        Optional<AppUser> au = getUser(username);
+        AppUser au = userRepository.findByUsername(username);
         u.setPassword(encoder.encode(u.getPassword()));
-        au.ifPresent(e -> {
-            updater.update(e, u, usersGettersAndSetters.getGettersAndSetters());
-            this.userRepository.save(e);
-        });
-        return au;
+        if(au == null) {
+            return Exceptional.Error(new Exception("Username not found"));
+        }
+        updater.update(au, u, usersGettersAndSetters.getGettersAndSetters());
+        this.userRepository.save(au);
+        return Exceptional.OK(au);
     }
 
     @Transactional
     @Override
-    public void updatePrivilegesOfConference(String username, int confId, Privileges newPrivs) {
-        Optional<AppUser> au = getUser(username);
+    public Exceptional<Void> updatePrivilegesOfConference(String username, int confId, Privileges newPrivs) {
+        AppUser e = userRepository.findByUsername(username);
 
-        au.ifPresent(e -> {
-            Optional<Privileges> privs = e.getPrivileges()
-                    .stream()
-                    .filter(f -> f.getConference().getId().equals(confId))
-                    .reduce((a, b) -> a);
+        if(e == null) {
+            return Exceptional.Error(new Exception("Username not found"));
+        }
 
-            if(privs.isPresent()) {
-                Privileges privileges = privs.get();
-                updater.update(privileges, newPrivs, privilegesGettersAndSetters.getGettersAndSetters());
-            } else {
-                Conference conf = conferenceRepository.findOne(confId);
-                if(conf == null) {
-                    // If the conference does not exist, return
-                    return;
-                }
-                // Create new privileges with the data given if no privileges found
-                Privileges privileges = new Privileges(e, conf);
-                updater.update(privileges, newPrivs, privilegesGettersAndSetters.getGettersAndSetters());
-                e.getPrivileges().add(privileges);
+        Optional<Privileges> privs = e.getPrivileges()
+                .stream()
+                .filter(f -> f.getConference().getId().equals(confId))
+                .reduce((a, b) -> a);
+
+        if(privs.isPresent()) {
+            Privileges privileges = privs.get();
+            updater.update(privileges, newPrivs, privilegesGettersAndSetters.getGettersAndSetters());
+        } else {
+            Conference conf = conferenceRepository.findOne(confId);
+            if(conf == null) {
+                // If the conference does not exist, return
+                return Exceptional.Error(new Exception("Conference not found"));
             }
-            userRepository.save(e);
-        });
+            // Create new privileges with the data given if no privileges found
+            Privileges privileges = new Privileges(e, conf);
+            updater.update(privileges, newPrivs, privilegesGettersAndSetters.getGettersAndSetters());
+            e.getPrivileges().add(privileges);
+        }
+        userRepository.save(e);
+
+        return Exceptional.OK(null);
     }
 
     @Transactional
     @Override
-    public Optional<Iterable<Paper>> getPapersOfStatus(String username, PaperStatus status) {
-        Optional<AppUser> opt = getUser(username);
+    public Exceptional<Iterable<Paper>> getPapersOfStatus(String username, PaperStatus status) {
+        AppUser au = userRepository.findByUsername(username);
 
-        return opt.isPresent()?
-            Optional.of(
-                opt.get().getSubmittedPapers()
+        return au != null?
+            Exceptional.OK(
+                au.getSubmittedPapers()
                     .stream()
                     .filter(e -> e.getStatus().equals(status))
                     .collect(Collectors.toList())
-            ) : Optional.empty();
+            ) : Exceptional.Error(new Exception("User not found"));
     }
 
     @Transactional
     @Override
-    public Optional<Iterable<Review>> getReviewsOfPaper(String username, int paperId) {
-        Optional<AppUser> opt = getUser(username);
+    public Exceptional<Iterable<Review>> getReviewsOfPaper(String username, int paperId) {
+        AppUser au = userRepository.findByUsername(username);
 
-        if(!opt.isPresent()) {
-            return Optional.empty();
+        if(au == null) {
+            return Exceptional.Error(new Exception("Username not found"));
         }
 
-        Optional<Paper> paperOpt = opt.get().getSubmittedPapers()
+        Optional<Paper> paperOpt = au.getSubmittedPapers()
                 .stream()
                 .filter(e -> e.getId() == paperId)
                 .reduce((a ,b) -> a);
 
-        Optional<Iterable<Review>> result = Optional.empty();
-
         if(paperOpt.isPresent()) {
-            result = Optional.of(new ArrayList<>(paperOpt.get().getReviews()));
+            return Exceptional.OK(new ArrayList<>(paperOpt.get().getReviews()));
+        } else {
+            return Exceptional.Error(new Exception("No papers found for the given user"));
         }
-
-        return result;
     }
 
     @Transactional
     @Override
-    public void addBidForPaper(String username, int paperId, BidStatus status) {
+    public Exceptional<Void> addBidForPaper(String username, int paperId, BidStatus status) {
         Paper pap = paperRepository.findOne(paperId);
         if(pap == null)
-            throw new RuntimeException();
+            return Exceptional.Error(new Exception("No paper found"));
 
-        Optional<AppUser> uopt = getUser(username);
-        uopt.ifPresent(user -> {
-            // If bid for paper already exists, update it
-            Optional<Bid> bidopt = user.getBids().stream()
-                    .filter(e -> e.getPaper().getId().equals(paperId))
-                    .reduce((a, b) -> a);
+        AppUser user = userRepository.findByUsername(username);
 
-            if(bidopt.isPresent()) {
-                // Update bid status
-                bidopt.get().setStatus(status);
-            } else {
-                // Create new bid
-                Bid b = new Bid();
-                b.setBidder(user);
-                b.setPaper(pap);
-                b.setStatus(status);
-                user.getBids().add(b);
-            }
+        if(user == null) {
+            return Exceptional.Error(new Exception("User not found"));
+        }
 
-            userRepository.save(user);
-        });
+        // If bid for paper already exists, update it
+        Optional<Bid> bidopt = user.getBids().stream()
+                .filter(e -> e.getPaper().getId().equals(paperId))
+                .reduce((a, b) -> a);
+
+        if(bidopt.isPresent()) {
+            // Update bid status
+            bidopt.get().setStatus(status);
+        } else {
+            // Create new bid
+            Bid b = new Bid();
+            b.setBidder(user);
+            b.setPaper(pap);
+            b.setStatus(status);
+            user.getBids().add(b);
+        }
+
+        userRepository.save(user);
+
+        return Exceptional.OK(null);
     }
 
     @Override
-    public void uploadPresentation(String username, int paperId, String extension, byte[] presentationFileData) {
+    public Exceptional<Void> uploadPresentation(String username, int paperId, String extension, byte[] presentationFileData) {
         // Save no paper from a non-existant user
         if(!userRepository.userExists(username))
-            return;
+            return Exceptional.Error(new Exception("User not found"));
         // Generate a filename
         String filePath = "/" + username + "--" + random.nextLong() + extension;
         Paper pap = paperRepository.findOne(paperId);
         if(pap == null) {
             // Return if no paper found
-            return;
+            return Exceptional.Error(new Exception("No paper found"));
         }
-        Optional<UploadedFile> file = uploadedFileService.uploadFile(filePath, presentationFileData);
-        file.ifPresent(uf -> {
-            uf.setPaperIsPresentationFor(pap);
-            uploadedFileService.saveUploadedFileData(uf);
+        Exceptional<UploadedFile> file = uploadedFileService.uploadFile(filePath, presentationFileData);
+        Container<UploadedFile> cont = new Container<>(null);
+        StringBuilder errors = new StringBuilder();
+        file.error(e -> {
+            errors.append(e.getMessage());
+        }).ok(e -> {
+            cont.setValue(e);
         });
+
+        if(errors.length() != 0) {
+            return Exceptional.Error(new Exception(errors.toString()));
+        } else {
+            cont.getValue().setPaperIsPresentationFor(pap);
+            uploadedFileService.saveUploadedFileData(cont.getValue());
+            return Exceptional.OK(null);
+        }
     }
 
     @Override
-    public Optional<Iterable<Paper>> getAssignedPapers(String username) {
+    public Exceptional<Iterable<Paper>> getAssignedPapers(String username) {
         Iterable<Paper> res = userRepository.getAssignedPapers(username);
-        return userRepository.userExists(username)? Optional.of(res) : Optional.empty();
+        return !userRepository.userExists(username)?
+                Exceptional.Error(new Exception("Username not found")) :
+                Exceptional.OK(res);
     }
 
     @Override
-    public Optional<Bid> getBidOfPaper(String username, int paperId) {
+    public Exceptional<Bid> getBidOfPaper(String username, int paperId) {
         Bid b = userRepository.getBidOfPaper(username, paperId);
-        return b == null? Optional.empty() : Optional.of(b);
+        return b == null? Exceptional.Error(new Exception("Bid not found")) :
+                Exceptional.OK(b);
     }
 
     @Transactional
     @Override
-    public void assignPaper(String username, int paperId) {
-        Optional<AppUser> usrOpt = getUser(username);
-        usrOpt.ifPresent(e -> {
-            Paper p = paperRepository.findOne(paperId);
-            if(p != null) {
-                e.getAssignedForReview().add(p);
-                userRepository.save(e);
-            }
-        });
+    public Exceptional<Void> assignPaper(String username, int paperId) {
+        AppUser user = userRepository.findByUsername(username);
+        if(user == null) {
+            return Exceptional.Error(new Exception("Username not found"));
+        }
+
+        Paper p = paperRepository.findOne(paperId);
+        if(p == null) {
+            return Exceptional.Error(new Exception("Paper not found"));
+        }
+        user.getAssignedForReview().add(p);
+        userRepository.save(user);
+        return Exceptional.OK(null);
     }
 
     @Transactional
     @Override
-    public void removeAssignedPaper(String username, int paperId) {
-        Optional<AppUser> usrOpt = getUser(username);
-        usrOpt.ifPresent(e -> {
-            Paper p = paperRepository.findOne(paperId);
-            if(p != null) {
-                e.getAssignedForReview().removeIf(f -> f.getId().equals(paperId));
-                userRepository.save(e);
-            }
-        });
+    public Exceptional<Void> removeAssignedPaper(String username, int paperId) {
+        AppUser user = userRepository.findByUsername(username);
+        if(user == null) {
+            return Exceptional.Error(new Exception("Username not found"));
+        }
+        Paper p = paperRepository.findOne(paperId);
+        if(p == null) {
+            return Exceptional.Error(new Exception("Paper not found"));
+        }
+        user.getAssignedForReview().removeIf(f -> f.getId().equals(paperId));
+        userRepository.save(user);
+        return Exceptional.OK(null);
     }
 
     @Override
-    public Optional<Iterable<Paper>> getSubmittedPapers(String username) {
+    public Exceptional<Iterable<Paper>> getSubmittedPapers(String username) {
         Iterable<Paper> res = userRepository.getSubmittedPapers(username);
-        return !userRepository.userExists(username)? Optional.empty() : Optional.of(res);
+        return !userRepository.userExists(username)? Exceptional.Error(new Exception("User not found")) :
+                Exceptional.OK(res);
     }
 
     @Transactional
     @Override
-    public void addReviewToPaper(String username, int paperId, ReviewStatus status, String justification) {
-        Optional<AppUser> au = getUser(username);
-        au.ifPresent(e -> {
-            Paper p = paperRepository.findOne(paperId);
+    public Exceptional<Void> addReviewToPaper(String username, int paperId, ReviewStatus status, String justification) {
+        AppUser user = userRepository.findByUsername(username);
 
-            if(p == null)
-                // If the paper does not exist, abort
-                throw new RuntimeException();
+        if(user == null) {
+            return Exceptional.Error(new Exception("User not found"));
+        }
 
-            if(e.getSubmittedPapers()
-                    .stream()
-                    .filter(f -> f.getId().equals(paperId))
-                    .count() >= 1) {
+       Paper p = paperRepository.findOne(paperId);
 
-                // If the paper is submitted by this user, abort
-                return;
-            }
+        if(p == null)
+            // If the paper does not exist, abort
+            throw new RuntimeException();
 
-            Review rev = new Review();
-            rev.setPaper(p);
-            rev.setReviewer(e);
-            rev.setStatus(status);
+        if(user.getSubmittedPapers()
+                .stream()
+                .filter(f -> f.getId().equals(paperId))
+                .count() >= 1) {
 
-            e.getReviews().add(rev);
-            userRepository.save(e);
-        });
+            // If the paper is submitted by this user, abort
+            return Exceptional.Error(new Exception("Paper not submitted by user"));
+        }
+
+        Review rev = new Review();
+        rev.setPaper(p);
+        rev.setReviewer(user);
+        rev.setStatus(status);
+
+        user.getReviews().add(rev);
+        userRepository.save(user);
+        return Exceptional.OK(null);
     }
 }

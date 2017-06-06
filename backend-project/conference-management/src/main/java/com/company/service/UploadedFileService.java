@@ -1,6 +1,7 @@
 package com.company.service;
 
 import com.company.domain.UploadedFile;
+import com.company.utils.exception.Exceptional;
 
 import java.util.Optional;
 
@@ -15,8 +16,8 @@ public interface UploadedFileService {
      * @param data The data
      * @return The file's metadata if upload succeeds. Optional.empty() otherwise
      */
-    Optional<UploadedFile> uploadFile(String path, byte[] data);
+    Exceptional<UploadedFile> uploadFile(String path, byte[] data);
 
-    void saveUploadedFileData(UploadedFile data);
+    Exceptional<Void> saveUploadedFileData(UploadedFile data);
 
 }

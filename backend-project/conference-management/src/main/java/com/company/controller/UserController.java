@@ -3,10 +3,12 @@ package com.company.controller;
 import com.company.domain.*;
 import com.company.service.UserService;
 import com.company.utils.ResponseJSON;
+import com.company.utils.exception.Exceptional;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.method.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -47,11 +49,12 @@ public class UserController {
     {
         ResponseJSON<String> resp=new ResponseJSON<>();
         resp.setResp("GAY PORN");
-            if(!service.getUser(body.getUsername()).isPresent())
-                resp.addError("The requested user doesn't exist");
-            else
-            if(!service.login(body.getUsername(),body.getPassword()))
-                resp.addError("Incorrect password");
+        Exceptional<AppUser> ex = service.getUser(body.getUsername());
+        ex.error(e -> resp.addError(e.getMessage()))
+            .ok(e -> {
+                if(!service.login(body.getUsername(),body.getPassword()))
+                    resp.addError("Incorrect password");
+            });
 
         if(resp.getErrors().size()==0) {
             setCookie("username",body.getUsername(),3600,response);
@@ -73,8 +76,12 @@ public class UserController {
         loggedInResponse lir=new loggedInResponse();
         if(service.login(usernameCookie,passwordCookie))
         {
-            lir.setCommiteeMember(service.getUser(usernameCookie).get().getIsCometeeMember());
-            lir.setSuperUser(service.getUser(usernameCookie).get().getIsSuperUser());
+            Exceptional<AppUser> au = service.getUser(usernameCookie);
+            au.error(e -> resp.addError(e.getMessage()))
+                .ok(e -> {
+                    lir.setCommiteeMember(e.getIsCometeeMember());
+                    lir.setSuperUser(e.getIsSuperUser());
+                });
         }
         else
         {
@@ -93,16 +100,15 @@ public class UserController {
         ResponseJSON<ConferencePrivileges> resp=new ResponseJSON<>();
         resp.getErrors().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getErrors());
         resp.getWarnings().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getWarnings());
-        ConferencePrivileges body=new ConferencePrivileges();
         if(resp.getErrors().size()==0)
         {
-            if(service.getConferencePrivileges(usernameCookie,id).isPresent())
-                body=new ConferencePrivileges(service.getConferencePrivileges(usernameCookie,id).get());
-            else{
-                resp.addError("Conference ID isn't valid");
-            }
+            Exceptional<Privileges> privs = service.getConferencePrivileges(usernameCookie, id);
+            privs.error(e -> {
+                resp.addError(e.getMessage());
+            }).ok(e -> {
+                resp.setResp(new ConferencePrivileges(e));
+            });
         }
-        resp.setResp(body);
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
@@ -111,16 +117,18 @@ public class UserController {
             @CookieValue(value = "username", defaultValue = "") String usernameCookie,
             @CookieValue(value = "password", defaultValue = "") String passwordCookie)
     {
-        UserResponse body=new UserResponse();
         ResponseJSON<UserResponse> resp=new ResponseJSON<>();
         resp.getErrors().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getErrors());
         resp.getWarnings().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getWarnings());
         if(resp.getErrors().size()==0)
         {
-            AppUser u = service.getUser(usernameCookie).get();
-            body=new UserResponse(u);
+            Exceptional<AppUser> u = service.getUser(usernameCookie);
+            u.error(e -> {
+                resp.addError(e.getMessage());
+            }).ok(e -> {
+                resp.setResp(new UserResponse(e));
+            });
         }
-        resp.setResp(body);
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
@@ -155,23 +163,26 @@ public class UserController {
     {
         ResponseJSON<String> resp=new ResponseJSON<>("");
         resp.getErrors().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getErrors());
-        if(resp.getErrors().size()==0)
-            if((username.equals(usernameCookie)  &&
-                    (!service.getUser(body.getUsername()).isPresent() ||
-                            body.getUsername().equals(usernameCookie))) ||
-                    (service.getUser(usernameCookie).get().getIsSuperUser()))
-            {
-                service.updateUser(username,new AppUser(
-                        body.getUsername(),body.getName(),body.getAffiliation(),body.getEmail(),body.getWebsite(),
-                        body.getPassword(),false,body.getisCommiteeMember()));
-                if(!service.getUser(usernameCookie).get().getIsSuperUser()){
-                    setCookie("username",body.getUsername(),3600,response);
-                    setCookie("password",body.getPassword(),3600,response);
+        if(resp.getErrors().size()==0) {
+            Exceptional<AppUser> au = service.getUser(usernameCookie);
+            au.error(e -> {
+                resp.addError(e.getMessage());
+            }).ok(e -> {
+                if ((username.equals(usernameCookie) &&
+                        body.getUsername().equals(usernameCookie)) ||
+                        (e.getIsSuperUser())) {
+                    service.updateUser(username, new AppUser(
+                            body.getUsername(), body.getName(), body.getAffiliation(), body.getEmail(), body.getWebsite(),
+                            body.getPassword(), false, body.getisCommiteeMember()));
+                    if (!e.getIsSuperUser()) {
+                        setCookie("username", body.getUsername(), 3600, response);
+                        setCookie("password", body.getPassword(), 3600, response);
+                    }
+                } else {
+                    resp.addError("You don't have the permissions to do these changes!");
                 }
-            }
-            else {
-                resp.addError("You don't have the permissions to do these changes!");
-            }
+            });
+        }
         else {
             resp.addError("You don't have the permissions to do these changes!");
         }
@@ -188,22 +199,30 @@ public class UserController {
     {
         ResponseJSON<String> resp=new ResponseJSON<>("");
         resp.getErrors().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getErrors());
-        if(resp.getErrors().size()==0)
-            if(username.equals(usernameCookie) ||
-                    service.getUser(usernameCookie).get().getIsSuperUser())
-            {
-                Privileges priv=service.getConferencePrivileges(username,conferenceId).get();
-                if(body.getIsChair()!=null)
-                    priv.setIsChair(body.getIsChair());
-                if(body.getIsCoChair()!=null)
-                    priv.setIsCoChair(body.getIsCoChair());
-                if(body.getIsPCMember()!=null)
-                    priv.setIsPCMember(body.getIsPCMember());
-                service.updatePrivilegesOfConference(username,conferenceId,priv);
-            }
-            else {
-                resp.addError("You don't have the permissions to do these changes!");
-            }
+        if(resp.getErrors().size()==0) {
+            Exceptional<AppUser> au = service.getUser(usernameCookie);
+            au.error(e -> {
+                resp.addError(e.getMessage());
+            }).ok(e -> {
+                if (username.equals(usernameCookie) ||
+                        e.getIsSuperUser()) {
+                    Exceptional<Privileges> priv = service.getConferencePrivileges(username, conferenceId);
+                    priv.error(f -> {
+                        resp.addError(f.getMessage());
+                    }).ok(f -> {
+                        if (body.getIsChair() != null)
+                            f.setIsChair(body.getIsChair());
+                        if (body.getIsCoChair() != null)
+                            f.setIsCoChair(body.getIsCoChair());
+                        if (body.getIsPCMember() != null)
+                            f.setIsPCMember(body.getIsPCMember());
+                        service.updatePrivilegesOfConference(username, conferenceId, f);
+                    });
+                } else {
+                    resp.addError("You don't have the permissions to do these changes!");
+                }
+            });
+        }
         else {
             resp.addError("You don't have the permissions to do these changes!");
         }
@@ -220,10 +239,16 @@ public class UserController {
         resp.getErrors().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getErrors());
         List<submittedPaperResponse> papers=new ArrayList<>();
         resp.setResp(papers);
-        if(resp.getErrors().size()==0)
-            for(Paper p:service.getSubmittedPapers(usernameCookie).get())
-                if(p.getStatus().toString().equals(status) || status==null)
-                    papers.add(new submittedPaperResponse(p));
+        if(resp.getErrors().size()==0) {
+            Exceptional<Iterable<Paper>> paps = service.getSubmittedPapers(usernameCookie);
+            paps.error(e -> {
+                resp.addError(e.getMessage());
+            }).ok(e -> {
+                for (Paper p : e)
+                    if (p.getStatus().toString().equals(status) || status == null)
+                        papers.add(new submittedPaperResponse(p));
+            });
+        }
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
@@ -239,12 +264,16 @@ public class UserController {
         resp.setResp(reviews);
         boolean isMyPaper=false;
 
-        if(resp.getErrors().size()==0)
-            if(service.getReviewsOfPaper(usernameCookie,paperId).isPresent())
-                for(Review r: service.getReviewsOfPaper(usernameCookie,paperId).get())
+        if(resp.getErrors().size()==0) {
+            Exceptional<Iterable<Review>> revsOfPaper =
+                    service.getReviewsOfPaper(usernameCookie, paperId);
+            revsOfPaper.error(e -> {
+                resp.addError(e.getMessage());
+            }).ok(e -> {
+                for (Review r : e)
                     reviews.add(new reviewResponse(r));
-            else
-                resp.addError("The paper with the given ID doesn't have you as its author or doesn't exist");
+            });
+        }
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
@@ -260,13 +289,15 @@ public class UserController {
         body.setStatus("NONE");
         resp.setResp(body);
 
-        Optional<Bid> bid = service.getBidOfPaper(usernameCookie,paperId);
+        Exceptional<Bid> bid = service.getBidOfPaper(usernameCookie,paperId);
 
         if(resp.getErrors().size()==0)
-            if(bid.isPresent())
-                body.setStatus(bid.get().getStatus().name());
-            else
-                resp.addError("The paper with the given ID doesn't have you as its author or doesn't exist");
+            bid.error(e -> {
+                resp.addError(e.getMessage());
+            }).ok(e -> {
+                body.setStatus(e.getStatus().name());
+            });
+
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
@@ -281,22 +312,18 @@ public class UserController {
         resp.getErrors().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getErrors());
         resp.setResp("");
 
-        Optional<Bid> bid = service.getBidOfPaper(usernameCookie,paperId);
+        Exceptional<Bid> bid = service.getBidOfPaper(usernameCookie,paperId);
         if(resp.getErrors().size()==0)
-            if(!bid.isPresent()) {
-                try {
-                    service.addBidForPaper(usernameCookie, paperId, BidStatus.valueOf(request.getStatus()));
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                    resp.addError("The paper with the given ID doesn't exist");
-                }
-            }
-            else
-            {
+            bid.error(e -> {
+                Exceptional<Void> res = service.addBidForPaper(usernameCookie, paperId,
+                                BidStatus.valueOf(request.getStatus()));
+                res.error(f -> {
+                    resp.addError(f.getMessage());
+                });
+            }).ok(e -> {
                 resp.addError("The paper with the given ID already has a bid from you or doesn't exist");
-            }
+            });
+
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
@@ -311,8 +338,14 @@ public class UserController {
         resp.setResp(body);
         if(resp.getErrors().size()==0)
         {
-            for(Paper p:service.getAssignedPapers(usernameCookie).get())
-                body.add(new submittedPaperResponse(p));
+            Exceptional<Iterable<Paper>> pps = service.getAssignedPapers(usernameCookie);
+            pps.error(e -> {
+                resp.addError(e.getMessage());
+            }).ok(e -> {
+               for(Paper p: e) {
+                   body.add(new submittedPaperResponse(p));
+               }
+            });
         }
         return new ResponseEntity<ResponseJSON<Iterable<submittedPaperResponse>>>(resp,HttpStatus.OK);
     }
@@ -327,16 +360,17 @@ public class UserController {
         resp.getErrors().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getErrors());
         if(resp.getErrors().size()==0)
         {
-            Optional<Iterable<Review>> reviews=service.getReviewsOfPaper(usernameCookie,paperId);
-            if(reviews.isPresent())
-            {
-                if(reviews.get().iterator().hasNext())
-                    resp.setResp(new reviewResponse(reviews.get().iterator().next()));
-                else
+            Exceptional<Iterable<Review>> reviews=service.getReviewsOfPaper(usernameCookie,paperId);
+
+            reviews.ok(e -> {
+                if(e.iterator().hasNext()) {
+                    resp.setResp(new reviewResponse(e.iterator().next()));
+                } else {
                     resp.addError("The paper with the given ID doesn't have a review from this user");
-            }
-            else
-                resp.addError("The paper with the given ID doesn't exist");
+                }
+            }).error(e -> {
+                resp.addError(e.getMessage());
+            });
         }
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
