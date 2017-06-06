@@ -291,18 +291,16 @@ public class UserController {
     {
         ResponseJSON<bidResponse> resp=new ResponseJSON<>();
         resp.getErrors().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getErrors());
-        bidResponse body=new bidResponse();
-        body.setStatus("NONE");
-        resp.setResp(body);
+
 
         Exceptional<Bid> bid = service.getBidOfPaper(usernameCookie,paperId);
 
         if(resp.getErrors().size()==0)
             bid.error(e -> {
                 resp.addError(e.getMessage());
-            }).ok(e -> {
-                body.setStatus(e.getStatus().name());
-            });
+                resp.setResp(new bidResponse());
+            }).ok(b -> {
+                resp.setResp(new bidResponse(b));});
 
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
@@ -367,14 +365,10 @@ public class UserController {
         resp.getErrors().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getErrors());
         if(resp.getErrors().size()==0)
         {
-            Exceptional<Iterable<Review>> reviews=service.getReviewsOfPaper(usernameCookie,paperId);
+            Exceptional<Review> reviews=service.getReviewOfPaper(usernameCookie,paperId);
 
             reviews.ok(e -> {
-                if(e.iterator().hasNext()) {
-                    resp.setResp(new reviewResponse(e.iterator().next()));
-                } else {
-                    resp.addError("The paper with the given ID doesn't have a review from this user");
-                }
+                resp.setResp(new reviewResponse(e));
             }).error(e -> {
                 resp.addError(e.getMessage());
             });
@@ -734,12 +728,14 @@ class submittedPaperResponse
 
 class reviewResponse
 {
-    private String status="";
-    private String justification="";
+    private String status;
+    private String justification;
     public reviewResponse(Review r)
     {
+        if(r!=null){
         status=r.getStatus().name();
         justification=r.getJustification();
+        }
     }
 
     public reviewResponse(){}
@@ -756,6 +752,12 @@ class bidResponse
 {
     private String status;
     public bidResponse(){}
+
+    public bidResponse(Bid motherfucker)
+    {
+        if(motherfucker!=null)
+            status=motherfucker.getStatus().name();
+    }
 
     public String getStatus() {
         return status;
