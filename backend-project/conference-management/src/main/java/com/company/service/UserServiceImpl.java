@@ -10,6 +10,7 @@ import com.company.utils.updater.PrivilegesGettersAndSetters;
 import com.company.utils.updater.Updater;
 import com.company.utils.updater.UsersGettersAndSetters;
 import com.sun.javaws.exceptions.InvalidArgumentException;
+import org.apache.tomcat.util.security.PrivilegedSetTccl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -64,8 +65,6 @@ public class UserServiceImpl implements UserService {
     public Exceptional<AppUser> getUser(String username) {
         AppUser usr = userRepository.findByUsername(username);
 
-        Exceptional exp = Exceptional.OK("CACAA");
-
         return usr == null?
                 Exceptional.Error(new Exception("Username not found")) :
                 Exceptional.OK(usr);
@@ -74,14 +73,30 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public Exceptional<Privileges> getConferencePrivileges(String username, int confId) {
+
+        if(!conferenceRepository.exists(confId)) {
+            return Exceptional.Error(new Exception("Conference not found"));
+        }
+
         AppUser au = userRepository.findByUsername(username);
+        if(au == null) {
+            return Exceptional.Error(new Exception("User not found"));
+        }
 
-
-        return au != null? Exceptional.OK(au.getPrivileges()
+        Optional<Privileges> privs = au.getPrivileges()
                 .stream()
                 .filter(e -> e.getConference().getId() == confId)
-                .reduce((a, b) -> a).get()) :
-                Exceptional.Error(new Exception("Username not found"));
+                .reduce((a, b) -> a);
+
+        Privileges finalPrivs;
+
+        if(!privs.isPresent()) {
+            finalPrivs = new Privileges(au, conferenceRepository.findOne(confId));
+        } else {
+            finalPrivs = privs.get();
+        }
+
+        return Exceptional.OK(finalPrivs);
     }
 
     @Override
