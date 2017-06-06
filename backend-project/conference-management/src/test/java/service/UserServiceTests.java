@@ -68,6 +68,7 @@ public class UserServiceTests {
 
     }
 
+    /*
     //@Test
     public void testBidOnPaper() {
         service.addBidForPaper("Alex-D-TC", 2, BidStatus.PLEASED);
@@ -257,7 +258,7 @@ public class UserServiceTests {
 
         service.uploadPresentation("Alex-D-TC", 1, ".pdf", data);
 
-    }
+    }*/
 
     private boolean appUserEqual(AppUser a, AppUser b) {
         return a.getUsername().equals(b.getUsername()) &&
