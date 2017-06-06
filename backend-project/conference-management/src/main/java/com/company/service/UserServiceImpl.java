@@ -200,6 +200,26 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
+    public Exceptional<Review> getReviewOfPaper(String username, int paperId) {
+        AppUser au = userRepository.findByUsername(username);
+
+        if(au == null)
+            return Exceptional.Error(new Exception("Username not found"));
+
+        if(paperRepository.findOne(paperId)==null)
+            return Exceptional.Error(new Exception("Paper Id is not valid"));
+
+        Optional<Review> reviewOpt = au.getReviews().stream().filter(r->{return r.getPaper().getId()==paperId;}).findFirst();
+
+        if(reviewOpt.isPresent()) {
+            return Exceptional.OK(reviewOpt.get());
+        } else {
+            return Exceptional.OK(null);
+        }
+    }
+
+    @Transactional
+    @Override
     public Exceptional<Void> addBidForPaper(String username, int paperId, BidStatus status) {
         Paper pap = paperRepository.findOne(paperId);
         if(pap == null)
@@ -273,8 +293,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Exceptional<Bid> getBidOfPaper(String username, int paperId) {
+        if(userRepository.findByUsername(username)==null)
+            return Exceptional.Error(new Exception("User not found"));
+        if(paperRepository.findOne(paperId)==null)
+            return Exceptional.Error(new Exception("Paper not found"));
         Bid b = userRepository.getBidOfPaper(username, paperId);
-        return b == null? Exceptional.Error(new Exception("Bid not found")) :
+        return b == null? Exceptional.OK(null) :
                 Exceptional.OK(b);
     }
 
@@ -344,13 +368,22 @@ public class UserServiceImpl implements UserService {
         }
 
         Review rev = new Review();
-        rev.setPaper(p);
-        rev.setReviewer(user);
-        rev.setStatus(status);
-        rev.setJustification(justification);
-
-        user.getReviews().add(rev);
-        userRepository.save(user);
+        getReviewOfPaper(username,paperId).ok(r->
+        {
+            if(r==null){
+                rev.setPaper(p);
+                rev.setReviewer(user);
+                rev.setStatus(status);
+                rev.setJustification(justification);
+                user.getReviews().add(rev);
+                userRepository.save(user);
+            }
+            else
+            {
+                r.setJustification(justification);
+                r.setStatus(status);
+            }
+        });
         return Exceptional.OK(null);
     }
 }
