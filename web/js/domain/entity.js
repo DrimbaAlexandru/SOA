@@ -1,8 +1,9 @@
-var Conference = function(name= undefined, eventTimeSpan = undefined, callForAbstract = undefined, callForProposals = undefined, biddingDeadline = undefined){
+var Conference = function(id = undefined, name= undefined, eventTimeSpan = undefined, callForAbstract = undefined, callForProposals = undefined, biddingDeadline = undefined){
+	this.id = id;
 	this.name = name;
 	this.eventTimeSpan = eventTimeSpan;
-	this.callForAbstract = callForAbstract;
-	this.callForProposal = callForProposals;
+	this.callFroAbstractTimeSpan = callForAbstract;
+	this.callForProposalsTimeSpan = callForProposals;
 	this.biddingDeadline = biddingDeadline;
 };
 
@@ -11,14 +12,16 @@ var TimeSpan = function(startDate = undefined, endDate= undefined){
     this.endDate = endDate;
 }
 
-var User = function(id = undefined, name, date, email, affiliation, website, password=undefined, isCommiteeMember=undefined){
+var User = function(id = undefined, username, name, date, email, affiliation, website, password=undefined, isSuperUser=undefined, isCommiteeMember=undefined){
     this.id = id;
+    this.username = username;
 	this.name = name;
 	this.email = email;
 	this.affiliation = affiliation;
 	this.date = date;
-	this.webite = website;
+	this.website = website;
 	this.password = password;
+	this.isSuperUser = isSuperUser;
 	this.isCommiteeMember= isCommiteeMember;
 };
 
