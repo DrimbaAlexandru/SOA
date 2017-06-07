@@ -27,11 +27,6 @@ public interface ConferenceService {
      */
     Exceptional<Conference> addConference(Conference c);
 
-    /**
-     *
-     * @param c the conference
-     * @return created conference
-     */
     Exceptional<Conference> addConference(ConferenceDTO c);
 
     /**
@@ -41,6 +36,8 @@ public interface ConferenceService {
      * @return updated conference
      */
     Exceptional<Conference> updateConference(int confId, Conference c);
+
+    Exceptional<Conference> updateConference(int oldId, ConferenceDTO c);
 
     /**
      *

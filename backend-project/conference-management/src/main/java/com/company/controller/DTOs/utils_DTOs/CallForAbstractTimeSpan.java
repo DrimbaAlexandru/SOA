@@ -9,4 +9,5 @@ public class CallForAbstractTimeSpan extends TimeSpan{
     public CallForAbstractTimeSpan(Date startDate, Date endDate) {
         super(startDate, endDate);
     }
+    public CallForAbstractTimeSpan(){super();}
 }

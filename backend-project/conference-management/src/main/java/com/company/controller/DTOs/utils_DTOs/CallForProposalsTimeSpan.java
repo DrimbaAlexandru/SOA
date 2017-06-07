@@ -9,4 +9,5 @@ public class CallForProposalsTimeSpan extends TimeSpan{
     public CallForProposalsTimeSpan(Date startDate, Date endDate) {
         super(startDate, endDate);
     }
+    public CallForProposalsTimeSpan(){super();}
 }

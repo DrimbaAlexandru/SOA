@@ -23,6 +23,7 @@ public class ConferenceDTO {
         this.name = conf.getName();
         this.biddingDeadline = conf.getBiddingDeadline();
     }
+    public ConferenceDTO(){}
 
     public int getId() {
         return id;

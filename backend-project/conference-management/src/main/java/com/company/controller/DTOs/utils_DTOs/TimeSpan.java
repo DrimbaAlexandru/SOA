@@ -9,6 +9,8 @@ public class TimeSpan {
     Date startDate;
     Date endDate;
 
+    public TimeSpan(){}
+
     public TimeSpan(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;

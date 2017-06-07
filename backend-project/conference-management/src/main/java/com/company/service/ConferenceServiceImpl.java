@@ -69,6 +69,21 @@ public class ConferenceServiceImpl implements ConferenceService {
         this.conferenceRepository.save(c);
         return Exceptional.OK(conference);
     }
+    @Override
+    public Exceptional<Conference> updateConference(int oldId, ConferenceDTO c)
+    {
+        Conference old=conferenceRepository.findOne(oldId);
+        if(old==null)
+            return Exceptional.Error(new Exception("Paper with given id doesn't exist"));
+        else
+        {
+            Conference conference=new Conference(c.getName(),c.getEventTimeSpan().getStartDate(), c.getEventTimeSpan().getEndDate(), c.getCallForAbstractTimeSpan().getEndDate(), c.getCallForProposalsTimeSpan().getEndDate(), c.getBiddingDeadline());
+            conference.setId(null);
+            updater.<Conference>update(old,conference,conferencesGettersAndSetters.getGettersAndSetters());
+            this.conferenceRepository.save(old);
+            return Exceptional.OK(old);
+        }
+    }
 
     @Override
     public Exceptional<Conference> removeConference(int confId) {

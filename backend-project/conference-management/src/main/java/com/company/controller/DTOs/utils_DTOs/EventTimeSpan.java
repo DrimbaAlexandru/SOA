@@ -9,4 +9,5 @@ public class EventTimeSpan extends TimeSpan {
     public EventTimeSpan(Date startDate, Date endDate) {
         super(startDate, endDate);
     }
+    public EventTimeSpan(){super();}
 }
