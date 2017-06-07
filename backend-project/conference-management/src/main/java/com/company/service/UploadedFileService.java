@@ -1,5 +1,6 @@
 package com.company.service;
 
+import com.company.controller.DTOs.FileGetDTO;
 import com.company.domain.UploadedFile;
 import com.company.utils.exception.Exceptional;
 
@@ -20,4 +21,5 @@ public interface UploadedFileService {
 
     Exceptional<Void> saveUploadedFileData(UploadedFile data);
 
+    Exceptional<FileGetDTO> getFileData(UploadedFile file);
 }

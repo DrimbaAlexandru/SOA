@@ -2,6 +2,8 @@ package com.company;
 
 import com.company.utils.RemoteFileManager;
 import com.company.utils.dropbox.DropboxManagerRemote;
+import com.company.utils.updater.ConferencesGettersAndSetters;
+import com.company.utils.updater.PapersGettersAndSetters;
 import com.company.utils.updater.PrivilegesGettersAndSetters;
 import com.company.utils.updater.UsersGettersAndSetters;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +32,14 @@ public class GeneralContext {
     public PrivilegesGettersAndSetters getPrivilegesGettersAndSetters() {
         return new PrivilegesGettersAndSetters();
     }
+
+    @Bean
+    public PapersGettersAndSetters getPapersGettersAndSetters() {
+        return new PapersGettersAndSetters();
+    }
+
+    @Bean
+    public ConferencesGettersAndSetters getConferencesGettersAndSetters(){return new ConferencesGettersAndSetters();}
 
     @Bean
     public RemoteFileManager getFileUploader(Environment env) {

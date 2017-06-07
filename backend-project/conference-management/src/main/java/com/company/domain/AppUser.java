@@ -42,29 +42,29 @@ public class AppUser {
 
     @ManyToMany
     @JoinTable(name="SubmittedPapers")
-    private Set<Paper> submittedPapers=new HashSet<>();
+    private Set<Paper> submittedPapers;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="AssignedForReview")
-    private Set<Paper> assignedForReview=new HashSet<>();
+    private Set<Paper> assignedForReview;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Privileges> privileges = new HashSet<>();
+    private Set<Privileges> privileges ;
 
     @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL)
-    private Set<Review> reviews=new HashSet<>();
+    private Set<Review> reviews;
 
     @OneToMany(mappedBy = "bidder", cascade = CascadeType.ALL)
-    private Set<Bid> bids=new HashSet<>();
+    private Set<Bid> bids;
 
     @OneToOne(mappedBy = "sessionChair")
     private Session sesionIsChairFor;
 
-    @ManyToMany(mappedBy = "listeners")
-    private Set<Session> listenedSessions = new HashSet<>();
+    @ManyToMany(mappedBy = "listeners", cascade = CascadeType.ALL)
+    private Set<Session> listenedSessions;
 
-    @OneToMany(mappedBy = "speaker")
-    private Set<SessionSchedule> presentationsIsSpeakerFor = new HashSet<>();
+    @OneToMany(mappedBy = "speaker", cascade = CascadeType.ALL)
+    private Set<SessionSchedule> presentationsIsSpeakerFor ;
 
     public Session getSesionIsChairFor() {
         return sesionIsChairFor;

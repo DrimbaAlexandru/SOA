@@ -69,6 +69,13 @@ public interface UserService {
     Exceptional<Iterable<Review>> getReviewsOfPaper(String username, int paperId);
 
     /**
+     * Gets the review of a paper given by the current user
+     * @param username The username
+     * @param paperId The paper
+     */
+    Exceptional<Review> getReviewOfPaper(String username, int paperId);
+
+    /**
      * Adds the bid of a user to the paper
      * @param username The username
      * @param paperId The paper

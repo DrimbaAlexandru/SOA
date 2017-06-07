@@ -1,5 +1,6 @@
 package com.company.service;
 
+import com.company.controller.DTOs.ConferenceDTO;
 import com.company.domain.Conference;
 import com.company.domain.Session;
 import com.company.utils.exception.Exceptional;
@@ -25,6 +26,13 @@ public interface ConferenceService {
      * @return created conference
      */
     Exceptional<Conference> addConference(Conference c);
+
+    /**
+     *
+     * @param c the conference
+     * @return created conference
+     */
+    Exceptional<Conference> addConference(ConferenceDTO c);
 
     /**
      *

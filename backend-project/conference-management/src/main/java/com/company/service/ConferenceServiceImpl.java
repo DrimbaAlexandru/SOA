@@ -1,5 +1,6 @@
 package com.company.service;
 
+import com.company.controller.DTOs.ConferenceDTO;
 import com.company.domain.Conference;
 import com.company.domain.Session;
 import com.company.repository.ConferenceRepository;
@@ -7,10 +8,14 @@ import com.company.utils.exception.Exceptional;
 import com.company.utils.updater.ConferencesGettersAndSetters;
 import com.company.utils.updater.Updater;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.HashSet;
 
 /**
  * Created by sebi on 6/6/2017.
  */
+@Component
 public class ConferenceServiceImpl implements ConferenceService {
 
     private ConferenceRepository conferenceRepository;
@@ -46,6 +51,12 @@ public class ConferenceServiceImpl implements ConferenceService {
         }catch(Exception e) {
             return Exceptional.Error(e);
         }
+    }
+
+    @Override
+    public Exceptional<Conference> addConference(ConferenceDTO c) {
+        Conference conference =new Conference(c.getName(),c.getEventTimeSpan().getStartDate(), c.getEventTimeSpan().getEndDate(), c.getCallForAbstractTimeSpan().getEndDate(), c.getCallForProposalsTimeSpan().getEndDate(), c.getBiddingDeadline());
+        return Exceptional.OK(conferenceRepository.save(conference));
     }
 
     @Override
