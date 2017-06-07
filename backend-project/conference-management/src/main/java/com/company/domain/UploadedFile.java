@@ -10,9 +10,11 @@ import java.util.Date;
 @Table(name = "UploadedFile")
 @Entity
 public class UploadedFile {
-    @Id @GeneratedValue
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY )
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "nume",unique = false, nullable = false, length = 256)
     private String nume;
@@ -48,7 +50,7 @@ public class UploadedFile {
         this.nume = nume;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -76,7 +78,7 @@ public class UploadedFile {
         return nume;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

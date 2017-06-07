@@ -11,9 +11,9 @@ import javax.persistence.*;
 @Entity
 public class Bid {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY )
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "BidderID", nullable = false)
@@ -32,7 +32,7 @@ public class Bid {
         return status;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -52,7 +52,7 @@ public class Bid {
         this.bidder = bidder;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

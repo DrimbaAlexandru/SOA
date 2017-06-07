@@ -9,9 +9,9 @@ import javax.persistence.*;
 @Entity
 public class Privileges {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY )
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "userID", nullable = false)
@@ -22,54 +22,68 @@ public class Privileges {
     private Conference conference;
 
     @Column(name = "isPCMember", nullable = false)
-    private boolean isPCMember;
+    private Boolean isPCMember;
 
     @Column(name = "isChair", nullable = false)
-    private boolean isChair;
+    private Boolean isChair;
 
     @Column(name = "isCoChair", nullable = false)
-    private boolean isCoChair;
+    private Boolean isCoChair;
 
     @Column(name = "isAuthor", nullable = false)
-    private boolean isAuthor;
+    private Boolean isAuthor;
 
-    public int getId() {
+    public Privileges() {
+        this.user = null;
+        this.conference = null;
+    }
+
+    public Privileges(AppUser user, Conference conf) {
+        isPCMember = false;
+        isChair = false;
+        isCoChair = false;
+        isAuthor = false;
+        this.user = user;
+        this.conference = conf;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public boolean isAuthor() {
+    public Boolean getIsAuthor() {
         return isAuthor;
     }
 
-    public boolean isChair() {
+    public Boolean getIsChair() {
         return isChair;
     }
 
-    public boolean isCoChair() {
+    public Boolean getIsCoChair() {
         return isCoChair;
     }
 
-    public boolean isPCMember() {
+    public Boolean getIsPCMember() {
         return isPCMember;
     }
 
-    public void setAuthor(boolean author) {
+    public void setIsAuthor(Boolean author) {
         isAuthor = author;
     }
 
-    public void setChair(boolean chair) {
+    public void setIsChair(Boolean chair) {
         isChair = chair;
     }
 
-    public void setCoChair(boolean coChair) {
+    public void setIsCoChair(Boolean coChair) {
         isCoChair = coChair;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setPCMember(boolean PCMember) {
+    public void setIsPCMember(Boolean PCMember) {
         isPCMember = PCMember;
     }
 

@@ -12,10 +12,11 @@ import java.util.Set;
 @Table(name = "Conference")
 @Entity
 public class Conference {
+
     @Id
-    @GeneratedValue
-    @Column(name = "conf_id")
-    private int id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY )
+    @Column(name = "id")
+    private Integer id;
 
     @Column(name = "name", unique = false, nullable = false, length = 256)
     private String name;
@@ -35,11 +36,11 @@ public class Conference {
     @Column(name = "biddingDeadline", nullable = false)
     private Date biddingDeadline;
 
-    @OneToMany(mappedBy = "conference")
-    private Set<Privileges> privileges = new HashSet<>();
+    @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL)
+    private Set<Privileges> privileges ;
 
-    @OneToMany(mappedBy = "conference")
-    private Set<Session> sessions=new HashSet<>();
+    @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL)
+    private Set<Session> sessions;
 
     public Conference(){}
 
@@ -60,11 +61,11 @@ public class Conference {
         this.privileges = privileges;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -123,4 +124,5 @@ public class Conference {
     public void setSessions(Set<Session> sessions) {
         this.sessions = sessions;
     }
+
 }

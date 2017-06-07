@@ -12,9 +12,9 @@ import java.util.Set;
 @Entity
 public class AppUser {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY )
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "username",unique = true, nullable = false, length = 64)
     private String username;
@@ -35,36 +35,36 @@ public class AppUser {
     private String password;
 
     @Column(name = "isSuperUser", nullable = false)
-    private boolean isSuperUser;
+    private Boolean isSuperUser;
 
     @Column(name = "isCometeeMember", nullable = false)
-    private boolean isCometeeMember;
+    private Boolean isCometeeMember;
 
     @ManyToMany
     @JoinTable(name="SubmittedPapers")
-    private Set<Paper> submittedPapers=new HashSet<>();
+    private Set<Paper> submittedPapers;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="AssignedForReview")
-    private Set<Paper> assignedForReview=new HashSet<>();
+    private Set<Paper> assignedForReview;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Privileges> privileges = new HashSet<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Privileges> privileges ;
 
-    @OneToMany(mappedBy = "reviewer")
-    private Set<Review> reviews=new HashSet<>();
+    @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL)
+    private Set<Review> reviews;
 
-    @OneToMany(mappedBy = "bidder")
-    private Set<Bid> bids=new HashSet<>();
+    @OneToMany(mappedBy = "bidder", cascade = CascadeType.ALL)
+    private Set<Bid> bids;
 
     @OneToOne(mappedBy = "sessionChair")
     private Session sesionIsChairFor;
 
-    @ManyToMany(mappedBy = "listeners")
-    private Set<Session> listenedSessions = new HashSet<>();
+    @ManyToMany(mappedBy = "listeners", cascade = CascadeType.ALL)
+    private Set<Session> listenedSessions;
 
-    @OneToMany(mappedBy = "speaker")
-    private Set<SessionSchedule> presentationsIsSpeakerFor = new HashSet<>();
+    @OneToMany(mappedBy = "speaker", cascade = CascadeType.ALL)
+    private Set<SessionSchedule> presentationsIsSpeakerFor ;
 
     public Session getSesionIsChairFor() {
         return sesionIsChairFor;
@@ -81,7 +81,6 @@ public class AppUser {
     public void setListenedSessions(Set<Session> listenedSessions) {
         this.listenedSessions = listenedSessions;
     }
-
 
     public String getUsername() {
         return username;
@@ -131,19 +130,19 @@ public class AppUser {
         this.password = password;
     }
 
-    public boolean isSuperUser() {
+    public Boolean getIsSuperUser() {
         return isSuperUser;
     }
 
-    public void setSuperUser(boolean superUser) {
+    public void setIsSuperUser(Boolean superUser) {
         isSuperUser = superUser;
     }
 
-    public boolean isCometeeMember() {
+    public Boolean getIsCometeeMember() {
         return isCometeeMember;
     }
 
-    public void setCometeeMember(boolean cometeeMember) {
+    public void setIsCometeeMember(Boolean cometeeMember) {
         isCometeeMember = cometeeMember;
     }
 
@@ -155,11 +154,11 @@ public class AppUser {
         this.privileges = privileges;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -180,10 +179,12 @@ public class AppUser {
         this.email = email;
         this.webpage = webpage;
         this.password = password;
+        isCometeeMember=false;
+        isSuperUser=false;
     }
 
     public AppUser(String username, String name, String affiliation, String email,
-                   String webpage, String password, boolean isSuperUser, boolean isCometeeMember) {
+                   String webpage, String password, Boolean isSuperUser, Boolean isCometeeMember) {
         this.username = username;
         this.name = name;
         this.affiliation = affiliation;

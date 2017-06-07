@@ -5,7 +5,7 @@
     'error' : []
 }
 
-users/logout POST{}
+
 
 users/login POST 
 {
@@ -25,7 +25,7 @@ return 'resp'=>
 
 
 //getConference
-users/privileges?conferenceId=id GET
+users/{username}/privileges?conferenceId=id GET
 return 
 'resp' => {
    isAuthor = bool
@@ -90,13 +90,12 @@ users/{username} PUT
 //grantChair
 //grantCoChair
 //grantPCMember
-/users/{username}/{conferenceId}/ PUT
+/users/{username}/{conferenceId}/
 {
     [optional] isPCMember =  bool
     [optional] isChair = bool
     [optional] isCoChair = bool
 }
-
 
 users/{username}/submittedPapers?status=accepted/decline GET
 return 'resp'=[
@@ -115,6 +114,8 @@ return 'resp'=[
 ]
 
 
+	--DEPRECATED. USE
+	--papers/{paperId}/presentation POST
 users/{username}/submittedPapers/{idPaper}/presetation POST
 {
     data:RAW_STRING
@@ -175,7 +176,8 @@ return 'resp'=>
 
 // Proposals
 
-papers/{conferenceId} GET
+		DONE
+papers GET
 return 'resp'={
 [{
     id:int
@@ -185,7 +187,8 @@ return 'resp'={
     authors:string[]//username
 }]
 
-papers/{conferenceId} POST
+		DONE
+papers POST
 {
     name:string
     subjects:string[]
@@ -193,7 +196,8 @@ papers/{conferenceId} POST
     authors:string[]
 }
 
-papers/{conferenceId}/{paperId} PUT
+		DONE
+papers/{paperId} PUT
 {
     name:string
     subjects:string[]
@@ -201,34 +205,35 @@ papers/{conferenceId}/{paperId} PUT
     authors:string[]
 }
 
+		DONE
 // Uploads a full paper file
-papers/{conferenceId}/{paperId}/full POST
+papers/{paperId}/full POST
 {
 	type:string
 	data:string
 }
 
-
-//getFullProposal
-papers/{conferenceId}/{paperId}/full GET
-return 'resp'=string RAW_DATA (pdf)
-
-//Uploads a abs paper file
-papers/{conferenceId}/{paperId}/abs POST
+		DONE
+// Uploads an abstract file
+papers/{paperId}/abstract POST
 {
 	type:string
 	data:string
 }
 
+		DONE
+// Uploads the presentation file
+   			--!!!! PLEASE USE THIS INSTEAD OF 
+			--users/{username}/submittedPapers/{idPaper}/presetation POST
+papers/{paperId}/presentation POST
+{
+	type:string
+	data:string
+}
 
-//getAbsProposal
-papers/{conferenceId}/{paperId}/abs GET
-return 'resp'=string RAW_DATA (pdf)
-
-
-
+		DONE
 //all accepted proposals
-papers/{conferenceId}/acceptedProposals GET
+papers/acceptedProposals GET
 return 'resp'={
 [{
     id:int
@@ -238,34 +243,38 @@ return 'resp'={
     authors:string[]//username
 }]
 
+		DONE
 // Gets all potential reviewers of a paper
-papers/{conferenceId}/{paperId}/potentialReviewers GET
+papers/{paperId}/potentialReviewers GET
 return 'resp' = [{
 	username = string
 }]
 
+		DONE
 // Gets all assigned reviewers of a paper
-papers/{conferenceId}/{paperId}/assignedReviewers GET
+papers/{paperId}/assignedReviewers GET
 return 'resp' = [{
 	username = string
 }]
 
+		DONE
+//getFullProposal
+papers/{paperId}/full GET
+return 
+{"data":String in BASE64}
 
-papers/{conferenceId}/{paperId}/reevaluate {} PUT
+
+		DONE
+papers/{paperId}/reevaluate {} PUT
 {}
 return {}
 
-papers/{conferenceId}/{paperId}/finalEvaluator/{username} PUT
+
+		DONE
+papers/{paperId}/finalEvaluator/{user_id} PUT
 {}
 return {}
 
-//chair gives the final for paper, if there is a controverse
-papers/{conferenceId}/{paperId}/finalStatus PUT
-{
-    status = "STRONG_ACCEPT"|"ACCEPT"|"WEAK_ACCEPT"|"BORDERLINE_PAPER"|"WEAK_REJECT"|"REJECT"|"STRONG_REJECT"
-    justification=string
-}
-return {}
 
 
 //listOthersReviewsForPaper

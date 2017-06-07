@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend-project-conference-management_main.iml" filepath="$PROJECT_DIR$/.idea/modules/backend-project-conference-management_main.iml" group="conference-management" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend-project-conference-management_test.iml" filepath="$PROJECT_DIR$/.idea/modules/backend-project-conference-management_test.iml" group="conference-management" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/conference-management.iml" filepath="$PROJECT_DIR$/.idea/modules/conference-management.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/conference-management_main.iml" filepath="$PROJECT_DIR$/.idea/modules/conference-management_main.iml" group="conference-management" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/conference-management_test.iml" filepath="$PROJECT_DIR$/.idea/modules/conference-management_test.iml" group="conference-management" />

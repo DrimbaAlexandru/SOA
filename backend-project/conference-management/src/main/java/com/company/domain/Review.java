@@ -10,15 +10,18 @@ import javax.persistence.*;
 @Entity
 public class Review {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY )
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ReviewerID", nullable = false)
     private AppUser reviewer;
 
-    @ManyToOne()
+    @Column(name = "justification", nullable = false, length = 1024)
+    private String justification;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PaperID", nullable = false)
     private Paper paper;
 
@@ -31,7 +34,7 @@ public class Review {
         return status;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -51,11 +54,19 @@ public class Review {
         this.reviewer = reviewer;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     public void setPaper(Paper paper) {
         this.paper = paper;
+    }
+
+    public String getJustification() {
+        return justification;
+    }
+
+    public void setJustification(String justification) {
+        this.justification = justification;
     }
 }
