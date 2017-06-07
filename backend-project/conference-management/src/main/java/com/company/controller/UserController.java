@@ -86,8 +86,9 @@ public class UserController {
         return new  ResponseEntity<>(resp,HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/privileges", method = RequestMethod.GET)
+    @RequestMapping(path = "/{username}/privileges", method = RequestMethod.GET)
     public ResponseEntity<ResponseJSON<ConferencePrivilegesDTO>> handle_getConferencePrivileges(
+            @PathVariable("username") String username,
             @CookieValue(value = "username", defaultValue = "") String usernameCookie,
             @CookieValue(value = "password", defaultValue = "") String passwordCookie,
             @RequestParam("conferenceId") Integer id)
@@ -97,7 +98,7 @@ public class UserController {
         resp.getWarnings().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getWarnings());
         if(resp.getErrors().size()==0)
         {
-            Exceptional<Privileges> privs = service.getConferencePrivileges(usernameCookie, id);
+            Exceptional<Privileges> privs = service.getConferencePrivileges(username, id);
             privs.error(e -> {
                 resp.addError(e.getMessage());
             }).ok(e -> {
@@ -107,17 +108,18 @@ public class UserController {
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/mine", method = RequestMethod.GET)
+    @RequestMapping(path = "/{username}", method = RequestMethod.GET)
     public ResponseEntity<ResponseJSON<UserResponse>> handle_get_mine(
             @CookieValue(value = "username", defaultValue = "") String usernameCookie,
-            @CookieValue(value = "password", defaultValue = "") String passwordCookie)
+            @CookieValue(value = "password", defaultValue = "") String passwordCookie,
+            @PathVariable("username") String username)
     {
         ResponseJSON<UserResponse> resp=new ResponseJSON<>();
         resp.getErrors().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getErrors());
         resp.getWarnings().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getWarnings());
         if(resp.getErrors().size()==0)
         {
-            Exceptional<AppUser> u = service.getUser(usernameCookie);
+            Exceptional<AppUser> u = service.getUser(username);
             u.error(e -> {
                 resp.addError(e.getMessage());
             }).ok(e -> {
@@ -230,8 +232,9 @@ public class UserController {
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
-    @RequestMapping(path="/submittedPapers", method = RequestMethod.GET)
+    @RequestMapping(path="/{username}/submittedPapers", method = RequestMethod.GET)
     public ResponseEntity<ResponseJSON<List<submittedPaperDTO>>> handle_get_submitted_papers(
+            @PathVariable("username") String username,
             @CookieValue(value = "username", defaultValue = "") String usernameCookie,
             @CookieValue(value = "password", defaultValue = "") String passwordCookie,
             @RequestParam(name="status", required = false) String status)
@@ -241,7 +244,7 @@ public class UserController {
         List<submittedPaperDTO> papers=new ArrayList<>();
         resp.setResp(papers);
         if(resp.getErrors().size()==0) {
-            Exceptional<Iterable<Paper>> paps = service.getSubmittedPapers(usernameCookie);
+            Exceptional<Iterable<Paper>> paps = service.getSubmittedPapers(username);
             paps.error(e -> {
                 resp.addError(e.getMessage());
             }).ok(e -> {
@@ -253,8 +256,9 @@ public class UserController {
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
-    @RequestMapping(path="/submittedPapers/{idPaper}/reviews", method = RequestMethod.GET)
+    @RequestMapping(path="/{username}/submittedPapers/{idPaper}/reviews", method = RequestMethod.GET)
     public ResponseEntity<ResponseJSON<List<reviewDTO>>> handle_get_paper_reviews(
+            @PathVariable("username") String username,
             @CookieValue(value = "username", defaultValue = "") String usernameCookie,
             @CookieValue(value = "password", defaultValue = "") String passwordCookie,
             @PathVariable("idPaper") int paperId)
@@ -267,7 +271,7 @@ public class UserController {
 
         if(resp.getErrors().size()==0) {
             Exceptional<Iterable<Review>> revsOfPaper =
-                    service.getReviewsOfPaper(usernameCookie, paperId);
+                    service.getReviewsOfPaper(username, paperId);
             revsOfPaper.error(e -> {
                 resp.addError(e.getMessage());
             }).ok(e -> {
@@ -278,8 +282,9 @@ public class UserController {
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
-    @RequestMapping(path="/bids/{idPaper}", method = RequestMethod.GET)
+    @RequestMapping(path="/{username}/bids/{idPaper}", method = RequestMethod.GET)
     public ResponseEntity<ResponseJSON<bidDTO>> handle_get_my_bid_for_paper(
+            @PathVariable("username") String username,
             @CookieValue(value = "username", defaultValue = "") String usernameCookie,
             @CookieValue(value = "password", defaultValue = "") String passwordCookie,
             @PathVariable("idPaper") int paperId)
@@ -288,7 +293,7 @@ public class UserController {
         resp.getErrors().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getErrors());
 
 
-        Exceptional<Bid> bid = service.getBidOfPaper(usernameCookie,paperId);
+        Exceptional<Bid> bid = service.getBidOfPaper(username,paperId);
 
         if(resp.getErrors().size()==0)
             bid.error(e -> {
@@ -300,8 +305,9 @@ public class UserController {
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
-    @RequestMapping(path="/bids/{idPaper}", method = RequestMethod.PUT)
+    @RequestMapping(path="/{username}/bids/{idPaper}", method = RequestMethod.PUT)
     public ResponseEntity<ResponseJSON<String>> handle_put_my_bid_for_paper(
+            @PathVariable("username") String username,
             @CookieValue(value = "username", defaultValue = "") String usernameCookie,
             @CookieValue(value = "password", defaultValue = "") String passwordCookie,
             @PathVariable("idPaper") int paperId,
@@ -311,24 +317,25 @@ public class UserController {
         resp.getErrors().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getErrors());
         resp.setResp("");
 
-        Exceptional<Bid> bid = service.getBidOfPaper(usernameCookie,paperId);
+        Exceptional<Bid> bid = service.getBidOfPaper(username,paperId);
         if(resp.getErrors().size()==0)
             bid.error(e -> {
-                Exceptional<Void> res = service.addBidForPaper(usernameCookie, paperId,
+                Exceptional<Void> res = service.addBidForPaper(username, paperId,
                                 BidStatus.valueOf(request.getStatus()));
                 res.error(f -> {
                     resp.addError(f.getMessage());
                 });
             }).ok(e -> {
-                service.addBidForPaper(usernameCookie, paperId,
+                service.addBidForPaper(username, paperId,
                         BidStatus.valueOf(request.getStatus()));
             });
 
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
-    @RequestMapping(path="/assignedForReview", method = RequestMethod.GET)
+    @RequestMapping(path="/{username}/assignedForReview", method = RequestMethod.GET)
     public ResponseEntity<ResponseJSON<Iterable<submittedPaperDTO>>> handle_get_assigned(
+            @PathVariable("username") String username,
             @CookieValue(value = "username", defaultValue = "") String usernameCookie,
             @CookieValue(value = "password", defaultValue = "") String passwordCookie)
     {
@@ -338,7 +345,7 @@ public class UserController {
         resp.setResp(body);
         if(resp.getErrors().size()==0)
         {
-            Exceptional<Iterable<Paper>> pps = service.getAssignedPapers(usernameCookie);
+            Exceptional<Iterable<Paper>> pps = service.getAssignedPapers(username);
             pps.error(e -> {
                 resp.addError(e.getMessage());
             }).ok(e -> {
@@ -350,8 +357,9 @@ public class UserController {
         return new ResponseEntity<ResponseJSON<Iterable<submittedPaperDTO>>>(resp,HttpStatus.OK);
     }
 
-    @RequestMapping(path="/reviews/{paperId}", method = RequestMethod.GET)
+    @RequestMapping(path="/{username}/reviews/{paperId}", method = RequestMethod.GET)
     public ResponseEntity<ResponseJSON<reviewDTO>> handle_get_review(
+            @PathVariable("username") String username,
             @CookieValue(value = "username", defaultValue = "") String usernameCookie,
             @CookieValue(value = "password", defaultValue = "") String passwordCookie,
             @PathVariable("paperId") int paperId)
@@ -360,7 +368,7 @@ public class UserController {
         resp.getErrors().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getErrors());
         if(resp.getErrors().size()==0)
         {
-            Exceptional<Review> reviews=service.getReviewOfPaper(usernameCookie,paperId);
+            Exceptional<Review> reviews=service.getReviewOfPaper(username,paperId);
 
             reviews.ok(e -> {
                 resp.setResp(new reviewDTO(e));
@@ -371,8 +379,9 @@ public class UserController {
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
-    @RequestMapping(path="/reviews/{idPaper}", method = RequestMethod.PUT)
+    @RequestMapping(path="/{username}/reviews/{idPaper}", method = RequestMethod.PUT)
     public ResponseEntity<ResponseJSON<String>> handle_put_my_review_for_paper(
+            @PathVariable("username") String username,
             @CookieValue(value = "username", defaultValue = "") String usernameCookie,
             @CookieValue(value = "password", defaultValue = "") String passwordCookie,
             @PathVariable("idPaper") int paperId,
@@ -383,7 +392,7 @@ public class UserController {
         resp.setResp("");
 
         if(resp.getErrors().size()==0) {
-            service.addReviewToPaper(usernameCookie,paperId,ReviewStatus.valueOf(request.getStatus()),request.getJustification()).
+            service.addReviewToPaper(username,paperId,ReviewStatus.valueOf(request.getStatus()),request.getJustification()).
                     error(e->{resp.addError(e.getMessage());});
         }
 

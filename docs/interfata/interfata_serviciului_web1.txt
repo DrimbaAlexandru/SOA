@@ -25,7 +25,7 @@ return 'resp'=>
 
 
 //getConference
-users/privileges?conferenceId=id GET
+users/{username}/privileges?conferenceId=id GET
 return 
 'resp' => {
    isAuthor = bool
