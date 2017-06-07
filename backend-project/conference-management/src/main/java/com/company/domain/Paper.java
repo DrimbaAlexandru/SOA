@@ -27,27 +27,27 @@ public class Paper {
 //!!!!
     private SessionSchedule schedule;
 
-    @ManyToMany(mappedBy="submittedPapers")
+    @ManyToMany(mappedBy="submittedPapers", cascade = CascadeType.ALL)
 //!!!!
-    private Set<AppUser> authors= new HashSet<>(0);
+    private Set<AppUser> authors;
 
-    @ManyToMany(mappedBy="assignedForReview")
+    @ManyToMany(mappedBy="assignedForReview", cascade = CascadeType.ALL)
 //!!!!
-    private Set<AppUser> reviewers= new HashSet<>(0);
+    private Set<AppUser> reviewers;
 
-    @OneToMany(mappedBy = "paper")
-    private Set<Review> reviews= new HashSet<>(0);
+    @OneToMany(mappedBy = "paper", cascade = CascadeType.ALL,orphanRemoval=true)
+    private Set<Review> reviews;
 
-    @OneToMany(mappedBy = "paper")
-    private Set<Bid> bids= new HashSet<>(0);
+    @OneToMany(mappedBy = "paper", cascade = CascadeType.ALL)
+    private Set<Bid> bids;
 
-    @OneToMany(mappedBy = "paperIsAbstractFor")
-    private Set<UploadedFile> abstracts= new HashSet<>(0);
+    @OneToMany(mappedBy = "paperIsAbstractFor", cascade = CascadeType.ALL)
+    private Set<UploadedFile> abstracts;
 
-    @OneToMany(mappedBy = "paperIsFullPaperFor")
-    private Set<UploadedFile> fullPapers= new HashSet<>(0);
+    @OneToMany(mappedBy = "paperIsFullPaperFor", cascade = CascadeType.ALL)
+    private Set<UploadedFile> fullPapers;
 
-    @OneToOne(mappedBy = "paperIsPresentationFor")
+    @OneToOne(mappedBy = "paperIsPresentationFor", cascade = CascadeType.ALL)
     private UploadedFile presentation = null;
 
     public Paper(){}
@@ -140,5 +140,13 @@ public class Paper {
 
     public Set<AppUser> getAuthors() {
         return authors;
+    }
+
+    public Set<AppUser> getReviewers() {
+        return reviewers;
+    }
+
+    public void setReviewers(Set<AppUser> reviewers) {
+        this.reviewers = reviewers;
     }
 }

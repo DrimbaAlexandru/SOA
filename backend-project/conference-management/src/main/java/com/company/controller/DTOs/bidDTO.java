@@ -5,12 +5,12 @@ import com.company.domain.Bid;
 /**
  * Created by Alex on 07.06.2017.
  */
-public class bidResponse
+public class bidDTO
 {
     private String status;
-    public bidResponse(){}
+    public bidDTO(){}
 
-    public bidResponse(Bid motherfucker)
+    public bidDTO(Bid motherfucker)
     {
         if(motherfucker!=null)
             status=motherfucker.getStatus().name();

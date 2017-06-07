@@ -25,13 +25,13 @@ public class Session {
 
     @ManyToMany
     @JoinTable(name = "Listeners")
-    private Set<AppUser> listeners = new HashSet<>();
+    private Set<AppUser> listeners ;
 
     @OneToOne
     @JoinColumn(name = "sessionChairID")
     private AppUser sessionChair;
 
-    @OneToMany(mappedBy = "session")
+    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL)
     private Set<SessionSchedule> schedule;
 
     public Session(){}

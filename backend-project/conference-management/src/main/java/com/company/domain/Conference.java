@@ -36,11 +36,11 @@ public class Conference {
     @Column(name = "biddingDeadline", nullable = false)
     private Date biddingDeadline;
 
-    @OneToMany(mappedBy = "conference")
-    private Set<Privileges> privileges = new HashSet<>();
+    @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL)
+    private Set<Privileges> privileges ;
 
-    @OneToMany(mappedBy = "conference")
-    private Set<Session> sessions=new HashSet<>();
+    @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL)
+    private Set<Session> sessions;
 
     public Conference(){}
 

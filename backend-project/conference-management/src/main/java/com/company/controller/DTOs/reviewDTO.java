@@ -5,11 +5,11 @@ import com.company.domain.Review;
 /**
  * Created by Alex on 07.06.2017.
  */
-public class reviewResponse
+public class reviewDTO
 {
     private String status;
     private String justification;
-    public reviewResponse(Review r)
+    public reviewDTO(Review r)
     {
         if(r!=null){
         status=r.getStatus().name();
@@ -17,7 +17,7 @@ public class reviewResponse
         }
     }
 
-    public reviewResponse(){}
+    public reviewDTO(){}
     public String getJustification() {
         return justification;
     }

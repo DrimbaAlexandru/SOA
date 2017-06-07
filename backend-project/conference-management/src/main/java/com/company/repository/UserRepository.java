@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * Created by AlexandruD on 02-Jun-17.
  */
 @Repository
-public interface UserRepository extends PagingAndSortingRepository<AppUser, String> {
+public interface UserRepository extends PagingAndSortingRepository<AppUser, Integer> {
 
     AppUser findByUsername(String username);
 

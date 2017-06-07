@@ -3,13 +3,13 @@ package com.company.controller.DTOs;
 /**
  * Created by Alex on 07.06.2017.
  */
-public class grantPermissionsRequest
+public class grantPermissionsDTO
 {
     private Boolean isPCMember=null;
     private Boolean isChair=null;
     private Boolean isCoChair=null;
 
-    public grantPermissionsRequest(){}
+    public grantPermissionsDTO(){}
 
     public void setIsChair(boolean chair) {
         isChair = chair;
