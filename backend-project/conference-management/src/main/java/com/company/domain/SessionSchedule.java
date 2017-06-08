@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Created by Alex on 21.05.2017.
  */
-@Table(name = "SessionScheduleDTO")
+@Table(name = "SessionSchedule")
 @Entity
 public class SessionSchedule {
     @Id
@@ -64,10 +64,11 @@ public class SessionSchedule {
         this.presentationTime = presentationTime;
     }
 
-    public SessionSchedule(Paper paper, Session sesion, Date presentationTime){
+    public SessionSchedule(Paper paper, Session sesion, Date presentationTime, AppUser speaker){
         this.paper = paper;
         this.session = sesion;
         this.presentationTime = presentationTime;
+        this.speaker=speaker;
     }
 
     public SessionSchedule(){}

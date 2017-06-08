@@ -43,7 +43,7 @@ public class UserController {
              HttpServletResponse response)
     {
         ResponseJSON<String> resp=new ResponseJSON<>();
-        resp.setResp("HARDCORE GAY PORN");
+        resp.setResp("GAY PORN");
         Exceptional<AppUser> ex = service.getUser(body.getUsername());
         ex.error(e -> resp.addError(e.getMessage()))
             .ok(e -> {
@@ -60,6 +60,19 @@ public class UserController {
             setCookie("password","",0,response);
         }
         return new ResponseEntity<>(resp, HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/logout",
+            method = RequestMethod.POST)
+    public ResponseEntity<ResponseJSON<String>> logout
+            (HttpServletResponse response)
+    {
+        ResponseJSON<String> resp=new ResponseJSON<>();
+        resp.setResp("GAY PORN");
+
+        setCookie("username","",0,response);
+        setCookie("password","",0,response);
+        return new ResponseEntity<ResponseJSON<String>>(resp,HttpStatus.OK);
     }
 
     @RequestMapping(path = "/loggedIn", method = RequestMethod.GET)
@@ -129,7 +142,7 @@ public class UserController {
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<ResponseJSON<Iterable<UserResponse>>> handle_get_all()
     {
         List<UserResponse> users=new ArrayList<>();
@@ -142,7 +155,7 @@ public class UserController {
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/", method = RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST)
     public ResponseEntity<ResponseJSON<String>> handle_create_user(@RequestBody updateUserRequest body)
     {
         ResponseJSON<String> resp=new ResponseJSON<>("");

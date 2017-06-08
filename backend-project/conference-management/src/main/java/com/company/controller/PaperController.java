@@ -1,12 +1,7 @@
 package com.company.controller;
 
-import com.company.controller.DTOs.FileGetDTO;
-import com.company.controller.DTOs.FilePostDTO;
-import com.company.controller.DTOs.submittedPaperDTO;
-import com.company.controller.DTOs.updateUserRequest;
-import com.company.domain.AppUser;
-import com.company.domain.Paper;
-import com.company.domain.UploadedFile;
+import com.company.controller.DTOs.*;
+import com.company.domain.*;
 import com.company.service.PaperService;
 import com.company.service.PaperServiceImpl;
 import com.company.utils.ResponseJSON;
@@ -35,7 +30,7 @@ public class PaperController {
     }
 
     //TESTED
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<ResponseJSON<Iterable<submittedPaperDTO>>> handle_get_all()
     {
         List<submittedPaperDTO> papers=new ArrayList<>();
@@ -46,9 +41,9 @@ public class PaperController {
     }
 
     //TESTED
-    @RequestMapping(path = "/", method = RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST)
     public ResponseEntity<ResponseJSON<String>> handle_post_paper(
-            @RequestBody submittedPaperDTO paper)
+            @RequestBody firstPaperSubmissionDTO paper)
     {
         ResponseJSON<String> resp=new ResponseJSON<>();
         service.addPaper(paper).error(e->{resp.addError(e.getMessage());});
@@ -95,6 +90,44 @@ public class PaperController {
         }).error(e->{resp.addError(e.getMessage());});
         resp.setResp(users);
         return new ResponseEntity<>(resp,HttpStatus.OK);
+    }
+
+    //TESTED
+    @RequestMapping(path = "/{paperId}/reviews", method = RequestMethod.GET)
+    public ResponseEntity<ResponseJSON<Iterable<reviewDTO>>> handle_get_reviews(
+            @PathVariable("paperId") int paperId)
+    {
+        ResponseJSON<Iterable<reviewDTO>> resp=new ResponseJSON<>();
+
+        List<reviewDTO> reviews=new ArrayList<>();
+        Exceptional<Iterable<Review>> r =service.getReviews(paperId);
+        r.error(e->{resp.addError(e.getMessage());}).ok(
+            revs->{
+                for(Review rev : revs)
+                    reviews.add(new reviewDTO(rev));
+            }
+        );
+        resp.setResp(reviews);
+        return new ResponseEntity<ResponseJSON<Iterable<reviewDTO>>>(resp,HttpStatus.OK);
+    }
+
+    //TESTED
+    @RequestMapping(path = "/{paperId}/bids", method = RequestMethod.GET)
+    public ResponseEntity<ResponseJSON<Iterable<bidDTO>>> handle_get_bids(
+            @PathVariable("paperId") int paperId)
+    {
+        ResponseJSON<Iterable<bidDTO>> resp=new ResponseJSON<>();
+
+        List<bidDTO> bids=new ArrayList<>();
+        Exceptional<Iterable<Bid>> excbids =service.getBids(paperId);
+        excbids.error(e->{resp.addError(e.getMessage());}).ok(
+                bids1->{
+                    for(Bid b : bids1)
+                        bids.add(new bidDTO(b));
+                }
+        );
+        resp.setResp(bids);
+        return new ResponseEntity<ResponseJSON<Iterable<bidDTO>>>(resp,HttpStatus.OK);
     }
 
     //TESTED

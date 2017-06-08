@@ -9,6 +9,7 @@ import com.company.utils.exception.Exceptional;
 import com.company.utils.updater.PrivilegesGettersAndSetters;
 import com.company.utils.updater.Updater;
 import com.company.utils.updater.UsersGettersAndSetters;
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -90,7 +91,11 @@ public class UserServiceImpl implements UserService {
 
         Privileges finalPrivs;
 
-        finalPrivs = privs.orElseGet(() -> new Privileges(au, conferenceRepository.findOne(confId)));
+        if(!privs.isPresent()) {
+            finalPrivs = new Privileges(au, conferenceRepository.findOne(confId));
+        } else {
+            finalPrivs = privs.get();
+        }
 
         return Exceptional.OK(finalPrivs);
     }
@@ -263,7 +268,11 @@ public class UserServiceImpl implements UserService {
         Exceptional<UploadedFile> file = uploadedFileService.uploadFile(filePath, presentationFileData);
         Container<UploadedFile> cont = new Container<>(null);
         StringBuilder errors = new StringBuilder();
-        file.error(e -> errors.append(e.getMessage())).ok(cont::setValue);
+        file.error(e -> {
+            errors.append(e.getMessage());
+        }).ok(e -> {
+            cont.setValue(e);
+        });
 
         if(errors.length() != 0) {
             return Exceptional.Error(new Exception(errors.toString()));
@@ -376,12 +385,5 @@ public class UserServiceImpl implements UserService {
             }
         });
         return Exceptional.OK(null);
-    }
-
-    @Override
-    public Exceptional<AppUser> getUserById(int userId) {
-        AppUser user = userRepository.findOne(userId);
-        return user == null? Exceptional.Error(new Exception("User not found")) :
-                Exceptional.OK(user);
     }
 }
