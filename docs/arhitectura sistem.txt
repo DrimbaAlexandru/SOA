@@ -26,7 +26,7 @@ Services
 		dependente: repo_User;
 
 	srv_Session:
-		RUD;	(creerea se face din cadrul conferintei)
+		CRUD;	(creerea se face din cadrul conferintei)
 		CRUD - Listeners
 		management programare;
 		dependente: repo_Session,repo_Listeners,repo_sesion_schedule;

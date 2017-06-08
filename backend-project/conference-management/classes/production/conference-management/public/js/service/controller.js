@@ -19,9 +19,9 @@ function Controller(onError= undefined, onWarning = undefined) {
     const HOST = "";
     const COMMANDS = {
         "users_login": "users/login",//"users/users_login",
-        "users_logout": "users.logout.php",//"users/logout",
+        "users_logout": "users/logout",//"users/logout",
         "users_loggedIn": "users/loggedIn",//"users/loggedIn",
-        "users_getMyPriviledges": "users/privileges?conferenceId=id",//"users/priviledges?conferenceId={0}",
+        "users_getMyPriviledges": "users/privileges?conferenceId={0}",//"users/priviledges?conferenceId={0}",
         "users_getAll": "users",
         "users_getOne": "users/{0}",
         "users_save": "users",
@@ -115,9 +115,12 @@ function Controller(onError= undefined, onWarning = undefined) {
 
     function validateAndRun(result, run) {
         try {
-            result = JSON.parse(result);
+            console.log(typeOf(result));
+            if(typeOf(result) === "[object String]")
+                result = JSON.parse(result);
         }
         catch (e) {
+            console.log(e);
             onError(["Invalid JSON received!"]);
             return;
         }
@@ -159,7 +162,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: HOST + COMMANDS["users_logout"],
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "POST",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -176,12 +179,13 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: HOST + COMMANDS["users_loggedIn"],
-                data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
                     try {
-                        result = JSON.parse(result);
+                        console.log(typeOf(result));
+                        if(typeOf(result) === "[object String]")
+                            result = JSON.parse(result);
                     }
                     catch (e) {
                         onError(["Invalid JSON received!"]);
@@ -213,7 +217,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: (HOST + COMMANDS["users_getMyPriviledges"]).format(conferinceId),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -236,7 +240,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: (HOST + COMMANDS["users_getAll"]),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -264,7 +268,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: (HOST + COMMANDS["users_getOne"]).format(username),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -337,7 +341,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: HOST + COMMANDS["users_getSubmittedPapers"],
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -365,7 +369,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: HOST + COMMANDS["users_getAcceptedSubmittedPapers"],
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -392,7 +396,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: (HOST + COMMANDS["users_getSubmittedPapersReviews"]).format(paperId),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -435,7 +439,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: (HOST + COMMANDS["users_getPaperBid"]).format(paperId),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -472,7 +476,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: HOST + COMMANDS["users_getAssignedForReview"],
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -499,7 +503,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: (HOST + COMMANDS["users_getPaperReview"]).format(paperId),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -560,7 +564,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: HOST + COMMANDS["users_setPaperAssignement"].format(username, paperId),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "PUT",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -577,7 +581,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: HOST + COMMANDS["papers_getAll"],
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -669,7 +673,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: HOST + COMMANDS["papers_getFull"].format(paperId),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -707,7 +711,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: HOST + COMMANDS["papers_getAbs"].format(paperId),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -725,7 +729,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: HOST + COMMANDS["papers_getAllAccepted"],
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -752,7 +756,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: HOST + COMMANDS["papers_getPotentialReviewers"].format(paperId),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -774,7 +778,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: HOST + COMMANDS["papers_getAssignedReviewers"].format(paperId),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -797,7 +801,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: HOST + COMMANDS["papers_reevaluatePaper"].format(paperId),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "PUT",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -814,7 +818,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: HOST + COMMANDS["papers_finalEvaluator"].format(paperId, userid),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "PUT",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -851,7 +855,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: HOST + COMMANDS["papers_getAssignedReviewers"].format(paperId),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -878,7 +882,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: (HOST + COMMANDS["conferences_getAll"]),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -909,7 +913,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: (HOST + COMMANDS["conferences_getOne"].format(conferenceId)),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -998,7 +1002,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: (HOST + COMMANDS["conferences_getSessions"]).format(conferenceId),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -1030,7 +1034,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: (HOST + COMMANDS["sessions_getOne"]).format(sessionId),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -1086,7 +1090,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: (HOST + COMMANDS["sessions_getPotentialChairs"]).format(session.id),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
                 success: function (result) {
@@ -1133,7 +1137,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         $.ajax(
             {
                 url: HOST + COMMANDS["sessions_participate"].format(sessionId),
-                data: JSON.stringify({}),
+                //data: JSON.stringify({}),
                 type: "POST",
                 contentType: applicationJSON,
                 success: function (result) {

@@ -9,7 +9,6 @@ import com.company.utils.exception.Exceptional;
 import com.company.utils.updater.PrivilegesGettersAndSetters;
 import com.company.utils.updater.Updater;
 import com.company.utils.updater.UsersGettersAndSetters;
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
