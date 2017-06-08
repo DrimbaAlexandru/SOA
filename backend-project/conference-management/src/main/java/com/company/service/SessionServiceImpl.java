@@ -130,14 +130,14 @@ public class SessionServiceImpl implements SessionService {
 
     @Transactional
     @Override
-    public Exceptional<Session> participateOnSession(int sessId, int userId) {
+    public Exceptional<Session> participateOnSession(int sessId, String username) {
         Session session = sessionRepository.findOne(sessId);
 
         if(session == null) {
             return Exceptional.Error(new Exception("Session id not found"));
         }
 
-        Exceptional<AppUser> user = userService.getUserById(userId);
+        Exceptional<AppUser> user = userService.getUser(username);
         StringBuilder err = new StringBuilder();
 
         Container<AppUser> cont = new Container<>(null);

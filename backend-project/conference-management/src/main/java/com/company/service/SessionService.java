@@ -61,9 +61,9 @@ public interface SessionService {
     /**
      *
      * @param sessId a specific session
-     * @param userId a listener to the given session
+     * @param username a listener to the given session
      * @return the updated session
      */
-    Exceptional<Session> participateOnSession(int sessId, int userId);
+    Exceptional<Session> participateOnSession(int sessId, String username);
 }
 
