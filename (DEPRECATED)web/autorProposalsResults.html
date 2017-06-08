@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<title>See results</title>
+<head>
+<link rel="stylesheet" href="css/design.css">
+	<script src="js/lib/jquery-3.2.1.min.js"></script>
+
+    <script src="js/gui/functions.js"></script>
+</head>
+<body>
+
+<div id="content">
+
+    <div id="left">
+        <div id="menu">
+            <ul>
+                <li><a href="#">Menu Item 1</a></li>
+                <li><a href="#">Menu Item 2</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="right">
+
+        <h1>You can see your results here</h1>
+
+        <table id="acceptedPapers" style="width:50%">
+            <caption>Your accepted papers</caption>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Keywords</th>
+                <th>Topics</th>
+                <th>Authors</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Cum sa mergi la mare?</td>
+                <td>mare</td>
+                <td>A merge;Mare;</td>
+                <td>ghitaBarosanul; catinca</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<!-- The Modal for recommandations -->
+<div id="myModalReco" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class = "closeButton" id="closeReco">&times;</span>
+    <div>
+    	<table id="recommandationsTable" style="width:50%">
+		    <caption>Recommandations for you for paper <span id="paperNameModalRecoSpan"></span></caption>
+  			<tr>
+                <th>Status</th>
+                <th>Recomendation</th>
+  			</tr>
+  			<tr>
+                <td>STRONG_ACCEPTED</td>
+                <td>You may read again the paper and retouch the conclusion</td>
+  			</tr>
+            <tr>
+                <td>BORDERLINE_PAPER</td>
+                <td>Your paper's results are weak</td>
+            </tr>
+ 		</table>
+
+    </div>
+  </div>
+
+</div>
+ 
+</body>
+</html>
