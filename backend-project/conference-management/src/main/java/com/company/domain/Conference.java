@@ -37,7 +37,7 @@ public class Conference {
     private Date biddingDeadline;
 
     @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL)
-    private Set<Privileges> privileges ;
+    private Set<Privileges> privileges;
 
     @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL)
     private Set<Session> sessions;

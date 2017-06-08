@@ -7,7 +7,6 @@ import com.company.domain.AppUser;
 import com.company.controller.DTOs.utils_DTOs.SessionScheduleDTO;
 import com.company.domain.Conference;
 import com.company.domain.Session;
-import com.company.domain.SessionSchedule;
 import com.company.service.ConferenceService;
 import com.company.utils.ResponseJSON;
 import com.company.utils.exception.Exceptional;
