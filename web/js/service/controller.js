@@ -582,8 +582,9 @@ function Controller(onError= undefined, onWarning = undefined) {
                 contentType: applicationJSON,
                 success: function (result) {
                     validateAndRun(result, function (response) {
+
                         var papers = [];
-                        for(var i in papers) {
+                        for(var i in response) {
                             var id = response[i].id;
                             var name = response[i].name;
                             var subjects = response[i].subjects;
@@ -904,10 +905,10 @@ function Controller(onError= undefined, onWarning = undefined) {
         )
     }
 
-    this.getOneConference = function (onResultArrived) {
+    this.getOneConference = function (conferenceId, onResultArrived) {
         $.ajax(
             {
-                url: (HOST + COMMANDS["conferences_getOne"]),
+                url: (HOST + COMMANDS["conferences_getOne"].format(conferenceId)),
                 data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
@@ -921,7 +922,7 @@ function Controller(onError= undefined, onWarning = undefined) {
                         var startDateProposal = response.callForProposalsTimeSpan.startDate;
                         var endDateProposal = response.callForProposalsTimeSpan.endDate;
                         var biddingDeadline = response.biddingDeadline;
-                        if (onResultArrived) onResultArrived(new Conference(name, new TimeSpan(startDateTimeSpan, endDateTimeSpan), new TimeSpan(startDateAbstract, endDateAbstract), new TimeSpan(startDateProposal, endDateProposal), biddingDeadline));
+                        if (onResultArrived) onResultArrived(new Conference(conferenceId, name, new TimeSpan(startDateTimeSpan, endDateTimeSpan), new TimeSpan(startDateAbstract, endDateAbstract), new TimeSpan(startDateProposal, endDateProposal), biddingDeadline));
                     });
                 },
                 errorFunction: errorFunction
