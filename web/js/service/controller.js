@@ -42,34 +42,35 @@ function Controller(onError= undefined, onWarning = undefined) {
 
         "papers_getAll": "papers.php",
         "papers_save": "papers.php",
-        "papers_update": "papers.php?paperId={0}",
-        "papers_uploadFull": "papers.full.php?paperId={0}",
-        "papers_getFull": "papers.full.php?paperId={0}",
-        "papers_uploadAbs": "papers.abs.php?paperId={0}",
-        "papers_getAbs": "papers.abs.php?paperId={0}",
+        "papers_update": "papers.php/{0}",
+        "papers_uploadFull": "papers/{0}/full",
+        "papers_getFull": "papers/{0}/full",
+        "papers_uploadAbs": "papers/{0}/abstract",
+        "papers_getAbs": "papers/{0}/abstract",
 
-        "papers_getAllAccepted": "papers.acceptedProposals.php",
-        "papers_getPotentialReviewers": "papers.potentialReviewers.php?paperId={0}",
-        "papers_getAssignedReviewers": "papers.assignedReviewers.php?paperId={0}",
-        "papers_reevaluatePaper": "papers.reevaluate.php?paperId={0}",
-        "papers_finalEvaluator": "papers.finalEvaluator.php?paperId={0}&username={1}",
-        "papers_finalStatus": "papers.finalStatus.php?paperId={0}",
+        "papers_getAllAccepted": "papers/acceptedProposals",
+        "papers_getPotentialReviewers": "papers/{0}/potentialReviewers",
+        "papers_getAssignedReviewers": "papers/{0}/assignedReviewers",
+        "papers_reevaluatePaper": "papers/{0}/reevaluate",
+        "papers_finalEvaluator": "papers/{0}/finalEvaluator/{1}",
+        "papers_finalStatus": "papers/{0}/finalStatus",
 
-        "reviews_getOthersReviews": "reviews.php?paperId={0}",
+        "reviews_getOthersReviews": "papers/{0}/reviews",
+        "papers_bids": "papers/{0}/bid",
 
         //SESSIONS
-        "conferences_save": "conferences.php",
-        "conferences_getAll": "conferences.php",
-        "conferences_getOne": "conferences.php?conferenceId={0}",
-        "conferences_update": "conferences.php?conferenceId={0}",
+        "conferences_save": "conferences",
+        "conferences_getAll": "conferences",
+        "conferences_getOne": "conferences/{0}",
+        "conferences_update": "conferences/{0}",
 
-        "conferences_getSessions": "conferences.sessions.php?conferenceId={0}",
+        "conferences_getSessions": "conferences/{0}/sessions",
 
-        "sessions_getOne": "sessions.php?sessionId={0}",
-        "sessions_save": "sessions.php",
-        "sessions_getPotentialChairs": "sessions.potentialChairs.php?sessionId={0}",
-        "sessions_setSessionChiar": "sessions.sessionChair.php?sessionId={0}",
-        "sessions_participate": "sessions.participate.php?sessionId={0}"
+        "sessions_getOne": "sessions/{0}",
+        "sessions_save": "sessions",
+        "sessions_getPotentialChairs": "sessions/{0}/potentialChairs",
+        "sessions_setSessionChiar": "sessions/{0}/sessionChair",
+        "sessions_participate": "sessions/{0}/participate"
     };
 
 
