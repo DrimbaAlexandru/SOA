@@ -45,7 +45,7 @@ return 'resp' =>
     email = string
     website = string
 	isSuperUser=bool
-    isCommiteeMember=bool
+    isCommeteeMember=bool
 }]
 
 users/{username} GET
@@ -57,7 +57,7 @@ return 'resp' =>
     email = string
     website = string
 	isSuperUser=bool
-    isCommiteeMember=bool
+    isCommeteeMember=bool
 }
 
 
@@ -82,7 +82,7 @@ users/{username} PUT
     email :string
     website:string
     password:"string"
-    isCommiteeMember = bool   
+    isCommeteeMember = bool
 }
 
 
@@ -194,6 +194,7 @@ papers POST
     subjects:string[]
     keywords:string[]
     authors:string[]
+    conferenceId:int
 }
 
 		DONE
@@ -275,19 +276,37 @@ papers/{paperId}/finalEvaluator/{user_id} PUT
 {}
 return {}
 
+		DONE
+papers/{paperId}/reviews/ GET
+[{
+    status : string
+    justification=string
+    username=string --reviewer-ul
+}]
+
+		DONE
+papers/{paperId}/bids/ GET
+[{
+    status : string
+    username=string --bidder-ul
+}]
 
 
 //listOthersReviewsForPaper
-reviews/{paperId} GET
+papers/{paperId}/getReviews GET
 return 'resp'=>[{
     status = status=NONE| "STRONG_ACCEPT"|"ACCEPT"|"WEAK_ACCEPT"|"BORDERLINE_PAPER"|"WEAK_REJECT"|"REJECT"|"STRONG_REJECT"
     justification=string
     username=string
 }]
 
+papers/{paperId}/getBids GET
 
 
-//////Conferences
+
+//SECTIONS
+
+//////Conference
 
 conferences POST
 {
@@ -296,7 +315,7 @@ conferences POST
         startDate:Date
         endDate:Date
     }
-    callForAbstractTimeSpan{
+    callFroAbstractTimeSpan{
         startDate:Date
         endDate:Date
     }
@@ -377,14 +396,12 @@ return =>'resp'[
             sessionId:int
             paperId:int
             presentationStartTime:Date
-            presentationEndTime:Date
+            presentationEndTime
             username:string //speakerName
         }
     ]      
 }]
 
-
--- SESSIONS
 sessions/{sessionId} GET
 return =>'resp'
 {
