@@ -586,11 +586,11 @@ function Controller(onError= undefined, onWarning = undefined) {
                 success: function (result) {
                     validateAndRun(result, function (response) {
 
-                        var id = response[i].id;
-                        var name = response[i].name;
-                        var subjects = response[i].subjects;
-                        var keywords = response[i].keywords;
-                        var authors = response[i].authors;
+                        var id = response.id;
+                        var name = response.name;
+                        var subjects = response.subjects;
+                        var keywords = response.keywords;
+                        var authors = response.authors;
                         var paper = new Proposal(id, name, keywords, subjects, authors);
 
                         if (onResultArrived) onResultArrived(paper)
