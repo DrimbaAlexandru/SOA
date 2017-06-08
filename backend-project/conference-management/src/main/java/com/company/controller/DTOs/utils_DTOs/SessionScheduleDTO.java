@@ -1,22 +1,33 @@
 package com.company.controller.DTOs.utils_DTOs;
 
+import com.company.domain.SessionSchedule;
+
 import java.util.Date;
 
 /**
  * Created by sebi on 6/8/2017.
  */
-public class SessionSchedule {
-    private int sessionId, papaerId;
+public class SessionScheduleDTO {
+    private int sessionId, paperId;
     private Date presentationStartTime, presentationEndTime;
+    private String username;
 
-    public SessionSchedule(int sessionId, int papaerId, Date presentationStartTime, Date presentationEndTime, String speakerName) {
+    public SessionScheduleDTO(int sessionId, int paperId, Date presentationStartTime, Date presentationEndTime, String speakerName) {
         this.sessionId = sessionId;
-        this.papaerId = papaerId;
+        this.paperId = paperId;
         this.presentationStartTime = presentationStartTime;
         this.presentationEndTime = presentationEndTime;
-        this.speakerName = speakerName;
+        this.username = speakerName;
     }
-    public SessionSchedule(){}
+
+    public SessionScheduleDTO(SessionSchedule s){
+        sessionId = s.getId();
+        paperId = s.getPaper().getId();
+        username= s.getSpeaker().getUsername();
+        presentationStartTime = s.getPresentationTime();
+    }
+
+    public SessionScheduleDTO(){}
 
     public int getSessionId() {
         return sessionId;
@@ -26,12 +37,12 @@ public class SessionSchedule {
         this.sessionId = sessionId;
     }
 
-    public int getPapaerId() {
-        return papaerId;
+    public int getPaperId() {
+        return paperId;
     }
 
-    public void setPapaerId(int papaerId) {
-        this.papaerId = papaerId;
+    public void setPaperId(int paperId) {
+        this.paperId = paperId;
     }
 
     public Date getPresentationStartTime() {

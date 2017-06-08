@@ -1,7 +1,10 @@
 package com.company.controller.DTOs;
 
-import com.company.controller.DTOs.utils_DTOs.SessionSchedule;
+import com.company.controller.DTOs.utils_DTOs.SessionScheduleDTO;
+import com.company.domain.Session;
+import com.company.domain.SessionSchedule;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,15 +13,27 @@ import java.util.List;
 public class SessionDTO {
     private int id;
     private String name;
-    private List<SessionSchedule> sessionScheduleList;
+    private List<SessionScheduleDTO> sessionScheduleDTOList;
 
-    public SessionDTO(int id, String name, List<SessionSchedule> sessionScheduleList) {
+    public SessionDTO(int id, String name, List<SessionScheduleDTO> sessionScheduleDTOList) {
         this.id = id;
         this.name = name;
-        this.sessionScheduleList = sessionScheduleList;
+        this.sessionScheduleDTOList = sessionScheduleDTOList;
     }
 
     public SessionDTO(){}
+
+    public SessionDTO(Session s)
+    {
+        id=s.getId();
+        name=s.getName();
+        sessionScheduleDTOList=new ArrayList<>();
+        for(SessionSchedule sch:s.getSchedule())
+        {
+            sessionScheduleDTOList.add(new SessionScheduleDTO(sch));
+        }
+
+    }
 
     public int getId() {
         return id;
@@ -36,11 +51,11 @@ public class SessionDTO {
         this.name = name;
     }
 
-    public List<SessionSchedule> getSessionScheduleList() {
-        return sessionScheduleList;
+    public List<SessionScheduleDTO> getSessionScheduleDTOList() {
+        return sessionScheduleDTOList;
     }
 
-    public void setSessionScheduleList(List<SessionSchedule> sessionScheduleList) {
-        this.sessionScheduleList = sessionScheduleList;
+    public void setSessionScheduleDTOList(List<SessionScheduleDTO> sessionScheduleDTOList) {
+        this.sessionScheduleDTOList = sessionScheduleDTOList;
     }
 }
