@@ -812,7 +812,7 @@ function loadReviews(){
 }
 
 function loadMangedConflicts(){
-    
+
 }
 
 
