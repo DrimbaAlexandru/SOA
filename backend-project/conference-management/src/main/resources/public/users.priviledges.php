@@ -1,1 +1,0 @@
-{"resp":{"isAuthor":true, "isChair":true, "isCoChair":true, "isPCMember":true}}

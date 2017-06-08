@@ -55,12 +55,12 @@ function isEmpty(val){
     return false;
 }
 
-function getConferenceId(){
+function getVariableFromCookie(v){
     var cookie = document.cookie;
     var s = cookie.split(';');
     for(var i in s){
         var k, v;
-        if(s[i].indexOf("conferenceId") > -1 )
+        if(s[i].indexOf(v) > -1 )
         {
             try {
                 return parseInt(s[i].split('=')[1].trim());
@@ -72,6 +72,15 @@ function getConferenceId(){
     }
     return undefined;
 }
+
+function getConferenceIdFromCookie(){
+    return getVariableFromCookie("conferenceId");
+}
+
+function getUsernameFromCookie(){
+    return getVariableFromCookie("username");
+}
+
 function tableClearLetHeader(table){
     table.find("tr").filter(function(){
         return $(this).children('th').length === 0
@@ -120,6 +129,196 @@ function showSystemPopp(e){
     var a = $(this).children().first();
     var id = a.attr("href");
     showPopup(id);
+}
+
+function listToCommaSeparatedString(list){
+    var keywords = "";
+    for(var key in list){
+        key = list[key];
+        if(key.indexOf(";") > -1){
+            key = key.replace(/;/g, function(a){
+                return "\\;";
+            })
+        }
+        keywords = keywords + key+";";
+    }
+    return keywords;
+}
+
+function commaSeparatedStringToList(string){
+    var split = string.split(";");
+    var toRemove = [];
+    var i = 0;
+    while(i < split.length){
+        if(split[i][split[i].length - 1] == '\\' && i < split.length){
+            split[i] = split[i].substr(0, split.length - 2) + split[i+1];
+            split.remove(i+1, 1);
+        }
+        else{
+            i++;
+        }
+    }
+    return split;
+}
+
+
+function loadGrantReviewer(){
+    function populate(users){
+        function grantReviewer(e){
+            var tds = $(this).parent().parent().children();
+            var username = tds.get(0);
+            c.getPriviledges(username, getConferenceIdFromCookie(), function(priviledge){
+                priviledge.isReviewer = true;
+                c.setPrivilegdes(username, getConferenceIdFromCookie(), priviledge, function(){
+
+                });
+            })  ;
+        }
+
+        for(var i in users){
+            var tr = $("<tr></tr>");
+            var td;
+
+            td = $("<td></td>");
+            td.html(users[i].username);
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html(users[i].name);
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html(users[i].affiliation);
+            tr.append(td);
+
+
+            td = $("<td></td>");
+            td.html(users[i].website);
+            tr.append(td);
+
+
+            td = $("<td></td>");
+            td.html(users[i].email);
+            tr.append(td);
+
+            td = $("<td></td>");
+
+            function putGrant(username, el){
+                c.getPriviledges(username, getConferenceIdFromCookie(), function(priviledge){
+                    if(priviledge.isReviewer){
+                        el.html("<p>Already granted</p>")
+                    }
+                    else{
+                        el.html("<button>Grant</button>");
+                        el.children("button").click(grantReviewer);
+                    }
+                });
+            }
+            putGrant(users.username, td.clone());
+
+            tr.append(td);
+            table.append(tr);
+
+        }
+    }
+
+    var table = $("#reviewerUsersTable");
+    tableClearLetHeader(table);
+
+    c.getAllUsers(populate);
+}
+
+
+function loadGrantChair(){
+    function populate(users){
+
+        function grantCoChair(e){
+            var tds = $(this).parent().parent().children();
+            var username = tds.get(0);
+            c.getPriviledges(username, getConferenceIdFromCookie(), function(priviledge){
+                priviledge.isCoChair= true;
+                c.setPrivilegdes(username, getConferenceIdFromCookie(), priviledge, function(){
+
+                });
+            })  ;
+        }
+
+        function grantChair(e){
+            var tds = $(this).parent().parent().children();
+            var username = tds.get(0);
+            c.getPriviledges(username, getConferenceIdFromCookie(), function(priviledge){
+                priviledge.isChair = true;
+                c.setPrivilegdes(username, getConferenceIdFromCookie(), priviledge, function(){
+
+                });
+            })  ;
+        }
+
+        for(var i in users){
+            var tr = $("<tr></tr>");
+            var td;
+
+            td = $("<td></td>");
+            td.html(users[i].username);
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html(users[i].name);
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html(users[i].affiliation);
+            tr.append(td);
+
+
+            td = $("<td></td>");
+            td.html(users[i].website);
+            tr.append(td);
+
+
+            td = $("<td></td>");
+            td.html(users[i].email);
+            tr.append(td);
+
+            td = $("<td></td>");
+
+            tr.append(td);
+
+            function putGrant(username, el1, el2){
+                c.getPriviledges(username, getConferenceIdFromCookie(), function(priviledge){
+                    if(priviledge.isChair){
+                        el1.html("<p>Already granted</p>")
+                    }
+                    else{
+                        el1.html("<button>Grant</button>");
+                        el1.children("button").click(grantChair);
+                    }
+
+                    if(priviledge.isCoChair){
+                        el1.html("<p>Already granted</p>")
+                    }
+                    else{
+                        el1.html("<button>Grant</button>");
+                        el1.children("button").click(grantCoChair);
+                    }
+
+                });
+            }
+
+            var td1 = $("<td></td>");
+
+            tr.append(td1);
+            putGrant(users.username, td.clone(), td1.clone());
+
+            table.append(tr);
+
+        }
+    }
+
+    var table = $("#reviewerUsersTable");
+    tableClearLetHeader(table);
+
+    c.getAllUsers(populate);
 }
 
 function fillModalGrantSteering(){
@@ -176,14 +375,8 @@ function fillModalGrantSteering(){
     }
 
     var table = $("#steeringUsersTable");
-    console.log(table);
-    table.find("tr").filter(function(){
-        return $(this).children('th').length === 0
-    }).remove();
-
-    var users = c.getAllUsers(populate);
-
-
+    clear(table);
+    c.getAllUsers(populate);
 }
 
 function assureCreateConfCommands(){
@@ -202,7 +395,6 @@ function assureCreateConfCommands(){
         var proposalEndDate = parent.children("#callForProposalEndDateCreateConfModal").val();
 
         var biddingValue = parent.children("#biddingDeadlineCreateConfModal").val();
-        console.log(confname, startDate, endDate, abstractEndDate, abstractStartDate, proposalEndDate, proposalStartDate, biddingValue);
         if(isEmpty(biddingValue) || isEmpty(confname) || isEmpty(startDate)
             || isEmpty(endDate)
             || isEmpty(abstractStartDate)
@@ -221,7 +413,6 @@ function assureCreateConfCommands(){
 
 function loadConference(){
     function populate(conference){
-        console.log(conference);
         $("#conferenceName").html(conference.name);
         $("#startDateSpan").html(conference.eventTimeSpan.startDate);
         $("#endDateSpan").html(conference.eventTimeSpan.endDate);
@@ -233,7 +424,7 @@ function loadConference(){
 
     }
 
-    c.getOneConference(getConferenceId(), populate);
+    c.getOneConference(getConferenceIdFromCookie(), populate);
 }
 
 function loadConferences(){
@@ -265,20 +456,7 @@ function loadConferences(){
 
 }
 
-function listToCommaSeparatedString(list){
-    var keywords = "";
-    for(var key in list){
-        key = list[key];
-        if(key.indexOf(";") > -1){
-            if(key.indexOf("\"") > -1){
-                key = key.replace("\"", "\\\"");
-            }
-            key = "\"" + key+ "\"";
-        }
-        keywords = keywords + key+";";
-    }
-    return keywords;
-}
+
 
 function loadAddPaper(){
     var fullPop = $("#myModalFull");
@@ -310,28 +488,26 @@ function loadAddPaper(){
             showErrors(["You must insert values on all fields!"]);
             return;
         }
-        console.log(data);
         if(data == "save"){
-            c.savePapers(getConferenceId(), new Proposal(id, name, keywords, subjects, authors),
+            c.savePapers(getConferenceIdFromCookie(), new Proposal(id, name, keywords, subjects, authors),
                 function(){window.location.reload();});
 
         }
         else if(data == "update"){
-            c.updatePapers(getConferenceId(), new Proposal(id, name, keywords, subjects, authors),
+            c.updatePapers(getConferenceIdFromCookie(), new Proposal(id, name, keywords, subjects, authors),
                 function(){window.location.reload();});
         }
     }
 
     function editClick(e){
         var parent = $(this).parent().parent();
-        console.log(parent);
         var id = parent.children().get(0).innerHTML;
         data = "update";
         var name = parent.children().get(1).innerHTML;
-        var keywords = parent.children().get(2).innerHTML;
-        var subjects = parent.children().get(3).innerHTML;
-        var authors = parent.children().get(4).innerHTML;
-        console.log(name, keywords, subjects, authors);
+        var keywords = commaSeparatedStringToList(parent.children().get(2).innerHTML);
+        var subjects = commaSeparatedStringToList(parent.children().get(3).innerHTML);
+        var authors = commaSeparatedStringToList(parent.children().get(4).innerHTML);
+
         editPop.find("#idEditModal").val(id);
         editPop.find("#nameEditModal").val(name);
         editPop.find("#keywordsEditModal").val(keywords);
@@ -361,7 +537,6 @@ function loadAddPaper(){
     function populate(papers){
         var table = $("#sentPapersTable");
         tableClearLetHeader(table);
-        console.log(papers);
         for(var i in papers){
             var tr = $("<tr></tr>");
             var td;
@@ -424,7 +599,7 @@ function loadAddPaper(){
 
         reader.onload = function(e){
             data = e.target.result;
-            c.uploadAbsPaper(getConferenceId(), id,"type", data, function(){
+            c.uploadAbsPaper(getConferenceIdFromCookie(), id,"type", data, function(){
                 absPop.fadeOut();
             } );
         }
@@ -441,7 +616,7 @@ function loadAddPaper(){
 
         reader.onload = function(e){
             data = e.target.result;
-            c.uploadAbsPaper(getConferenceId(), id,"type", data, function(){
+            c.uploadAbsPaper(getConferenceIdFromCookie(), id,"type", data, function(){
                 fullPop.fadeOut();
             } );
         }
@@ -465,8 +640,76 @@ function loadAddPaper(){
         editPop.fadeIn();
     });
 
+}
 
+function loadViewResult(){
+    var reco = $("#myModalReco");
 
+    function proposalClick(e){
+        var id = $(this).children().get(0).innerHTML;
+
+        function populateReviews(reviews){
+            var table = reco.find("#recommandationsTable");
+            tableClearLetHeader(table);
+
+            for(var i in reviews){
+                var tr = $("<tr></tr>");
+                var td;
+
+                td = $("<td></td>");
+                td.html(reviews[i].status);
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html(papers[i].justification);
+                tr.append(td);
+
+                table.append(tr);
+            }
+            reco.fadeIn();
+        }
+
+        c.getSubmittedPapersReviews(getUsernameFromCookie(), id, populateReviews);
+    }
+
+    function populate(papers){
+        var table = $("#sentPapersTable");
+        tableClearLetHeader(table);
+        for(var i in papers){
+            var tr = $("<tr></tr>");
+            var td;
+
+            td = $("<td></td>");
+            td.html(papers[i].id);
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html(papers[i].name);
+            tr.append(td);
+
+            var keywords = listToCommaSeparatedString(papers[i].keywords);
+            var subjects= listToCommaSeparatedString(papers[i].subjects);
+            var authors= listToCommaSeparatedString(papers[i].authors);
+
+            td = $("<td></td>");
+            td.html(keywords);
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html(subjects);
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html(authors);
+            tr.append(td);
+
+            table.append(tr);
+            tr.click(proposalClick);
+
+        }
+    }
+
+    c.getAcceptedSubmittedPapers(getUsernameFromCookie(), populate);
 }
 
 function loadDeadlines(){
@@ -474,13 +717,10 @@ function loadDeadlines(){
     function deadlineClicked(e){
         e.preventDefault(true);
         showPopup("myModalDeadlines");
-        console.log($(this).children().get(0).innerHTML);
         var name = $(this).children().get(0).innerHTML;
         var date = $(this).children().get(1).innerHTML;
         pop.find("#nameDeadlinesModal").val(name);
         pop.find("#dateDeadlinesModal").val(date);
-
-
     }
 
     function saveDeadline(e) {
@@ -547,19 +787,296 @@ function loadDeadlines(){
     }
 
     $("#submitDeadlinesModal").click(saveDeadline);
-    c.getOneConference(getConferenceId(), populate);
+    c.getOneConference(getConferenceIdFromCookie(), populate);
 }
 
-function loadSystemPages(page){
+function loadAsignPaper(){
+
+
+}
+
+function loadBids(){
+
+
+
+}
+
+function loadReviews(){
+
+}
+
+function loadMangedConflicts(){
+    
+}
+
+
+function loadSessionChairs(){
+    var pop = $("#myModalSession");
+
+    function sessionClick(e){
+        var id = $(this).children().get(0).innerHTML;
+
+        function setSessionClick(e){
+            var username = $(this).parent().parent().get(2).innerHTML;
+
+            c.setSessionChiar(id, username, function(){
+                pop.fadeOut();
+            });
+        }
+
+        function populateUsers(users){
+            var table = $("#potetialSessionChairs");
+            tableClearLetHeader(table);
+
+            for(var i in users){
+                var tr = $("<tr></tr>");
+                var td;
+
+                td = $("<td></td>");
+                td.html(users[i].id);
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html(users[i].username);
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html(users[i].name);
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html("<button>Set session</button>");
+                tr.append(td);
+                td.children().first().click(setSessionClick);
+                table.append(tr);
+            }
+
+        }
+
+
+        c.getPotentialChairs(id, populateUsers);
+        pop.fadeIn();
+    }
+
+    function populate(sessions){
+        var table = $("#sessionsTable");
+        tableClearLetHeader(table);
+
+        for(var i in sessions){
+            var session = sessions[i];
+
+            var tr = $("<tr></tr>");
+            var td;
+
+            td = $("<td></td>");
+            td.html(session.id);
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html(session.name);
+            tr.append(td);
+
+            td = $("<td></td>");
+            var table1 = $("<table></table>");
+            for(var j in session.schedule){
+                var tr1 = $("<tr></tr>");
+
+                function complete(tr1, paperId, schedule){
+                    c.getOnePaper(paperId, function(paper){
+                        var td1;
+
+                        td1 = $("<td></td>");
+                        td1.html(paper.id);
+                        tr1.append(td1);
+
+                        td1 = $("<td></td>");
+                        td1.html(paper.name);
+                        tr1.append(td1);
+
+
+                        td1 = $("<td></td>");
+                        td1.html(listToCommaSeparatedString(paper.keywords));
+                        tr1.append(td1);
+
+
+                        td1 = $("<td></td>");
+                        td1.html(listToCommaSeparatedString(paper.subjects));
+                        tr1.append(td1);
+
+
+                        td1 = $("<td></td>");
+                        td1.html(listToCommaSeparatedString(pape.authors));
+                        tr1.append(td1);
+
+                        td1 = $("<td></td>");
+                        td1.html(schedule.presentationStartTime);
+                        tr1.append(td1);
+
+
+                        td1 = $("<td></td>");
+                        td1.html(schedule.presentationEndTime);
+                        tr1.append(td1);
+
+                        td1 = $("<td></td>");
+                        td1.html(schedule.username);
+                        tr1.append(td1);
+
+                    });
+                }
+                complete(tr.clone(), session.schedule[j].paperId, jQuery.extend(true, {}, session.schedule[j]));
+
+                table1.append(tr1);
+
+            }
+            td.append(table1);
+            tr.append(td);
+
+            tr.click(sessionClick);
+        }
+    }
+
+
+    c.getConferenceSessions(getConferenceIdFromCookie(), populate);
+}
+
+function loadSessions(){
+    var pop = $("#myModalSection");
+
+    function sessionClick(e){
+        var id = $(this).children().get(0).innerHTML;
+        pop.find("#idModalSection").val(id);
+        pop.fadeIn();
+    }
+
+    function confirmClick(e){
+        e.preventDefault(true);
+        var answer = pop.find('input[name="answer"]:checked').val();
+        var id = pop.find("#idModalSection").val();
+        if(answer == 'yes'){
+            c.participateSession(sessionId, getUsernameFromCookie(), function(){
+                pop.fadeOut();
+            });
+            return;
+        }
+        pop.fadeOut();
+    }
+
+    function populate(sessions){
+        var table = $("#sectionsTable");
+        tableClearLetHeader(table);
+
+        for(var i in sessions){
+            var session = sessions[i];
+
+            var tr = $("<tr></tr>");
+            var td;
+
+            td = $("<td></td>");
+            td.html(session.id);
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html(session.name);
+            tr.append(td);
+
+            td = $("<td></td>");
+            var table1 = $("<table></table>");
+            for(var j in session.schedule){
+                var tr1 = $("<tr></tr>");
+
+                function complete(tr1, paperId, schedule){
+                    c.getOnePaper(paperId, function(paper){
+                        var td1;
+
+                        td1 = $("<td></td>");
+                        td1.html(paper.id);
+                        tr1.append(td1);
+
+                        td1 = $("<td></td>");
+                        td1.html(paper.name);
+                        tr1.append(td1);
+
+
+                        td1 = $("<td></td>");
+                        td1.html(listToCommaSeparatedString(paper.keywords));
+                        tr1.append(td1);
+
+
+                        td1 = $("<td></td>");
+                        td1.html(listToCommaSeparatedString(paper.subjects));
+                        tr1.append(td1);
+
+
+                        td1 = $("<td></td>");
+                        td1.html(listToCommaSeparatedString(pape.authors));
+                        tr1.append(td1);
+
+                        td1 = $("<td></td>");
+                        td1.html(schedule.presentationStartTime);
+                        tr1.append(td1);
+
+
+                        td1 = $("<td></td>");
+                        td1.html(schedule.presentationEndTime);
+                        tr1.append(td1);
+
+                        td1 = $("<td></td>");
+                        td1.html(schedule.username);
+                        tr1.append(td1);
+
+                    });
+                }
+                complete(tr.clone(), session.schedule[j].paperId, jQuery.extend(true, {}, session.schedule[j]));
+
+                table1.append(tr1);
+
+            }
+            td.append(table1);
+            tr.append(td);
+
+            tr.click(sessionClick);
+        }
+    }
+
+    $('#confirmSectionsButton').click(confirmClick);
+    c.getConferenceSessions(getConferenceIdFromCookie(), populate);
+}
+
+function loadSystemPages(page, priviledge){
     var menu = $("#menu ul");
     menu.empty();
+
+    var s = new Set();
+    for(var i in SYSTEM_PAGES_FOR_USERS["all"]){
+        s.add(SYSTEM_PAGES_FOR_USERS["all"][i])
+    }
+
+    if(priviledge.isCometeeMember){
+        for(var i in SYSTEM_PAGES_FOR_USERS["steering"]){
+            s.add(SYSTEM_PAGES_FOR_USERS["steering"][i])
+        }
+    }
+
+    if(priviledge.isSuperUser){
+        for(var i in SYSTEM_PAGES_FOR_USERS["master"]){
+            s.add(SYSTEM_PAGES_FOR_USERS["master"][i])
+        }
+    }
+
+
     for(var spage in SYSTEM_PAGES){
+        if(!(s.has(spage)))
+            continue;
+
         var menuItem = $("<li></li>");
         menuItem.html("<a href='"+PAGES[SYSTEM_PAGES[spage]]+"'>"+formatPage(SYSTEM_PAGES[spage]) +"</a>");
         menu.append(menuItem);
     }
 
     for(var spop in SYSTEM_POPUPS){
+        if(!(s.has(spage)))
+            continue;
+
         var menuItem = $("<li></li>");
         menuItem.html("<a href='"+ SYSTEM_POPUPS_ID[SYSTEM_POPUPS[spop]]+ "'>"+formatPage(SYSTEM_POPUPS[spop]) +"</a>");
         menu.append(menuItem);
@@ -579,8 +1096,7 @@ function loadSystemPages(page){
 }
 
 
-
-function loadConferencePages(page){
+function loadConferencePages(page, sysPrivilegde){
     function populate(priviledge){
         var s = new Set();
         for(var i in CONFERENCE_PAGES_FOR_USERS["all"]){
@@ -611,6 +1127,18 @@ function loadConferencePages(page){
             }
         }
 
+        if(sysPrivilegde.isCometeeMember){
+            for(var i in CONFERENCE_PAGES_FOR_USERS["steering"]){
+                s.add(CONFERENCE_PAGES_FOR_USERS["steering"][i])
+            }
+        }
+
+        if(sysPrivilegde.isSuperUser){
+            for(var i in CONFERENCE_PAGES_FOR_USERS["master"]){
+                s.add(CONFERENCE_PAGES_FOR_USERS["master"][i])
+            }
+        }
+
         for(var page of s){
             var menuItem = $("<li></li>");
             menuItem.html("<a href='"+PAGES[page]+"'>"+formatPage(page) +"</a>");
@@ -620,7 +1148,7 @@ function loadConferencePages(page){
     var menu = $("#menu ul");
     menu.empty();
 
-    c.getMyPriviledges(getConferenceId(), populate);
+    c.getPriviledges(getUsernameFromCookie(), getConferenceIdFromCookie(), populate);
 }
 
 function logout(){
@@ -649,8 +1177,8 @@ function main(){
                     return;
                 }
 
-                if(SYSTEM_PAGES.indexOf(page) > -1) loadSystemPages(page);
-                else loadConferencePages();
+                if(SYSTEM_PAGES.indexOf(page) > -1) loadSystemPages(page, priviledge);
+                else loadConferencePages(page, priviledge);
 
                 if(page in PAGE_LOADS){
                     PAGE_LOADS[page]();

@@ -11,31 +11,31 @@ String.prototype.format = function () {
 };
 
 PAGES = {
-    "index":"index.html",
-    "login":"login.html",
-    "register":"register.html",
+    "index":"index.html",//DONE
+    "login":"login.html",//DONE
+    "register":"register.html",//DONE
 
-    "conferences":"conferences.html",
-    "conference":"conference.html",
+    "conferences":"conferences.html",//DONE
+    "conference":"conference.html",//DONE
 
     "bid":"bidProposals.html",
     "review":"reviewProposals.html",
 
     "asignPaper":"asignPapersToReviewers.html",
     "manageConflicts":"manageConflictProposals.html",
-    "sessionChairs":"sessionChairs.html",
-    "deadlines":"manageDeadlines.html",
+    "sessionChairs":"sessionChairs.html",//DONE
+    "deadlines":"manageDeadlines.html",//DONE
 
-    "addPaper":"autorManageProposals.html",
-    "viewResult":"autorProposalsResults.html",
+    "addPaper":"autorManageProposals.html",//DONE
+    "viewResult":"autorProposalsResults.html",//DONE
 
-    "sessions":"sessions.html",
+    "sessions":"sessions.html",//DONE
 
-    "grantReviewer":"grantReviewer.html",
-    "grantChair":"grantReviewer.html",
+    "grantReviewer":"grantReviewer.html",//DONE
+    "grantChair":"grantReviewer.html",//DONE
 
-    "createConference":"createConf.html",
-    "grantSteering":"grantSteering.html",
+    "createConference":"createConf.html",//DONE
+    "grantSteering":"grantSteering.html",//DONE
 };
 
 PAGES_REVERSE ={};
@@ -55,14 +55,14 @@ SYSTEM_POPUPS_ID = {
 
 CONFERENCE_PAGES_FOR_USERS = {
     "cochair":
-        ["bid", "review", "asignPaper", "manageConflicts", "sessionChairs", "deadlines"],
+        ["bid", "review", "asignPaper", "manageConflicts", "sessionChairs", "deadlines", "grantReviewer"],
     "chair":
-        ["bid", "review", "asignPaper", "manageConflicts", "sessionChairs", "deadlines"],
+        ["bid", "review", "asignPaper", "manageConflicts", "sessionChairs", "deadlines", "grantReviewer"],
     "reviewer":
         ["bid", "review"],
     "author":
         ["addPaper", "viewResult"],
-    "steering":[],
+    "steering":["grantChair"],
     "master":[],
     "all":["sessions", "conference"]
 }
@@ -71,7 +71,10 @@ SYSTEM_PAGES_FOR_USERS = {
     "master":
         ["grantSteering"],
     "steering":
-        ["createConference"]
+        ["createConference"],
+    "all":
+        ["conferences"]
+
 }
 
 PAGE_LOADS = {
@@ -79,4 +82,17 @@ PAGE_LOADS = {
     "conference":loadConference,
     "deadlines":loadDeadlines,
     "addPaper":loadAddPaper,
+    "viewResult":loadViewResult,
+
+    "manageConflicts":loadMangedConflicts,
+    "asignPaper":loadAsignPaper,
+    "bid":loadBids,
+    "review":loadReviews,
+
+
+    "grantReviewer":loadGrantReviewer,
+    "grantChair":loadGrantChair,
+
+    "session":loadSessions,
+    "sessionChairs":loadSessionChairs,
 }
