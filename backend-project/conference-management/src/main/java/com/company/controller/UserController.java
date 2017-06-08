@@ -33,6 +33,7 @@ public class UserController {
     private void setCookie(String name, String value, int expiry, HttpServletResponse response) {
         Cookie c=new Cookie(name,value);
         c.setMaxAge(expiry);
+        c.setPath("/");
         response.addCookie(c);
     }
 
@@ -42,8 +43,9 @@ public class UserController {
             (@RequestBody loginRequest body,
              HttpServletResponse response)
     {
+
         ResponseJSON<String> resp=new ResponseJSON<>();
-        resp.setResp("GAY PORN");
+        resp.setResp("GAY PORN" );
         Exceptional<AppUser> ex = service.getUser(body.getUsername());
         ex.error(e -> resp.addError(e.getMessage()))
             .ok(e -> {
@@ -56,8 +58,8 @@ public class UserController {
             setCookie("password",body.getPassword(),3600,response);
         }
         else {
-            setCookie("username","",0,response);
-            setCookie("password","",0,response);
+            setCookie("username","ccc",0,response);
+            setCookie("password","ccc",0,response);
         }
         return new ResponseEntity<>(resp, HttpStatus.OK);
     }
