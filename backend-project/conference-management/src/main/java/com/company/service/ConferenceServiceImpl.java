@@ -5,6 +5,7 @@ import com.company.domain.AppUser;
 import com.company.domain.Conference;
 import com.company.domain.Session;
 import com.company.repository.ConferenceRepository;
+import com.company.repository.SessionRepository;
 import com.company.utils.exception.Exceptional;
 import com.company.utils.updater.ConferencesGettersAndSetters;
 import com.company.utils.updater.Updater;
@@ -20,15 +21,18 @@ import java.util.HashSet;
 public class ConferenceServiceImpl implements ConferenceService {
 
     private ConferenceRepository conferenceRepository;
+    private SessionRepository sessionRepository;
     private Updater updater;
     private ConferencesGettersAndSetters conferencesGettersAndSetters;
 
     public ConferenceServiceImpl(
             @Autowired ConferenceRepository conferenceRepository,
-            @Autowired ConferencesGettersAndSetters conferencesGettersAndSetters) {
+            @Autowired ConferencesGettersAndSetters conferencesGettersAndSetters,
+            @Autowired SessionRepository sessionRepository) {
         this.conferenceRepository = conferenceRepository;
         this.updater = new Updater();
         this.conferencesGettersAndSetters = conferencesGettersAndSetters;
+        this.sessionRepository = sessionRepository;
     }
 
     @Override
@@ -56,7 +60,10 @@ public class ConferenceServiceImpl implements ConferenceService {
 
     @Override
     public Exceptional<Conference> addConference(ConferenceDTO c) {
-        Conference conference =new Conference(c.getName(),c.getEventTimeSpan().getStartDate(), c.getEventTimeSpan().getEndDate(), c.getCallForAbstractTimeSpan().getEndDate(), c.getCallForProposalsTimeSpan().getEndDate(), c.getBiddingDeadline());
+        Conference conference = new Conference(c.getName(),c.getEventTimeSpan().getStartDate(), c.getEventTimeSpan().getEndDate(), c.getCallForAbstractTimeSpan().getEndDate(), c.getCallForProposalsTimeSpan().getEndDate(), c.getBiddingDeadline());
+        conference = conferenceRepository.save(conference);
+        Session s = sessionRepository.save(new Session(conference,"Default session"));
+        //conference.getSessions().add(s);
         return Exceptional.OK(conferenceRepository.save(conference));
     }
 
