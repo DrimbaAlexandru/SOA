@@ -377,4 +377,11 @@ public class UserServiceImpl implements UserService {
         });
         return Exceptional.OK(null);
     }
+
+    @Override
+    public Exceptional<AppUser> getUserById(int userId) {
+        AppUser user = userRepository.findOne(userId);
+        return user == null? Exceptional.Error(new Exception("User not found")) :
+                Exceptional.OK(user);
+    }
 }

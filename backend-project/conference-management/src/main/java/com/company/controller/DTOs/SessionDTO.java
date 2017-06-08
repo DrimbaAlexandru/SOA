@@ -1,7 +1,11 @@
 package com.company.controller.DTOs;
 
 import com.company.controller.DTOs.utils_DTOs.SessionSchedule;
+import com.company.domain.Session;
+import com.company.domain.Conference;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -9,16 +13,29 @@ import java.util.List;
  */
 public class SessionDTO {
     private int id;
+    private int conference;
     private String name;
     private List<SessionSchedule> sessionScheduleList;
 
-    public SessionDTO(int id, String name, List<SessionSchedule> sessionScheduleList) {
+    public SessionDTO(int id, String name, Conference conference, List<SessionSchedule> sessionScheduleList) {
         this.id = id;
         this.name = name;
         this.sessionScheduleList = sessionScheduleList;
+        this.conference = conference.getId();
+    }
+
+    public SessionDTO(Session session)
+    {
+        this.id = session.getId();
+        this.name = session.getName();
+        this.conference = session.getConference().getId();
     }
 
     public SessionDTO(){}
+
+    public int getConference(){return conference;}
+    public void setConference(int c) {this.conference = c;}
+
 
     public int getId() {
         return id;

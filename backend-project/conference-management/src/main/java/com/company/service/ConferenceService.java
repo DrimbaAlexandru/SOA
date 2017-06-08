@@ -1,6 +1,7 @@
 package com.company.service;
 
 import com.company.controller.DTOs.ConferenceDTO;
+import com.company.domain.AppUser;
 import com.company.domain.Conference;
 import com.company.domain.Session;
 import com.company.utils.exception.Exceptional;
@@ -52,5 +53,12 @@ public interface ConferenceService {
      * @return all sessions of the conference
      */
     Exceptional<Iterable<Session>> getSessions(int confId);
+
+    /**
+     * Gets all the pc members of a given conference
+     * @param confId the conference id
+     * @return The pc members
+     */
+    Exceptional<Iterable<AppUser>> getPCMembers(int confId);
 
 }

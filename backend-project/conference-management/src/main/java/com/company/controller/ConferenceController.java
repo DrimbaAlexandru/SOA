@@ -2,6 +2,8 @@ package com.company.controller;
 
 import com.company.controller.DTOs.ConferenceDTO;
 import com.company.controller.DTOs.SessionDTO;
+import com.company.controller.DTOs.UserResponse;
+import com.company.domain.AppUser;
 import com.company.domain.Conference;
 import com.company.domain.Session;
 import com.company.domain.SessionSchedule;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Created by sebi on 6/7/2017.
@@ -50,6 +54,27 @@ public class ConferenceController {
                 file->{resp.setResp(new ConferenceDTO(file));}
         );
         return new ResponseEntity<>(resp, HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/{conferenceId}/PCMembers", method = RequestMethod.GET)
+    public ResponseEntity<ResponseJSON<Iterable<UserResponse>>> handle_get_pc_memgers(
+            @PathVariable("conferenceId") Integer confId) {
+
+        Exceptional<Iterable<AppUser>> res =
+                conferenceService.getPCMembers(confId);
+
+        ResponseJSON<Iterable<UserResponse>> resp = new ResponseJSON<>();
+        res.error(e -> {
+            resp.addError(e.getMessage());
+        }).ok(e -> {
+            List<UserResponse> data =
+                    StreamSupport.stream(e.spliterator(), false)
+                        .map(UserResponse::new)
+                        .collect(Collectors.toList());
+            resp.setResp(data);
+        });
+
+        return ResponseEntity.ok(resp);
     }
 
     /** tested with structure:
@@ -90,7 +115,7 @@ public class ConferenceController {
     {
         ResponseJSON<String> resp=new ResponseJSON<>();
         conferenceService.updateConference(conferenceId,conferenceDTO).error(e->{resp.addError(e.getMessage());});
-        return new ResponseEntity<ResponseJSON<String>>(resp,HttpStatus.OK);
+        return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
     @RequestMapping(path = "/{conferenceId}/sessions", method = RequestMethod.GET)
@@ -107,6 +132,6 @@ public class ConferenceController {
             }
         }).error(e->{responseJSON.addError(e.getMessage());});
         responseJSON.setResp(sessionDTOS);
-        return new ResponseEntity<ResponseJSON<Iterable<SessionDTO>>>(responseJSON, HttpStatus.OK);
+        return new ResponseEntity<>(responseJSON, HttpStatus.OK);
     }
 }

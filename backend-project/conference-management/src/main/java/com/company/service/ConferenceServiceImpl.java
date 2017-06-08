@@ -1,6 +1,7 @@
 package com.company.service;
 
 import com.company.controller.DTOs.ConferenceDTO;
+import com.company.domain.AppUser;
 import com.company.domain.Conference;
 import com.company.domain.Session;
 import com.company.repository.ConferenceRepository;
@@ -94,6 +95,15 @@ public class ConferenceServiceImpl implements ConferenceService {
         }
         conferenceRepository.delete(confId);
         return Exceptional.OK(conference);
+    }
+
+    @Override
+    public Exceptional<Iterable<AppUser>> getPCMembers(int confId) {
+        if(!conferenceRepository.exists(confId)) {
+            return Exceptional.Error(new Exception("Conference id not found"));
+        }
+
+        return Exceptional.OK(conferenceRepository.getPCMembers(confId));
     }
 
     @Override

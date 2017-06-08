@@ -16,6 +16,12 @@ public interface UserService {
     boolean login(String username, String password);
 
     /**
+     * Gets a user by the id
+     * @param userId The user id
+     */
+    Exceptional<AppUser> getUserById(int userId);
+
+    /**
      * Gets a user by username
      * @param username The username
      */
