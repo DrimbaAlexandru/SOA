@@ -1,11 +1,9 @@
 package com.company.service;
 
 import com.company.controller.DTOs.FileGetDTO;
+import com.company.controller.DTOs.firstPaperSubmissionDTO;
 import com.company.controller.DTOs.submittedPaperDTO;
-import com.company.domain.AppUser;
-import com.company.domain.Paper;
-import com.company.domain.PaperStatus;
-import com.company.domain.UploadedFile;
+import com.company.domain.*;
 import com.company.utils.exception.Exceptional;
 
 /**
@@ -28,7 +26,7 @@ public interface PaperService {
      * @param p the paper to be inserted
      * @return Exceptional containing the newly inserted paper or an exception
      */
-    Exceptional<Paper> addPaper(submittedPaperDTO p);
+    Exceptional<Paper> addPaper(firstPaperSubmissionDTO p);
 
     /**
      * @param p the paper to be replaced with
@@ -98,5 +96,15 @@ public interface PaperService {
      * and designates a reviewer to give the final review or exception
      */
     Exceptional<Void> setFinalEvaluator(int paperId, String username);
+
+    /**
+     * @param id
+     * @return
+     */
+    Exceptional<Paper> getById(int id);
+
+    Exceptional<Iterable<Review>> getReviews(int id);
+
+    Exceptional<Iterable<Bid>> getBids(int id);
 
 }
