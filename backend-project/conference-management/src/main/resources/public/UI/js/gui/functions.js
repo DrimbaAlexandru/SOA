@@ -797,6 +797,54 @@ function loadDeadlines(){
 }
 
 function loadAsignPaper(){
+    var pop = $("#myModalEnrolled");
+
+    function paperClick(){
+        var paperId = $(this).children().get(0).innerHTML;
+        var asignedRevsTable = $("#assignedRevs");
+        var potentialRevsTable = $("#potentialRevs");
+
+
+        function fillUser(tr, username){
+            c.getOneUser(username, function(user){
+                var td;
+                td = $("<td></td>");
+                td.html(user.id);
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html(user.name);
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html(user.username);
+                tr.append(td);
+            });
+        }
+
+        function populateAsigned(users) {
+            for(var i in users){
+                var tr = $('<tr></tr>');
+                fillUser(tr.clone(), users[i].username);
+                asignedRevsTable.append(tr);
+            }
+        }
+
+        function populatePotential(users) {
+            for(var i in users){
+                var tr = $('<tr></tr>');
+                fillUser(tr.clone(), users[i].username);
+                potentialRevsTable.append(tr);
+            }
+        }
+
+        tableClearLetHeader(asignedRevsTable);
+        tableClearLetHeader(potentialRevsTable);
+
+        c.getAssignedReviewers(getConferenceIdFromCookie(),paperId,  populateAsigned);
+        c.getPotentialReviewers(getConferenceIdFromCookie(), paperId, populatePotential);
+    }
+
 
     function loadPaper(tr, paperId){
         c.getOnePaper(paperId, function(paper){
@@ -822,6 +870,7 @@ function loadAsignPaper(){
             td = $("<td></td>");
             td.html(listToCommaSeparatedString(paper.authors));
             tr.append(td);
+            tr.click(paperClick);
         });
     }
 
