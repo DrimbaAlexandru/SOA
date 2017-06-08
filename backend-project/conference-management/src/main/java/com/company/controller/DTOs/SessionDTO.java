@@ -13,12 +13,12 @@ public class SessionDTO {
     private int id;
     private int conference;
     private String name;
-    private List<SessionScheduleDTO> sessionScheduleDTOList;
+    private List<SessionScheduleDTO> schedule;
 
     public SessionDTO(int id, String name, List<SessionScheduleDTO> sessionScheduleDTOList) {
         this.id = id;
         this.name = name;
-        this.sessionScheduleDTOList = sessionScheduleDTOList;
+        this.schedule = sessionScheduleDTOList;
     }
 
     public SessionDTO(){}
@@ -27,10 +27,10 @@ public class SessionDTO {
     {
         id=s.getId();
         name=s.getName();
-        sessionScheduleDTOList=new ArrayList<>();
+        schedule =new ArrayList<>();
         for(SessionSchedule sch:s.getSchedule())
         {
-            sessionScheduleDTOList.add(new SessionScheduleDTO(sch));
+            schedule.add(new SessionScheduleDTO(sch));
         }
 
     }
@@ -51,11 +51,11 @@ public class SessionDTO {
         this.name = name;
     }
 
-    public List<SessionScheduleDTO> getSessionScheduleDTOList() {
-        return sessionScheduleDTOList;
+    public List<SessionScheduleDTO> getSchedule() {
+        return schedule;
     }
 
-    public void setSessionScheduleDTOList(List<SessionScheduleDTO> sessionScheduleDTOList) {
-        this.sessionScheduleDTOList = sessionScheduleDTOList;
+    public void setSchedule(List<SessionScheduleDTO> schedule) {
+        this.schedule = schedule;
     }
 }

@@ -334,8 +334,8 @@ function fillModalGrantSteering(){
             var username = tds.get(0).innerHTML;
             var name = tds.get(1).innerHTML;
             var affiliation = tds.get(2).innerHTML;
-            var website = tds.get(3).innerHTML;
-            var email = tds.get(4).innerHTML;
+            var website = tds.get(3);
+            var email = tds.get(4);
             var isCometeeMember = true;
             c.updateUser(new User(0, username, name, email, affiliation, website, "", undefined, isCometeeMember));
         }
@@ -1041,6 +1041,7 @@ function loadSessions(){
             tr.append(td);
 
             tr.click(sessionClick);
+            table.append(tr);
         }
     }
 
