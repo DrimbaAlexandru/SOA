@@ -87,7 +87,7 @@ public class UserController {
             Exceptional<AppUser> au = service.getUser(usernameCookie);
             au.error(e -> resp.addError(e.getMessage()))
                 .ok(e -> {
-                    lir.setIsCommiteeMember(e.getIsCometeeMember());
+                    lir.setIsCometeeMember(e.getIsCometeeMember());
                     lir.setIsSuperUser(e.getIsSuperUser());
                 });
         }
@@ -189,7 +189,7 @@ public class UserController {
 
                     service.updateUser(username, new AppUser(
                             body.getUsername(), body.getName(), body.getAffiliation(), body.getEmail(), body.getWebsite(),
-                            body.getPassword(), null, body.getisCommiteeMember()));
+                            body.getPassword(), null, body.getIsCometeeMember()));
                     if (usernameCookie.equals(username)) {
                         if(body.getUsername()!=null)
                             setCookie("username", body.getUsername(), 3600, response);

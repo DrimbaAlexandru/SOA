@@ -12,6 +12,8 @@ public class UserResponse
     private String affiliation="";
     private String email="";
     private String website="";
+    private boolean isSuperUser;
+    private boolean isCometeeMember;
     public UserResponse(){}
     public UserResponse(AppUser u)
     {
@@ -20,14 +22,8 @@ public class UserResponse
         affiliation=u.getAffiliation();
         email=u.getEmail();
         website=u.getWebpage();
-    }
-    public UserResponse(String _username,String _name,String _affiliation, String _email,String _website)
-    {
-        username=_username;
-        name=_name;
-        affiliation=_affiliation;
-        email=_email;
-        website=_website;
+        isCometeeMember=u.getIsCometeeMember();
+        isSuperUser=u.getIsSuperUser();
     }
 
     public String getUsername() {
@@ -49,4 +45,13 @@ public class UserResponse
     public String getWebsite() {
         return website;
     }
+
+    public boolean getIsCometeeMember() {
+        return isCometeeMember;
+    }
+
+    public boolean getIsSuperUser() {
+        return isSuperUser;
+    }
+
 }
