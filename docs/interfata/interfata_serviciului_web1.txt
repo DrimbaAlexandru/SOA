@@ -24,16 +24,7 @@ return 'resp'=>
 
 
 
-//getConference
-users/{username}/privileges?conferenceId=id GET
-return 
-'resp' => {
-   isAuthor = bool
-    isPCMember = bool, 
-    isChair = bool, 
-    isCoChair = bool,
-    
-}
+
 
 
 users GET
@@ -85,7 +76,16 @@ users/{username} PUT
     isCommeteeMember = bool
 }
 
+//getConference
+users/{username}/privileges?conferenceId=id GET
+return
+'resp' => {
+   isAuthor = bool
+    isPCMember = bool,
+    isChair = bool,
+    isCoChair = bool,
 
+}
 
 //grantChair
 //grantCoChair
@@ -97,6 +97,17 @@ users/{username} PUT
     [optional] isCoChair = bool
 }
 
+
+users/{username}/submittedPapers GET
+return 'resp'=>
+[{
+    id:int
+    name:string
+    subjects:string[]
+    keywords:string[]
+    authors:string[]//username
+}]
+
 users/{username}/submittedPapers?status=accepted/decline GET
 return 'resp'=[
 {    id:int
@@ -105,6 +116,7 @@ return 'resp'=[
     keywords:string[]
     authors:string[]//username
 }]
+
 
 
 users/{username}/submittedPapers/{idPaper}/reviews GET
@@ -164,15 +176,7 @@ users/{username}/assignedPapers/{paperId} Put
 {}
 return {}
 
-users/{username}/submittedPapers GET
-return 'resp'=>
-[{
-    id:int
-    name:string
-    subjects:string[]
-    keywords:string[]
-    authors:string[]//username
-}]
+
 
 // Proposals
 
@@ -448,7 +452,7 @@ return 'resp'
 
 sessions/{sessionId}/sessionChair PUT
 {
-    id:int
+    username:string
 }
 return {}
 
