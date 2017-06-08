@@ -46,10 +46,10 @@ public interface SessionService {
     /**
      *
      * @param sessId
-     * @param sessChair new session chair for the session
+     * @param username new session chair for the session
      * @return updated session
      */
-    Exceptional<Session> updateSessionChair(int sessId, AppUser sessChair);
+    Exceptional<Session> updateSessionChair(int sessId, String username);
 
     /**
      *

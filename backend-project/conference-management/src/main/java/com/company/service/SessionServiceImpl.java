@@ -97,14 +97,28 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public Exceptional<Session> updateSessionChair(int sessId, AppUser sessChair) {
+    public Exceptional<Session> updateSessionChair(int sessId, String username) {
+
         Session session = sessionRepository.findOne(sessId);
         if(session == null) {
             return Exceptional.Error(new Exception("Session id not found"));
         }
-        session.setSessionChair(sessChair);
 
-        sessionRepository.save(session);
+        Exceptional<AppUser> au = userService.getUser(username);
+
+        StringBuilder errors = new StringBuilder();
+
+        au.error(e -> {
+            errors.append(e.getMessage());
+        }).ok(e -> {
+            session.setSessionChair(e);
+            sessionRepository.save(session);
+        });
+
+        if(errors.length() != 0) {
+            return Exceptional.Error(new Exception(errors.toString()));
+        }
+
         return Exceptional.OK(session);
     }
 

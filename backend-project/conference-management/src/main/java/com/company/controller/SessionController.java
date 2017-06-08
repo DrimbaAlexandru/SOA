@@ -91,9 +91,16 @@ public class SessionController {
             @RequestBody UserIdRequest user,
             @PathVariable("sessionId") int sessionId)
     {
-        ResponseJSON<String> resp=  new ResponseJSON<>();
+        ResponseJSON<String> resp = new ResponseJSON<>();
 
-        sessionService.updateSessionChair(sessionId, user.getId());
+        Exceptional<Session> res =
+                sessionService.updateSessionChair(sessionId, user.getUsername());
+
+        res.error(e -> {
+            resp.addError(e.getMessage());
+        });
+
+        return ResponseEntity.ok(resp);
     }
 
 }

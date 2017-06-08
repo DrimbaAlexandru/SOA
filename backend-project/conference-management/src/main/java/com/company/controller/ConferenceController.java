@@ -4,6 +4,7 @@ import com.company.controller.DTOs.ConferenceDTO;
 import com.company.controller.DTOs.SessionDTO;
 import com.company.controller.DTOs.UserResponse;
 import com.company.domain.AppUser;
+import com.company.controller.DTOs.utils_DTOs.SessionScheduleDTO;
 import com.company.domain.Conference;
 import com.company.domain.Session;
 import com.company.domain.SessionSchedule;
@@ -106,7 +107,6 @@ public class ConferenceController {
     }
 
     /** tested with the structure  |^|
-     *
      */
     @RequestMapping(path = "/{conferenceId}", method = RequestMethod.PUT)
     public ResponseEntity<ResponseJSON<String>> handle_put_conference(
@@ -126,9 +126,7 @@ public class ConferenceController {
         ResponseJSON<Iterable<SessionDTO>> responseJSON = new ResponseJSON<>();
         sessions.ok(sessions1 -> {
             for(Session s:sessions1){
-                for(SessionSchedule sess:s.getSchedule()) {
-                    //sessionDTOS.add(new SessionDTO(s.getId(), s.getName(), sess));
-                }
+                sessionDTOS.add(new SessionDTO(s));
             }
         }).error(e->{responseJSON.addError(e.getMessage());});
         responseJSON.setResp(sessionDTOS);

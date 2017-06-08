@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Created by Alex on 21.05.2017.
  */
-@Table(name = "SessionSchedule")
+@Table(name = "SessionScheduleDTO")
 @Entity
 public class SessionSchedule {
     @Id

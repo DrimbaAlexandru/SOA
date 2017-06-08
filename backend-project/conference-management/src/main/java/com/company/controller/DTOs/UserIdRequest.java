@@ -5,18 +5,18 @@ package com.company.controller.DTOs;
  */
 public class UserIdRequest {
 
-    private Integer id;
+    private String username;
 
     public UserIdRequest() {
 
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Integer getId() {
-        return id;
+    public String getUsername() {
+        return username;
     }
 
 }

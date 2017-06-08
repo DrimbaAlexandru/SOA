@@ -1,8 +1,5 @@
 package com.company.controller.DTOs;
-
-import com.company.controller.DTOs.utils_DTOs.CallForAbstractTimeSpan;
-import com.company.controller.DTOs.utils_DTOs.CallForProposalsTimeSpan;
-import com.company.controller.DTOs.utils_DTOs.EventTimeSpan;
+import com.company.controller.DTOs.utils_DTOs.TimeSpan;
 import com.company.domain.Conference;
 
 import java.util.Date;
@@ -11,17 +8,26 @@ import java.util.Date;
  * Created by sebi on 6/7/2017.
  */
 public class ConferenceDTO {
-    private int id;
+    private Integer id;
     private String name;
-    private EventTimeSpan eventTimeSpan;
-    private CallForAbstractTimeSpan callForAbstractTimeSpan;
-    private CallForProposalsTimeSpan callForProposalsTimeSpan;
+    private TimeSpan eventTimeSpan;
+    private TimeSpan callForAbstractTimeSpan;
+    private TimeSpan callForProposalsTimeSpan;
     private Date biddingDeadline;
 
     public ConferenceDTO(Conference conf) {
+        eventTimeSpan = new TimeSpan();
+        callForAbstractTimeSpan = new TimeSpan();
+        callForProposalsTimeSpan = new TimeSpan();
         this.id = conf.getId();
         this.name = conf.getName();
         this.biddingDeadline = conf.getBiddingDeadline();
+        eventTimeSpan.setEndDate(conf.getEventEndDate());
+        eventTimeSpan.setStartDate(conf.getEventStartDate());
+        callForAbstractTimeSpan.setStartDate(new Date());
+        callForProposalsTimeSpan.setStartDate(new Date());
+        callForAbstractTimeSpan.setEndDate(conf.getCallForAbstractDeadline());
+        callForProposalsTimeSpan.setEndDate(conf.getCallForProposalsDeadline());
     }
     public ConferenceDTO(){}
 
@@ -41,27 +47,27 @@ public class ConferenceDTO {
         this.name = name;
     }
 
-    public EventTimeSpan getEventTimeSpan() {
+    public TimeSpan getEventTimeSpan() {
         return eventTimeSpan;
     }
 
-    public void setEventTimeSpan(EventTimeSpan eventTimeSpan) {
+    public void setEventTimeSpan(TimeSpan eventTimeSpan) {
         this.eventTimeSpan = eventTimeSpan;
     }
 
-    public CallForAbstractTimeSpan getCallForAbstractTimeSpan() {
+    public TimeSpan getCallForAbstractTimeSpan() {
         return callForAbstractTimeSpan;
     }
 
-    public void setCallForAbstractTimeSpan(CallForAbstractTimeSpan callForAbstractTimeSpan) {
+    public void setCallForAbstractTimeSpan(TimeSpan callForAbstractTimeSpan) {
         this.callForAbstractTimeSpan = callForAbstractTimeSpan;
     }
 
-    public CallForProposalsTimeSpan getCallForProposalsTimeSpan() {
+    public TimeSpan getCallForProposalsTimeSpan() {
         return callForProposalsTimeSpan;
     }
 
-    public void setCallForProposalsTimeSpan(CallForProposalsTimeSpan callForProposalsTimeSpan) {
+    public void setCallForProposalsTimeSpan(TimeSpan callForProposalsTimeSpan) {
         this.callForProposalsTimeSpan = callForProposalsTimeSpan;
     }
 
