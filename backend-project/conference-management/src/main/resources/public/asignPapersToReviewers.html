@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<title>Asign Papers to Reviewers</title>
+<head>
+<link rel="stylesheet" href="css/design.css">
+	<script src="js/lib/jquery-3.2.1.min.js"></script>
+
+    <script src="js/gui/functions.js"></script>
+</head>
+<body>
+
+
+<div id="content">
+
+    <div id="left">
+        <div id="menu">
+            <ul>
+                <li><a href="#">Menu Item 1</a></li>
+                <li><a href="#">Menu Item 2</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="right">
+        <table id="enrolledPapersChair" style="width:50%">
+            <caption>Enrolled papers</caption>
+            <tr>
+                <th>Id</th>
+                <th>Proposal Name</th>
+                <th>Keywords</th>
+                <th>Subjects</th>
+                <th>Authors</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Cum sa mergi la mare?</td>
+                <td>Salut</td>
+                <td>Topics</td>
+                <td>Author1</td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+
+
+<!-- The Modal for Enrolled papers -->
+<div id="myModalEnrolled" class="modal ">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="closeButton" id="closeEnrolled">&times;</span>
+    <div>
+    	<table id="assignedRevs" style="width:50%">
+            <caption>Reviewers already assigned to this paper</caption>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Username</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Maricel</td>
+                <td>maricelBo$$</td>
+            </tr>
+ 		</table>
+ 	</div>
+ 	<br>
+ 	<div>
+    	<table id="potentialRevs" style="width:50%">
+		<caption>Reviewers that are willing to review this paper</caption>
+  		    <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Add</th>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Ghita</td>
+                <td>ghitaBarosanul</td>
+                <td><button class="addReviewer">+</button></td>
+            </tr>
+        </table>
+ 	</div>
+
+
+    </div>
+  </div>
+
+
+</body>
+</html>

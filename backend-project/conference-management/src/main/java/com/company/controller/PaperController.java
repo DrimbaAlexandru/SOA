@@ -30,7 +30,7 @@ public class PaperController {
     }
 
     //TESTED
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<ResponseJSON<Iterable<submittedPaperDTO>>> handle_get_all()
     {
         List<submittedPaperDTO> papers=new ArrayList<>();
@@ -41,7 +41,7 @@ public class PaperController {
     }
 
     //TESTED
-    @RequestMapping(path = "/", method = RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST)
     public ResponseEntity<ResponseJSON<String>> handle_post_paper(
             @RequestBody firstPaperSubmissionDTO paper)
     {

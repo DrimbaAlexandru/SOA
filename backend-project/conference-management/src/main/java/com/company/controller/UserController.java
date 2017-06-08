@@ -142,7 +142,7 @@ public class UserController {
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<ResponseJSON<Iterable<UserResponse>>> handle_get_all()
     {
         List<UserResponse> users=new ArrayList<>();
@@ -155,7 +155,7 @@ public class UserController {
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/", method = RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST)
     public ResponseEntity<ResponseJSON<String>> handle_create_user(@RequestBody updateUserRequest body)
     {
         ResponseJSON<String> resp=new ResponseJSON<>("");

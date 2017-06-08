@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register</title>
+    <link rel="stylesheet" href="css/design.css"/>
+    <script src="js/lib/jquery-3.2.1.min.js"></script>
+
+    <script src="js/gui/functions.js"></script>
+</head>
+<body>
+
+<div id="errors"></div>
+<div id="warnings"></div>
+
+<form>
+    <header>Register</header>
+    <label>Full name: <span>*</span></label>
+    <input name="fname"/>
+
+    <label>Affiliation:<span>*</span></label>
+    <input name="affiliation"/>
+
+    <label>E-mail:<span>*</span></label>
+    <input name="email"/>
+
+    <label>Website:<span>*</span></label>
+    <input name="website"/>
+
+    <label>Username: <span>*</span></label>
+    <input name="username"/>
+    <div class="help">At least 6 character</div>
+    <label>Password: <span>*</span></label>
+    <input name="password" type="password"/>
+    <div class="help">Use upper and lowercase lettes as well</div>
+    <button id="registerButton" type="button" >Register</button>
+</form>
+
+
+</body>
+</html>

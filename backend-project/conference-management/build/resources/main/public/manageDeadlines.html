@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Deadline</title>
+    <link rel="stylesheet" href="css/design.css">
+    <script src="js/lib/jquery-3.2.1.min.js"></script>
+
+    <script src="js/gui/functions.js"></script>
+</head>
+<body>
+
+
+<div id="errors"></div>
+<div id="warnings"></div>
+<div id="content">
+
+    <div id="left">
+        <div id="menu">
+            <ul>
+                <li><a href="#">Menu Item 1</a></li>
+                <li><a href="#">Menu Item 2</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="right">
+
+
+        <h1>You can change deadlines here</h1>
+        <div>
+            <table id="deadlinesTable" style="width:50%">
+                <caption>Deadlines</caption>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                </tr>
+                <tr>
+                    <td>Bidding Deadline</td>
+                    <td>2007/03/17</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- The Modal for Abs -->
+<div id="myModalDeadlines" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="closeButton" id="closeDeadlines">&times;</span>
+        <div>
+            <form action="">
+                Deadline Name: <input id="nameDeadlinesModal" value="BiddingDeadline" disabled="disabled"/>
+                <br>
+                New Date: <input id="dateDeadlinesModal" type="date" name="newDate"><br>
+                <br>
+                <input id="submitDeadlinesModal" type="submit" value="Save"/>
+            </form>
+
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
