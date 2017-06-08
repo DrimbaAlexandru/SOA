@@ -18,27 +18,27 @@ function Controller(onError= undefined, onWarning = undefined) {
     const applicationJSON = "application/json";
     const HOST = "";
     const COMMANDS = {
-        "users_login": "users.login.php",//"users/users_login",
+        "users_login": "users/login",//"users/users_login",
         "users_logout": "users.logout.php",//"users/logout",
-        "users_loggedIn": "users.loggedIn.php",//"users/loggedIn",
-        "users_getMyPriviledges": "users.priviledges.php?conferenceId={0}",//"users/priviledges?conferenceId={0}",
-        "users_getAll": "users.php",
-        "users_getOne": "users.php?username={0}",
-        "users_save": "users.php",
-        "users_update": "users.php?username={0}",
+        "users_loggedIn": "users/loggedIn",//"users/loggedIn",
+        "users_getMyPriviledges": "users/privileges?conferenceId=id",//"users/priviledges?conferenceId={0}",
+        "users_getAll": "users",
+        "users_getOne": "users/{0}",
+        "users_save": "users",
+        "users_update": "users/{0}",
         //parametrul username va fi luat din sesiune
-        "users_getSubmittedPapers": "users.submittedPapers.php",
-        "users_getAcceptedSubmittedPapers": "users.submittedPapers.php?status=accepted",
-        "users_getSubmittedPapersReviews": "users.submittedPapers.reviews.php?idPaper={0}",
-        "users_setSubmittedPapersPresetation": "users.submittedPapers.presentation.php?idPaper={0}",
-        "users_getPaperBid": "users.bids.php?paperId={0}",
-        "users_setPaperBid": "users.bids.php?paperId={0}",
-        "users_getAssignedForReview": "users.asignedForReview.php",
-        "users_getPaperReview": "users.reviews.php?paperId={0}",
-        "users_setPaperReview": "users.reviews.php?paperId={0}",
+        "users_getSubmittedPapers": "users/submittedPapers",
+        "users_getAcceptedSubmittedPapers": "users/submittedPapers?status=accepted/decline",
+        "users_getSubmittedPapersReviews": "users/submittedPapers/{0}/reviews",
+        "users_setSubmittedPapersPresetation": "users/submittedPapers/{0}/presetation",
+        "users_getPaperBid": "users/bids/{0}",
+        "users_setPaperBid": "users/bids/{0}",
+        "users_getAssignedForReview": "users/asignedForReview",
+        "users_getPaperReview": "users/reviews/{0}",
+        "users_setPaperReview": "users/reviews/{0}",
         //parametrul username e explicit
-        "users_setPrivilegdes": "users.php?username={0}&conferenceId={1}",
-        "users_setPaperAssignement": "users.assignedPapers.php?username={0}&paperId={1}",
+        "users_setPrivilegdes": "users/{0}/{1}",
+        "users_setPaperAssignement": "users/{0}/assignedPapers/{1}",
 
         "papers_getAll": "papers.php",
         "papers_save": "papers.php",
@@ -128,6 +128,12 @@ function Controller(onError= undefined, onWarning = undefined) {
         if (run) run(result['resp']);
     }
 
+    /**
+     * add a user
+     * @param username
+     * @param password
+     * @param onResultArrived
+     */
     this.login = function (username, password, onResultArrived) {
         $.ajax(
             {
