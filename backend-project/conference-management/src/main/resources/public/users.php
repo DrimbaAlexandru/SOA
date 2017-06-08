@@ -1,2 +1,0 @@
-{"warnings":["asdas"], "resp":[{"username":"elisei", "name":"Salut", "affiliation":"Merge", "email":"email", "website":"website", "isSuperUser":false, "isCometeeMember":true},
-{"username":"elisei", "name":"Salut", "affiliation":"Merge", "email":"email", "website":"website", "isSuperUser":false, "isCometeeMember":false}]}
