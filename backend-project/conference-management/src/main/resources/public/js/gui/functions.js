@@ -806,7 +806,7 @@ function loadReviews(){
 }
 
 function loadMangedConflicts(){
-    
+
 }
 
 
