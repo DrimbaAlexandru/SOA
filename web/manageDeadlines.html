@@ -5,9 +5,14 @@
     <title>Manage Deadline</title>
     <link rel="stylesheet" href="css/design.css">
     <script src="js/lib/jquery-3.2.1.min.js"></script>
+
+    <script src="js/gui/functions.js"></script>
 </head>
 <body>
 
+
+<div id="errors"></div>
+<div id="warnings"></div>
 <div id="content">
 
     <div id="left">
@@ -23,7 +28,7 @@
 
         <h1>You can change deadlines here</h1>
         <div>
-            <table id="deadlinesChiarPage" style="width:50%">
+            <table id="deadlinesTable" style="width:50%">
                 <caption>Deadlines</caption>
                 <tr>
                     <th>Name</th>
@@ -47,12 +52,12 @@
     <div class="modal-content">
         <span class="closeButton" id="closeDeadlines">&times;</span>
         <div>
-            <form action="something">
+            <form action="">
                 Deadline Name: <input id="nameDeadlinesModal" value="BiddingDeadline" disabled="disabled"/>
                 <br>
                 New Date: <input id="dateDeadlinesModal" type="date" name="newDate"><br>
                 <br>
-                <input type="submit" value="Submit">
+                <input id="submitDeadlinesModal" type="submit" value="Save"/>
             </form>
 
 

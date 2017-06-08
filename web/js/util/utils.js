@@ -64,7 +64,7 @@ CONFERENCE_PAGES_FOR_USERS = {
         ["addPaper", "viewResult"],
     "steering":[],
     "master":[],
-    "all":["sessions"]
+    "all":["sessions", "conference"]
 }
 
 SYSTEM_PAGES_FOR_USERS = {
@@ -77,4 +77,6 @@ SYSTEM_PAGES_FOR_USERS = {
 PAGE_LOADS = {
     "conferences":loadConferences,
     "conference":loadConference,
+    "deadlines":loadDeadlines,
+    "addPaper":loadAddPaper,
 }

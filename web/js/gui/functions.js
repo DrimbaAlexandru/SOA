@@ -4,7 +4,13 @@
 
 var errorsDiv, warningsDiv;
 
-var c;
+var c, data;
+
+function formatPage(page){
+    return page.substr(0, 1).toUpperCase() + page.substr(1).replace(/([A-Z])/g, function(a){
+        return " "+a;
+    })
+}
 
 function showWarnings(warnings){
     warningsDiv.empty();
@@ -47,6 +53,29 @@ function isEmpty(val){
         return true;
     }
     return false;
+}
+
+function getConferenceId(){
+    var cookie = document.cookie;
+    var s = cookie.split(';');
+    for(var i in s){
+        var k, v;
+        if(s[i].indexOf("conferenceId") > -1 )
+        {
+            try {
+                return parseInt(s[i].split('=')[1].trim());
+            }
+            catch (e){
+
+            }
+        }
+    }
+    return undefined;
+}
+function tableClearLetHeader(table){
+    table.find("tr").filter(function(){
+        return $(this).children('th').length === 0
+    }).remove();
 }
 
 function getLoginCredidentials(){
@@ -191,7 +220,20 @@ function assureCreateConfCommands(){
 }
 
 function loadConference(){
-    
+    function populate(conference){
+        console.log(conference);
+        $("#conferenceName").html(conference.name);
+        $("#startDateSpan").html(conference.eventTimeSpan.startDate);
+        $("#endDateSpan").html(conference.eventTimeSpan.endDate);
+        $("#callForPapersStartDateSpan").html(conference.callForProposalsTimeSpan.startDate);
+        $("#callForPapersEndDateSpan").html(conference.callForProposalsTimeSpan.endDate);
+        $("#callForAbstractsStartDateSpan").html(conference.callForAbstractTimeSpan.startDate);
+        $("#callForAbstractsEndDateSpan").html(conference.callForAbstractTimeSpan.endDate);
+        $("#biddingDeadlineSpan").html(conference.biddingDeadline);
+
+    }
+
+    c.getOneConference(getConferenceId(), populate);
 }
 
 function loadConferences(){
@@ -223,18 +265,303 @@ function loadConferences(){
 
 }
 
+function listToCommaSeparatedString(list){
+    var keywords = "";
+    for(var key in list){
+        key = list[key];
+        if(key.indexOf(";") > -1){
+            if(key.indexOf("\"") > -1){
+                key = key.replace("\"", "\\\"");
+            }
+            key = "\"" + key+ "\"";
+        }
+        keywords = keywords + key+";";
+    }
+    return keywords;
+}
+
+function loadAddPaper(){
+    var fullPop = $("#myModalFull");
+    var absPop = $("#myModalAbs");
+    var editPop = $("#myModalEdit");
+    var buttonAdd = $(".buttonAdd");
+    var path;
+
+    function clearEditPop(){
+
+        editPop.find("#nameEditModal").val("");
+        editPop.find("#keywordsEditModal").val("");
+        editPop.find("#topicsEditModal").val("");
+        editPop.find("#authorsEditModal").val("");
+    }
+    function submitEditPaperClick(e){
+        e.preventDefault(true);
+        var id = editPop.find("#idEditModal").val();
+        var name = editPop.find("#nameEditModal").val();
+        var keywords = editPop.find("#keywordsEditModal").val();
+        var subjects = editPop.find("#topicsEditModal").val();
+        var authors = editPop.find("#authorsEditModal").val();
+
+        if(isEmpty(id)
+            || isEmpty(name)
+            || isEmpty(keywords)
+            || isEmpty(subjects)
+            || isEmpty(authors)){
+            showErrors(["You must insert values on all fields!"]);
+            return;
+        }
+        console.log(data);
+        if(data == "save"){
+            c.savePapers(getConferenceId(), new Proposal(id, name, keywords, subjects, authors),
+                function(){window.location.reload();});
+
+        }
+        else if(data == "update"){
+            c.updatePapers(getConferenceId(), new Proposal(id, name, keywords, subjects, authors),
+                function(){window.location.reload();});
+        }
+    }
+
+    function editClick(e){
+        var parent = $(this).parent().parent();
+        console.log(parent);
+        var id = parent.children().get(0).innerHTML;
+        data = "update";
+        var name = parent.children().get(1).innerHTML;
+        var keywords = parent.children().get(2).innerHTML;
+        var subjects = parent.children().get(3).innerHTML;
+        var authors = parent.children().get(4).innerHTML;
+        console.log(name, keywords, subjects, authors);
+        editPop.find("#idEditModal").val(id);
+        editPop.find("#nameEditModal").val(name);
+        editPop.find("#keywordsEditModal").val(keywords);
+        editPop.find("#topicsEditModal").val(subjects);
+        editPop.find("#authorsEditModal").val(authors);
+
+        editPop.fadeIn();
+    }
+
+    function uploadAbsClick(e){
+        e.preventDefault(true);
+        var parent = $(this).parent().parent();
+        var id = parent.children().get(0).innerHTML;
+        absPop.find("#idAbsModal").val(id);
+        absPop.fadeIn();
+    }
+
+    function uploadFullClick(e){
+        e.preventDefault(true);
+        var parent = $(this).parent().parent();
+        var id = parent.children().get(0).innerHTML;
+        fullPop.find("#idFullModal").val(id);
+        fullPop.fadeIn();
+    }
+
+
+    function populate(papers){
+        var table = $("#sentPapersTable");
+        tableClearLetHeader(table);
+        console.log(papers);
+        for(var i in papers){
+            var tr = $("<tr></tr>");
+            var td;
+
+            td = $("<td></td>");
+            td.html(papers[i].id);
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html(papers[i].name);
+            tr.append(td);
+
+            var keywords = listToCommaSeparatedString(papers[i].keywords);
+            var subjects= listToCommaSeparatedString(papers[i].subjects);
+            var authors= listToCommaSeparatedString(papers[i].authors);
+
+            td = $("<td></td>");
+            td.html(keywords);
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html(subjects);
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html(authors);
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html('<button class="editPaper">Edit</button>');
+            td.children().first().click(editClick);
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html('<button class="uploadAbs">Upload</button>');
+            td.children().first().click(uploadAbsClick)
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html('<button class="uploadFull">Upload</button>');
+            td.children().first().click(uploadFullClick);
+            tr.append(td);
+
+            table.append(tr);
+        }
+    }
+
+    c.getAllPapers(populate);
+
+
+    $("#submitEditPaper").click(submitEditPaperClick);
+    $("#submitAbsPaper").click(function(e){
+        e.preventDefault(true);
+        if(isUndefined(path ) || isEmpty(path)){
+            showErrors(["You must select a file!"]);
+            return;
+        }
+        var reader = new FileReader();
+        var id = absPop.find("#idAbsModal").val();
+
+        reader.onload = function(e){
+            data = e.target.result;
+            c.uploadAbsPaper(getConferenceId(), id,"type", data, function(){
+                absPop.fadeOut();
+            } );
+        }
+        reader.readAsText(path);
+    });
+    $("#submitFullPaper").click(function(e){
+        e.preventDefault(true);
+        if(isUndefined(path ) || isEmpty(path)){
+            showErrors(["You must select a file!"]);
+            return;
+        }
+        var reader = new FileReader();
+        var id = fullPop.find("#idFullModal").val();
+
+        reader.onload = function(e){
+            data = e.target.result;
+            c.uploadAbsPaper(getConferenceId(), id,"type", data, function(){
+                fullPop.fadeOut();
+            } );
+        }
+        reader.readAsText(path);
+    });
+
+
+    $("#absFileUpload").change(function(e){
+        path = e.target.files[0];
+
+    })
+
+    $("#fullFileUpload").change(function(e){
+        path = e.target.files[0];
+
+    })
+
+    buttonAdd.click(function(){
+        data = "save";
+        clearEditPop();
+        editPop.fadeIn();
+    });
+
+
+
+}
+
+function loadDeadlines(){
+    var pop = $("#myModalDeadlines");
+    function deadlineClicked(e){
+        e.preventDefault(true);
+        showPopup("myModalDeadlines");
+        console.log($(this).children().get(0).innerHTML);
+        var name = $(this).children().get(0).innerHTML;
+        var date = $(this).children().get(1).innerHTML;
+        pop.find("#nameDeadlinesModal").val(name);
+        pop.find("#dateDeadlinesModal").val(date);
+
+
+    }
+
+    function saveDeadline(e) {
+        e.preventDefault(true);
+        var name = pop.find("#nameDeadlinesModal").val();
+        var date = pop.find("#dateDeadlinesModal").val();
+        if(isEmpty(name) || isEmpty(date)){
+            showErrors(["You must provide a date!"]);
+            return;
+        }
+        if(name.indexOf("biddingDeadline")> -1){
+            data[name] = date;
+        }
+        else{
+            data[name+"TimeSpan"].endDate = date;
+        }
+
+        c.saveConference(data, function(){
+            pop.fadeOut();
+            location.reload();
+        });
+    }
+
+    function populate(conference){
+
+        data = conference;
+        var table = $("#deadlinesTable")
+        tableClearLetHeader(table);
+
+        for(var key in conference){
+            if(key.indexOf("TimeSpan") > -1 || key.indexOf("biddingDeadline") >-1){
+                var tr = $("<tr></tr>");
+                var td;
+
+                td = $("<td></td>");
+                if(key.indexOf("TimeSpan") > -1 ){
+                    td.html(key.replace("TimeSpan", ""));
+                }
+                else{
+                    td.html(key);
+                }
+                tr.append(td);
+
+                td = $("<td></td>");
+                if(key.indexOf("TimeSpan") > -1 ){
+                    td.html(conference[key].endDate);
+                }
+                else{
+                    td.html(conference[key]);
+                }
+
+                tr.append(td);
+                table.append(tr);
+                tr.hover(function(){
+                    $(this).addClass("selected");
+                },
+                function(){
+                    $(this).removeClass("selected");
+                })
+
+                tr.click(deadlineClicked);
+            }
+        }
+    }
+
+    $("#submitDeadlinesModal").click(saveDeadline);
+    c.getOneConference(getConferenceId(), populate);
+}
+
 function loadSystemPages(page){
     var menu = $("#menu ul");
     menu.empty();
     for(var spage in SYSTEM_PAGES){
         var menuItem = $("<li></li>");
-        menuItem.html("<a href='"+PAGES[SYSTEM_PAGES[spage]]+"'>"+SYSTEM_PAGES[spage].toUpperCase() +"</a>");
+        menuItem.html("<a href='"+PAGES[SYSTEM_PAGES[spage]]+"'>"+formatPage(SYSTEM_PAGES[spage]) +"</a>");
         menu.append(menuItem);
     }
 
     for(var spop in SYSTEM_POPUPS){
         var menuItem = $("<li></li>");
-        menuItem.html("<a href='"+ SYSTEM_POPUPS_ID[SYSTEM_POPUPS[spop]]+ "'>"+SYSTEM_POPUPS[spop].toUpperCase() +"</a>");
+        menuItem.html("<a href='"+ SYSTEM_POPUPS_ID[SYSTEM_POPUPS[spop]]+ "'>"+formatPage(SYSTEM_POPUPS[spop]) +"</a>");
         menu.append(menuItem);
         $.get(PAGES[SYSTEM_POPUPS[spop]], function(data, status){
             if(status == "success")
@@ -249,6 +576,51 @@ function loadSystemPages(page){
         });
         menuItem.click(showSystemPopp);
     }
+}
+
+
+
+function loadConferencePages(page){
+    function populate(priviledge){
+        var s = new Set();
+        for(var i in CONFERENCE_PAGES_FOR_USERS["all"]){
+            s.add(CONFERENCE_PAGES_FOR_USERS["all"][i])
+        }
+
+        if(priviledge.isAuthor){
+            for(var i in CONFERENCE_PAGES_FOR_USERS["author"]){
+                s.add(CONFERENCE_PAGES_FOR_USERS["author"][i])
+            }
+        }
+
+        if(priviledge.isChair){
+            for(var i in CONFERENCE_PAGES_FOR_USERS["chair"]){
+                s.add(CONFERENCE_PAGES_FOR_USERS["chair"][i])
+            }
+        }
+
+        if(priviledge.isCoChair){
+            for(var i in CONFERENCE_PAGES_FOR_USERS["cochair"]){
+                s.add(CONFERENCE_PAGES_FOR_USERS["cochair"][i])
+            }
+        }
+
+        if(priviledge.isPCMember){
+            for(var i in CONFERENCE_PAGES_FOR_USERS["reviewer"]){
+                s.add(CONFERENCE_PAGES_FOR_USERS["reviewer"][i])
+            }
+        }
+
+        for(var page of s){
+            var menuItem = $("<li></li>");
+            menuItem.html("<a href='"+PAGES[page]+"'>"+formatPage(page) +"</a>");
+            menu.append(menuItem);
+        }
+    }
+    var menu = $("#menu ul");
+    menu.empty();
+
+    c.getMyPriviledges(getConferenceId(), populate);
 }
 
 function logout(){
@@ -332,6 +704,9 @@ function main(){
 
             })
         });
+
+        $(".closeButton").click(closeButtonClick);
+
 
 
         //todo 	--!!!! PLEASE USE THIS INSTEAD OF

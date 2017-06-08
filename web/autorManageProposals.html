@@ -4,8 +4,13 @@
 <head>
 	<link rel="stylesheet" href="css/design.css">
 	<script src="js/lib/jquery-3.2.1.min.js"></script>
+
+	<script src="js/gui/functions.js"></script>
 </head>
 <body>
+
+<div id="errors"></div>
+<div id="warnings"></div>
 <div id="content">
 
 	<div id="left">
@@ -45,6 +50,7 @@
 
 	</div>
 </div>
+<div class="buttonAdd">+</div>
 
 <!-- The Modal for Full -->
 <div id="myModalFull" class="modal">
@@ -53,8 +59,10 @@
   <div class="modal-content">
     <span id="closeFull" class="closeButton">&times;</span>
     <div>
-    	<form>
-            <label for="fullFileUpload"> Select the full paper file to upload</label><br>
+    	<form class="noBoxShaddow">
+			<label for="fullFileUpload"> Select the full paper file to upload</label><br>
+			<label for="idFullModal">Id:</label>
+			<input id="idFullModal" type="text" name="id" disabled="disabled" value="2"/></br>
             <input type="file" name="fileupload" value="fileupload" id="fullFileUpload"><br>
             <input id="submitFullPaper" type="submit" value="Upload">
     	</form>
@@ -69,9 +77,11 @@
     <div class="modal-content">
         <span id="closeAbs" class="closeButton">&times;</span>
         <div>
-            <form>
+            <form class="noBoxShaddow">
                 <label for="absFileUpload"> Select the abs paper file  to upload</label><br>
-                <input type="file" name="fileupload" value="fileupload" id="absFileUpload"><br>
+				<label for="idAbsModal">Id:</label>
+				<input id="idAbsModal" type="text" name="id" disabled="disabled" value="2"/></br>
+				<input type="file" name="fileupload" value="fileupload" id="absFileUpload"><br>
                 <input id="submitAbsPaper" type="submit" value="Upload">
             </form>
         </div>
@@ -85,9 +95,9 @@
   <div class="modal-content">
     <span id="closeEdit" class="closeButton">&times;</span>
     <div>
-    	<form>
+    	<form class="noBoxShaddow">
             Id:<br>
-            <input id="idEditModal" type="text" name="id"/></br>
+            <input id="idEditModal" type="text" name="id" disabled="disabled" value="2"/></br>
   			Paper name:<br>
   			<input id="nameEditModal" type="text" name="name"><br>
   			Keywords:<br>
@@ -103,8 +113,5 @@
 
 </div>
 
-<script>
-$(".closeButton").click(function (e){ $(this).parent().parent().css("display", "none");});
-</script>
 </body>
 </html>

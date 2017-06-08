@@ -1,1 +1,1 @@
-{"resp":[{"id":2, "name":"Salut", "eventTimeSpan":{"startDate":"2", "endDate":"2"}, "callForAbstractTimeSpan":{"startDate":"2", "endDate":"2"},"callForProposalsTimeSpan": {"startDate":"2", "endDate":"2"}, "biddingDeadline":"Salut"}]}
+{"resp":{"id":2, "name":"Salut", "eventTimeSpan":{"startDate":"2", "endDate":"2"}, "callForAbstractTimeSpan":{"startDate":"2", "endDate":"2"},"callForProposalsTimeSpan": {"startDate":"2017-03-12", "endDate":"2017-03-21"}, "biddingDeadline":"Salut"}}
