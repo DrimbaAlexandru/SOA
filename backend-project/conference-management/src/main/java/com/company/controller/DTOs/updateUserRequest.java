@@ -11,11 +11,11 @@ public class updateUserRequest
     private String email;
     private String website;
     private String password;
-    private Boolean isCommiteeMember=null;
+    private Boolean isCometeeMember =null;
     public updateUserRequest(){}
 
-    public void setIsCommiteeMember(boolean commiteeMember) {
-        isCommiteeMember = commiteeMember;
+    public void setIsCometeeMember(boolean commiteeMember) {
+        isCometeeMember = commiteeMember;
     }
 
     public void setPassword(String password) {
@@ -66,7 +66,7 @@ public class updateUserRequest
         return username;
     }
 
-    public Boolean getisCommiteeMember() {
-        return isCommiteeMember;
+    public Boolean getIsCometeeMember() {
+        return isCometeeMember;
     }
 }

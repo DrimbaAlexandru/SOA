@@ -16,33 +16,32 @@ function Controller(onError= undefined, onWarning = undefined) {
     this.onError = onError;
     this.onWarning = onWarning;
     const applicationJSON = "application/json";
-    const HOST = "";
+    const HOST = "/";
     const COMMANDS = {
         "users_login": "users/login",//"users/users_login",
         "users_logout": "users/logout",//"users/logout",
         "users_loggedIn": "users/loggedIn",//"users/loggedIn",
-        "users_getMyPriviledges": "users/privileges?conferenceId={0}",//"users/priviledges?conferenceId={0}",
+        "users_getPriviledges": "users/{0}/privileges?conferenceId={1}",//"users/priviledges?conferenceId={0}",
+        "users_setPrivilegdes": "users/{0}/{1}",
         "users_getAll": "users",
         "users_getOne": "users/{0}",
         "users_save": "users",
         "users_update": "users/{0}",
-        //parametrul username va fi luat din sesiune
-        "users_getSubmittedPapers": "users/submittedPapers",
-        "users_getAcceptedSubmittedPapers": "users/submittedPapers?status=accepted/decline",
-        "users_getSubmittedPapersReviews": "users/submittedPapers/{0}/reviews",
-        "users_setSubmittedPapersPresetation": "users/submittedPapers/{0}/presetation",
-        "users_getPaperBid": "users/bids/{0}",
-        "users_setPaperBid": "users/bids/{0}",
-        "users_getAssignedForReview": "users/asignedForReview",
-        "users_getPaperReview": "users/reviews/{0}",
-        "users_setPaperReview": "users/reviews/{0}",
-        //parametrul username e explicit
-        "users_setPrivilegdes": "users/{0}/{1}",
+        "users_getSubmittedPapers": "users/{0}/submittedPapers",
+        "users_getAcceptedSubmittedPapers": "users/{0}/submittedPapers?status=accepted/decline",
+        "users_getSubmittedPapersReviews": "users/{0}/submittedPapers/{1}/reviews",
+        "users_setSubmittedPapersPresetation": "users/{0}/submittedPapers/{1}/presetation",
+        "users_getPaperBid": "users/{0}/bids/{1}",
+        "users_setPaperBid": "users/{0}/bids/{1}",
+        "users_getAssignedForReview": "users/{0}/asignedForReview",
+        "users_getPaperReview": "users/{0}/reviews/{1}",
+        "users_setPaperReview": "users/{0}/reviews/{1}",
         "users_setPaperAssignement": "users/{0}/assignedPapers/{1}",
 
-        "papers_getAll": "papers.php",
-        "papers_save": "papers.php",
-        "papers_update": "papers.php/{0}",
+        "papers_getId":"papers/{0}",//todo to be implemented
+        "papers_getAll": "papers",
+        "papers_save": "papers",
+        "papers_update": "papers/{0}",
         "papers_uploadFull": "papers/{0}/full",
         "papers_getFull": "papers/{0}/full",
         "papers_uploadAbs": "papers/{0}/abstract",
@@ -68,7 +67,7 @@ function Controller(onError= undefined, onWarning = undefined) {
 
         "sessions_getOne": "sessions/{0}",
         "sessions_save": "sessions",
-        "sessions_getPotentialChairs": "sessions/{0}/potentialChairs",
+        "sessions_getPotentialChairs": "conferences/{0}/PCMembers",
         "sessions_setSessionChiar": "sessions/{0}/sessionChair",
         "sessions_participate": "sessions/{0}/participate"
     };
@@ -213,10 +212,10 @@ function Controller(onError= undefined, onWarning = undefined) {
         )
     }
 
-    this.getMyPriviledges = function (conferinceId, onResultArrived) {
+    this.getPriviledges = function (username, conferinceId, onResultArrived) {
         $.ajax(
             {
-                url: (HOST + COMMANDS["users_getMyPriviledges"]).format(conferinceId),
+                url: (HOST + COMMANDS["users_getPriviledges"]).format(username, conferinceId),
                 //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
@@ -337,10 +336,10 @@ function Controller(onError= undefined, onWarning = undefined) {
         )
     }
 
-    this.getSubmittedPapers = function (onResultArrived) {
+    this.getSubmittedPapers = function (username, onResultArrived) {
         $.ajax(
             {
-                url: HOST + COMMANDS["users_getSubmittedPapers"],
+                url: HOST + COMMANDS["users_getSubmittedPapers"].format(username),
                 //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
@@ -365,10 +364,10 @@ function Controller(onError= undefined, onWarning = undefined) {
         )
     }
 
-    this.getAcceptedSubmittedPapers = function (onResultArrived) {
+    this.getAcceptedSubmittedPapers = function (username, onResultArrived) {
         $.ajax(
             {
-                url: HOST + COMMANDS["users_getAcceptedSubmittedPapers"],
+                url: HOST + COMMANDS["users_getAcceptedSubmittedPapers"].format(username),
                 //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
@@ -392,10 +391,10 @@ function Controller(onError= undefined, onWarning = undefined) {
         )
     }
 
-    this.getSubmittedPapersReviews = function (paperId, onResultArrived) {
+    this.getSubmittedPapersReviews = function (username, paperId, onResultArrived) {
         $.ajax(
             {
-                url: (HOST + COMMANDS["users_getSubmittedPapersReviews"]).format(paperId),
+                url: (HOST + COMMANDS["users_getSubmittedPapersReviews"]).format(username, paperId),
                 //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
@@ -415,10 +414,10 @@ function Controller(onError= undefined, onWarning = undefined) {
         )
     }
 
-    this.setSubmittedPapersPresetation = function (data, type, onResultArrived) {
+    this.setSubmittedPapersPresetation = function (username, paperId, data, type, onResultArrived) {
         $.ajax(
             {
-                url: HOST + COMMANDS["users_setSubmittedPapersPresetation"],
+                url: HOST + COMMANDS["users_setSubmittedPapersPresetation"].format(username, paperId),
                 data: JSON.stringify({
                     data: data,
                     type: type
@@ -435,10 +434,10 @@ function Controller(onError= undefined, onWarning = undefined) {
         )
     }
 
-    this.getPaperBid = function (paperId, onResultArrived) {
+    this.getPaperBid = function (username, paperId, onResultArrived) {
         $.ajax(
             {
-                url: (HOST + COMMANDS["users_getPaperBid"]).format(paperId),
+                url: (HOST + COMMANDS["users_getPaperBid"]).format(username, paperId),
                 //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
@@ -453,10 +452,10 @@ function Controller(onError= undefined, onWarning = undefined) {
         )
     }
 
-    this.setPaperBid = function (paperId, status, onResultArrived) {
+    this.setPaperBid = function (username, paperId, status, onResultArrived) {
         $.ajax(
             {
-                url: (HOST + COMMANDS["users_setPaperBid"]).format(paperId),
+                url: (HOST + COMMANDS["users_setPaperBid"]).format(username, paperId),
                 data: JSON.stringify({
                     status: status
                 }),
@@ -472,10 +471,10 @@ function Controller(onError= undefined, onWarning = undefined) {
         )
     }
 
-    this.getAssignedForReview = function (onResultArrived) {
+    this.getAssignedForReview = function (username, onResultArrived) {
         $.ajax(
             {
-                url: HOST + COMMANDS["users_getAssignedForReview"],
+                url: HOST + COMMANDS["users_getAssignedForReview"].format(username),
                 //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
@@ -502,7 +501,7 @@ function Controller(onError= undefined, onWarning = undefined) {
     this.getPaperReview = function (paperId, onResultArrived) {
         $.ajax(
             {
-                url: (HOST + COMMANDS["users_getPaperReview"]).format(paperId),
+                url: (HOST + COMMANDS["users_getPaperReview"]).format(username, paperId),
                 //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
@@ -521,7 +520,7 @@ function Controller(onError= undefined, onWarning = undefined) {
     this.setPaperReview = function (paperId, review, onResultArrived) {
         $.ajax(
             {
-                url: (HOST + COMMANDS["users_setPaperReview"]).format(paperId),
+                url: (HOST + COMMANDS["users_setPaperReview"]).format(username, paperId),
                 data: JSON.stringify({
                     status: review.status,
                     justification: review.justification,
@@ -570,6 +569,31 @@ function Controller(onError= undefined, onWarning = undefined) {
                 success: function (result) {
                     validateAndRun(result, function (response) {
                         if (onResultArrived) onResultArrived();
+                    });
+                },
+                error: errorFunction
+            }
+        )
+    }
+
+    this.getOnePaper = function (paperId, onResultArrived) {
+        $.ajax(
+            {
+                url: HOST + COMMANDS["papers_getId"].format(paperId),
+                //data: JSON.stringify({}),
+                type: "GET",
+                contentType: applicationJSON,
+                success: function (result) {
+                    validateAndRun(result, function (response) {
+
+                        var id = response.id;
+                        var name = response.name;
+                        var subjects = response.subjects;
+                        var keywords = response.keywords;
+                        var authors = response.authors;
+                        var paper = new Proposal(id, name, keywords, subjects, authors);
+
+                        if (onResultArrived) onResultArrived(paper)
                     });
                 },
                 error: errorFunction
@@ -1086,10 +1110,10 @@ function Controller(onError= undefined, onWarning = undefined) {
     }
 
 
-    this.getPotentialChairs = function (session, onResultArrived) {
+    this.getPotentialChairs = function (sessionId, onResultArrived) {
         $.ajax(
             {
-                url: (HOST + COMMANDS["sessions_getPotentialChairs"]).format(session.id),
+                url: (HOST + COMMANDS["sessions_getPotentialChairs"]).format(sessionId),
                 //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,
@@ -1114,12 +1138,12 @@ function Controller(onError= undefined, onWarning = undefined) {
         )
     }
 
-    this.setSessionChiar = function (sessionId,sessionChairId,  onResultArrived) {
+    this.setSessionChiar = function (sessionId,sessionChairUsername,  onResultArrived) {
         $.ajax(
             {
                 url: HOST + COMMANDS["sessions_setSessionChiar"].format(sessionId),
                 data: JSON.stringify({
-                    id : sessionChairId
+                    username : sessionChairUsername
                 }),
                 type: "PUT",
                 contentType: applicationJSON,
@@ -1133,11 +1157,11 @@ function Controller(onError= undefined, onWarning = undefined) {
         )
     }
 
-    this.participateSession = function (sessionId, onResultArrived) {
+    this.participateSession = function (sessionId,username,  onResultArrived) {
         $.ajax(
             {
                 url: HOST + COMMANDS["sessions_participate"].format(sessionId),
-                //data: JSON.stringify({}),
+                data: JSON.stringify({username:username}),
                 type: "POST",
                 contentType: applicationJSON,
                 success: function (result) {

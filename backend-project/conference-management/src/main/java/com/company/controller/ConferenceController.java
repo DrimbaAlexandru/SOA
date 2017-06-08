@@ -35,7 +35,7 @@ public class ConferenceController {
     }
 
     //tested (Date display issues)
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<ResponseJSON<Iterable<ConferenceDTO>>> handle_get_all()
     {
         List<ConferenceDTO> conferences=new ArrayList<>();
@@ -98,7 +98,7 @@ public class ConferenceController {
      * @param conferenceDTO
      * @return 200
      */
-    @RequestMapping(path = "/", method = RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST)
     public ResponseEntity<ResponseJSON<String>> hendle_post_conference(@RequestBody ConferenceDTO conferenceDTO){
         ResponseJSON<String> resp = new ResponseJSON<>();
         conferenceService.addConference(conferenceDTO).error(e -> {resp.setResp(e.getMessage());});

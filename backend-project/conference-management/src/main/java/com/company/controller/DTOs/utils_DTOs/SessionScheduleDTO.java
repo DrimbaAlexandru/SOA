@@ -1,6 +1,7 @@
 package com.company.controller.DTOs.utils_DTOs;
 
 import com.company.domain.SessionSchedule;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
@@ -9,6 +10,7 @@ import java.util.Date;
  */
 public class SessionScheduleDTO {
     private int sessionId, paperId;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date presentationStartTime, presentationEndTime;
     private String username;
 

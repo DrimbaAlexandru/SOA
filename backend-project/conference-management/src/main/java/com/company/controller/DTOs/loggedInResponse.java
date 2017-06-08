@@ -6,16 +6,16 @@ package com.company.controller.DTOs;
 public class loggedInResponse
 {
     private boolean isSuperUser=false;
-    private boolean isCommiteeMember=false;
+    private boolean isCometeeMember =false;
     public loggedInResponse(){}
-    public boolean isCommiteeMember() { return isCommiteeMember; }
-    public boolean isSuperUser() { return isSuperUser; }
+    public boolean getIsCometeeMember() { return isCometeeMember; }
+    public boolean getIsSuperUser() { return isSuperUser; }
 
-    public void setCommiteeMember(boolean commiteeMember) {
-        isCommiteeMember = commiteeMember;
+    public void setIsCometeeMember(boolean commiteeMember) {
+        isCometeeMember = commiteeMember;
     }
 
-    public void setSuperUser(boolean superUser) {
+    public void setIsSuperUser(boolean superUser) {
         isSuperUser = superUser;
     }
 }

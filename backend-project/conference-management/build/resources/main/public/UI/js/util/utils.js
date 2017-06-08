@@ -93,6 +93,6 @@ PAGE_LOADS = {
     "grantReviewer":loadGrantReviewer,
     "grantChair":loadGrantChair,
 
-    "session":loadSessions,
+    "sessions":loadSessions,
     "sessionChairs":loadSessionChairs,
 }

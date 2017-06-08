@@ -201,6 +201,15 @@ papers POST
     conferenceId:int
 }
 
+papers/{paperId} GET
+{
+    id:int
+    name:string
+    subjects:string[]
+    keywords:string[]
+    authors:string[]//username
+}
+
 		DONE
 papers/{paperId} PUT
 {
