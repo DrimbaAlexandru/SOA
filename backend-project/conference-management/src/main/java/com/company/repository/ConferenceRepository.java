@@ -16,9 +16,9 @@ public interface ConferenceRepository extends PagingAndSortingRepository<Confere
     @Query("SELECT co.sessions FROM Conference co where co.id = ?1")
     Iterable<Session> getSessions(int confId);
 
-    @Query("SELECT u FROM Conference co JOIN Privileges priv JOIN User u where co.id = ?1 AND priv.isPCMember = true")
+    @Query("SELECT u FROM Conference co JOIN Privileges priv JOIN AppUser u where co.id = ?1 AND priv.isPCMember = true")
     Iterable<AppUser> getPCMembers(int confId);
 
-    @Query("SELECT u FROM Conference co JOIN Privileges priv JOIN User u where co.id = ?1")
+    @Query("SELECT u FROM Conference co JOIN Privileges priv JOIN AppUser u where co.id = ?1")
     Iterable<AppUser> getRegisteredUsers(int confId);
 }

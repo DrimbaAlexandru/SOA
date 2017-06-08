@@ -11,12 +11,14 @@ import com.company.controller.DTOs.SessionDTO;
 import com.company.utils.updater.SessionGettersAndSetters;
 import com.company.utils.updater.Updater;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 
 /**
  * Created by sebi on 6/7/2017.
  */
+@Component
 public class SessionServiceImpl implements SessionService {
 
     private UserService userService;
@@ -120,12 +122,6 @@ public class SessionServiceImpl implements SessionService {
         }
 
         return Exceptional.OK(session);
-    }
-
-    @Override
-    //todo not sure how should be implemented   :|
-    public Iterable<AppUser> getPotentialChairs(int sessId) {
-        return null;
     }
 
     @Transactional

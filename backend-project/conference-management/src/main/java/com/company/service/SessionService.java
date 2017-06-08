@@ -53,13 +53,6 @@ public interface SessionService {
 
     /**
      *
-     * @param sessId
-     * @return potential session chairs for a specific session
-     */
-    Iterable<AppUser> getPotentialChairs(int sessId);
-
-    /**
-     *
      * @param sessId a specific session
      * @param username a listener to the given session
      * @return the updated session

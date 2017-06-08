@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.company.service.ConferenceServiceImplTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2017-06-08T21:46:07" hostname="DESKTOP-CD5HDT7" time="0.003">
+  <properties/>
+  <testcase name="getSessions" classname="com.company.service.ConferenceServiceImplTest" time="0.002"/>
+  <testcase name="updateConference" classname="com.company.service.ConferenceServiceImplTest" time="0.0"/>
+  <testcase name="getConference" classname="com.company.service.ConferenceServiceImplTest" time="0.001"/>
+  <testcase name="getConferences" classname="com.company.service.ConferenceServiceImplTest" time="0.0"/>
+  <testcase name="addConference" classname="com.company.service.ConferenceServiceImplTest" time="0.0"/>
+  <testcase name="removeConference" classname="com.company.service.ConferenceServiceImplTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -3,11 +3,8 @@ package com.company;
 import com.company.utils.RemoteFileManager;
 import com.company.utils.dropbox.DropboxManagerRemote;
 
-import com.company.utils.updater.ConferencesGettersAndSetters;
+import com.company.utils.updater.*;
 
-import com.company.utils.updater.PapersGettersAndSetters;
-import com.company.utils.updater.PrivilegesGettersAndSetters;
-import com.company.utils.updater.UsersGettersAndSetters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -38,6 +35,11 @@ public class GeneralContext {
     @Bean
     public PapersGettersAndSetters getPapersGettersAndSetters() {
         return new PapersGettersAndSetters();
+    }
+
+    @Bean
+    public SessionGettersAndSetters getSessionGettersAndSetters() {
+        return new SessionGettersAndSetters();
     }
 
     @Bean

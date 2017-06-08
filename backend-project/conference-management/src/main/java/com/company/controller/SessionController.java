@@ -75,17 +75,6 @@ public class SessionController {
         return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
-    @RequestMapping(path="/{sessionId}",method =  RequestMethod.GET)
-    public ResponseEntity<ResponseJSON<Iterable<UserResponse>>> handle_getpotentialChairs(@PathVariable("sessionId") int sessionId)
-    {
-        List<UserResponse> users= new ArrayList<>();
-        for(AppUser u : sessionService.getPotentialChairs(sessionId))
-            users.add(new UserResponse(u.getUsername(),u.getName(),u.getAffiliation(),u.getEmail(),u.getWebpage()));
-        ResponseJSON<Iterable<UserResponse>> resp = new ResponseJSON<>(users);
-        return new ResponseEntity<>(resp,HttpStatus.OK);
-
-    }
-
     @RequestMapping(path="/{sessionId}/sessionChair",method = RequestMethod.PUT)
     public ResponseEntity<ResponseJSON<String>> handle_put_sessionChair(
             @RequestBody UserIdRequest user,
