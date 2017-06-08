@@ -4,9 +4,13 @@
 <head>
     <link rel="stylesheet" href="css/design.css">
     <script src="js/lib/jquery-3.2.1.min.js"></script>
+    <script src="js/gui/functions.js"></script>
 </head>
 <body>
 
+
+<div id="errors"></div>
+<div id="warnings"></div>
 <div id="content">
 
     <div id="left">
@@ -19,7 +23,7 @@
     </div>
     <div id="right">
         <h1>Welcome to conference <span id="conferenceName">#conferenceName</span> site!</h1>
-        <div id="informationsDiv">
+        <div id="informationsDiv" class="informationsClass">
             Start date:<span id="startDateSpan">#startDate</span><br>
             End date:<span id="endDateSpan">#startDate</span><br>
             <br>
@@ -33,7 +37,7 @@
             Bidding deadline:<span id="biddingDeadlineSpan">#biddingDeadline</span>
 
         </div>
-        <p>Using the right panel you can navigate through the page!</p>
+
     </div>
 </div>
 </body>

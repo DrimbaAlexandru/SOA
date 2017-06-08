@@ -1,1 +1,1 @@
-{"resp":{"isSuperUser":true, "isCommiteeMember":false}, "errors":["Erosre!"]}
+{"resp":{"isSuperUser":true, "isCommiteeMember":false}, "errors":[]}

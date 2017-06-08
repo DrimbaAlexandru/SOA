@@ -2,27 +2,39 @@
 <html>
 <head>
 <title>Register</title>
+    <link rel="stylesheet" href="css/design.css"/>
     <script src="js/lib/jquery-3.2.1.min.js"></script>
+
+    <script src="js/gui/functions.js"></script>
 </head>
 <body>
 
-<h1>Register</h1>
-<div>
-<p>
-Full name: <input type="text" name="fname"><br>
-<br>
-Affiliation: <input type="text" name="affiliation"><br>
-<br>
-E-mail: <input type="text" name="email"><br>
-<br>
-Username: <input type="text" name="username"><br>
-<br>
-Password: <input type="text" name="password"><br>
-</p>
-<button id="registerButton" type="button" >Register</button>
+<div id="errors"></div>
+<div id="warnings"></div>
 
+<form>
+    <header>Register</header>
+    <label>Full name: <span>*</span></label>
+    <input name="fname"/>
 
-</div>
+    <label>Affiliation:<span>*</span></label>
+    <input name="affiliation"/>
+
+    <label>E-mail:<span>*</span></label>
+    <input name="email"/>
+
+    <label>Website:<span>*</span></label>
+    <input name="website"/>
+
+    <label>Username: <span>*</span></label>
+    <input name="username"/>
+    <div class="help">At least 6 character</div>
+    <label>Password: <span>*</span></label>
+    <input name="password" type="password"/>
+    <div class="help">Use upper and lowercase lettes as well</div>
+    <button id="registerButton" type="button" >Register</button>
+</form>
+
 
 </body>
 </html>

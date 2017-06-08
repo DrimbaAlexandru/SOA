@@ -2,24 +2,29 @@
 <html>
 <head>
 <title>Login</title>
+
+    <link rel="stylesheet" type="text/css" href="css/design.css"/>
     <script src="js/lib/jquery-3.2.1.min.js"></script>
+    <script src="js/gui/functions.js"></script>
 </head>
 <body>
 
-<h1>Login</h1>
-<div>
-<p>
-Username: <input type="text" name="username"><br>
-<br>
-Password: <input type="text" name="password"><br>
-</p>
-<button id="loginButon" type="button" >Login</button>
-<br>
-<p>Don't have an account?</p>
-<a href="register.html">Create one here</a>
+<div id="errors"></div>
+<div id="warnings"></div>
+<form>
+    <header>Login</header>
+    <label>Username <span>*</span></label>
+    <input name="username" type="text"/>
+    <div class="help">At least 6 character</div>
+    <label>Password <span>*</span></label>
+    <input name="password" type="password"/>
+    <div class="help">Use upper and lowercase lettes as well</div>
+    <button type="submit" id="loginButton">Login</button>
+    <br>
+    <label>Don't have an account?</label>
+    <a class="help" href="register.html">Create one here</a>
 
-
-</div>
+</form>
 
 </body>
 </html>

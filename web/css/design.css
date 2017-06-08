@@ -1,17 +1,273 @@
+html, body {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
 
-body, html{
+body {
+    background: #778899;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+form {
+    background: white;
+    width: 40%;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+    font-family: lato;
+    position: relative;
+    color: #333;
+    border-radius: 10px;
+}
+form header {
+    background: #5F9EA0;
+    padding: 30px 20px;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    border-radius: 10px 10px 0 0;
+}
+
+form a{
+    margin-left: 20px;
+    display: inline-block;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+
+form label {
+    margin-left: 20px;
+    display: inline-block;
+    margin-top: 30px;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+form label span {
+    color: #FF3838;
+    font-size: 2em;
+    position: absolute;
+    left: 2.3em;
+    top: -10px;
+}
+
+form input {
+    display: block;
+    width: 78%;
+    margin-left: 20px;
+    padding: 5px 20px;
+    font-size: 1em;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #ccc;
+}
+form .help {
+    margin-left: 20px;
+    font-size: 0.8em;
+    color: #777;
+}
+form button {
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-family: inherit;
+    color: white;
+    background: #5F9EA0;
+    outline: none;
+    border: none;
+    padding: 5px 15px;
+    font-size: 1.3em;
+    font-weight: 400;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px rgba(51, 51, 51, 0.4);
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+}
+form button:hover {
+    background: #ff5252;
+}
+
+
+html{
     width:100%;
     height:100%;
     margin:0px;
+
+}
+
+body {
+    width: 100%;
+    background: #778899;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
 }
 
 table, th, td {
-    border: 2px solid black;
+    border: 1px solid black;
     border-collapse: collapse;
+    font-family: lato;
+    margin: 0 auto;
+    #border-radius: 10px 10px 0 0;
+
 }
 
+table{
+    background-color: #f1f1f1;
+}
+
+
+
+table caption {
+    position: relative;
+    background: #5F9EA0;
+    padding: 10px 20px;
+    color: white;
+    font-size: 1em;
+    font-weight: 600;
+    border-radius: 10px 10px 0 0;
+
+}
+
+.tableEnrolledPapersChair {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    z-index: 15;
+    top: 50%;
+    left: 25%;
+    margin: 0px 0 0 -100px;
+    background: #f1f1f1;
+    width: 21.3%;
+    height: 22%;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.7);
+    font-family: lato;
+    border-radius: 10px 10px 0 0;
+
+}
+
+.tableSentPapers{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    z-index: 15;
+    top: 50%;
+    left: 25%;
+    margin: 0px 0 0 -100px;
+    background: #f1f1f1;
+    width: 37.8%;
+    height: 22%;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.7);
+    font-family: lato;
+    border-radius: 10px 10px 0 0;
+}
+
+.tableAcceptedPapers{
+    position: relative;
+    width: 100px;
+    height: 200px;
+    z-index: 15;
+    top: 50%;
+    left: 29%;
+    margin: 0px 0 0 -100px;
+    background: #f1f1f1;
+    width: 25.7%;
+    height: 25%;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.7);
+    font-family: lato;
+    border-radius: 10px 10px 0 0;
+}
+
+.informationsClass{
+    position: absolute;
+    display: inline-block;
+    padding:15px;
+    margin:0 auto;
+    width:400px;
+    left:0;
+    right:0;
+    z-index: 15;
+    background: #f1f1f1;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+    font-family: lato;
+    border-radius: 10px 10px 0 0;
+}
+
+
 tr.selected{
-    background-color: rgba(0,0,0,0.3);
+    background-color: #f1f1f1
+
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+
+li a {
+    display: block;
+    color: #f1f1f1;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-family: lato;
+}
+
+/* Change the link color on hover */
+li a:hover {
+    background-color: #f1f1f1;
+    color: #f1f1f1;
+}
+
+
+
+
+#errors, #warnings{
+    display: none;;
+    position: fixed;
+    width:50%;
+    margin:0 auto;
+    left:0;
+    right:0;
+    top:15px;
+    padding:0 10px;
+    background-color: #ff5252;
+    border-radius: 7px;
+    z-index: 10000;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(51, 51, 51, 0.4);
+}
+
+#warnings{
+    background-color: #5F9EA0;
+}
+#errors p, #warnings p{
+    color: white;
+    margin-left:15px;
+    position: relative;
+}
+
+#errors p::before, #warnings p::before{
+    display:block;
+    position:relative;
+    width:10px;
+    height:10px;
+    border-radius: 5px;
+    background-color: wheat;
+    content:" ";
+    margin-left:-15px;
+    top:13px;
+    bottom:50%;
 }
 
 
@@ -39,6 +295,11 @@ tr.selected{
     width: 80%;
 }
 
+h1{
+    font-family: lato;
+
+}
+
 /* The Close Button */
 .closeButton {
     color: #aaaaaa;
@@ -62,7 +323,7 @@ tr.selected{
 }
 
 #left{
-    background-color: aqua;
+    background-color: #777777;
     width:200px;
     float:left;
     min-height:100%;
@@ -98,6 +359,11 @@ tr.selected{
     min-height:100%;
     min-width:200px;
     margin-left:200px;
+    position: relative;;
+}
+
+#right h1{
+    text-align: center;
 }
 
 #right #conferinces-wrapper{

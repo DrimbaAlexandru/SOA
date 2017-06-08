@@ -2,7 +2,7 @@ var Conference = function(id = undefined, name= undefined, eventTimeSpan = undef
 	this.id = id;
 	this.name = name;
 	this.eventTimeSpan = eventTimeSpan;
-	this.callFroAbstractTimeSpan = callForAbstract;
+	this.callForAbstractTimeSpan = callForAbstract;
 	this.callForProposalsTimeSpan = callForProposals;
 	this.biddingDeadline = biddingDeadline;
 };
@@ -12,17 +12,16 @@ var TimeSpan = function(startDate = undefined, endDate= undefined){
     this.endDate = endDate;
 }
 
-var User = function(id = undefined, username, name, date, email, affiliation, website, password=undefined, isSuperUser=undefined, isCommiteeMember=undefined){
+var User = function(id = undefined, username, name, email, affiliation, website, password=undefined, isSuperUser=undefined, isCommiteeMember=undefined){
     this.id = id;
     this.username = username;
 	this.name = name;
 	this.email = email;
 	this.affiliation = affiliation;
-	this.date = date;
 	this.website = website;
 	this.password = password;
 	this.isSuperUser = isSuperUser;
-	this.isCommiteeMember= isCommiteeMember;
+	this.isCometeeMember= isCommiteeMember;
 };
 
 
@@ -40,7 +39,7 @@ var Priviledge = function (isAuthor = false, isPCMember = false, isChair = false
 }
 
 var SystemPriviledge= function(isSuperUser= false, isCommiteeMember = false){
-	this.isCommiteeMember = isCommiteeMember;
+	this.isCometeeMember = isCommiteeMember;
 	this.isSuperUser = isSuperUser;
 }
 
