@@ -1,11 +1,10 @@
 package com.company.service;
 
 import com.company.controller.DTOs.FileGetDTO;
+import com.company.controller.DTOs.firstPaperSubmissionDTO;
 import com.company.controller.DTOs.submittedPaperDTO;
 import com.company.domain.*;
-import com.company.repository.PaperRepository;
-import com.company.repository.UploadedFileRepository;
-import com.company.repository.UserRepository;
+import com.company.repository.*;
 import com.company.utils.container.Container;
 import com.company.utils.exception.Exceptional;
 import com.company.utils.updater.PapersGettersAndSetters;
@@ -29,18 +28,27 @@ public class PaperServiceImpl implements PaperService {
     private UploadedFileService uploadedFileService;
     private UploadedFileRepository uploadedFileRepository;
     private UserRepository userRepository;
+    private ConferenceRepository conferenceRepository;
+    private SessionRepository sessionRepository;
+    private SessionScheduleRepository sessionScheduleRepository;
 
     public PaperServiceImpl(@Autowired PaperRepository paperRepository,
                             @Autowired PapersGettersAndSetters papersGettersAndSetters,
                             @Autowired UploadedFileService uploadedFileService,
                             @Autowired UserRepository userRepository,
-                            @Autowired UploadedFileRepository uploadedFileRepository){
+                            @Autowired UploadedFileRepository uploadedFileRepository,
+                            @Autowired ConferenceRepository conferenceRepository,
+                            @Autowired SessionRepository sessionRepository,
+                            @Autowired SessionScheduleRepository sessionScheduleRepository){
         this.paperRepository=paperRepository;
         this.papersGettersAndSetters=papersGettersAndSetters;
         updater=new Updater();
         this.uploadedFileService = uploadedFileService;
         this.userRepository=userRepository;
         this.uploadedFileRepository=uploadedFileRepository;
+        this.conferenceRepository=conferenceRepository;
+        this.sessionRepository=sessionRepository;
+        this.sessionScheduleRepository=sessionScheduleRepository;
     }
 
     @Override
@@ -54,17 +62,37 @@ public class PaperServiceImpl implements PaperService {
         return Exceptional.OK(paperRepository.save(p));
     }
 
-    public Exceptional<Paper> addPaper(submittedPaperDTO p)
+    public Exceptional<Paper> addPaper(firstPaperSubmissionDTO p)
     {
         Set<AppUser> users=new HashSet<>();
+        Conference conference=conferenceRepository.findOne(p.getConferenceID());
+        if(conference==null)
+            return Exceptional.Error(new Exception("I'm not in the mood to execute this task. Please use the keyword 'PLEASE' or put in a valid conference ID"));
+
         for(String username:p.getAuthors())
         {
             AppUser u = userRepository.findByUsername(username);
             if(u!=null)
                 users.add(u);
         }
+        if(users.size()==0)
+            return Exceptional.Error(new Exception("No correct usernames given as authors"));
         Paper paper=new Paper(p.getName(),PaperStatus.SUBMITTED,users);
-        return Exceptional.OK(paperRepository.save(paper));
+
+        Set<Session> sessions=conference.getSessions();
+        Session session;
+        SessionSchedule sessionSchedule;
+        if(sessions.size()==0) {
+            session = new Session(conference, "Default Session");
+            session = sessionRepository.save(session);
+        }
+        else
+            session = (Session)sessions.toArray()[0];
+
+        paper = paperRepository.save(paper);
+        sessionSchedule = new SessionSchedule(paper,session,new Date(),(AppUser) users.toArray()[0]);
+        sessionScheduleRepository.save(sessionSchedule);
+        return Exceptional.OK(paper);
 
     }
 
@@ -251,5 +279,32 @@ public class PaperServiceImpl implements PaperService {
         return Exceptional.OK(null);
     }
 
+    @Override
+    public Exceptional<Paper> getById(int id) {
+        Paper p=paperRepository.findOne(id);
+        if(p==null)
+            return Exceptional.Error(new Exception("Paper with given id doesn't exist"));
+        else
+            return Exceptional.OK(p);
+    }
 
+    @Transactional
+    @Override
+    public Exceptional<Iterable<Review>> getReviews(int id) {
+        Paper p=paperRepository.findOne(id);
+        if(p==null)
+            return Exceptional.Error(new Exception("Paper with given id doesn't exist"));
+        else
+            return Exceptional.OK(p.getReviews());
+    }
+
+    @Transactional
+    @Override
+    public Exceptional<Iterable<Bid>> getBids(int id) {
+        Paper p=paperRepository.findOne(id);
+        if(p==null)
+            return Exceptional.Error(new Exception("Paper with given id doesn't exist"));
+        else
+            return Exceptional.OK(p.getBids());
+    }
 }

@@ -276,6 +276,20 @@ papers/{paperId}/finalEvaluator/{user_id} PUT
 {}
 return {}
 
+		DONE
+papers/{paperId}/reviews/ GET
+[{
+    status : string
+    justification=string
+    username=string --reviewer-ul
+}]
+
+		DONE
+papers/{paperId}/bids/ GET
+[{
+    status : string
+    username=string --bidder-ul
+}]
 
 
 //listOthersReviewsForPaper

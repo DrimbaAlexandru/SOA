@@ -8,12 +8,15 @@ import com.company.domain.Bid;
 public class bidDTO
 {
     private String status;
+    private String username;
     public bidDTO(){}
 
     public bidDTO(Bid motherfucker)
     {
-        if(motherfucker!=null)
-            status=motherfucker.getStatus().name();
+        if(motherfucker!=null) {
+            status = motherfucker.getStatus().name();
+            username=motherfucker.getBidder().getUsername();
+        }
     }
 
     public String getStatus() {
@@ -22,5 +25,13 @@ public class bidDTO
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

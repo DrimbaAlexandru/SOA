@@ -64,10 +64,11 @@ public class SessionSchedule {
         this.presentationTime = presentationTime;
     }
 
-    public SessionSchedule(Paper paper, Session sesion, Date presentationTime){
+    public SessionSchedule(Paper paper, Session sesion, Date presentationTime, AppUser speaker){
         this.paper = paper;
         this.session = sesion;
         this.presentationTime = presentationTime;
+        this.speaker=speaker;
     }
 
     public SessionSchedule(){}
