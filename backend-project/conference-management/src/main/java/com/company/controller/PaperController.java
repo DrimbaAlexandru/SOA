@@ -41,6 +41,18 @@ public class PaperController {
     }
 
     //TESTED
+    @RequestMapping(path = "/{paperId}", method = RequestMethod.GET)
+    public ResponseEntity<ResponseJSON<submittedPaperDTO>> handle_get_paper_by_id(
+            @PathVariable("paperId") int paperId)
+    {
+        ResponseJSON<submittedPaperDTO> resp=new ResponseJSON<>();
+        service.getById(paperId).error(e->{resp.addError(e.getMessage());}).ok(
+            p->{resp.setResp(new submittedPaperDTO(p));}
+        );
+        return new ResponseEntity<>(resp,HttpStatus.OK);
+    }
+
+    //TESTED
     @RequestMapping(path = "", method = RequestMethod.POST)
     public ResponseEntity<ResponseJSON<String>> handle_post_paper(
             @RequestBody firstPaperSubmissionDTO paper)
