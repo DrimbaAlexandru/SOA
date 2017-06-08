@@ -798,7 +798,50 @@ function loadDeadlines(){
 
 function loadAsignPaper(){
 
+    function loadPaper(tr, paperId){
+        c.getOnePaper(paperId, function(paper){
+            var td;
 
+            td = $("<td></td>");
+            td.html(paper.id);
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html(paper.name);
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html(listToCommaSeparatedString(paper.keywords));
+            tr.append(td);
+
+
+            td = $("<td></td>");
+            td.html(listToCommaSeparatedString(paper.subjects));
+            tr.append(td);
+
+            td = $("<td></td>");
+            td.html(listToCommaSeparatedString(paper.authors));
+            tr.append(td);
+        });
+    }
+
+    function colectSessions(sessions){
+        for(var i in sessions){
+
+            for(var j in sessions[i].schedule){
+                var paperId = sessions[i].schedule[j].paperId;
+                var tr = $("<tr></tr>");
+                table.appendChild(tr);
+                loadPaper(tr.clone(), paperId);
+            }
+        }
+    }
+
+
+
+    var table = $("#enrolledPapers");
+    tableClearLetHeader(table);
+    c.getConferenceSessions(getConferenceIdFromCookie(), colectSessions);
 }
 
 function loadBids(){
