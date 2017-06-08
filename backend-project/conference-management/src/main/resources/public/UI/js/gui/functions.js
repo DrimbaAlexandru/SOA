@@ -55,26 +55,32 @@ function isEmpty(val){
     return false;
 }
 
-function getVariableFromCookie(v){
+function getVariableFromCookie(v, convertToInt = false){
     var cookie = document.cookie;
     var s = cookie.split(';');
     for(var i in s){
         var k, v;
         if(s[i].indexOf(v) > -1 )
         {
-            try {
-                return parseInt(s[i].split('=')[1].trim());
-            }
-            catch (e){
+            if(convertToInt){
+                try {
+                    return parseInt(s[i].split('=')[1].trim());
+                }
+                catch (e){
 
+                }
             }
+            else{
+                return s[i].split('=')[1].trim();
+            }
+
         }
     }
     return undefined;
 }
 
 function getConferenceIdFromCookie(){
-    return getVariableFromCookie("conferenceId");
+    return getVariableFromCookie("conferenceId", true);
 }
 
 function getUsernameFromCookie(){
@@ -325,11 +331,11 @@ function fillModalGrantSteering(){
     function populate(users){
         function grantSteering(e){
             var tds = $(this).parent().parent().children();
-            var username = tds.get(0);
-            var name = tds.get(1);
-            var affiliation = tds.get(2);
-            var website = tds.get(3);
-            var email = tds.get(4);
+            var username = tds.get(0).innerHTML;
+            var name = tds.get(1).innerHTML;
+            var affiliation = tds.get(2).innerHTML;
+            var website = tds.get(3).innerHTML;
+            var email = tds.get(4).innerHTML;
             var isCometeeMember = true;
             c.updateUser(new User(0, username, name, email, affiliation, website, "", undefined, isCometeeMember));
         }
@@ -375,7 +381,7 @@ function fillModalGrantSteering(){
     }
 
     var table = $("#steeringUsersTable");
-    clear(table);
+    tableClearLetHeader(table);
     c.getAllUsers(populate);
 }
 
@@ -1063,9 +1069,9 @@ function loadSystemPages(page, priviledge){
         }
     }
 
-
+    console.log(s);
     for(var spage in SYSTEM_PAGES){
-        if(!(s.has(spage)))
+        if(!(s.has(SYSTEM_PAGES[spage])))
             continue;
 
         var menuItem = $("<li></li>");
@@ -1074,7 +1080,7 @@ function loadSystemPages(page, priviledge){
     }
 
     for(var spop in SYSTEM_POPUPS){
-        if(!(s.has(spage)))
+        if(!(s.has(SYSTEM_POPUPS[spage])))
             continue;
 
         var menuItem = $("<li></li>");
@@ -1208,8 +1214,7 @@ function main(){
             }
 
             c.login(user.username, user.password, function(){
-                alert(user.username);
-                document.cookie  = "username =" + user.username + "; path=/";
+                //document.cookie  = "username =" + user.username + "; path=/";
                 window.location.href = "conferences.html";
             });
         });

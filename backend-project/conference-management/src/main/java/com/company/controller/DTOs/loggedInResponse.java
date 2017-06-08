@@ -8,14 +8,14 @@ public class loggedInResponse
     private boolean isSuperUser=false;
     private boolean isCommiteeMember=false;
     public loggedInResponse(){}
-    public boolean isCommiteeMember() { return isCommiteeMember; }
-    public boolean isSuperUser() { return isSuperUser; }
+    public boolean getIsCommiteeMember() { return isCommiteeMember; }
+    public boolean getIsSuperUser() { return isSuperUser; }
 
-    public void setCommiteeMember(boolean commiteeMember) {
+    public void setIsCommiteeMember(boolean commiteeMember) {
         isCommiteeMember = commiteeMember;
     }
 
-    public void setSuperUser(boolean superUser) {
+    public void setIsSuperUser(boolean superUser) {
         isSuperUser = superUser;
     }
 }

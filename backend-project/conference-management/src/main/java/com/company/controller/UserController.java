@@ -87,8 +87,8 @@ public class UserController {
             Exceptional<AppUser> au = service.getUser(usernameCookie);
             au.error(e -> resp.addError(e.getMessage()))
                 .ok(e -> {
-                    lir.setCommiteeMember(e.getIsCometeeMember());
-                    lir.setSuperUser(e.getIsSuperUser());
+                    lir.setIsCommiteeMember(e.getIsCometeeMember());
+                    lir.setIsSuperUser(e.getIsSuperUser());
                 });
         }
         else

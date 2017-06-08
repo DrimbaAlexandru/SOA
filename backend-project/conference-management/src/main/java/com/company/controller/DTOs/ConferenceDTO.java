@@ -1,6 +1,7 @@
 package com.company.controller.DTOs;
 import com.company.controller.DTOs.utils_DTOs.TimeSpan;
 import com.company.domain.Conference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
@@ -13,6 +14,7 @@ public class ConferenceDTO {
     private TimeSpan eventTimeSpan;
     private TimeSpan callForAbstractTimeSpan;
     private TimeSpan callForProposalsTimeSpan;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date biddingDeadline;
 
     public ConferenceDTO(Conference conf) {

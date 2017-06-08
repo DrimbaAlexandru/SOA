@@ -16,7 +16,7 @@ function Controller(onError= undefined, onWarning = undefined) {
     this.onError = onError;
     this.onWarning = onWarning;
     const applicationJSON = "application/json";
-    const HOST = "";
+    const HOST = "/";
     const COMMANDS = {
         "users_login": "users/login",//"users/users_login",
         "users_logout": "users/logout",//"users/logout",
