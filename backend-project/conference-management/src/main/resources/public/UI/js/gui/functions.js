@@ -895,64 +895,40 @@ function loadAsignPaper(){
 
 function loadBids(){
 
-
-
-
-    var pop = $("#myModalEnrolled");
+    var pop = $("#myModalBid");
 
     function paperClick(){
         var paperId = $(this).children().get(0).innerHTML;
-        var asignedRevsTable = $("#assignedRevs");
-        var potentialRevsTable = $("#potentialRevs");
-
-
-        function fillUser(tr, username){
-            c.getOneUser(username, function(user){
-                var td;
-                td = $("<td></td>");
-                td.html(user.id);
-                tr.append(td);
-
-                td = $("<td></td>");
-                td.html(user.name);
-                tr.append(td);
-
-                td = $("<td></td>");
-                td.html(user.username);
-                tr.append(td);
-            });
-        }
-
-        function populateAsigned(users) {
-            for(var i in users){
-                var tr = $('<tr></tr>');
-                fillUser(tr.clone(), users[i].username);
-                asignedRevsTable.append(tr);
-            }
-        }
-
-        function populatePotential(users) {
-            for(var i in users){
-                var tr = $('<tr></tr>');
-                fillUser(tr.clone(), users[i].username);
-                potentialRevsTable.append(tr);
-            }
-        }
-
-        tableClearLetHeader(asignedRevsTable);
-        tableClearLetHeader(potentialRevsTable);
-
-        c.getAssignedReviewers(getConferenceIdFromCookie(),paperId,  populateAsigned);
-        c.getPotentialReviewers(getConferenceIdFromCookie(), paperId, populatePotential);
+        pop.find("#idModalBid").val(paperId);
+        pop.fadeIn();
     }
 
+
+    function saveBid(){
+        var id = pop.find("#idModalBid").val();
+        var name = pop.find("input[name='bid']:checked").val();
+
+        switch(name){
+            case "yes":
+                name = BidType.ACCEPT_FOR_REVIEW;
+                break
+            case "maybe";
+                name = BidType.COULD_REVIEW
+                break
+            case "no":
+                name = BidType.REJECT_FROM_REVIEW;
+                break;
+            default:
+                showErrors(["Invalid value " + name+ " for bid!"])
+        }
+        c.setPaperBid(getUsernameFromCookie(), id, BidType[name]);
+    }
 
     function loadPaper(paperId){
         c.getOnePaper(paperId, function(paper){
 
             c.getPaperBid(getUsernameFromCookie(), paperId, function(bid){
                 var tr = $("<tr></tr>");
-
                 var td;
 
                 td = $("<td></td>");
@@ -975,10 +951,14 @@ function loadBids(){
                 td = $("<td></td>");
                 td.html(listToCommaSeparatedString(paper.authors));
                 tr.append(td);
-                tr.click(paperClick);
+
 
                 if(bid === BidType.NONE){
-
+                    forBidTable.append(tr);
+                    tr.click(paperClick);
+                }
+                else{
+                    biddedTable.appendChild(tr);
                 }
             });
         });
@@ -994,11 +974,12 @@ function loadBids(){
         }
     }
 
-
     var biddedTable = $("#biddedPapersTable")
     var forBidTable = $("#forBidPapersTable");
     tableClearLetHeader(biddedTable);
     tableClearLetHeader(forBidTable);
+
+    $("#saveBid").click(saveBid);
     c.getConferenceSessions(getConferenceIdFromCookie(), colectSessions);
 }
 
