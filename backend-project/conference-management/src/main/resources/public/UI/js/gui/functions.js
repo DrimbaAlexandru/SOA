@@ -898,6 +898,107 @@ function loadBids(){
 
 
 
+    var pop = $("#myModalEnrolled");
+
+    function paperClick(){
+        var paperId = $(this).children().get(0).innerHTML;
+        var asignedRevsTable = $("#assignedRevs");
+        var potentialRevsTable = $("#potentialRevs");
+
+
+        function fillUser(tr, username){
+            c.getOneUser(username, function(user){
+                var td;
+                td = $("<td></td>");
+                td.html(user.id);
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html(user.name);
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html(user.username);
+                tr.append(td);
+            });
+        }
+
+        function populateAsigned(users) {
+            for(var i in users){
+                var tr = $('<tr></tr>');
+                fillUser(tr.clone(), users[i].username);
+                asignedRevsTable.append(tr);
+            }
+        }
+
+        function populatePotential(users) {
+            for(var i in users){
+                var tr = $('<tr></tr>');
+                fillUser(tr.clone(), users[i].username);
+                potentialRevsTable.append(tr);
+            }
+        }
+
+        tableClearLetHeader(asignedRevsTable);
+        tableClearLetHeader(potentialRevsTable);
+
+        c.getAssignedReviewers(getConferenceIdFromCookie(),paperId,  populateAsigned);
+        c.getPotentialReviewers(getConferenceIdFromCookie(), paperId, populatePotential);
+    }
+
+
+    function loadPaper(paperId){
+        c.getOnePaper(paperId, function(paper){
+
+            c.getPaperBid(getUsernameFromCookie(), paperId, function(bid){
+                var tr = $("<tr></tr>");
+
+                var td;
+
+                td = $("<td></td>");
+                td.html(paper.id);
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html(paper.name);
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html(listToCommaSeparatedString(paper.keywords));
+                tr.append(td);
+
+
+                td = $("<td></td>");
+                td.html(listToCommaSeparatedString(paper.subjects));
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html(listToCommaSeparatedString(paper.authors));
+                tr.append(td);
+                tr.click(paperClick);
+
+                if(bid === BidType.NONE){
+
+                }
+            });
+        });
+    }
+
+    function colectSessions(sessions){
+        for(var i in sessions){
+
+            for(var j in sessions[i].schedule){
+                var paperId = sessions[i].schedule[j].paperId;
+                loadPaper(paperId);
+            }
+        }
+    }
+
+
+    var biddedTable = $("#biddedPapersTable")
+    var forBidTable = $("#forBidPapersTable");
+    tableClearLetHeader(biddedTable);
+    tableClearLetHeader(forBidTable);
     c.getConferenceSessions(getConferenceIdFromCookie(), colectSessions);
 }
 
