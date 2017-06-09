@@ -899,12 +899,98 @@ function loadAsignPaper(){
 
 function loadBids(){
 
+    var pop = $("#myModalBid");
+
+    function paperClick(){
+        var paperId = $(this).children().get(0).innerHTML;
+        pop.find("#idModalBid").val(paperId);
+        pop.fadeIn();
+    }
 
 
+    function saveBid(){
+        var id = pop.find("#idModalBid").val();
+        var name = pop.find("input[name='bid']:checked").val();
+
+        switch(name){
+            case "yes":
+                name = BidType.ACCEPT_FOR_REVIEW;
+                break
+            case "maybe";
+                name = BidType.COULD_REVIEW
+                break
+            case "no":
+                name = BidType.REJECT_FROM_REVIEW;
+                break;
+            default:
+                showErrors(["Invalid value " + name+ " for bid!"])
+        }
+        c.setPaperBid(getUsernameFromCookie(), id, BidType[name]);
+    }
+
+    function loadPaper(paperId){
+        c.getOnePaper(paperId, function(paper){
+
+            c.getPaperBid(getUsernameFromCookie(), paperId, function(bid){
+                var tr = $("<tr></tr>");
+                var td;
+
+                td = $("<td></td>");
+                td.html(paper.id);
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html(paper.name);
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html(listToCommaSeparatedString(paper.keywords));
+                tr.append(td);
+
+
+                td = $("<td></td>");
+                td.html(listToCommaSeparatedString(paper.subjects));
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html(listToCommaSeparatedString(paper.authors));
+                tr.append(td);
+
+
+                if(bid === BidType.NONE){
+                    forBidTable.append(tr);
+                    tr.click(paperClick);
+                }
+                else{
+                    biddedTable.appendChild(tr);
+                }
+            });
+        });
+    }
+
+    function colectSessions(sessions){
+        for(var i in sessions){
+
+            for(var j in sessions[i].schedule){
+                var paperId = sessions[i].schedule[j].paperId;
+                loadPaper(paperId);
+            }
+        }
+    }
+
+    var biddedTable = $("#biddedPapersTable")
+    var forBidTable = $("#forBidPapersTable");
+    tableClearLetHeader(biddedTable);
+    tableClearLetHeader(forBidTable);
+
+    $("#saveBid").click(saveBid);
+    c.getConferenceSessions(getConferenceIdFromCookie(), colectSessions);
 }
 
 function loadReviews(){
 
+
+    
 }
 
 function loadMangedConflicts(){
