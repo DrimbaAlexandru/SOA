@@ -897,6 +897,8 @@ function loadBids(){
 
 
 
+
+    c.getConferenceSessions(getConferenceIdFromCookie(), colectSessions);
 }
 
 function loadReviews(){
