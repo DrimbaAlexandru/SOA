@@ -515,9 +515,9 @@ function loadAddPaper(){
         var id = parent.children().get(0).innerHTML;
         data = "update";
         var name = parent.children().get(1).innerHTML;
-        var keywords = commaSeparatedStringToList(parent.children().get(2).innerHTML);
-        var subjects = commaSeparatedStringToList(parent.children().get(3).innerHTML);
-        var authors = commaSeparatedStringToList(parent.children().get(4).innerHTML);
+        var keywords = (parent.children().get(2).innerHTML);
+        var subjects = (parent.children().get(3).innerHTML);
+        var authors = (parent.children().get(4).innerHTML);
 
         editPop.find("#idEditModal").val(id);
         editPop.find("#nameEditModal").val(name);
@@ -804,13 +804,23 @@ function loadDeadlines(){
 function loadAsignPaper(){
     var pop = $("#myModalEnrolled");
 
+
     function paperClick(){
         var paperId = $(this).children().get(0).innerHTML;
         var asignedRevsTable = $("#assignedRevs");
         var potentialRevsTable = $("#potentialRevs");
 
-        pop.fadeId();
-        function fillUser(tr, username){
+        function addReviewer(e){
+                var username = $(this).parent().parent().children().get(2).innerHTML;
+                c.setPaperAssignement(getUsernameFromCookie(), paperId, function(){
+                    pop.fadeOut();
+                });
+            }
+
+        pop.fadeIn();
+        function fillUser(tr, username, add=false){
+
+                console.log(username)
             c.getOneUser(username, function(user){
                 var td;
                 td = $("<td></td>");
@@ -824,12 +834,21 @@ function loadAsignPaper(){
                 td = $("<td></td>");
                 td.html(user.username);
                 tr.append(td);
+
+                if(add){
+                    td = $("<td></td>");
+                    td.html("<button>Add</button>");
+                    td.children().click(addReviewer);
+                    tr.append(td);
+
+                }
             });
         }
 
         function populateAsigned(users) {
             for(var i in users){
                 var tr = $('<tr></tr>');
+                console.log(users[i].username)
                 fillUser(tr, users[i].username);
                 asignedRevsTable.append(tr);
             }
@@ -838,7 +857,9 @@ function loadAsignPaper(){
         function populatePotential(users) {
             for(var i in users){
                 var tr = $('<tr></tr>');
-                fillUser(tr, users[i].username);
+
+                console.log(users[i].username)
+                fillUser(tr, users[i].username, true);
                 potentialRevsTable.append(tr);
             }
         }
@@ -993,9 +1014,128 @@ function loadBids(){
 }
 
 function loadReviews(){
+    var revPop = $("#myModalReviewedPapers");
+    var unrevPop = $("#myModalUnReviewed");
+    var reviewedTable  = $("#revewedPapersReviewer");
+    var unrevieweTable = $("#unrevewedPapersReviewer");
+
+    function reviewedClick(){
+        var id = $(this).children().get(0).innerHTML;
+        revPop.find("#idReviewed")
+        revPop.fadeIn();
+
+        c.getPaperReview(username, id, function(review){
+            revPop.find("#paperStatusReviewedPapersModal").children().html(review.status);
+            revPop.find("#recommandation").children().html(review.justification);
+        });
 
 
-    
+    }
+
+    function unreviewedClick(e){
+        var id = $(this).children().get(0).innerHTML;
+        unrevPop.find("#idUnreviewed").val(id);
+        unrevPop.fadeIn();
+    }
+
+    function submitReview(e){
+        e.preventDefault(true);
+        var id = unrevPop.find("#idUnreviewed").val();
+        var name = unrevPop.find("input[name='grade']:checked").val();
+        switch(name){
+            case "sAccept":
+                name = ReviewType.STRONG_ACCEPT;
+                break
+            case "accept":
+                name = ReviewType.ACCEPT;
+                break
+            case "wAccept":
+                name = ReviewType.WEAK_ACCEPT;
+                break;
+           case "borderline":
+               name = ReviewType.BORDERLINE_PAPER;
+               break
+           case "wReject":
+               name = ReviewType.WEAK_REJECT;
+               break
+           case "reject":
+               name = ReviewType.REJECT;
+               break
+           case "sreject":
+              name = ReviewType.STRONG_REJECT;
+              break
+            default:
+                showErrors(["Invalid value " + name+ " for bid!"])
+                return;
+                }
+            c.setPaperReview(getUsernameFromCookie(), id, name, function(){
+                unrevPop.fadeOut();
+            });
+    }
+
+    function populate(papers){
+
+
+        for(var i in papers){
+            var paper = papers[i];
+
+            function put(paper){
+                c.getPaperReview(getUsernameFromCookie(), paper.id, function(review){
+                    var tr = $("<tr></tr>");
+
+                    var td;
+                     td = $("<td></td>");
+                     td.html(paper.id);
+                     tr.append(td);
+
+                     td = $("<td></td>");
+                      td.html(paper.name);
+                      tr.append(td);
+
+
+                    if(review.status == ReviewType.NONE){
+
+                     td = $("<td></td>");
+                      td.html(listToCommaSeparatedString(paper.keywords));
+                      tr.append(td);
+
+
+                     td = $("<td></td>");
+                      td.html(listToCommaSeparatedString(paper.subjects));
+                      tr.append(td);
+
+
+                     td = $("<td></td>");
+                      td.html(listToCommaSeparatedString(paper.authors));
+                      tr.append(td);
+                      unrevieweTable.append(tr);
+                      tr.click(unreviewedClick);
+
+                    }
+                    else{
+                      td = $("<td></td>");
+                       td.html(review.status);
+                       tr.append(td);
+
+                         td = $("<td></td>");
+                          td.html(listToCommaSeparatedString(paper.authors));
+                          tr.append(td);
+                            reviewedTable.append(tr);
+                          tr.click(reviewedClick);
+                    }
+                });
+
+            };
+
+            put(paper);
+        }
+    }
+
+    $("#saveGrade").click(submitReview);
+
+    tableClearLetHeader(reviewedTable);
+    tableClearLetHeader(unrevieweTable);
+    c.getAssignedForReview(getUsernameFromCookie(), populate);
 }
 
 function loadMangedConflicts(){

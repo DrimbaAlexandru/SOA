@@ -40,7 +40,7 @@ public class AppUser {
     @Column(name = "isCometeeMember", nullable = false)
     private Boolean isCometeeMember;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="SubmittedPapers")
     private Set<Paper> submittedPapers;
 

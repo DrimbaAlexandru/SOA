@@ -127,7 +127,10 @@ public class PaperServiceImpl implements PaperService {
         {
             Set<AppUser> users=new HashSet<>();
             Paper paper=new Paper(p.getName(),PaperStatus.SUBMITTED);
-            old.getAuthors().clear();
+            for(AppUser u : old.getAuthors())
+            {
+                u.getSubmittedPapers().remove(old);
+            }
             for(String username:p.getAuthors())
             {
                 AppUser u = userRepository.findByUsername(username);

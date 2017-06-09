@@ -372,6 +372,19 @@ public class UserController {
         return new ResponseEntity<ResponseJSON<Iterable<submittedPaperDTO>>>(resp,HttpStatus.OK);
     }
 
+    @RequestMapping(path="/{username}/assignedPapers/{paperId}", method = RequestMethod.PUT)
+    public ResponseEntity<ResponseJSON<Void>> handle_put_assigned(
+            @PathVariable("username") String username,
+            @PathVariable("paperId") int paperId,
+            @CookieValue(value = "username", defaultValue = "") String usernameCookie,
+            @CookieValue(value = "password", defaultValue = "") String passwordCookie)
+    {
+        ResponseJSON<Void> resp=new ResponseJSON<>();
+        resp.getErrors().addAll(handle_loggedIn(usernameCookie,passwordCookie).getBody().getErrors());
+        service.assignPaper(username,paperId).error(e->{resp.addError(e.getMessage());});
+        return new ResponseEntity<>(resp,HttpStatus.OK);
+    }
+
     @RequestMapping(path="/{username}/reviews/{paperId}", method = RequestMethod.GET)
     public ResponseEntity<ResponseJSON<reviewDTO>> handle_get_review(
             @PathVariable("username") String username,

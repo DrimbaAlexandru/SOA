@@ -511,7 +511,12 @@ function Controller(onError= undefined, onWarning = undefined) {
                 contentType: applicationJSON,
                 success: function (result) {
                     validateAndRun(result, function (response) {
-                        var status = ReviewType[response.status];
+                        var status = response.status;
+
+                        if(isUndefined(status) || status == null){
+                            status = "NONE";
+                        }
+
                         var justification = response.justification;
                         if (onResultArrived) onResultArrived(new Review(status, justification))
                     });
@@ -791,7 +796,7 @@ function Controller(onError= undefined, onWarning = undefined) {
                     validateAndRun(result, function (response) {
                         var users = [];
                         for(var i in response){
-                            var username = response.username;
+                            var username = response[i].username;
                             users.push(new User(0, username, "", "", "", ""));
                         }
                         if (onResultArrived) onResultArrived(users)
@@ -813,7 +818,7 @@ function Controller(onError= undefined, onWarning = undefined) {
                     validateAndRun(result, function (response) {
                         var users = [];
                         for(var i in response){
-                            var username = response.username;
+                            var username = response[i].username;
                             users.push(new User(0, username, "", "", "", ""));
                         }
                         if (onResultArrived) onResultArrived(users)
@@ -882,7 +887,7 @@ function Controller(onError= undefined, onWarning = undefined) {
     this.getOthersReviews = function (paperId, onResultArrived) {
         $.ajax(
             {
-                url: HOST + COMMANDS["papers_getAssignedReviewers"].format(paperId),
+                url: HOST + COMMANDS["reviews_getOthersReviews"].format(paperId),
                 //data: JSON.stringify({}),
                 type: "GET",
                 contentType: applicationJSON,

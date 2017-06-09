@@ -83,6 +83,7 @@
             <br>
             <span>#details</span>
         </div>
+        <input type="hidden" value="" id="idReviewed"/>
         <div id="paperStatusReviewedPapersModal">
             Status:<span>#status</span>
         </div>
@@ -126,10 +127,12 @@
     <div>
     	<p>Grade the paper:</p>
     	<form id="gradeFormUnReviewedModal" action="">
+            <input type="hidden" value="" id="idUnreviewed"/>
+
   			<input type="radio" name="grade" value="sAccept"> Strong Accept<br>
   			<input type="radio" name="grade" value="accept"> Accept<br>
   			<input type="radio" name="grade" value="wAccept"> Weak Accept<br>
-  			<input type="radio" name="grade" value="borderline"> Borderline<br>
+  			<input type="radio" name="grade" value="borderline" checked="checked"> Borderline<br>
   			<input type="radio" name="grade" value="wReject"> Weak Reject<br>
   			<input type="radio" name="grade" value="reject"> Reject<br>
   			<input type="radio" name="grade" value="sreject"> Strong Reject<br>
