@@ -32,7 +32,7 @@ PAGES = {
     "sessions":"sessions.html",//DONE
 
     "grantReviewer":"grantReviewer.html",//DONE
-    "grantChair":"grantReviewer.html",//DONE
+    "grantChair":"grantChair.html",//DONE
 
     "createConference":"createConf.html",//DONE
     "grantSteering":"grantSteering.html",//DONE

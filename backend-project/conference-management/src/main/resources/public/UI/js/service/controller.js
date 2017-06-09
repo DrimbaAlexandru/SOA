@@ -444,7 +444,10 @@ function Controller(onError= undefined, onWarning = undefined) {
                 success: function (result) {
                     validateAndRun(result, function (response) {
                         var status = response.status;
-                        if (onResultArrived) onResultArrived(BidType[status])
+                        if(isUndefined(status) || status == null){
+                            status = "NONE";
+                        }
+                        if (onResultArrived) onResultArrived(status)
                     });
                 },
                 error: errorFunction
@@ -453,11 +456,12 @@ function Controller(onError= undefined, onWarning = undefined) {
     }
 
     this.setPaperBid = function (username, paperId, status, onResultArrived) {
+        console.log(status);
         $.ajax(
             {
                 url: (HOST + COMMANDS["users_setPaperBid"]).format(username, paperId),
                 data: JSON.stringify({
-                    status: status
+                    "status": status
                 }),
                 type: "PUT",
                 contentType: applicationJSON,
@@ -537,7 +541,7 @@ function Controller(onError= undefined, onWarning = undefined) {
         )
     }
 
-    this.setPrivilegdes = function (user, conferenceId, priviledge, onResultArrived) {
+    this.setPrivilegdes = function (username, conferenceId, priviledge, onResultArrived) {
         var p = {};
         if(!isUndefined(priviledge.isPCMember) ) p.isPCMember = priviledge.isPCMember;
         if(!isUndefined(priviledge.isChair)) p.isChair = priviledge.isChair;
@@ -545,7 +549,7 @@ function Controller(onError= undefined, onWarning = undefined) {
 
         $.ajax(
             {
-                url: HOST + COMMANDS["users_setPrivilegdes"].format(user.username, conferenceId),
+                url: HOST + COMMANDS["users_setPrivilegdes"].format(username, conferenceId),
                 data: JSON.stringify(p),
                 type: "PUT",
                 contentType: applicationJSON,

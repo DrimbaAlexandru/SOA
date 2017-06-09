@@ -240,7 +240,7 @@ function loadGrantChair(){
 
         function grantCoChair(e){
             var tds = $(this).parent().parent().children();
-            var username = tds.get(0);
+            var username = tds.get(0).innerHTML;
             c.getPriviledges(username, getConferenceIdFromCookie(), function(priviledge){
                 priviledge.isCoChair= true;
                 c.setPrivilegdes(username, getConferenceIdFromCookie(), priviledge, function(){
@@ -251,7 +251,8 @@ function loadGrantChair(){
 
         function grantChair(e){
             var tds = $(this).parent().parent().children();
-            var username = tds.get(0);
+            var username = tds.get(0).innerHTML;
+            console.log(username);
             c.getPriviledges(username, getConferenceIdFromCookie(), function(priviledge){
                 priviledge.isChair = true;
                 c.setPrivilegdes(username, getConferenceIdFromCookie(), priviledge, function(){
@@ -301,11 +302,11 @@ function loadGrantChair(){
                     }
 
                     if(priviledge.isCoChair){
-                        el1.html("<p>Already granted</p>")
+                        el2.html("<p>Already granted</p>")
                     }
                     else{
-                        el1.html("<button>Grant</button>");
-                        el1.children("button").click(grantCoChair);
+                        el2.html("<button>Grant</button>");
+                        el2.children("button").click(grantCoChair);
                     }
 
                 });
@@ -314,14 +315,14 @@ function loadGrantChair(){
             var td1 = $("<td></td>");
 
             tr.append(td1);
-            putGrant(users.username, td, td1);
+            putGrant(users[i].username, td, td1);
 
             table.append(tr);
 
         }
     }
 
-    var table = $("#reviewerUsersTable");
+    var table = $("#chairUsersTable ");
     tableClearLetHeader(table);
 
     c.getAllUsers(populate);
@@ -334,8 +335,8 @@ function fillModalGrantSteering(){
             var username = tds.get(0).innerHTML;
             var name = tds.get(1).innerHTML;
             var affiliation = tds.get(2).innerHTML;
-            var website = tds.get(3);
-            var email = tds.get(4);
+            var website = tds.get(3).innerHTML;
+            var email = tds.get(4).innerHTML;
             var isCometeeMember = true;
             c.updateUser(new User(0, username, name, email, affiliation, website, "", undefined, isCometeeMember));
         }
@@ -717,7 +718,7 @@ function loadViewResult(){
 
         }
     }
-    var table = $("#sentPapersTable");
+    var table = $("#acceptedPapers");
     tableClearLetHeader(table);
     c.getAcceptedSubmittedPapers(getUsernameFromCookie(), populate);
 }
@@ -899,12 +900,102 @@ function loadAsignPaper(){
 
 function loadBids(){
 
+    var pop = $("#myModalBid");
+
+    function paperClick(){
+        var paperId = $(this).children().get(0).innerHTML;
+        pop.find("#idModalBid").val(paperId);
+        pop.fadeIn();
+    }
 
 
+    function saveBid(){
+        var id = pop.find("#idModalBid").val();
+        var name = pop.find("input[name='bid']:checked").val();
+
+        switch(name){
+            case "yes":
+                name = BidType.ACCEPT_FOR_REVIEW;
+                break
+            case "maybe":
+                name = BidType.COULD_REVIEW
+                break
+            case "no":
+                name = BidType.REJECT_FROM_REVIEW;
+                break;
+            default:
+                showErrors(["Invalid value " + name+ " for bid!"])
+        }
+        c.setPaperBid(getUsernameFromCookie(), id, name, function(){
+            pop.fadeOut();
+        });
+    }
+
+    function loadPaper(paperId){
+        c.getOnePaper(paperId, function(paper){
+
+            c.getPaperBid(getUsernameFromCookie(), paperId, function(bid){
+                console.log(bid);
+                var tr = $("<tr></tr>");
+                var td;
+
+                td = $("<td></td>");
+                td.html(paper.id);
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html(paper.name);
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html(listToCommaSeparatedString(paper.keywords));
+                tr.append(td);
+
+
+                td = $("<td></td>");
+                td.html(listToCommaSeparatedString(paper.subjects));
+                tr.append(td);
+
+                td = $("<td></td>");
+                td.html(listToCommaSeparatedString(paper.authors));
+                tr.append(td);
+
+
+                if(bid === BidType.NONE){
+                    forBidTable.append(tr);
+                    tr.click(paperClick);
+                }
+                else{
+                    biddedTable.append(tr);
+                }
+            });
+        });
+    }
+
+    function colectSessions(sessions){
+        for(var i in sessions){
+
+            for(var j in sessions[i].schedule){
+                var paperId = sessions[i].schedule[j].paperId;
+                console.log(paperId);
+                loadPaper(paperId);
+            }
+        }
+    }
+
+    var biddedTable = $("#biddedPapersTable")
+    var forBidTable = $("#forBidPapersTable");
+    tableClearLetHeader(biddedTable);
+    tableClearLetHeader(forBidTable);
+
+    $("#saveBid").click(saveBid);
+    c.getConferenceSessions(getConferenceIdFromCookie(), colectSessions);
 }
 
 function loadReviews(){
 
+
+    
 }
 
 function loadMangedConflicts(){
@@ -1055,7 +1146,7 @@ function loadSessions(){
         var answer = pop.find('input[name="answer"]:checked').val();
         var id = pop.find("#idModalSection").val();
         if(answer == 'yes'){
-            c.participateSession(sessionId, getUsernameFromCookie(), function(){
+            c.participateSession(id, getUsernameFromCookie(), function(){
                 pop.fadeOut();
             });
             return;
@@ -1084,10 +1175,11 @@ function loadSessions(){
             td = $("<td></td>");
             var table1 = $("<table></table>");
             for(var j in session.schedule){
-                var tr1 = $("<tr></tr>");
 
-                function complete(tr1, paperId, schedule){
+
+                function complete(paperId, schedule){
                     c.getOnePaper(paperId, function(paper){
+                    var tr1 = $("<tr></tr>");
                         var td1;
 
                         td1 = $("<td></td>");
@@ -1110,7 +1202,7 @@ function loadSessions(){
 
 
                         td1 = $("<td></td>");
-                        td1.html(listToCommaSeparatedString(pape.authors));
+                        td1.html(listToCommaSeparatedString(paper.authors));
                         tr1.append(td1);
 
                         td1 = $("<td></td>");
@@ -1125,12 +1217,12 @@ function loadSessions(){
                         td1 = $("<td></td>");
                         td1.html(schedule.username);
                         tr1.append(td1);
-
+                        table1.append(tr1);
                     });
                 }
-                complete(tr, session[i].schedule[j].paperId, session[i].schedule[j]);
+                complete(session.schedule[j].paperId, session.schedule[j]);
 
-                table1.append(tr1);
+
 
             }
             td.append(table1);
