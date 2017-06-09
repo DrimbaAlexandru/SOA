@@ -220,7 +220,7 @@ function loadGrantReviewer(){
                     }
                 });
             }
-            putGrant(users.username, td.clone());
+            putGrant(users.username, td);
 
             tr.append(td);
             table.append(tr);
@@ -314,7 +314,7 @@ function loadGrantChair(){
             var td1 = $("<td></td>");
 
             tr.append(td1);
-            putGrant(users.username, td.clone(), td1.clone());
+            putGrant(users.username, td, td1);
 
             table.append(tr);
 
@@ -482,15 +482,19 @@ function loadAddPaper(){
         e.preventDefault(true);
         var id = editPop.find("#idEditModal").val();
         var name = editPop.find("#nameEditModal").val();
-        var keywords = editPop.find("#keywordsEditModal").val();
-        var subjects = editPop.find("#topicsEditModal").val();
-        var authors = editPop.find("#authorsEditModal").val();
+        var keywords = commaSeparatedStringToList(editPop.find("#keywordsEditModal").val());
+        var subjects = commaSeparatedStringToList(editPop.find("#topicsEditModal").val());
+        var authors = commaSeparatedStringToList(editPop.find("#authorsEditModal").val());
+        var username = getUsernameFromCookie();
+        if(authors.indexOf(username) == -1){
+            authors.push(username);
+        }
 
         if(isEmpty(id)
             || isEmpty(name)
-            || isEmpty(keywords)
-            || isEmpty(subjects)
-            || isEmpty(authors)){
+            || keywords.length == 0
+            || subjects.length == 0
+            || authors.length == 0){
             showErrors(["You must insert values on all fields!"]);
             return;
         }
@@ -590,7 +594,7 @@ function loadAddPaper(){
         }
     }
 
-    c.getAllPapers(populate);
+    c.getSubmittedPapers(getUsernameFromCookie(),populate);
 
 
     $("#submitEditPaper").click(submitEditPaperClick);
@@ -679,8 +683,7 @@ function loadViewResult(){
     }
 
     function populate(papers){
-        var table = $("#sentPapersTable");
-        tableClearLetHeader(table);
+
         for(var i in papers){
             var tr = $("<tr></tr>");
             var td;
@@ -714,7 +717,8 @@ function loadViewResult(){
 
         }
     }
-
+    var table = $("#sentPapersTable");
+    tableClearLetHeader(table);
     c.getAcceptedSubmittedPapers(getUsernameFromCookie(), populate);
 }
 
@@ -743,8 +747,8 @@ function loadDeadlines(){
         else{
             data[name+"TimeSpan"].endDate = date;
         }
-
-        c.saveConference(data, function(){
+        console.log(data)
+        c.updateConference(data, function(){
             pop.fadeOut();
             location.reload();
         });
@@ -804,7 +808,7 @@ function loadAsignPaper(){
         var asignedRevsTable = $("#assignedRevs");
         var potentialRevsTable = $("#potentialRevs");
 
-
+        pop.fadeId();
         function fillUser(tr, username){
             c.getOneUser(username, function(user){
                 var td;
@@ -825,7 +829,7 @@ function loadAsignPaper(){
         function populateAsigned(users) {
             for(var i in users){
                 var tr = $('<tr></tr>');
-                fillUser(tr.clone(), users[i].username);
+                fillUser(tr, users[i].username);
                 asignedRevsTable.append(tr);
             }
         }
@@ -833,7 +837,7 @@ function loadAsignPaper(){
         function populatePotential(users) {
             for(var i in users){
                 var tr = $('<tr></tr>');
-                fillUser(tr.clone(), users[i].username);
+                fillUser(tr, users[i].username);
                 potentialRevsTable.append(tr);
             }
         }
@@ -880,8 +884,8 @@ function loadAsignPaper(){
             for(var j in sessions[i].schedule){
                 var paperId = sessions[i].schedule[j].paperId;
                 var tr = $("<tr></tr>");
-                table.appendChild(tr);
-                loadPaper(tr.clone(), paperId);
+                table.append(tr);
+                loadPaper(tr, paperId);
             }
         }
     }
@@ -1021,7 +1025,7 @@ function loadSessionChairs(){
 
                     });
                 }
-                complete(tr.clone(), session.schedule[j].paperId, jQuery.extend(true, {}, session.schedule[j]));
+                complete(tr, session.schedule[j].paperId, session.schedule[j]);
 
                 table1.append(tr1);
 
@@ -1124,7 +1128,7 @@ function loadSessions(){
 
                     });
                 }
-                complete(tr.clone(), session.schedule[j].paperId, jQuery.extend(true, {}, session.schedule[j]));
+                complete(tr, session[i].schedule[j].paperId, session[i].schedule[j]);
 
                 table1.append(tr1);
 

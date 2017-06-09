@@ -7,14 +7,14 @@ import com.company.domain.Privileges;
  */
 public class ConferencePrivilegesDTO
 {
-    private boolean isAuthor=false;
+    private boolean isAuthor=true;
     private boolean isChair=false;
     private boolean isCoChair=false;
     private boolean isPCMember=false;
     public ConferencePrivilegesDTO(){}
     public ConferencePrivilegesDTO(Privileges p)
     {
-        isAuthor=p.getIsAuthor();
+        isAuthor=true;
         isChair=p.getIsChair();
         isCoChair=p.getIsCoChair();
         isPCMember=p.getIsPCMember();

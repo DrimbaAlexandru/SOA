@@ -1,10 +1,7 @@
 package com.company.controller.DTOs;
 
-import com.company.domain.Paper;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by Alex on 08.06.2017.
@@ -16,7 +13,7 @@ public class firstPaperSubmissionDTO
     private List<String> subjects=new ArrayList<>();
     private List<String> keywords=new ArrayList<>();
     private List<String> authors;
-    private Integer conferenceID;
+    private Integer conferenceId;
 
     public firstPaperSubmissionDTO(){}
 
@@ -60,11 +57,11 @@ public class firstPaperSubmissionDTO
         this.subjects = subjects;
     }
 
-    public void setConferenceID(Integer conferenceID) {
-        this.conferenceID = conferenceID;
+    public void setConferenceId(Integer conferenceId) {
+        this.conferenceId = conferenceId;
     }
 
-    public Integer getConferenceID() {
-        return conferenceID;
+    public Integer getConferenceId() {
+        return conferenceId;
     }
 }

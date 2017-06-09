@@ -52,11 +52,10 @@ public class Paper {
 
     public Paper(){}
 
-    public Paper(String _nume, PaperStatus _status, Set<AppUser> _authors)
+    public Paper(String _nume, PaperStatus _status)
     {
         nume=_nume;
         status=_status;
-        authors=_authors;
     }
 
     public void setId(Integer id) {

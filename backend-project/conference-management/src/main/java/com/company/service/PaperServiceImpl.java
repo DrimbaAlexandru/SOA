@@ -62,22 +62,29 @@ public class PaperServiceImpl implements PaperService {
         return Exceptional.OK(paperRepository.save(p));
     }
 
+    @Transactional
     public Exceptional<Paper> addPaper(firstPaperSubmissionDTO p)
     {
         Set<AppUser> users=new HashSet<>();
-        Conference conference=conferenceRepository.findOne(p.getConferenceID());
+        Conference conference=conferenceRepository.findOne(p.getConferenceId());
         if(conference==null)
             return Exceptional.Error(new Exception("I'm not in the mood to execute this task. Please use the keyword 'PLEASE' or put in a valid conference ID"));
+
+        Paper paper=new Paper(p.getName(),PaperStatus.SUBMITTED);
+        paper = paperRepository.save(paper);
 
         for(String username:p.getAuthors())
         {
             AppUser u = userRepository.findByUsername(username);
             if(u!=null)
+            {
                 users.add(u);
+                u.getSubmittedPapers().add(paper);
+            }
         }
         if(users.size()==0)
             return Exceptional.Error(new Exception("No correct usernames given as authors"));
-        Paper paper=new Paper(p.getName(),PaperStatus.SUBMITTED,users);
+
 
         Set<Session> sessions=conference.getSessions();
         Session session;
@@ -89,11 +96,12 @@ public class PaperServiceImpl implements PaperService {
         else
             session = (Session)sessions.toArray()[0];
 
+        System.out.println(session.getName());
+
         paper = paperRepository.save(paper);
         sessionSchedule = new SessionSchedule(paper,session,new Date(),(AppUser) users.toArray()[0]);
         sessionScheduleRepository.save(sessionSchedule);
         return Exceptional.OK(paper);
-
     }
 
     public Exceptional<Paper> updatePaper(int oldId, Paper p)
@@ -118,13 +126,16 @@ public class PaperServiceImpl implements PaperService {
         else
         {
             Set<AppUser> users=new HashSet<>();
+            Paper paper=new Paper(p.getName(),PaperStatus.SUBMITTED);
             for(String username:p.getAuthors())
             {
                 AppUser u = userRepository.findByUsername(username);
                 if(u!=null)
+                {
                     users.add(u);
+                    paper.getAuthors().add(u);
+                }
             }
-            Paper paper=new Paper(p.getName(),null,users);
             paper.setId(null);
             updater.<Paper>update(old,paper,papersGettersAndSetters.getGettersAndSetters());
             this.paperRepository.save(old);

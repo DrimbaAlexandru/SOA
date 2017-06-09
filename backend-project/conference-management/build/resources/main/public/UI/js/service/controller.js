@@ -654,7 +654,7 @@ function Controller(onError= undefined, onWarning = undefined) {
     this.updatePapers = function (conferenceId, paper,  onResultArrived) {
         $.ajax(
             {
-                url: HOST + COMMANDS["papers_update"].format(paper.paperId),
+                url: HOST + COMMANDS["papers_update"].format(paper.id),
                 data: JSON.stringify({
                     name: paper.name,
                     subjects: paper.subjects,
