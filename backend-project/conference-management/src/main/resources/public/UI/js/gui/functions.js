@@ -985,6 +985,8 @@ function loadBids(){
 
 function loadReviews(){
 
+
+    
 }
 
 function loadMangedConflicts(){
