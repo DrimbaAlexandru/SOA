@@ -1,12 +1,7 @@
 package com.company.domain;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
-
-/**
- * Created by Alex on 21.05.2017.
- */
 
 @Table(name = "AppUser")
 @Entity
@@ -19,68 +14,17 @@ public class AppUser {
     @Column(name = "username",unique = true, nullable = false, length = 64)
     private String username;
 
-    @Column(name = "name",nullable = false, length = 64)
-    private String name;
-
-    @Column(name = "affiliation",length = 64)
-    private String affiliation;
-
     @Column(name = "email",unique = true, nullable = false, length = 64)
     private String email;
-
-    @Column(name = "webpage")
-    private String webpage;
 
     @Column(name = "password", nullable = false,length = 64)
     private String password;
 
-    @Column(name = "isSuperUser", nullable = false)
-    private Boolean isSuperUser;
+    @Column(name = "password", nullable = false,length = 64)
+    private String discogsToken;
 
-    @Column(name = "isCometeeMember", nullable = false)
-    private Boolean isCometeeMember;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="SubmittedPapers")
-    private Set<Paper> submittedPapers;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="AssignedForReview")
-    private Set<Paper> assignedForReview;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Privileges> privileges ;
-
-    @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL)
-    private Set<Review> reviews;
-
-    @OneToMany(mappedBy = "bidder", cascade = CascadeType.ALL)
-    private Set<Bid> bids;
-
-    @OneToOne(mappedBy = "sessionChair")
-    private Session sesionIsChairFor;
-
-    @ManyToMany(mappedBy = "listeners", cascade = CascadeType.ALL)
-    private Set<Session> listenedSessions;
-
-    @OneToMany(mappedBy = "speaker", cascade = CascadeType.ALL)
-    private Set<SessionSchedule> presentationsIsSpeakerFor ;
-
-    public Session getSesionIsChairFor() {
-        return sesionIsChairFor;
-    }
-
-    public void setSesionIsChairFor(Session sesionIsChairFor) {
-        this.sesionIsChairFor = sesionIsChairFor;
-    }
-
-    public Set<Session> getListenedSessions() {
-        return listenedSessions;
-    }
-
-    public void setListenedSessions(Set<Session> listenedSessions) {
-        this.listenedSessions = listenedSessions;
-    }
+    @OneToMany(mappedBy = "ownerID", cascade = CascadeType.ALL)
+    private Set<SubjectOfInterest> subjectOfInterest;
 
     public String getUsername() {
         return username;
@@ -88,22 +32,6 @@ public class AppUser {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAffiliation() {
-        return affiliation;
-    }
-
-    public void setAffiliation(String affiliation) {
-        this.affiliation = affiliation;
     }
 
     public String getEmail() {
@@ -114,44 +42,12 @@ public class AppUser {
         this.email = email;
     }
 
-    public String getWebpage() {
-        return webpage;
-    }
-
-    public void setWebpage(String webpage) {
-        this.webpage = webpage;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Boolean getIsSuperUser() {
-        return isSuperUser;
-    }
-
-    public void setIsSuperUser(Boolean superUser) {
-        isSuperUser = superUser;
-    }
-
-    public Boolean getIsCometeeMember() {
-        return isCometeeMember;
-    }
-
-    public void setIsCometeeMember(Boolean cometeeMember) {
-        isCometeeMember = cometeeMember;
-    }
-
-    public Set<Privileges> getPrivileges() {
-        return privileges;
-    }
-
-    public void setPrivileges(Set<Privileges> privileges) {
-        this.privileges = privileges;
     }
 
     public void setId(Integer id) {
@@ -162,68 +58,29 @@ public class AppUser {
         return id;
     }
 
-    public void setSubmittedPapers(Set<Paper> submittedPapers) {
-        this.submittedPapers = submittedPapers;
+    public String getDiscogsToken() {
+        return discogsToken;
     }
 
-    public Set<Paper> getSubmittedPapers() {
-        return submittedPapers;
+    public Set<SubjectOfInterest> getSubjectOfInterest() {
+        return subjectOfInterest;
+    }
+
+    public void setDiscogsToken(String discogsToken) {
+        this.discogsToken = discogsToken;
+    }
+
+    public void setSubjectOfInterest(Set<SubjectOfInterest> subjectOfInterest) {
+        this.subjectOfInterest = subjectOfInterest;
     }
 
     public AppUser(){}
 
-    public AppUser(String username, String name, String affiliation, String email, String webpage, String password) {
+    public AppUser(String username, String email, String password, String discogsToken) {
         this.username = username;
-        this.name = name;
-        this.affiliation = affiliation;
         this.email = email;
-        this.webpage = webpage;
         this.password = password;
-        isCometeeMember=false;
-        isSuperUser=false;
+        this.discogsToken = discogsToken;
     }
 
-    public AppUser(String username, String name, String affiliation, String email,
-                   String webpage, String password, Boolean isSuperUser, Boolean isCometeeMember) {
-        this.username = username;
-        this.name = name;
-        this.affiliation = affiliation;
-        this.email = email;
-        this.webpage = webpage;
-        this.password = password;
-        this.isSuperUser = isSuperUser;
-        this.isCometeeMember = isCometeeMember;
-    }
-
-    public Set<Bid> getBids() {
-        return bids;
-    }
-
-    public Set<Paper> getAssignedForReview() {
-        return assignedForReview;
-    }
-
-    public Set<Review> getReviews() {
-        return reviews;
-    }
-
-    public Set<SessionSchedule> getPresentationsIsSpeakerFor() {
-        return presentationsIsSpeakerFor;
-    }
-
-    public void setAssignedForReview(Set<Paper> assignedForReview) {
-        this.assignedForReview = assignedForReview;
-    }
-
-    public void setBids(Set<Bid> bids) {
-        this.bids = bids;
-    }
-
-    public void setPresentationsIsSpeakerFor(Set<SessionSchedule> presentationsIsSpeakerFor) {
-        this.presentationsIsSpeakerFor = presentationsIsSpeakerFor;
-    }
-
-    public void setReviews(Set<Review> reviews) {
-        this.reviews = reviews;
-    }
 }

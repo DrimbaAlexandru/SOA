@@ -6,9 +6,6 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by AlexandruD on 03-Jun-17.
- */
 public class Updater {
 
     /**

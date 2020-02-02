@@ -1,61 +1,23 @@
 package com.company.controller.DTOs;
 
-/**
- * Created by Alex on 07.06.2017.
- */
 public class updateUserRequest
 {
     private String username;
-    private String name;
-    private String affiliation;
+
     private String email;
-    private String website;
+
     private String password;
-    private Boolean isCometeeMember =null;
+
+    private String discogsToken;
+
     public updateUserRequest(){}
 
-    public void setIsCometeeMember(boolean commiteeMember) {
-        isCometeeMember = commiteeMember;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setAffiliation(String affiliation) {
-        this.affiliation = affiliation;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public String getName() {
-        return name;
+    public String getDiscogsToken() {
+        return discogsToken;
     }
 
     public String getEmail() {
         return email;
-    }
-
-    public String getAffiliation() {
-        return affiliation;
     }
 
     public String getPassword() {
@@ -66,7 +28,19 @@ public class updateUserRequest
         return username;
     }
 
-    public Boolean getIsCometeeMember() {
-        return isCometeeMember;
+    public void setDiscogsToken(String discogsToken) {
+        this.discogsToken = discogsToken;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

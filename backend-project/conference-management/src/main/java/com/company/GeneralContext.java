@@ -1,7 +1,7 @@
 package com.company;
 
-import com.company.utils.RemoteFileManager;
-import com.company.utils.dropbox.DropboxManagerRemote;
+import com.company.service.RemoteServices.DiscogsResultsStalker;
+import com.company.service.RemoteServices.RemoteResultsStalker;
 
 import com.company.utils.updater.*;
 
@@ -11,44 +11,32 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-/**
- * Created by AlexandruD on 15-May-17.
- */
 @Configuration
-public class GeneralContext {
+public class GeneralContext
+{
 
     @Bean
-    public PasswordEncoder getPasswordEncoder() {
+    public PasswordEncoder getPasswordEncoder()
+    {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public UsersGettersAndSetters getUsersGettersAndSetters() {
+    public UsersGettersAndSetters getUsersGettersAndSetters()
+    {
         return new UsersGettersAndSetters();
     }
 
     @Bean
-    public PrivilegesGettersAndSetters getPrivilegesGettersAndSetters() {
-        return new PrivilegesGettersAndSetters();
+    public InterestsGettersAndSetters getInterestsGettersAndSetters()
+    {
+        return new InterestsGettersAndSetters();
     }
 
     @Bean
-    public PapersGettersAndSetters getPapersGettersAndSetters() {
-        return new PapersGettersAndSetters();
-    }
-
-    @Bean
-    public SessionGettersAndSetters getSessionGettersAndSetters() {
-        return new SessionGettersAndSetters();
-    }
-
-    @Bean
-    public ConferencesGettersAndSetters getConferencesGettersAndSetters(){return new ConferencesGettersAndSetters();}
-
-    @Bean
-    public RemoteFileManager getFileUploader(Environment env) {
-        return new DropboxManagerRemote(env.getProperty("dropbox.app.key"),
-                env.getProperty("dropbox.app.secret"),
-                env.getProperty("dropbox.access.token"));
+    public RemoteResultsStalker getResultsService( Environment env )
+    {
+        return new DiscogsResultsStalker( env.getProperty( "discogs.accept_header" ),
+                                          env.getProperty( "discogs.accept_header" ) );
     }
 }
