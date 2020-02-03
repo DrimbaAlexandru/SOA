@@ -1,15 +1,17 @@
 package com.company.controller.DTOs;
 
-public class addSubjectOfInterestDTO
+import com.company.domain.SubjectOfInterest;
+
+public class subjectOfInterestResponse
 {
     private String searchString;
     private Integer resultsCount;
     private Boolean newlyReported;
     private String searchLink;
 
-    public addSubjectOfInterestDTO(){}
+    public subjectOfInterestResponse(){}
 
-    public addSubjectOfInterestDTO(String searchString, Integer resultsCount, Boolean newlyReported, String searchLink)
+    public subjectOfInterestResponse( String searchString, Integer resultsCount, Boolean newlyReported, String searchLink )
     {
         this.newlyReported = newlyReported;
         this.resultsCount = resultsCount;

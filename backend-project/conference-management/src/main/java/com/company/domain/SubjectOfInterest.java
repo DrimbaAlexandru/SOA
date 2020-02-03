@@ -21,6 +21,12 @@ public class SubjectOfInterest {
     @Column(name = "displayCountdown", nullable = false)
     private Integer displayCountdown;
 
+    @Column(name = "resultsCount", nullable = false)
+    private Integer resultsCount;
+
+    @Column(name = "resultsPageLink", nullable = false, length = 255)
+    private String resultsPageLink;
+
     public SubjectOfInterest(){}
 
     public AppUser getOwner() {
@@ -39,7 +45,17 @@ public class SubjectOfInterest {
         return searchString;
     }
 
-    public void setDisplayCountdown(Integer displayCountdown) {
+    public Integer getResultsCount()
+    {
+        return resultsCount;
+    }
+
+    public String getResultsPageLink()
+    {
+        return resultsPageLink;
+    }
+
+    public void setDisplayCountdown( Integer displayCountdown ) {
         this.displayCountdown = displayCountdown;
     }
 
@@ -53,5 +69,15 @@ public class SubjectOfInterest {
 
     public void setSearchString(String searchString) {
         this.searchString = searchString;
+    }
+
+    public void setResultsCount( Integer resultsCount )
+    {
+        this.resultsCount = resultsCount;
+    }
+
+    public void setResultsPageLink( String resultsPageLink )
+    {
+        this.resultsPageLink = resultsPageLink;
     }
 }

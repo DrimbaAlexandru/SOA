@@ -41,14 +41,23 @@ public class UserController
     public ResponseEntity< ResponseJSON< String > > login( @RequestBody loginRequest body, HttpServletResponse response )
     {
         ResponseJSON< String > resp = new ResponseJSON<>();
-        resp.setResp( "GAY PORN" );
+        resp.setResp( "Log in response" );
         Exceptional< AppUser > ex = service.getUser( body.getUsername() );
-        ex.error( e -> resp.addError( e.getMessage() ) ).ok( e -> {
+        HttpStatus status = HttpStatus.OK;
+
+        if( ex.isException() )
+        {
+            resp.addError( ex.getException().getMessage() );
+            status = HttpStatus.FORBIDDEN;
+        }
+        else
+        {
             if( !service.login( body.getUsername(), body.getPassword() ) )
             {
                 resp.addError( "Incorrect password" );
+                status = HttpStatus.FORBIDDEN;
             }
-        } );
+        }
 
         if( resp.getErrors().size() == 0 )
         {
@@ -60,14 +69,14 @@ public class UserController
             setCookie( "username", "ccc", 0, response );
             setCookie( "password", "ccc", 0, response );
         }
-        return new ResponseEntity<>( resp, HttpStatus.OK );
+        return new ResponseEntity<>( resp, status );
     }
 
     @RequestMapping( path = "/logout", method = RequestMethod.POST )
     public ResponseEntity< ResponseJSON< String > > logout( HttpServletResponse response )
     {
         ResponseJSON< String > resp = new ResponseJSON<>();
-        resp.setResp( "GAY PORN" );
+        resp.setResp( "Logged out" );
 
         setCookie( "username", "", 0, response );
         setCookie( "password", "", 0, response );
@@ -75,377 +84,170 @@ public class UserController
     }
 
     @RequestMapping( path = "/loggedIn", method = RequestMethod.GET )
-    public ResponseEntity< ResponseJSON< loggedInResponse > > handle_loggedIn( @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie )
+    public ResponseEntity< ResponseJSON< UserIdRequest > > handle_loggedIn( @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie )
     {
-        ResponseJSON< loggedInResponse > resp = new ResponseJSON<>();
-        loggedInResponse lir = new loggedInResponse();
+        ResponseJSON< UserIdRequest > resp = new ResponseJSON<>();
+        UserIdRequest lir = new UserIdRequest();
+        HttpStatus status = HttpStatus.OK;
+
         if( service.login( usernameCookie, passwordCookie ) )
         {
             Exceptional< AppUser > au = service.getUser( usernameCookie );
-            au.error( e -> resp.addError( e.getMessage() ) ).ok( e -> {
-                lir.setIsCometeeMember( e.getIsCometeeMember() );
-                lir.setIsSuperUser( e.getIsSuperUser() );
-            } );
+            if( au.isException() )
+            {
+                resp.addError( au.getException().getMessage() );
+                status = HttpStatus.FORBIDDEN;
+            }
+            else
+            {
+                lir.setUsername( au.getData().getUsername() );
+            }
         }
         else
         {
             resp.addError( "User is not logged in or username and password are incorrect" );
+            status = HttpStatus.FORBIDDEN;
         }
         resp.setResp( lir );
-        return new ResponseEntity<>( resp, HttpStatus.OK );
+        return new ResponseEntity<>( resp, status );
     }
 
-    @RequestMapping( path = "/{username}/privileges", method = RequestMethod.GET )
-    public ResponseEntity< ResponseJSON< ConferencePrivilegesDTO > > handle_getConferencePrivileges( @PathVariable( "username" ) String username, @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie, @RequestParam( "conferenceId" ) Integer id )
+    @RequestMapping( path = "/searches", method = RequestMethod.GET )
+    public ResponseEntity< ResponseJSON< Iterable< subjectOfInterestResponse > > > handle_getSearchStatus( @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie )
     {
-        ResponseJSON< ConferencePrivilegesDTO > resp = new ResponseJSON<>();
-        resp.getErrors().addAll( handle_loggedIn( usernameCookie, passwordCookie ).getBody().getErrors() );
-        resp.getWarnings().addAll( handle_loggedIn( usernameCookie, passwordCookie ).getBody().getWarnings() );
+        ResponseJSON< Iterable< subjectOfInterestResponse > > resp = new ResponseJSON<>();
+        ResponseEntity< ResponseJSON< UserIdRequest > > loginStatus = handle_loggedIn( usernameCookie, passwordCookie );
+        HttpStatus status = loginStatus.getStatusCode();
+        resp.getErrors().addAll( loginStatus.getBody().getErrors() );
+        resp.getWarnings().addAll( loginStatus.getBody().getWarnings() );
+
         if( resp.getErrors().size() == 0 )
         {
-            Exceptional< Privileges > privs = service.getConferencePrivileges( username, id );
-            privs.error( e -> {
-                resp.addError( e.getMessage() );
-            } ).ok( e -> {
-                resp.setResp( new ConferencePrivilegesDTO( e ) );
-            } );
+            Exceptional< Iterable< SubjectOfInterest > > searchResults = service.getSubjectsOfInterest( usernameCookie );
+            if( searchResults.isException() )
+            {
+                resp.addError( searchResults.getException().getMessage() );
+                status = HttpStatus.NOT_FOUND;
+            }
+            else
+            {
+                List< subjectOfInterestResponse > response = new ArrayList<>();
+                for( SubjectOfInterest soi : searchResults.getData() )
+                {
+                    subjectOfInterestResponse item = new subjectOfInterestResponse();
+                    item.setNewlyReported( soi.getDisplayCountdown() > 0 );
+                    item.setResultsCount( soi.getResultsCount() );
+                    item.setSearchLink( soi.getResultsPageLink() );
+                    item.setSearchString( soi.getSearchString() );
+                    response.add( item );
+                }
+                resp.setResp( response );
+            }
         }
-        return new ResponseEntity<>( resp, HttpStatus.OK );
-    }
-
-    @RequestMapping( path = "/{username}", method = RequestMethod.GET )
-    public ResponseEntity< ResponseJSON< UserResponse > > handle_get_mine( @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie, @PathVariable( "username" ) String username )
-    {
-        ResponseJSON< UserResponse > resp = new ResponseJSON<>();
-        resp.getErrors().addAll( handle_loggedIn( usernameCookie, passwordCookie ).getBody().getErrors() );
-        resp.getWarnings().addAll( handle_loggedIn( usernameCookie, passwordCookie ).getBody().getWarnings() );
-        if( resp.getErrors().size() == 0 )
-        {
-            Exceptional< AppUser > u = service.getUser( username );
-            u.error( e -> {
-                resp.addError( e.getMessage() );
-            } ).ok( e -> {
-                resp.setResp( new UserResponse( e ) );
-            } );
-        }
-        return new ResponseEntity<>( resp, HttpStatus.OK );
-    }
-
-    @RequestMapping( path = "", method = RequestMethod.GET )
-    public ResponseEntity< ResponseJSON< Iterable< UserResponse > > > handle_get_all()
-    {
-        List< UserResponse > users = new ArrayList<>();
-        for( AppUser u : service.getUsers() )
-        {
-            users.add( new UserResponse( u ) );
-        }
-        ResponseJSON< Iterable< UserResponse > > resp = new ResponseJSON<>();
-        resp.setResp( users );
-        return new ResponseEntity<>( resp, HttpStatus.OK );
+        return new ResponseEntity<>( resp, status );
     }
 
     @RequestMapping( path = "", method = RequestMethod.POST )
     public ResponseEntity< ResponseJSON< String > > handle_create_user( @RequestBody updateUserRequest body )
     {
         ResponseJSON< String > resp = new ResponseJSON<>( "" );
-        service.getUser( body.getUsername() ).error( a -> {
-            service.addUser( new AppUser( body.getUsername(), body.getName(), body.getAffiliation(), body.getEmail(), body.getWebsite(), body.getPassword() ) ).error( b -> {
-                resp.addError( "Unexpected error. The given email may be already be used by another user" );
-            } );
-        } ).ok( a -> {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        Exceptional< AppUser > au = service.getUser( body.getUsername() );
+
+        if( au.isOK() )
+        {
             resp.addError( "An user with this username already exists" );
-        } );
-        return new ResponseEntity< ResponseJSON< String > >( resp, HttpStatus.OK );
-    }
-
-    @RequestMapping( path = "/{username}", method = RequestMethod.PUT )
-    public ResponseEntity< ResponseJSON< String > > handle_update_user( @PathVariable( "username" ) String username, @RequestBody updateUserRequest body, @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie, HttpServletResponse response )
-    {
-        ResponseJSON< String > resp = new ResponseJSON<>( "" );
-        resp.getErrors().addAll( handle_loggedIn( usernameCookie, passwordCookie ).getBody().getErrors() );
-        if( service.getUser( username ).isException() )
-        {
-            resp.addError( "The username you want to make changes to doesn't exist" );
-        }
-        if( resp.getErrors().size() == 0 )
-        {
-            Exceptional< AppUser > au = service.getUser( usernameCookie );
-            au.error( e -> {
-                resp.addError( e.getMessage() );
-            } ).ok( e -> {
-                if( ( username.equals( usernameCookie ) && ( body.getUsername() == null || service.getUser( body.getUsername() ).isException() ) ) || ( e.getIsSuperUser() ) )
-                {
-
-                    service.updateUser( username, new AppUser( body.getUsername(), body.getName(), body.getAffiliation(), body.getEmail(), body.getWebsite(), body.getPassword(), null, body.getIsCometeeMember() ) );
-                    if( usernameCookie.equals( username ) )
-                    {
-                        if( body.getUsername() != null )
-                        {
-                            setCookie( "username", body.getUsername(), 3600, response );
-                        }
-                        if( body.getPassword() != null )
-                        {
-                            setCookie( "password", body.getPassword(), 3600, response );
-                        }
-                    }
-                }
-                else
-                {
-                    resp.addError( "You don't have the permissions to do these changes!" );
-                }
-            } );
-        }
-
-        return new ResponseEntity<>( resp, HttpStatus.OK );
-    }
-
-    @RequestMapping( path = "/{username}/{conferenceId}", method = RequestMethod.PUT )
-    public ResponseEntity< ResponseJSON< String > > handle_grant_permissions( @PathVariable( "username" ) String username, @PathVariable( "conferenceId" ) Integer conferenceId, @RequestBody grantPermissionsDTO body, @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie )
-    {
-        ResponseJSON< String > resp = new ResponseJSON<>( "" );
-        resp.getErrors().addAll( handle_loggedIn( usernameCookie, passwordCookie ).getBody().getErrors() );
-        if( resp.getErrors().size() == 0 )
-        {
-            Exceptional< AppUser > au = service.getUser( usernameCookie );
-            au.error( e -> {
-                resp.addError( e.getMessage() );
-            } ).ok( e -> {
-                if( username.equals( usernameCookie ) || e.getIsSuperUser() )
-                {
-                    Exceptional< Privileges > priv = service.getConferencePrivileges( username, conferenceId );
-                    priv.error( f -> {
-                        resp.addError( f.getMessage() );
-                    } ).ok( f -> {
-                        if( body.getIsChair() != null )
-                        {
-                            f.setIsChair( body.getIsChair() );
-                        }
-                        if( body.getIsCoChair() != null )
-                        {
-                            f.setIsCoChair( body.getIsCoChair() );
-                        }
-                        if( body.getIsPCMember() != null )
-                        {
-                            f.setIsPCMember( body.getIsPCMember() );
-                        }
-                        service.updatePrivilegesOfConference( username, conferenceId, f );
-                    } );
-                }
-                else
-                {
-                    resp.addError( "You don't have the permissions to do these changes!" );
-                }
-            } );
         }
         else
         {
-            resp.addError( "You don't have the permissions to do these changes!" );
+            au = service.addUser( new AppUser( body.getUsername(), body.getEmail(), body.getPassword(), body.getDiscogsToken() ) );
+            if( au.isException() )
+            {
+                resp.addError( "Unexpected error. The given email may be already be used by another user" );
+            }
+            else
+            {
+                status = HttpStatus.OK;
+            }
         }
-        return new ResponseEntity<>( resp, HttpStatus.OK );
+        return new ResponseEntity< ResponseJSON< String > >( resp, status );
+
     }
 
-    @RequestMapping( path = "/{username}/submittedPapers", method = RequestMethod.GET )
-    public ResponseEntity< ResponseJSON< List< submittedPaperDTO > > > handle_get_submitted_papers( @PathVariable( "username" ) String username, @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie, @RequestParam( name = "status", required = false ) String status )
+    @RequestMapping( path = "", method = RequestMethod.PUT )
+    public ResponseEntity< ResponseJSON< String > > handle_update_user( @RequestBody updateUserRequest body, @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie, HttpServletResponse response )
     {
-        ResponseJSON< List< submittedPaperDTO > > resp = new ResponseJSON<>();
-        resp.getErrors().addAll( handle_loggedIn( usernameCookie, passwordCookie ).getBody().getErrors() );
-        List< submittedPaperDTO > papers = new ArrayList<>();
-        resp.setResp( papers );
+        ResponseJSON< String > resp = new ResponseJSON<>( "" );
+        ResponseEntity< ResponseJSON< UserIdRequest > > loginStatus = handle_loggedIn( usernameCookie, passwordCookie );
+        HttpStatus status = loginStatus.getStatusCode();
+        resp.getErrors().addAll( loginStatus.getBody().getErrors() );
+        resp.getWarnings().addAll( loginStatus.getBody().getWarnings() );
+
         if( resp.getErrors().size() == 0 )
         {
-            Exceptional< Iterable< Paper > > paps = service.getSubmittedPapers( username );
-            paps.error( e -> {
-                resp.addError( e.getMessage() );
-            } ).ok( e -> {
-                for( Paper p : e )
+            Exceptional< AppUser > au = service.getUser( usernameCookie );
+            if( au.isException() )
+            {
+                resp.addError( au.getException().getMessage() );
+                status = HttpStatus.NOT_FOUND;
+            }
+            else
+            {
+                AppUser u = au.getData();
+                au = service.updateUser( u.getUsername(), new AppUser( u.getUsername(), u.getEmail(), u.getPassword(), u.getDiscogsToken() ) );
+                if( au.isException() )
                 {
-                    if( p.getStatus().toString().equals( status ) || status == null )
+                    resp.addError( au.getException().getMessage() );
+                    status = HttpStatus.INTERNAL_SERVER_ERROR;
+                }
+                else
+                {
+                    if( body.getUsername() != null )
                     {
-                        papers.add( new submittedPaperDTO( p ) );
+                        setCookie( "username", body.getUsername(), 3600, response );
+                    }
+                    if( body.getPassword() != null )
+                    {
+                        setCookie( "password", body.getPassword(), 3600, response );
                     }
                 }
-            } );
-        }
-        return new ResponseEntity<>( resp, HttpStatus.OK );
-    }
-
-    @RequestMapping( path = "/{username}/submittedPapers/{idPaper}/reviews", method = RequestMethod.GET )
-    public ResponseEntity< ResponseJSON< List< reviewDTO > > > handle_get_paper_reviews( @PathVariable( "username" ) String username, @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie, @PathVariable( "idPaper" ) int paperId )
-    {
-        ResponseJSON< List< reviewDTO > > resp = new ResponseJSON<>();
-        resp.getErrors().addAll( handle_loggedIn( usernameCookie, passwordCookie ).getBody().getErrors() );
-        List< reviewDTO > reviews = new ArrayList<>();
-        resp.setResp( reviews );
-        boolean isMyPaper = false;
-
-        if( resp.getErrors().size() == 0 )
-        {
-            Exceptional< Iterable< Review > > revsOfPaper = service.getReviewsOfPaper( username, paperId );
-            revsOfPaper.error( e -> {
-                resp.addError( e.getMessage() );
-            } ).ok( e -> {
-                for( Review r : e )
-                {
-                    reviews.add( new reviewDTO( r ) );
-                }
-            } );
-        }
-        return new ResponseEntity<>( resp, HttpStatus.OK );
-    }
-
-    @RequestMapping( path = "/{username}/bids/{idPaper}", method = RequestMethod.GET )
-    public ResponseEntity< ResponseJSON< bidDTO > > handle_get_my_bid_for_paper( @PathVariable( "username" ) String username, @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie, @PathVariable( "idPaper" ) int paperId )
-    {
-        ResponseJSON< bidDTO > resp = new ResponseJSON<>();
-        resp.getErrors().addAll( handle_loggedIn( usernameCookie, passwordCookie ).getBody().getErrors() );
-
-
-        Exceptional< SubjectOfInterest > bid = service.getBidOfPaper( username, paperId );
-
-        if( resp.getErrors().size() == 0 )
-        {
-            bid.error( e -> {
-                resp.addError( e.getMessage() );
-                resp.setResp( new bidDTO() );
-            } ).ok( b -> {
-                resp.setResp( new bidDTO( b ) );
-            } );
-        }
-
-        return new ResponseEntity<>( resp, HttpStatus.OK );
-    }
-
-    @RequestMapping( path = "/{username}/bids/{idPaper}", method = RequestMethod.PUT )
-    public ResponseEntity< ResponseJSON< String > > handle_put_my_bid_for_paper( @PathVariable( "username" ) String username, @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie, @PathVariable( "idPaper" ) int paperId, @RequestBody bidDTO request )
-    {
-        ResponseJSON< String > resp = new ResponseJSON<>();
-        resp.getErrors().addAll( handle_loggedIn( usernameCookie, passwordCookie ).getBody().getErrors() );
-        resp.setResp( "" );
-
-        Exceptional< SubjectOfInterest > bid = service.getBidOfPaper( username, paperId );
-        if( resp.getErrors().size() == 0 )
-        {
-            bid.error( e -> {
-                Exceptional< Void > res = service.addBidForPaper( username, paperId, BidStatus.valueOf( request.getStatus() ) );
-                res.error( f -> {
-                    resp.addError( f.getMessage() );
-                } );
-            } ).ok( e -> {
-                service.addBidForPaper( username, paperId, BidStatus.valueOf( request.getStatus() ) );
-            } );
-        }
-
-        return new ResponseEntity<>( resp, HttpStatus.OK );
-    }
-
-    @RequestMapping( path = "/{username}/assignedForReview", method = RequestMethod.GET )
-    public ResponseEntity< ResponseJSON< Iterable< submittedPaperDTO > > > handle_get_assigned( @PathVariable( "username" ) String username, @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie )
-    {
-        ResponseJSON< Iterable< submittedPaperDTO > > resp = new ResponseJSON<>();
-        resp.getErrors().addAll( handle_loggedIn( usernameCookie, passwordCookie ).getBody().getErrors() );
-        List< submittedPaperDTO > body = new ArrayList<>();
-        resp.setResp( body );
-        if( resp.getErrors().size() == 0 )
-        {
-            Exceptional< Iterable< Paper > > pps = service.getAssignedPapers( username );
-            pps.error( e -> {
-                resp.addError( e.getMessage() );
-            } ).ok( e -> {
-                for( Paper p : e )
-                {
-                    body.add( new submittedPaperDTO( p ) );
-                }
-            } );
-        }
-        return new ResponseEntity< ResponseJSON< Iterable< submittedPaperDTO > > >( resp, HttpStatus.OK );
-    }
-
-    @RequestMapping( path = "/{username}/assignedPapers/{paperId}", method = RequestMethod.PUT )
-    public ResponseEntity< ResponseJSON< Void > > handle_put_assigned( @PathVariable( "username" ) String username, @PathVariable( "paperId" ) int paperId, @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie )
-    {
-        ResponseJSON< Void > resp = new ResponseJSON<>();
-        resp.getErrors().addAll( handle_loggedIn( usernameCookie, passwordCookie ).getBody().getErrors() );
-        service.assignPaper( username, paperId ).error( e -> {
-            resp.addError( e.getMessage() );
-        } );
-        return new ResponseEntity<>( resp, HttpStatus.OK );
-    }
-
-    @RequestMapping( path = "/{username}/reviews/{paperId}", method = RequestMethod.GET )
-    public ResponseEntity< ResponseJSON< reviewDTO > > handle_get_review( @PathVariable( "username" ) String username, @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie, @PathVariable( "paperId" ) int paperId )
-    {
-        ResponseJSON< reviewDTO > resp = new ResponseJSON<>();
-        resp.getErrors().addAll( handle_loggedIn( usernameCookie, passwordCookie ).getBody().getErrors() );
-        if( resp.getErrors().size() == 0 )
-        {
-            Exceptional< Review > reviews = service.getReviewOfPaper( username, paperId );
-
-            reviews.ok( e -> {
-                resp.setResp( new reviewDTO( e ) );
-            } ).error( e -> {
-                resp.addError( e.getMessage() );
-            } );
-        }
-        return new ResponseEntity<>( resp, HttpStatus.OK );
-    }
-
-    @RequestMapping( path = "/{username}/reviews/{idPaper}", method = RequestMethod.PUT )
-    public ResponseEntity< ResponseJSON< String > > handle_put_my_review_for_paper( @PathVariable( "username" ) String username, @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie, @PathVariable( "idPaper" ) int paperId, @RequestBody reviewDTO request )
-    {
-        ResponseJSON< String > resp = new ResponseJSON<>();
-        resp.getErrors().addAll( handle_loggedIn( usernameCookie, passwordCookie ).getBody().getErrors() );
-        resp.setResp( "" );
-
-        if( resp.getErrors().size() == 0 )
-        {
-            service.addReviewToPaper( username, paperId, ReviewStatus.valueOf( request.getStatus() ), request.getJustification() ).
-                    error( e -> {
-                        resp.addError( e.getMessage() );
-                    } );
-        }
-
-        return new ResponseEntity<>( resp, HttpStatus.OK );
-    }
-
-    @RequestMapping( path = "/{id}/assignPaper/{paperId}", method = RequestMethod.PUT )
-    public ResponseEntity< ResponseJSON< String > > handle_assign_paper( @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie, @PathVariable( "id" ) String reviewerUsername, @PathVariable( "paperId" ) int paperId )
-    {
-        ResponseJSON< String > resp = new ResponseJSON<>();
-        resp.getErrors().addAll( handle_loggedIn( usernameCookie, passwordCookie ).getBody().getErrors() );
-        resp.setResp( "" );
-
-        if( resp.getErrors().size() == 0 )
-        {
-            service.assignPaper( reviewerUsername, paperId ).error( e -> {
-                resp.addError( e.getMessage() );
-            } );
-        }
-
-        return new ResponseEntity<>( resp, HttpStatus.OK );
-    }
-    //------------------------------------------------------------------
-
-    @RequestMapping( path = "/submittedPapers/{paperId}/presentation", method = RequestMethod.POST )
-    public ResponseEntity< ResponseJSON< String > > uploadPresentation( @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie, @PathVariable( "paperId" ) Integer paperId, @RequestParam( "type" ) String type, @RequestParam( "file" ) MultipartFile file )
-    {
-
-        try
-        {
-            byte[] fileData = file.getBytes();
-
-            ResponseJSON< String > resp = new ResponseJSON<>();
-            resp.getErrors().addAll( handle_loggedIn( usernameCookie, passwordCookie ).getBody().getErrors() );
-            if( resp.getErrors().size() == 0 )
-            {
-                service.uploadPresentation( usernameCookie, paperId, "." + type, fileData );
             }
-            return new ResponseEntity< ResponseJSON< String > >( resp, HttpStatus.OK );
         }
-        catch( IOException e )
-        {
 
-            return new ResponseEntity< ResponseJSON< String > >( new ResponseJSON<>( "Error occured on file upload" ), HttpStatus.BAD_REQUEST );
-        }
+        return new ResponseEntity<>( resp, status );
     }
+
+    @RequestMapping( path = "/searches", method = RequestMethod.POST )
+    public ResponseEntity< ResponseJSON< subjectOfInterestResponse > > handle_postSearchQuery( @CookieValue( value = "username", defaultValue = "" ) String usernameCookie, @CookieValue( value = "password", defaultValue = "" ) String passwordCookie, @RequestBody subjectOfInterestRequest body )
+    {
+        ResponseJSON< subjectOfInterestResponse > resp = new ResponseJSON<>();
+        ResponseEntity< ResponseJSON< UserIdRequest > > loginStatus = handle_loggedIn( usernameCookie, passwordCookie );
+        HttpStatus status = loginStatus.getStatusCode();
+        resp.getErrors().addAll( loginStatus.getBody().getErrors() );
+        resp.getWarnings().addAll( loginStatus.getBody().getWarnings() );
+
+        if( resp.getErrors().size() == 0 )
+        {
+            Exceptional< SubjectOfInterest > Esoi = service.addSubjectOfInterest( usernameCookie, body.getSearchString() );
+            if( Esoi.isOK() )
+            {
+                SubjectOfInterest soi = Esoi.getData();
+                subjectOfInterestResponse item = new subjectOfInterestResponse();
+                item.setNewlyReported( soi.getDisplayCountdown() > 0 );
+                item.setResultsCount( soi.getResultsCount() );
+                item.setSearchLink( soi.getResultsPageLink() );
+                item.setSearchString( soi.getSearchString() );
+                resp.setResp( item );
+            }
+            else
+            {
+                resp.addError( Esoi.getException().getMessage() );
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        }
+        return new ResponseEntity<>( resp, HttpStatus.OK );
+
+    }
+
 }
 

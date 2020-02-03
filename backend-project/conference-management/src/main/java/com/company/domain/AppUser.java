@@ -20,10 +20,10 @@ public class AppUser {
     @Column(name = "password", nullable = false,length = 64)
     private String password;
 
-    @Column(name = "password", nullable = false,length = 64)
+    @Column(name = "discogsToken", nullable = false,length = 64)
     private String discogsToken;
 
-    @OneToMany(mappedBy = "ownerID", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Set<SubjectOfInterest> subjectOfInterest;
 
     public String getUsername() {

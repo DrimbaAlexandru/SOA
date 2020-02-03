@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface InterestRepository extends PagingAndSortingRepository< SubjectOfInterest, Integer >
 {
-    SubjectOfInterest findBySearchStringAndOwnerID(String searchString, Integer ownerID);
+    SubjectOfInterest findBySearchStringAndOwnerId( String searchString, Integer ownerId );
 }

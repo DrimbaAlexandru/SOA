@@ -3,7 +3,8 @@ package com.company.service;
 import com.company.domain.*;
 import com.company.repository.InterestRepository;
 import com.company.repository.UserRepository;
-import com.company.utils.container.Container;
+import com.company.service.RemoteServices.RemoteResultsStalker;
+import com.company.service.RemoteServices.SearchResults;
 import com.company.utils.exception.Exceptional;
 import com.company.utils.updater.InterestsGettersAndSetters;
 import com.company.utils.updater.Updater;
@@ -11,12 +12,6 @@ import com.company.utils.updater.UsersGettersAndSetters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 /**
  * Created by AlexandruD on 02-Jun-17.
@@ -31,21 +26,18 @@ public class UserServiceImpl implements UserService
     private UsersGettersAndSetters usersGettersAndSetters;
     private InterestsGettersAndSetters interestsGettersAndSetters;
     private Updater updater;
-    private Random random;
+    private RemoteResultsStalker resultsStalker;
 
-    public UserServiceImpl( @Autowired UserRepository userRepository,
-                            @Autowired InterestRepository interestRepository,
-                            @Autowired PasswordEncoder encoder,
-                            @Autowired UsersGettersAndSetters usersGettersAndSetters,
-                            @Autowired InterestsGettersAndSetters interestsGettersAndSetters )
+    public UserServiceImpl( @Autowired UserRepository userRepository, @Autowired InterestRepository interestRepository, @Autowired PasswordEncoder encoder, @Autowired UsersGettersAndSetters usersGettersAndSetters, @Autowired InterestsGettersAndSetters interestsGettersAndSetters, @Autowired RemoteResultsStalker resultsStalker )
     {
         this.userRepository = userRepository;
         this.interestRepository = interestRepository;
         this.encoder = encoder;
         this.usersGettersAndSetters = usersGettersAndSetters;
         this.interestsGettersAndSetters = interestsGettersAndSetters;
+        this.resultsStalker = resultsStalker;
+
         this.updater = new Updater();
-        random = new Random( System.currentTimeMillis() );
     }
 
     @Override
@@ -60,9 +52,7 @@ public class UserServiceImpl implements UserService
     {
         AppUser usr = userRepository.findByUsername( username );
 
-        return ( usr == null )
-                ? Exceptional.Error( new Exception( "Username not found" ) )
-                : Exceptional.OK( usr );
+        return ( usr == null ) ? Exceptional.Error( new Exception( "Username not found" ) ) : Exceptional.OK( usr );
     }
 
     @Override
@@ -124,7 +114,7 @@ public class UserServiceImpl implements UserService
             return Exceptional.Error( new Exception( "Username not found" ) );
         }
 
-        SubjectOfInterest subject = interestRepository.findBySearchStringAndOwnerID( searchString, owner.getId() );
+        SubjectOfInterest subject = interestRepository.findBySearchStringAndOwnerId( searchString, owner.getId() );
 
         if( subject != null )
         {
@@ -134,9 +124,13 @@ public class UserServiceImpl implements UserService
         subject.setDisplayCountdown( 2 );
         subject.setOwner( owner );
         subject.setSearchString( searchString );
+        subject.setDisplayCountdown( 1 );
+        subject.setResultsCount( 0 );
+        subject.setResultsPageLink( "" );
 
         try
         {
+            syncResults( searchString, owner, subject );
             subject = interestRepository.save( subject );
             return Exceptional.OK( subject );
         }
@@ -157,7 +151,7 @@ public class UserServiceImpl implements UserService
         {
             return Exceptional.Error( new Exception( "Item not found" ) );
         }
-        if( !subject.getOwner().getId().equals( SoIId ))
+        if( !subject.getOwner().getUsername().equals( username ) )
         {
             return Exceptional.Error( new Exception( "You are not the owner of the selected ID" ) );
         }
@@ -168,10 +162,11 @@ public class UserServiceImpl implements UserService
             updated = true;
         }
 
-        // Discogs API logic goes here
-
         try
         {
+            // Discogs API logic goes here
+            updated = updated | syncResults( subject.getSearchString(), subject.getOwner(), subject );
+
             if( updated )
             {
                 updater.update( subject, newSubject, interestsGettersAndSetters.getGettersAndSetters() );
@@ -183,5 +178,23 @@ public class UserServiceImpl implements UserService
         {
             return Exceptional.Error( e );
         }
+    }
+
+    private boolean syncResults( String searchString, AppUser user, SubjectOfInterest soi ) throws Exception
+    {
+        Exceptional< SearchResults > results = resultsStalker.findResults( "", user.getDiscogsToken(), searchString );
+        if( results.isOK() )
+        {
+            SearchResults sr = results.getData();
+            if( !soi.getResultsCount().equals( sr.getResultsCount() ) )
+            {
+                soi.setResultsPageLink( sr.getQueryLink() );
+                soi.setResultsCount( sr.getResultsCount() );
+                soi.setDisplayCountdown( 3 );
+                return true;
+            }
+            return false;
+        }
+        throw results.getException();
     }
 }
