@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<title>Sign up for sections</title>
+<head>
+<link rel="stylesheet" href="css/design.css">
+    <script src="js/lib/jquery-3.2.1.min.js"></script>
+
+    <script src="js/gui/functions.js"></script>
+</head>
+<body>
+
+<div id="errors"></div>
+<div id="warnings"></div>
+<div id="content">
+
+    <div id="left">
+        <div id="menu">
+            <ul>
+                <li><a href="#">Logout</a></li>
+                <li><a href="#">Menu Item 2</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="right">
+        <h1>You can watch searches here</h1>
+
+        <table id="searchItemsTable" style="width:50%">
+            <caption>Search Items</caption>
+            <tr>
+                <th>No</th>
+                <th>Search string</th>
+                <th>Results count</th>
+                <th>Updated?</th>
+                <th>Search results link</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>search string 1</td>
+                <td>1</td>
+                <td>NEW!</td>
+                <td>link</td>
+            </tr>
+        </table>
+        <br>
+
+        <form>
+            <header>Add search interest</header>
+            <label>Search string <span>*</span></label>
+            <input name="searchString" type="text"/>
+
+            <button type="submit" id="addSearchButton">Add</button>
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>

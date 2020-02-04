@@ -19,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping( path = "/users" )
+@CrossOrigin
 public class UserController
 {
 
@@ -134,12 +135,23 @@ public class UserController
                 List< subjectOfInterestResponse > response = new ArrayList<>();
                 for( SubjectOfInterest soi : searchResults.getData() )
                 {
-                    subjectOfInterestResponse item = new subjectOfInterestResponse();
-                    item.setNewlyReported( soi.getDisplayCountdown() > 0 );
-                    item.setResultsCount( soi.getResultsCount() );
-                    item.setSearchLink( soi.getResultsPageLink() );
-                    item.setSearchString( soi.getSearchString() );
-                    response.add( item );
+                    Exceptional< SubjectOfInterest > Esoi = service.updateSubjectOfInterest( usernameCookie, soi.getId() );
+                    if( Esoi.isOK() )
+                    {
+                        subjectOfInterestResponse item = new subjectOfInterestResponse();
+
+                        soi = Esoi.getData();
+                        item.setNewlyReported( soi.getDisplayCountdown() > 0 );
+                        item.setResultsCount( soi.getResultsCount() );
+                        item.setSearchLink( soi.getResultsPageLink() );
+                        item.setSearchString( soi.getSearchString() );
+                        response.add( item );
+                    }
+                    else
+                    {
+                        status = HttpStatus.INTERNAL_SERVER_ERROR;
+                        resp.addError( Esoi.getException().getMessage() );
+                    }
                 }
                 resp.setResp( response );
             }

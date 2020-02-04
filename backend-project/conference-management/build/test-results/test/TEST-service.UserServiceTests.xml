@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="service.UserServiceTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-06-08T21:46:14" hostname="DESKTOP-CD5HDT7" time="0.0">
-  <properties/>
-  <testcase name="trueTest" classname="service.UserServiceTests" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

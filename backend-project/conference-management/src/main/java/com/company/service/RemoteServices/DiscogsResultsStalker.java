@@ -7,11 +7,12 @@ public class DiscogsResultsStalker implements RemoteResultsStalker
 {
     private String UserAgent;
     private String AcceptHeader;
+    private final String server = "";
 
     public DiscogsResultsStalker( String userAgent, String acceptHeader )
     {
-        this.AcceptHeader=acceptHeader;
-        this.UserAgent=userAgent;
+        this.AcceptHeader = acceptHeader;
+        this.UserAgent = userAgent;
     }
 
     public void setAcceptHeader( String acceptHeader )
@@ -35,8 +36,12 @@ public class DiscogsResultsStalker implements RemoteResultsStalker
     }
 
     @Override
-    public Exceptional<SearchResults> findResults( String username, String accessToken, String searchString )
+    public Exceptional< SearchResults > findResults( String username, String accessToken, String searchString )
     {
-        return Exceptional.Error( new NotYetImplementedException( "Not yet implemented" ) );
+        //return Exceptional.Error( new NotYetImplementedException( "Not yet implemented" ) );
+        SearchResults results = new SearchResults();
+        results.setQueryLink( "search link" );
+        results.setResultsCount( 1 );
+        return Exceptional.OK( results );
     }
 }

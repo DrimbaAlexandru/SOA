@@ -156,6 +156,11 @@ public class UserServiceImpl implements UserService
             return Exceptional.Error( new Exception( "You are not the owner of the selected ID" ) );
         }
         newSubject.setDisplayCountdown( subject.getDisplayCountdown() );
+        newSubject.setResultsCount( subject.getResultsCount() );
+        newSubject.setResultsPageLink( subject.getResultsPageLink() );
+        newSubject.setSearchString( subject.getSearchString() );
+        newSubject.setOwner( subject.getOwner() );
+        newSubject.setId( subject.getId() );
         if( newSubject.getDisplayCountdown() > 0 )
         {
             newSubject.setDisplayCountdown( newSubject.getDisplayCountdown() - 1 );
@@ -165,7 +170,7 @@ public class UserServiceImpl implements UserService
         try
         {
             // Discogs API logic goes here
-            updated = updated | syncResults( subject.getSearchString(), subject.getOwner(), subject );
+            updated = updated | syncResults( subject.getSearchString(), subject.getOwner(), newSubject );
 
             if( updated )
             {
