@@ -1,9 +1,19 @@
-group 'com.iss-223-1'
-version '1.0-SNAPSHOT'
+plugins {
+  id "org.springframework.boot" version "2.1.0.RELEASE"
+}
 
 apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: "org.springframework.boot"
+
+bootJar {
+    baseName = 'gs-spring-boot-docker'
+    version =  '0.1.0'
+}
 
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
