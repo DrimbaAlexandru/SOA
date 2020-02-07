@@ -178,10 +178,8 @@ function Controller(onError= undefined, onWarning = undefined) {
                 url: HOST + COMMANDS["users_save"],
                 data: JSON.stringify({
                     username: user.username,
-                    name: user.name,
-                    affiliation: user.affiliation,
                     email: user.email,
-                    website: user.website,
+                    discogsToken: user.discogsToken,
                     password: user.password
                 }),
                 xhrFields: {

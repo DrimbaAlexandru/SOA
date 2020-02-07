@@ -36,7 +36,7 @@ public class GeneralContext
     @Bean
     public RemoteResultsStalker getResultsService( Environment env )
     {
-        return new DiscogsResultsStalker( env.getProperty( "discogs.accept_header" ),
+        return new DiscogsResultsStalker( env.getProperty( "discogs.user_agent" ),
                                           env.getProperty( "discogs.accept_header" ) );
     }
 }
