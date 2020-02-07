@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.company</OriginalElement>
+  <nodes>
+    <node x="240.02356150793628" y="544.0">com.company.service.UserServiceImpl</node>
+    <node x="65.59174332611815" y="778.0">com.company.GeneralContext</node>
+    <node x="243.26508620689663" y="782.9396551724137">com.company.PersistenceContext</node>
+    <node x="770.125" y="434.0">com.company.utils</node>
+    <node x="642.125" y="434.0">com.company.service.UserService</node>
+    <node x="450.8667433261181" y="222.0">com.company.domain.SubjectOfInterest</node>
+    <node x="76.5625" y="266.0">com.company.service.RemoteServices.SearchResults</node>
+    <node x="0.0" y="566.0">com.company.service.RemoteServices.DiscogsResultsStalker</node>
+    <node x="478.125" y="434.0">com.company.repository.InterestRepository</node>
+    <node x="892.125" y="434.0">com.company.controller.DTOs</node>
+    <node x="126.125" y="434.0">com.company.service.RemoteServices.RemoteResultsStalker</node>
+    <node x="437.3403814935064" y="0.0">com.company.domain.AppUser</node>
+    <node x="319.125" y="434.0">com.company.repository.UserRepository</node>
+    <node x="436.2650862068966" y="782.9396551724137">com.company.Application</node>
+    <node x="761.2447646103896" y="610.0">com.company.controller.UserController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.company.service.UserServiceImpl" target="com.company.domain.SubjectOfInterest">
+      <point x="62.90909090909088" y="-92.0" />
+      <point x="475.93265241702716" y="524.0" />
+      <point x="467.625" y="524.0" />
+      <point x="467.625" y="414.0" />
+      <point x="512.9667433261181" y="414.0" />
+      <point x="-41.39999999999998" y="81.0" />
+    </edge>
+    <edge source="com.company.controller.UserController" target="com.company.domain.SubjectOfInterest">
+      <point x="-73.77777777777783" y="-26.0" />
+      <point x="770.4669868326117" y="514.0" />
+      <point x="631.625" y="514.0" />
+      <point x="631.625" y="414.0" />
+      <point x="595.7667433261182" y="414.0" />
+      <point x="41.40000000000009" y="81.0" />
+    </edge>
+    <edge source="com.company.service.RemoteServices.DiscogsResultsStalker" target="com.company.service.RemoteServices.RemoteResultsStalker">
+      <point x="58.66666666666666" y="-70.0" />
+      <point x="-60.375" y="15.0" />
+    </edge>
+    <edge source="com.company.domain.SubjectOfInterest" target="com.company.domain.AppUser">
+      <point x="-25.875" y="-81.0" />
+      <point x="528.4917433261181" y="202.0" />
+      <point x="547.395937049062" y="202.0" />
+      <point x="-31.444444444444457" y="81.0" />
+    </edge>
+    <edge source="com.company.service.UserServiceImpl" target="com.company.repository.UserRepository">
+      <point x="0.0" y="-92.0" />
+      <point x="413.0235615079363" y="524.0" />
+      <point x="414.375" y="524.0" />
+      <point x="31.75" y="15.0" />
+    </edge>
+    <edge source="com.company.repository.UserRepository" target="com.company.domain.AppUser">
+      <point x="0.0" y="-15.0" />
+      <point x="382.625" y="192.0" />
+      <point x="484.5070481601731" y="192.0" />
+      <point x="-94.33333333333331" y="81.0" />
+    </edge>
+    <edge source="com.company.service.RemoteServices.DiscogsResultsStalker" target="com.company.service.RemoteServices.SearchResults">
+      <point x="-58.66666666666663" y="-70.0" />
+      <point x="29.33333333333337" y="524.0" />
+      <point x="58.243402777777874" y="524.0" />
+      <point x="58.243402777777874" y="404.0" />
+      <point x="98.3125" y="404.0" />
+      <point x="-65.25" y="37.0" />
+    </edge>
+    <edge source="com.company.service.UserService" target="com.company.domain.AppUser">
+      <point x="27.0" y="-15.0" />
+      <point x="723.125" y="202.0" />
+      <point x="641.7292703823953" y="202.0" />
+      <point x="62.888888888888914" y="81.0" />
+    </edge>
+    <edge source="com.company.repository.InterestRepository" target="com.company.domain.SubjectOfInterest">
+      <point x="0.0" y="-15.0" />
+      <point x="549.625" y="414.0" />
+      <point x="554.3667433261181" y="414.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="com.company.controller.UserController" target="com.company.domain.AppUser">
+      <point x="18.444444444444457" y="-26.0" />
+      <point x="862.689209054834" y="494.0" />
+      <point x="881.625" y="494.0" />
+      <point x="881.625" y="192.0" />
+      <point x="673.1737148268398" y="192.0" />
+      <point x="94.33333333333337" y="81.0" />
+    </edge>
+    <edge source="com.company.controller.UserController" target="com.company.service.UserService">
+      <point x="-55.33333333333326" y="-26.0" />
+      <point x="788.9114312770563" y="504.0" />
+      <point x="696.125" y="504.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.company.controller.UserController" target="com.company.controller.DTOs">
+      <point x="36.888888888888914" y="-26.0" />
+      <point x="881.1336534992785" y="504.0" />
+      <point x="919.125" y="504.0" />
+      <point x="-27.0" y="15.0" />
+    </edge>
+    <edge source="com.company.service.UserService" target="com.company.domain.SubjectOfInterest">
+      <point x="-27.0" y="-15.0" />
+      <point x="669.125" y="414.0" />
+      <point x="637.1667433261182" y="414.0" />
+      <point x="82.80000000000007" y="81.0" />
+    </edge>
+    <edge source="com.company.service.UserServiceImpl" target="com.company.service.RemoteServices.SearchResults">
+      <point x="-94.36363636363632" y="-92.0" />
+      <point x="318.65992514429996" y="524.0" />
+      <point x="297.625" y="524.0" />
+      <point x="297.625" y="414.0" />
+      <point x="228.8125" y="414.0" />
+      <point x="65.25" y="37.0" />
+    </edge>
+    <edge source="com.company.GeneralContext" target="com.company.service.RemoteServices.DiscogsResultsStalker">
+      <point x="-32.25" y="-15.0" />
+      <point x="97.84174332611815" y="753.0" />
+      <point x="88.0" y="753.0" />
+      <point x="0.0" y="70.0" />
+    </edge>
+    <edge source="com.company.service.RemoteServices.RemoteResultsStalker" target="com.company.service.RemoteServices.SearchResults">
+      <point x="0.0" y="-15.0" />
+      <point x="206.625" y="414.0" />
+      <point x="185.3125" y="414.0" />
+      <point x="21.75" y="37.0" />
+    </edge>
+    <edge source="com.company.domain.AppUser" target="com.company.domain.SubjectOfInterest">
+      <point x="0.0" y="81.0" />
+      <point x="578.8403814935064" y="202.0" />
+      <point x="580.2417433261181" y="202.0" />
+      <point x="25.875" y="-81.0" />
+    </edge>
+    <edge source="com.company.controller.UserController" target="com.company.utils">
+      <point x="0.0" y="-26.0" />
+      <point x="844.2447646103896" y="524.0" />
+      <point x="845.875" y="524.0" />
+      <point x="25.25" y="15.0" />
+    </edge>
+    <edge source="com.company.service.UserServiceImpl" target="com.company.service.RemoteServices.RemoteResultsStalker">
+      <point x="-125.81818181818176" y="-92.0" />
+      <point x="287.2053796897545" y="524.0" />
+      <point x="267.0" y="524.0" />
+      <point x="60.375" y="15.0" />
+    </edge>
+    <edge source="com.company.service.UserServiceImpl" target="com.company.domain.AppUser">
+      <point x="-62.90909090909088" y="-92.0" />
+      <point x="350.1144705988454" y="514.0" />
+      <point x="308.625" y="514.0" />
+      <point x="308.625" y="182.0" />
+      <point x="453.06260371572864" y="182.0" />
+      <point x="-125.77777777777777" y="81.0" />
+    </edge>
+    <edge source="com.company.service.UserServiceImpl" target="com.company.service.UserService">
+      <point x="157.27272727272725" y="-92.0" />
+      <point x="570.2962887806635" y="524.0" />
+      <point x="660.125" y="524.0" />
+      <point x="-36.0" y="15.0" />
+    </edge>
+    <edge source="com.company.GeneralContext" target="com.company.service.RemoteServices.RemoteResultsStalker">
+      <point x="32.25" y="-15.0" />
+      <point x="162.34174332611815" y="753.0" />
+      <point x="186.5" y="753.0" />
+      <point x="-20.125" y="15.0" />
+    </edge>
+    <edge source="com.company.service.UserServiceImpl" target="com.company.repository.InterestRepository">
+      <point x="94.36363636363637" y="-92.0" />
+      <point x="507.38719787157265" y="524.0" />
+      <point x="513.875" y="524.0" />
+      <point x="-35.75" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Tree" zoom="0.9138427464008859" x="393.1014299563742" y="471.0615608337373" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
